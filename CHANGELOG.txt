@@ -1,3 +1,4 @@
+23/10/2018: Corrections du script QP (Sénat)
 12/10/2018: adaptation de Lexis-Nexis pour l'Allemand
 06/03/2018 : remise du filtre des années citées à 0
 14/02/2018: correction script QP pour AN, réduction des logs

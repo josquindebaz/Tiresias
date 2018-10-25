@@ -1,7 +1,7 @@
 # -*- encoding: iso-8859-1 -*-
 #----------------------------------------------------------
 #Script de Script de récupération des Questions parlementaires pour Prospéro
-#version du 14/02/2018
+#version du 23/10/2018
 #Josquin Debaz
 #GNU General Public License
 #Version 3, 29 June 2007
@@ -303,7 +303,11 @@ class parseSENAT(object):
             self.donnees['dpq'] = re.search('<span class="rouge">publi&eacute;e.*\s*([\d/]*)',texte[0]).group(1)
         except :
             self.donnees['dpq'] = re.search('publi&eacute;e dans le JO S&eacute;nat du\s*([\d/]*)',texte[0]).group(1)
-        self.donnees['pgq'] = re.search('- page\s*(\d*)',texte[0]).group(1)
+        try:
+            self.donnees['pgq'] = re.search('- page\s*(\d*)',texte[0]).group(1)
+        except:
+            print "pb pagination question"
+            self.donnees['pgq'] = ""
 
         #avec ou sans réponse ?
         if re.search('Réponse',texte[0]):
@@ -314,8 +318,11 @@ class parseSENAT(object):
             try :
                 self.donnees['dpr'] = re.search('publi&eacute;e dans le JO S&eacute;nat du\s*(.*)\s',texte[2]).group(1)
                 self.donnees['pgrep'] = re.search('- page\s*(\d*)',texte[2]).group(1)
-            except :
-                self.donnees['dpr'] = re.search('publi&eacute;e dans le JO S&eacute;nat du\s*(.*)\s',texte[3]).group(1)
+            except:
+                try:
+                    self.donnees['dpr'] = re.search('publi&eacute;e dans le JO S&eacute;nat du\s*(.*)\s',texte[3]).group(1)
+                except:
+                    self.donnees['dpr'] = re.search('publi&eacute;e dans le JO S&eacute;nat du\s*(.*)\s',texte[2]).group(1)
                 try :
                     self.donnees['pgrep'] = re.search('- page\s*(\d*)',texte[3]).group(1)
                 except:
@@ -324,6 +331,8 @@ class parseSENAT(object):
 
         else:
             if (verbose): print "sans reponse"
+            
+            
             self.donnees['ASREP'] = "Sans réponse"
             if (not re.search('réponse du',texte[0])):
                 if (verbose):
@@ -332,9 +341,12 @@ class parseSENAT(object):
                 self.donnees['ministere'] = ""
                 #listbox.insert(0,rapport)
             else:
-                if (verbose):
-                    print "en attente"
-                self.donnees['ministere'] = re.search('En attente de réponse du\s*(.*)',texte[0]).group(1)
+                if re.search("\S*La question est caduque", texte[0]):
+                    if (verbose): print "La question est caduque"
+                    self.donnees['ministere'] =  re.search("\S*Transmise au (.*)\r", texte[0]).group(1)
+                else:
+                    if (verbose): print "en attente"
+                    self.donnees['ministere'] = re.search('En attente de réponse du\s*(.*)',texte[0]).group(1)
             texte = re.split('<p class="justifie">',texte[0])
             if (len(texte) < 2) : texte = re.split('<p align="justify">',texte[0])
 
@@ -550,10 +562,14 @@ class parseASS(object):
             #récupère la page
             self.donnees['pgq'] =  re.search('<PGREP>(.*)</PGREP>',buf).group(1)
             #sépare le texte
-            texte= re.split('<REP>',buf)
-            texte = re.split('</REP>',texte[1])
+            if re.search("<REPONSE>", buf):
+                texte = [re.split('DEBAT : ', buf)[1]]
+            else:
+                texte= re.split('<REP>',buf)
+                texte = re.split('</REP>',texte[1])
+                
             #Le titre
-            texte = re.sub('(</a></p>)|(</A></P>)','\n.\n',texte[0])
+            texte = re.sub('(</a></p>)|(</A></P>)','\n.\n', texte[0])
             #Les locuteurs -----------------------
             texte = re.sub(' *<(strong|STRONG)> *',r'(LOC ',texte)
             texte = re.sub('[.,].*</(strong|STRONG)>',r') ',texte)        
