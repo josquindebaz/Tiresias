@@ -1,3 +1,5 @@
+29/10/2018: chemin fichier accent nettoyeur
+26/10/2018: balises nettoyeur
 23/10/2018: Corrections du script QP (Sénat)
 12/10/2018: adaptation de Lexis-Nexis pour l'Allemand
 06/03/2018 : remise du filtre des années citées à 0

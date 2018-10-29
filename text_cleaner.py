@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #### Nettoyeur caractères
-#### version du 9 12 2014
+#### version du 29/10/2018
 #### Author Josquin Debaz
 #### GPL 3
 
@@ -10,7 +10,7 @@ class liste_TXT(object):
     """liste les textes d'un dossier et de ses sous-dossiers récursivement"""
     def __init__(self,rep):
         self.lesTXT = []
-        for roots,dirs,files in os.walk(rep):
+        for roots,dirs,files in os.walk(u'%s'%rep):
             for f in files :
                 if ((os.path.splitext(f)[1] == '.txt') or (os.path.splitext(f)[1] == '.TXT')):
                     self.lesTXT.append(os.path.join(roots,f))
@@ -60,7 +60,8 @@ class agent_de_surface(object):
         # liste  : balise html à effacer
         Liste_des_balises =['<i>','</i>','<strong>','</strong>','</tr>','<td>','</td>','&lt;i&gt;','&lt;/i&gt;',
                             '&lt;/strong&gt;','&lt;strong&gt;','<em>','</em>','&#65279;',
-                            "<div>","</div>","<ul>","</ul>","<p>","<ol>","</ol>","<span>","</span>",]
+                            "<div>","</div>","<ul>","</ul>","<p>","<ol>","</ol>","<span>","</span>",
+                            "<b>", "</b>"]
         
         #dictionnaire : "forme corrigée" : ["formes à corriger"],
         carac_multi = {
@@ -81,6 +82,7 @@ class agent_de_surface(object):
             u"ù".encode('latin-1'):["&ugrave;","&#249;"],
             u"ê".encode('latin-1'):["&ecirc;","&#234;"],
             " " : ["&#8203;"],
+            "euros" : ["&euro;" , "&#8364"]
             }
         
         #dictionnaire : "forme corrigée" : "forme à corriger",
@@ -98,7 +100,6 @@ class agent_de_surface(object):
              u"ï".encode('latin-1') : "&#239;",
              "&" : "&amp;",
              "&deg;" : "°",
-             "euros" : "&euro;" ,
              " ":"&#176;",
              "\n- " : "<li>",
             }
