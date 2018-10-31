@@ -2,7 +2,7 @@
 #----------------------------------------------------------
 #Script de traitement de xml issus de LEXIS NEXIS pour Prospéro
 #Génère les TXT et les CTX à partir des fichiers txt du dossier
-#version du 26 avril 2012
+#version du 31/10/2018 
 #Josquin Debaz
 #GNU General Public License
 #Version 3, 29 June 2007
@@ -127,7 +127,7 @@ class EcritFichiers(object):
         def __init__(self,date,racine,dest):
                 #instancie l'objet avec une date et une racine, lui donne son nom
                 if (not os.path.isdir(dest)):
-			os.mkdir(dest)
+                        os.mkdir(dest)
                 self.nom_fichier = self.nom_fichier_sans_doublon(date,racine,dest)
                 
         def date_prosperienne(self,date):
@@ -197,7 +197,12 @@ class parseLEXISNEXIS(object):
 
             if re.search("\r\nLÄNGE: \d* \S*\r\n", article):
                 en_tete, article = re.split('\r\nLÄNGE: \d* \S*\r\n', article, 1)
-            article, pied = re.split("UPDATE:", article)
+            elif(re.search("\r\nLENGTH: \d* \S*\r\n", article)):
+                en_tete, article = re.split('\r\nLENGTH: \d* \S*\r\n', article, 1)
+            if re.search("\r\nUPDATE:.*\r\n", article):                
+                article, pied = re.split("UPDATE:", article)
+            elif re.search("\r\nLOAD-DATE:.*\r\n", article):                
+                article, pied = re.split("LOAD-DATE:", article)
 
 
             #récupère les données pour le ctx

@@ -1,3 +1,4 @@
+31/10/2018: correction Lexis allemand
 29/10/2018: chemin fichier accent nettoyeur
 26/10/2018: balises nettoyeur
 23/10/2018: Corrections du script QP (Sénat)
