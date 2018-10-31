@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #### Nettoyeur caractères
-#### version du 29/10/2018
+#### version du 31/10/2018
 #### Author Josquin Debaz
 #### GPL 3
 
@@ -61,7 +61,7 @@ class agent_de_surface(object):
         Liste_des_balises =['<i>','</i>','<strong>','</strong>','</tr>','<td>','</td>','&lt;i&gt;','&lt;/i&gt;',
                             '&lt;/strong&gt;','&lt;strong&gt;','<em>','</em>','&#65279;',
                             "<div>","</div>","<ul>","</ul>","<p>","<ol>","</ol>","<span>","</span>",
-                            "<b>", "</b>"]
+                            "<b>", "</b>", "<p align='center'>", '<p align="CENTER">']
         
         #dictionnaire : "forme corrigée" : ["formes à corriger"],
         carac_multi = {
@@ -82,7 +82,7 @@ class agent_de_surface(object):
             u"ù".encode('latin-1'):["&ugrave;","&#249;"],
             u"ê".encode('latin-1'):["&ecirc;","&#234;"],
             " " : ["&#8203;"],
-            "euros" : ["&euro;" , "&#8364"]
+            "euros" : ["&#8364;", "&euro;" , "&#8364"]
             }
         
         #dictionnaire : "forme corrigée" : "forme à corriger",
