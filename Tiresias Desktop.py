@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Tiresias Desktop
-version = "31/10/2018"
+version = "16/12/2018"
 # Author Josquin Debaz
 # GNU General Public License
 # Version 3, 29 June 2007
@@ -1186,7 +1186,7 @@ Merci à Robin, Federico, Guillaume, Markku, Patrick, Pierrick et Thomas pour le
                 boutonSupports.grid(column=1,row=2,sticky='NSEW')
                 self.entrySupports = Tkinter.Entry(self,width=70)
                 self.entrySupports.grid(column=2,row=2,sticky='NSEW')
-                boutonDest = Tkinter.Button(self, text=u"répertoire de destination", command= self.sel_dirDest)
+                boutonDest = Tkinter.Button(self, text=u"répertoire d'écriture des fichiers", command= self.sel_dirDest)
                 boutonDest.grid(column=1,row=3,sticky='NSEW')
                 self.entry_repDest = Tkinter.Entry(self,width=70)
                 self.entry_repDest.grid(column=2,row=3,sticky='NSEW')

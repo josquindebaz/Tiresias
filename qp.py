@@ -507,7 +507,7 @@ class parseASS3(object):
             self.donnees['ASREP'] = "Sans réponse"
             #dates and pages
             JO2 = re.search("<div>R.ponse publi.*", buf).group(0)
-            print JO2
+            #print JO2
             self.donnees['dpq'] = re.search(">(\d*/\d*/\d*)</span>", JO2).group(1)
             self.donnees['pgq'] = re.search(".*page.*>(\d*)</span></div>", JO2).group(1)
             question = re.split('<div class="reponse_contenu">', buf)[1]

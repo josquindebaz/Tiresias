@@ -1,3 +1,4 @@
+16/12/2018: micro corrections
 31/10/2018: correction Lexis allemand
 29/10/2018: chemin fichier accent nettoyeur
 26/10/2018: balises nettoyeur
