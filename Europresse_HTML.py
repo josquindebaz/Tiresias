@@ -2,7 +2,7 @@
 #----------------------------------------------------------
 #Script de traitement des HTML xml issus d'Europresse pour Prospéro
 #Génère les TXT et les CTX à partir des fichiers HTML du dossier
-#version du 29/10/2015 par Josquin Debaz
+#version du 07/01/2019 par Josquin Debaz
 #
 # Author:      Guillaume Ollivier adapté de Factiva.py (Josquin Debaz)
 #
@@ -131,50 +131,50 @@ class supports(object):
                         return self.supports[clef][1:]
 
 class EcritFichiers(object):
-	"Ecrit un fichier pour prospero."
-	"En entrée la date jj/mm/aaaa et le radical prospérien"
-	"L'appel à la fonction [ecrit] demande le contenu (en liste) et l'extention"
-	"Cela créé les fichiers TXT et CTX sans doublons dans un dossier éponyme"
+        "Ecrit un fichier pour prospero."
+        "En entrée la date jj/mm/aaaa et le radical prospérien"
+        "L'appel à la fonction [ecrit] demande le contenu (en liste) et l'extention"
+        "Cela créé les fichiers TXT et CTX sans doublons dans un dossier éponyme"
 
-	def __init__(self,date,racine,dest):
+        def __init__(self,date,racine,dest):
                 #instancie l'objet avec une date et une racine, lui donne son nom
-		if (not os.path.isdir(dest)):
-			os.mkdir(dest)
-		self.nom_fichier = self.nom_fichier_sans_doublon(date,racine,dest)
+                if (not os.path.isdir(dest)):
+                        os.mkdir(dest)
+                self.nom_fichier = self.nom_fichier_sans_doublon(date,racine,dest)
 
-	def date_prosperienne(self,date):
+        def date_prosperienne(self,date):
                 #la date de depart doit avoir la forme jj/mm/aaaa
-		mois = ("1","2","3","4","5","6","7","8","9","A","B","C")   #les mois en tuple
-		date = re.split('/',date)
-		date = "%s%s%s" % (date[2][2:],mois[int(date[1])-1],date[0])
-		return date
+                mois = ("1","2","3","4","5","6","7","8","9","A","B","C")   #les mois en tuple
+                date = re.split('/',date)
+                date = "%s%s%s" % (date[2][2:],mois[int(date[1])-1],date[0])
+                return date
 
-	def nom_fichier_sans_doublon(self,date,racine,dest):
-		indice,base = "A", 64
-		nom = "%s/%s%s%s" % (dest,racine,self.date_prosperienne(date),indice)
-		while os.path.isfile(nom + ".txt"): #tant que le fichier existe
-			if  (ord(indice[-1]) < 90):
-				indice = chr(ord(indice[-1]) + 1) #incrémente le dernier caractère de l'indice
-			else :		#quand on arrive à Z
-				base += 1	#augmente la première lettre
-				indice = "A"	#remet la deuxième à A
-			if base > 64 : #à deux lettres
-				indice = chr(base) + indice
-			nom = "%s/%s%s%s" % (dest,racine,self.date_prosperienne(date),indice)
-		return nom
+        def nom_fichier_sans_doublon(self,date,racine,dest):
+                indice,base = "A", 64
+                nom = "%s/%s%s%s" % (dest,racine,self.date_prosperienne(date),indice)
+                while os.path.isfile(nom + ".txt"): #tant que le fichier existe
+                        if  (ord(indice[-1]) < 90):
+                                indice = chr(ord(indice[-1]) + 1) #incrémente le dernier caractère de l'indice
+                        else :          #quand on arrive à Z
+                                base += 1       #augmente la première lettre
+                                indice = "A"    #remet la deuxième à A
+                        if base > 64 : #à deux lettres
+                                indice = chr(base) + indice
+                        nom = "%s/%s%s%s" % (dest,racine,self.date_prosperienne(date),indice)
+                return nom
 
-	def fin_de_ligne (self,lignes):
-		lignes = lignes
-		lignes += "\n"
-		return lignes
+        def fin_de_ligne (self,lignes):
+                lignes = lignes
+                lignes += "\n"
+                return lignes
 
-	def ecrit(self,contenu_fichier,extention):	#écrit le fichier, selon une liste de contenu et une extension
-		nom_fichier = self.nom_fichier + extention	#ajoute l'extention
-		pointeur_fichier = open(nom_fichier,'w')
-		texte_fichier = map(self.fin_de_ligne,contenu_fichier) 	#ajoute les fins de ligne
-		pointeur_fichier.writelines(texte_fichier)	#écrit les lignes du fichiers
-		pointeur_fichier.close()
-		return nom_fichier
+        def ecrit(self,contenu_fichier,extention):      #écrit le fichier, selon une liste de contenu et une extension
+                nom_fichier = self.nom_fichier + extention      #ajoute l'extention
+                pointeur_fichier = open(nom_fichier,'w')
+                texte_fichier = map(self.fin_de_ligne,contenu_fichier)  #ajoute les fins de ligne
+                pointeur_fichier.writelines(texte_fichier)      #écrit les lignes du fichiers
+                pointeur_fichier.close()
+                return nom_fichier
 
 class parseEuropressHTML(object):
         "d'Europresse, au format html, aux fichiers de prospero"
@@ -188,12 +188,12 @@ class parseEuropressHTML(object):
                 self.dest = dest
                 self.listeFichiersecrits = []
                 # repérage de tous les articles
-		if re.search("<article>",self.dom):
-			self.articles = re.split("<article>",self.dom)
-			nb_art = len(self.articles) -1
-			cmp_art = 1                    #compteur d'article traités
-			for article in self.articles[1:]:
-				#print "Je traite l'article %d/%d du fichier %s" % (cmp_art, nb_art, fichier)
+                if re.search("<article>",self.dom):
+                        self.articles = re.split("<article>",self.dom)
+                        nb_art = len(self.articles) -1
+                        cmp_art = 1                    #compteur d'article traités
+                        for article in self.articles[1:]:
+                                #print "Je traite l'article %d/%d du fichier %s" % (cmp_art, nb_art, fichier)
                                 if re.search('<span class="DocPublicationName">(Rapports|Reports) -', article): 
                                     print "je passe l'extrait de rapport", re.search('<span class="DocPublicationName">(Rapports|Reports) - .*</span>  <span class="DocPublicationName">', article).group(0)
                                 else:
@@ -201,26 +201,26 @@ class parseEuropressHTML(object):
                                         print "je passe le tweet"
                                     else:
                                         self.analyse_new(article)
-				cmp_art += 1
-				
-			
+                                cmp_art += 1
+                                
+                        
 
-		else :
-			self.dom= self.dom.replace('\n', ' ')
-			self.articles = self.dom.split("<br><br><br><table")
-			nb_art = len(self.articles) -1
-			cmp_art = 1                    #compteur d'article traités
-			for article in self.articles[:-1]:  # supprime de la liste le dernier enregistrement
-				##print "Je traite l'article %d/%d du fichier %s" % (cmp_art, nb_art, fichier)
-				self.analyse(article)
-				cmp_art += 1
+                else :
+                        self.dom= self.dom.replace('\n', ' ')
+                        self.articles = self.dom.split("<br><br><br><table")
+                        nb_art = len(self.articles) -1
+                        cmp_art = 1                    #compteur d'article traités
+                        for article in self.articles[:-1]:  # supprime de la liste le dernier enregistrement
+                                ##print "Je traite l'article %d/%d du fichier %s" % (cmp_art, nb_art, fichier)
+                                self.analyse(article)
+                                cmp_art += 1
 
-	def recup_content_class(self,classe,texte):
-		balise = re.findall("<(\w*) class=\"%s\">"% classe,texte) [0]
-		texte = re.split("<%s class=\"%s\">" % (balise,classe),texte) [1]
-		texte = re.split("</%s>"%balise,texte)[0]
-		texte = re.sub("\s*$","",texte)
-		return texte
+        def recup_content_class(self,classe,texte):
+                balise = re.findall("<(\w*) class=\"%s\">"% classe,texte) [0]
+                texte = re.split("<%s class=\"%s\">" % (balise,classe),texte) [1]
+                texte = re.split("</%s>"%balise,texte)[0]
+                texte = re.sub("\s*$","",texte)
+                return texte
 
         def analyse_new(self,article):
                 #récupère les données pour le ctx
@@ -232,13 +232,13 @@ class parseEuropressHTML(object):
                     journal = re.split("<", journal)[0]
                 if re.search(", no", journal):
                     journal = re.split(", ", journal)[0]
-		h = HTMLParser.HTMLParser()
-		journal =  h.unescape(journal)
+                h = HTMLParser.HTMLParser()
+                journal =  h.unescape(journal)
                 contenu_ctx[2] = self.nettoie_htm(journal)
 
-                date = self.recup_content_class("DocHeader",article)
-                #print date
-                if re.search("\d{1,} \S* \d{4}",date):
+                date = self.recup_content_class("DocHeader", article)
+##                print date
+                if re.search("\d{1,} \S* \d{4} -",date):
                         date = re.search("(\d{1,} \S* \d{4})",date).group(1)
                 elif re.search(u"\w* \d{1,}, \d{4}", article):
                         date = re.search(u"(\w* \d{1,}, \d{4})", article).group(1)
@@ -261,7 +261,7 @@ class parseEuropressHTML(object):
                     corps = self.recup_content_class("DocText clearfix",
                     article)
                     
-		corps = self.nettoie_htm(corps)
+                corps = self.nettoie_htm(corps)
                 contenu_txt = [contenu_ctx[1],'.']  #on commence par le titre
                 contenu_txt.append(corps)
 
@@ -374,7 +374,7 @@ class parseEuropressHTML(object):
                         'juin': '06', 'juillet': '07', 'Juillet': '07', 'aout': '08', u'août': '08', 'septembre': '09', 'octobre': '10',
                         'novembre': '11', u'décembre': '12', 'January' : '01', 'February' : '02', 'March' : '03', 'April' :'04', 'May': '05',
                         'June' : '06', 'July' : '07', 'August' : '08', 'September' : '09', 'October' : '10', 'November' : '11', 'December' : '12',
-			}
+                        }
             d = d.replace('  ', ' ')
             d = self.nettoie_htm(d)
             d = re.sub(',','',d)

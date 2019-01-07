@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Tiresias Desktop
-version = "16/12/2018"
+version = "07/01/2019"
 # Author Josquin Debaz
 # GNU General Public License
 # Version 3, 29 June 2007
