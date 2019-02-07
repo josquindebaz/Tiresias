@@ -1,3 +1,4 @@
+07/01/2019 : added hyphenation deletor
 07/01/2019 : correction recherche date Europresse
 16/12/2018: micro corrections
 31/10/2018: correction Lexis allemand

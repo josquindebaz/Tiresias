@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Tiresias Desktop
-version = "07/01/2019"
+version = "07/02/2019"
 # Author Josquin Debaz
 # GNU General Public License
 # Version 3, 29 June 2007
@@ -80,6 +80,7 @@ Merci à Robin, Federico, Guillaume, Markku, Patrick, Pierrick et Thomas pour le
                 correcteurs.add_command(label="Nettoyage de caractères (Prospéro 1 en français)", command=self.nettoie)
                 correcteurs.add_command(label="Traitement des groupes de capitales",command=self.gestion_majuscules)
                 correcteurs.add_command(label="Correcteur de mots ", command=self.corr_mots)
+                correcteurs.add_command(label="Delete hyphenations", command=self.suppr_tirets)
 
                 # création modif corpus:
                 modif =  Tkinter.Menu(menu, tearoff=0)
@@ -741,8 +742,61 @@ Merci à Robin, Federico, Guillaume, Markku, Patrick, Pierrick et Thomas pour le
                 else :
                         return chaine
                 
+##############################################################
+## module qui efface les césures
 
+        def suppr_tirets(self):
+                """efface les césures dans les .txt d'un dossier et de ses sous-dossiers"""
+                self.geometry("700x250")
+                for item in self.grid_slaves():
+                        item.destroy()
+                #row 1
+                bouton1 = Tkinter.Button(self, text=u"Select directory", command= self.ST_sel_dir)
+                bouton1.grid(column=1, row=1, sticky='NSEW')
+                self.ST_entry = Tkinter.Entry(self)
+                self.ST_entry.grid(column=2, row=1, sticky='NSEW')
+                bouton2 = Tkinter.Button(self, text=u"Delete hyphenations", command=self.ST_action)
+                bouton2.grid(column=3, row=1, sticky='NSEW')
+                #row 2
+                self.ST_ZONEtexte = Tkinter.Text(self)
+                self.ST_ZONEtexte.grid(column=1, row=2, columnspan=3,sticky='NSEW')
+                ascenseurZT= Tkinter.Scrollbar(self)
+                ascenseurZT.grid(column=4, row=2,sticky='NSEW')
+                ascenseurZT.configure(command=self.ST_ZONEtexte.yview)
+                self.ST_ZONEtexte.configure(yscrollcommand=ascenseurZT.set)
 
+        def ST_sel_dir(self):
+                self.ST_entry.delete(0,"end")
+                sel_dir = tkFileDialog.askdirectory(title="Select directory")
+                self.ST_entry.insert(0, sel_dir)                
+
+        def ST_action(self):
+                self.progress_bar()
+                progress = 0
+                cf = 0
+
+                listeTXT = text_cleaner.liste_TXT(self.ST_entry.get())
+                for f in listeTXT.lesTXT:
+                        progress += 1
+                        self.progress_bar_avance(progress*100/len(listeTXT.lesTXT))
+                        with open(f, 'r') as F:
+                                BUF = F.read()
+                        m = re.compile("-\s*[\r\n]{1,}")
+                        c = len(m.findall(BUF))
+                        if(c):
+                                cf += 1
+                                try:
+                                        self.ST_ZONEtexte.insert("1.0", u"%d modifications in %s\n"%(c, f))
+                                except:
+                                        self.ST_ZONEtexte.insert("1.0", u"%d modifications in %s\n"%(c, u'%s'%f.decode('latin1')))
+
+                                nBUF = m.sub("", BUF)
+                                with open(f, 'w') as F:
+                                        F.write(nBUF)
+                self.ST_ZONEtexte.insert("1.0", u"%d file(s) modified on %d\n"%(cf, len(listeTXT.lesTXT)))
+
+                                        
+                        
 
 ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## 
 ## Menu modification corpus
