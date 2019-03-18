@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+## -*- coding: utf-8 -*-
 #### Nettoyeur caractères
 #### version du 31/10/2018
 #### Author Josquin Debaz
@@ -32,11 +32,26 @@ class agent_de_surface(object):
     
     def __init__(self,texte):
         self.BUF = texte
+        if self.testUTF8(self.BUF):
+            self.BUF = self.UTFtoLATIN(self.BUF)
         self.compte_modif = self.les_ascii()
         self.compte_modif += self.les_caracteres()
         self.compte_modif += self.nombres_morceaux()
         self.compte_modif += self.le_tiret()
 
+    def testUTF8(self, txt):
+        try:
+            txt.decode('UTF-8')
+        except UnicodeDecodeError:
+            return False
+        else:
+            return True
+
+    def UTFtoLATIN(self, txt):
+        txt = txt.decode('utf-8')
+        txt = txt.encode('latin-1', 'xmlcharrefreplace')
+        return txt
+ 
     def les_ascii(self):
         # dictionnaire : [code ascii non reconnu] : [forme reconnue],
         LISTE_DES_CARACTERES = { 156 : "oe" ,   160 : " ", 12 : "\n", 133 : "..." ,
@@ -69,20 +84,25 @@ class agent_de_surface(object):
             ' " ':["&laquo;","&raquo;","&#8220;","&#8221;","&#171;" ,"&#187;" ,"&quot;","&lt;","&gt;"],
             '... ':["&hellip;","&#8230;","&#x2026;" ]  ,
             u"oe".encode('latin-1'):["&oelig;","&#156;" ,"&#339;", "&#338;" ],
-            "-" : ["&#8211;","&#8208;","&sect;","&bull;"],
+            "-" : ["&#8211;","&#8208;","&sect;","&bull;", "&#8209;"],
             "\n" : ["<br>", "<br/>", "<BR>",  "<BR/>",  "<BR />","<br />",'<tr>',"</p>","</li>","&#8232;"],
             " ":["&nbsp;",'&#xd;','#xd;',"&#160;","&#8201;"],
-            u"î".encode('latin-1') :[  "&#238;" ,"&icirc;",u"î".encode('utf-8')],
+            u"î".encode('latin-1') :[  "&#238;" ,"&icirc;",u"î".encode('utf-8'), "i&#776;", "i&#770;"],
             u"é".encode('latin-1'):["&eacute;",u"é".encode('utf-8'),"&#233;","e&#769;"],
             u"è".encode('latin-1'):["&egrave;",u"è".encode('utf-8'),"&#232;","e&#768;" ],
             u"à".encode('latin-1'):["&agrave;","&#224;",u"à".encode('utf-8'),"a&#768;"],
             ' - ' : ['&#8212;',"&ndash;"],
+            u"â".encode('latin-1'):["a&#770;"],
             u"ô".encode('latin-1'):["&ocirc;","o&#770;","&#244;"],
             u"û".encode('latin-1'):["&ucirc;",  "u&#768;"],
-            u"ù".encode('latin-1'):["&ugrave;","&#249;"],
-            u"ê".encode('latin-1'):["&ecirc;","&#234;"],
-            " " : ["&#8203;"],
-            "euros" : ["&#8364;", "&euro;" , "&#8364"]
+            u"ù".encode('latin-1'):["&ugrave;","&#249;", "u&#768;"],
+            u"û".encode('latin-1') : ["u&#770;"],
+            u"ê".encode('latin-1'):["&ecirc;","&#234;", "e&#770;"],
+            " " : ["&#8203;", "&#8239;"],
+            "euros" : ["&#8364;", "&euro;" , "&#8364"], 
+            "e": ["&#7497;"],
+            u"ç".encode('latin-1'): ["&#231;", "c&#807;", '&ccedil;'],
+            u"Ç".encode('latin-1'): ["C&#807;"],
             }
         
         #dictionnaire : "forme corrigée" : "forme à corriger",
@@ -91,11 +111,9 @@ class agent_de_surface(object):
 #            '-' : 'â€oe' , 'ë' : 'Ã«' , 'ç' : 'Ã§' , 'î' : 'Ã®' , 'ê' : 'Ãª' , 'à' : 'Ã' , "'" : "â€™" ,'oe' : 'Å"', '-' : 'â€"', '-' : 'â€¢', 
              ' " ' : "«" , ' " ' : '»'  , ' ' : "\xc2",
              u"â".encode('latin-1'):"&acirc;",
-             u'ç'.encode('latin-1'):'&ccedil;',
              u"ï".encode('latin-1'):"&iuml;",
              u"É".encode('latin-1'):"&#201;",
              u"É".encode('latin-1'):"&Eacute;",
-             u"ç".encode('latin-1') : "&#231;",
              u"â".encode('latin-1') : "&#226;",
              u"ï".encode('latin-1') : "&#239;",
              "&" : "&amp;",
@@ -129,9 +147,8 @@ class agent_de_surface(object):
                     
 
 
-        for correcte,incorrecte in Liste_des_formes.iteritems() :
-            cherche = string.count(self.BUF,incorrecte)
-            #print incorrecte
+        for correcte, incorrecte in Liste_des_formes.iteritems() :
+            cherche = string.count(self.BUF, incorrecte)
             if cherche:
                 #print "2[%s]%s" %( incorrecte,correcte) 
                 self.BUF = string.replace( self.BUF,incorrecte,correcte)

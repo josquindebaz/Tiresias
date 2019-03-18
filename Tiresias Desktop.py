@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Tiresias Desktop
-version = "07/02/2019"
+version = "18/03/2019"
 # Author Josquin Debaz
 # GNU General Public License
 # Version 3, 29 June 2007
@@ -34,26 +34,18 @@ class simpleapp_tk(Tkinter.Tk):
 
 
         def accueille(self):
-                self.geometry("465x280")
+                self.geometry("700x500")
                 for item in self.grid_slaves():
                         item.destroy()
                 self.vAccueil = Tkinter.StringVar()
-                self.vAccueil = """
-Bienvenue sur Tirésias Desktop
+                self.vAccueil = """Tirésias Desktop conçu par Josquin Debaz\npour l'association Doxa\nhttp://prosperologie.org\n\nVersion du """
+                self.vAccueil += version
+                self.vAccueil += """
 
-Logiciel conçu par Josquin Debaz pour l'association Doxa
-http://prosperologie.org
+Remarques, commentaires et suggestions :\nhttp://prosperologie.org/forum
 
-Version du %s
+Script pour Europresse initié par Guillaume Ollivier\nMerci à Robin, Federico, Guillaume, Markku, Patrick, Pierrick et Thomas pour les suggestions et retours de bug"""
 
-Remarques, commentaires et suggestions sur 
-http://prosperologie.org/forum
-
-Script pour Europresse initié par Guillaume Ollivier
-
-Merci à Robin, Federico, Guillaume, Markku, Patrick, Pierrick et Thomas pour les suggestions et retours de bug
-
-"""%version
                 accueil = Tkinter.Message(bg="white",fg="black",width=460,relief="groove",justify="center",text=self.vAccueil)
                 accueil.grid(row=1,column=1)
                 
