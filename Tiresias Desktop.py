@@ -1680,7 +1680,7 @@ Script pour Europresse initié par Guillaume Ollivier\nMerci à Robin, Federico,
         def carteqp_traite(self):
                 donnees = self.carteqp_ZONEtexte1.get(1.0,"end")
                 if (donnees != "\n"): 
-                        fichier = tkFileDialog.asksaveasfilename(title="Enregistrer sous", initialdir=".", initialfile="carte.svg", filetypes = [("Fichiers svg","*.svg;")])
+                        fichier = tkFileDialog.asksaveasfilename(title="Enregistrer sous", initialdir=".", initialfile="carte.svg", filetypes = [("Fichiers svg","*.svg")])
                         carteqp.traite(donnees,fichier)
                         webbrowser.open(fichier,0,1)
                         
