@@ -1,0 +1,60 @@
+﻿18/03/2019: UTF8 to LATIN 1 dans le nettoyeur
+07/02/2019 : added hyphenation deletor
+07/01/2019 : correction recherche date Europresse
+16/12/2018: micro corrections
+31/10/2018: correction Lexis allemand
+29/10/2018: chemin fichier accent nettoyeur
+26/10/2018: balises nettoyeur
+23/10/2018: Corrections du script QP (Sénat)
+12/10/2018: adaptation de Lexis-Nexis pour l'Allemand
+06/03/2018 : remise du filtre des années citées à 0
+14/02/2018: correction script QP pour AN, réduction des logs
+30/01/2018 : correction script QP pour AN
+28/12/2017 : correction script QP et adresses répertoire accentuées, et correction traitement réponse au Sénat qd changement de destinataire
+22/07/2017  : correction script Assemblée
+20/07/2017 : correction script Europresse
+09/02/2017 : mise à jour title pour les atlas départementaux
+07/12/2016 : mise à jour du script Europresse
+10/11/2015 : correction problème accents requête assemblée
+29/10/2015 : mise à jour du script Europresse
+01/06/2015 : mise à jour du script Factiva
+06/01/2015 : mise à jour du script cartes des départements
+22/12/2014 : mise à jour du script Factiva
+09/12/2014 : ajout de balises html dans le correcteur
+14/10/2014 : correction script sénat qui ajoutait un \r à la date
+09/10/2014 : révision des codecs du script QP et du nettoyeur
+02/09/2014 : révision du script Europresse
+01/07/2014 : correction QP du Sénat : sauts de ligne dans les CTX et réponses partielles
+18/06/2014 : révision du script QP (Sénat), ajout exception en cas de transmission de la question
+17/06/2014 : révision du script QP (Assemblée), mise en conformité titre et liens
+12/02/2014 : révision du script QP (Assemblée)
+04-11-2013 : révision des scripts Europresse, qp (Sénat)
+24/10/2013 : révision du script QP
+30/04/2013 : révision des scripts Europresse, qp et caractères
+06/03/2013 : refonte traitement caractères dans le correcteur
+04/02/2013 : changement modalité accès fichier du correcteur
+13/11/2012 : ajout du filtreur
+31/10/2012 : compatibilité avec plusieurs versions de Factiva, passage à Python 27
+25/10/2012 : correction d'un bug sur les QP et du nettoyage de caractères
+19/10/2012 : ajout du correcteur de formes et du modificateur de lecteur de disque des fichiers PRC et CTX
+09/08/2012 : ajout de la 14e législature pour les QP, correction du script Factiva
+20/06/2012 : correction du script QP pour le Sénat
+14/06/2012 : ajout de formes au correcteur de caractères
+12/06/2012 : correction du script Factiva
+01/06/2012 : mise à jour du script Factiva
+30/05/2012 : correction script Factiva pour les entrées de paragraphe pour les textes non francophones
+15/05/2012 : ajout du traitement de Lexis-Nexis
+26/04/2012 : amélioration de la légende de l'atlas des départements
+26/04/2012 : ajout d'une barre de progression et de messages d'erreur pour les problemes dans l'entrée des QP
+17/04/2012 : ajout du téléchargement du support.publi
+16/04/2012 : ajout du générateur de cartes pour QP
+16/04/2012 : ajout du traitement de Europresse
+11/04/2012 : ajout du supprimeur de .bdt
+11/04/2012 : traitement des .txt et des .TXT par le nettoyeur
+11/04/2012 : passage du listeur des TXT dans l'entrée Fichiers
+11/04/2012 : ajout nettoyage des caractères dans l'entrée QP
+11/04/2012 : ajout utilisation directe de QP.py avec un url de question
+11/04/2012 : ajout du traitement des années citées récupérées par formule
+05/04/2012 : ajout du traitement des QP
+05/04/2012 : ajout nettoyage des caractères dans l'entrée Factiva
+
