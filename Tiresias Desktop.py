@@ -981,7 +981,7 @@ Script pour Europresse initié par Guillaume Ollivier\nMerci à Robin, Federico,
                 filepath = tkFileDialog.askopenfilename(filetypes=[("fichier de projet","*.prc")],title='Choisir le projet', initialdir='.')
                 self.entry_PRC.delete(0,"end")
                 self.entry_PRC.insert(0,filepath)
-                PRC = open(filepath,'r').readlines()
+                PRC = open(filepath, 'r').readlines()
                 self.introPRC = PRC[:6]
                 self.textesPRC = map(lambda x:re.sub('\n','',x),PRC[6:-1])
                 self.LB1txt.set("%d texte(s) dans le projet" % (len(self.textesPRC)) )
