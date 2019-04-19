@@ -2,6 +2,7 @@
 # GPL 3
 
 import urllib.request
+import re
 import time
 import webbrowser
 import tkinter as tk
@@ -91,15 +92,14 @@ https://github.com/josquindebaz/Tiresias",
 
     def test_version(self):
         try:
-            url = "https://raw.githubusercontent.com/josquin\
-debaz/Tiresias/master/CHANGELOG.txt"
+            url = "https://raw.githubusercontent.com/josquindebaz/Tiresias/master/T2/CHANGELOG.txt"
+            #https://raw.githubusercontent.com/josquindebaz/Tiresias/master/CHANGELOG.txt"
             with urllib.request.urlopen(url) as p:
-                b = p.read()
-                last = time.strptime(b[:10].decode('ascii'), "%d/%m/%Y")
+                b = p.read().decode()
+                last = time.strptime(re.findall("\d{2}/\d{2}/\d{4}",  b)[0], "%d/%m/%Y")
             with open("CHANGELOG.txt", 'rb') as f:
                 bl = f.read().decode()
-                print(bl)
-                loc = time.strptime(bl[:10], "%d/%m/%Y")
+                loc = time.strptime(re.findall("\d{2}/\d{2}/\d{4}", bl)[0], "%d/%m/%Y")
             if last > loc:
                 return 1
             else:
