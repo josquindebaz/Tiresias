@@ -118,7 +118,7 @@ class V_filter():
 
         self.result.delete(1.0, "end")
 
-        with open(p, 'r') as f:
+        with open(p, 'r', encoding='iso-8859-1') as f:
             self.prc = f.readlines()
             self.list_txt = [l[:-1] for l in self.prc[6:-1]]
 
@@ -133,12 +133,13 @@ class V_filter():
 
     def theme_add(self):
         item = self.w_add_Entry.get()
-        if (item in self.L_presents.get(0, 'end')):
-            self.result.insert(1.0, u"%s already in theme\n"%item)
-        else:
-            self.L_presents.insert("end", u"%s"%item)
-            self.result.insert(1.0, u"%s added to theme\n"%item)
-            self.w_add_Entry.delete(0, "end")
+        if item != "":
+            if (item in self.L_presents.get(0, 'end')):
+                self.result.insert(1.0, u"%s already in theme\n"%item)
+            else:
+                self.L_presents.insert("end", u"%s"%item)
+                self.result.insert(1.0, u"%s added to theme\n"%item)
+                self.w_add_Entry.delete(0, "end")
 
     def theme_remove(self):
         selected = self.L_presents.curselection()
@@ -179,7 +180,7 @@ class V_filter():
                         self.Acorpus_list.insert("end", u"%s %s\n"%(txt, ev[0]))
                         self.list_txt_ac.append(txt)
                 else:
-                    self.result.insert(1.0, "%s: no such file"%txt)
+                    self.result.insert(1.0, "%s: no such file\n"%txt)
                     self.list_txt_absent.append(txt)
                 
             self.result.insert(1.0, "%d text(s) positive, %d negative, %d file(s) not found\n"\

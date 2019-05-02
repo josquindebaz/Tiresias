@@ -17,8 +17,9 @@ class V_E():
         FrameDir = tk.Frame(self.parent)
         FrameDir.pack(anchor=tk.W)
 
-        bnDir = tk.Button(FrameDir, text="Select .HTML Europresse file directory",
-            command=self.sel_dir_html)
+        bnDir = tk.Button(FrameDir,
+                          text="Select .html Europresse file directory",
+                          command=self.sel_dir_html)
         bnDir.pack(side=tk.LEFT)
 
         self.choosenDir = tk.StringVar()
@@ -135,7 +136,7 @@ class V_E():
         self.choosenDir.set(directory)
         self.get_html_list()
         self.log.insert(1.0,
-                "Found %d .HTML file(s) in %s\n" %(len(self.list_html),
+                "Found %d .html file(s) in %s\n" %(len(self.list_html),
                                                    directory))
     def reset_lists(self):
         self.unknown_list.delete(0, 'end')
@@ -147,7 +148,7 @@ class V_E():
         
         directory = self.choosenDir.get()
         if (directory):
-            self.list_html = glob.glob("%s/*HTML"%directory)
+            self.list_html = glob.glob("%s/*.htm*"%directory)
             [self.htm_list.insert("end",
                     os.path.split(item)[1]) for item in self.list_html]
 

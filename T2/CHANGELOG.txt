@@ -1,1 +1,2 @@
-﻿19/04/2019: First test version
+﻿02/05/2019: html extensions for Europresse, prc encoding an no empty theme in Filter
+19/04/2019: First test version
