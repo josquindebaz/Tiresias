@@ -1,6 +1,7 @@
 import tkinter as tk
 
 import glob
+import re
 import os
 
 from mod.Europresse import *
@@ -148,7 +149,10 @@ class V_E():
         
         directory = self.choosenDir.get()
         if (directory):
-            self.list_html = glob.glob("%s/*.htm*"%directory)
+            #self.list_html = glob.glob("%s/*.htm*"%directory)
+            rule = re.compile(".*\.htm.", re.IGNORECASE)
+            self.list_html = [f for f in os.listdir(directory) if
+                rule.match(f)]
             [self.htm_list.insert("end",
                     os.path.split(item)[1]) for item in self.list_html]
 
