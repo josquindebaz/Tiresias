@@ -3,6 +3,7 @@ from tkinter import ttk
 from tkinter import filedialog 
 from tkinter.scrolledtext import ScrolledText
 import os
+from pathlib import Path
 
 from mod.prc_filter import prc_filter
 
@@ -13,10 +14,19 @@ class V_filter():
             font=("Helvetica", 12, "bold"))
         WindowTitle.pack(fill=tk.X)
 
-
         self.list_txt = []
         self.list_txt_c = []
         self.prc = []
+
+        corpus_path_windows = "C:\corpus"
+        home = str(Path.home())
+        corpus_path_unix = "%s/.wine/drive_c/corpus"%home
+        if os.path.isdir(corpus_path_windows):
+            self.initdir = corpus_path_windows
+        elif os.path.isdir(corpus_path_unix):
+            self.initdir = corpus_path_unix
+        else:
+            self.initdir = "."
         
         #Frame project
         Fr1 = tk.Frame(self.parent)
@@ -31,8 +41,9 @@ class V_filter():
             textvariable=self.choosenPRC)
         PRC_entry.pack(side=tk.LEFT)
 
-##        bnDir = tk.Button(Fr1, text=u"Select directory",)
-##        bnDir.pack(side=tk.LEFT)
+        bnDir = tk.Button(Fr1, text=u"Select directory", 
+            command=self.sel_dir)
+        bnDir.pack(side=tk.LEFT)
         
         #Frame corpus/anticorpus
         Fr2 = tk.LabelFrame(self.parent, 
@@ -113,7 +124,7 @@ class V_filter():
         p = filedialog.askopenfilename(
             filetypes=[("project file","*.prc")],
             title='Select a project',
-            initialdir=u"C:\corpus")
+            initialdir=self.initdir)
         self.choosenPRC.set(p)
 
         self.result.delete(1.0, "end")
@@ -131,6 +142,24 @@ class V_filter():
         self.progressbar['value'] = 0
         self.progressbar['maximum'] =  len(self.list_txt)
 
+    def sel_dir(self):
+        directory = tk.filedialog.askdirectory(title="Choose directory",
+                                               initialdir=self.initdir)
+        self.choosenPRC.set(directory)
+        self.result.delete(1.0, "end")
+
+        self.list_txt = []
+        for root, rep, files in os.walk(directory):
+            self.list_txt.extend([os.path.join(root, name) 
+                for name in files 
+                if os.path.splitext(name)[1] in [".txt", ".TXT"]
+                ])
+
+        for txt in self.list_txt:
+            self.Corpus_list.insert("end", u"%s\n"%txt)
+        self.result.insert(1.0,
+                u"Found %d .txt(s) in %s\n"%(len(self.list_txt), directory))
+
     def theme_add(self):
         item = self.w_add_Entry.get()
         if item != "":
@@ -138,7 +167,7 @@ class V_filter():
                 self.result.insert(1.0, u"%s already in theme\n"%item)
             else:
                 self.L_presents.insert("end", u"%s"%item)
-                self.result.insert(1.0, u"%s added to theme\n"%item)
+                self.result.insert(1.0, u"[%s] added to theme\n"%item)
                 self.w_add_Entry.delete(0, "end")
 
     def theme_remove(self):
@@ -170,7 +199,7 @@ class V_filter():
                 self.progressbar['value'] = c
                 self.parent.update()
                 if os.path.isfile(txt):
-                    with open(txt, "r") as f:
+                    with open(txt, "r", encoding='iso-8859-1') as f:
                         b = f.read()
                     ev = Eval.eval_theme(b)
                     if ((ev[1][0] >= Eval.score) and (ev[1][1] >= Eval.dep)):
@@ -198,12 +227,20 @@ class V_filter():
     def save_PRC(self, list_txt, suf):
         if len(list_txt):
             p = self.choosenPRC.get()
-            lines = self.prc[:6]
-            lines.extend([txt+"\n" for txt in list_txt])
+            if os.path.splitext(p)[1] not in [".prc", ".PRC"]:
+                p = "%s.prc" % os.path.split(p)[1]
+                
+            if (self.prc):
+                lines = self.prc[:6]
+            else:
+                lines = ["projet0005\r\n", 
+                    "\r\n", "\r\n", "\r\n", "\r\n", "\r\n"]
+            lines.extend([txt+"\r\n" for txt in list_txt])
             lines.append("ENDFILE")
             fichier = filedialog.asksaveasfile(mode='w',
                         filetypes=[("","*.prc")],
                         defaultextension = ".prc",
+                        initialdir=self.initdir,
                         initialfile="%s_filtered_%s%s"%(p[:-4], suf, p[-4:]))
             fichier.writelines(lines)
             fichier.close()
