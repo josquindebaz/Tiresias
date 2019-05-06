@@ -1,8 +1,10 @@
 import tkinter as tk
+from tkinter import ttk
 
 import glob
 import re
 import os
+from pathlib import Path
 
 from mod.Europresse import *
 from mod.supports import publi
@@ -13,6 +15,16 @@ class V_E():
         WindowTitle = tk.Label(self.parent, text="Europresse",
             font=("Helvetica", 12, "bold"))
         WindowTitle.pack(fill=tk.X)
+
+        corpus_path_windows = "C:\corpus"
+        home = str(Path.home())
+        corpus_path_unix = "%s/.wine/drive_c/corpus"%home
+        if os.path.isdir(corpus_path_windows):
+            self.initdir = corpus_path_windows
+        elif os.path.isdir(corpus_path_unix):
+            self.initdir = corpus_path_unix
+        else:
+            self.initdir = "."
 
         #FrameDir
         FrameDir = tk.Frame(self.parent)
@@ -51,39 +63,37 @@ class V_E():
         #Unknow sources
         Fr_U = tk.LabelFrame(FrEurF, text="Unknown Sources", borderwidth=2,)
         Fr_U.pack(side=tk.LEFT, anchor=tk.N)
-        self.unknown_list=tk.Listbox(Fr_U, width=40)
+        self.unknown_list=tk.Listbox(Fr_U, width=50)
         self.unknown_list.pack()
+        self.unknown_list.bind("<<ListboxSelect>>", self.memoUnknown)
+        self.memory_selected_unknown = None
 
-##        UP1 = tk.PanedWindow(Fr_U)
-##        UP1.pack(anchor=tk.W, fill=tk.X)
-##        lab_U_pubname = tk.Label(UP1, text="Name")
-##        lab_U_pubname.pack(side=tk.LEFT)
-##        U_pubname = tk.Entry(UP1)
-##        U_pubname.pack(fill=tk.X)        
-##        UP2 = tk.PanedWindow(Fr_U)
-##        UP2.pack(anchor=tk.W, fill=tk.X)
-##        lab_U_type = tk.Label(UP2, text="Type")
-##        lab_U_type.pack(side=tk.LEFT)
-##        U_type = tk.Entry(UP2)
-##        U_type.pack(fill=tk.X)
-##        UP3 = tk.PanedWindow(Fr_U)
-##        UP3.pack(anchor=tk.W, fill=tk.X)
-##        lab_U_abr = tk.Label(UP3, text="Abrv")
-##        lab_U_abr.pack(side=tk.LEFT)
-##        U_abr = tk.Entry(UP3)
-##        U_abr.pack(fill=tk.X)
-##        
-##        bn_U_w = tk.Button(Fr_U, text="Save",)
-##        bn_U_w.pack()
+        self.CbS = ttk.Combobox(Fr_U)
+        self.CbS.pack(anchor=tk.W, fill=tk.X)
+        self.CbS.bind("<<ComboboxSelected>>", self.CbSSel)
 
-##        #FIXME bof
-##        Supports = supports()
-##        l = [Supports.D[a]['source'] for a in Supports.D.keys()]
-##        optionList = (l)
-##        v = tk.StringVar()
-##        v.set(optionList[0])
-##        om = tk.OptionMenu(Fr_U, v, *optionList)
-##        om.pack()
+        UP1 = tk.PanedWindow(Fr_U)
+        UP1.pack(anchor=tk.W, fill=tk.X)
+        lab_U_pubname = tk.Label(UP1, text="Name")
+        lab_U_pubname.pack(side=tk.LEFT)
+        self.U_pubname = tk.Entry(UP1)
+        self.U_pubname.pack(fill=tk.X)        
+        UP2 = tk.PanedWindow(Fr_U)
+        UP2.pack(anchor=tk.W, fill=tk.X)
+        lab_U_type = tk.Label(UP2, text="Type")
+        lab_U_type.pack(side=tk.LEFT)
+        self.U_type = tk.Entry(UP2)
+        self.U_type.pack(fill=tk.X)
+        UP3 = tk.PanedWindow(Fr_U)
+        UP3.pack(anchor=tk.W, fill=tk.X)
+        lab_U_abr = tk.Label(UP3, text="Abrv")
+        lab_U_abr.pack(side=tk.LEFT)
+        self.U_abr = tk.Entry(UP3)
+        self.U_abr.pack(fill=tk.X)
+        
+        bn_U_w = tk.Button(Fr_U, text="Add to support.publi",
+            command=self.add_support)
+        bn_U_w.pack()
 
         #article list        
         Fr_art = tk.LabelFrame(FrTemp, text="Found articles", borderwidth=2)
@@ -120,25 +130,56 @@ class V_E():
         bn_process_art.pack(side=tk.LEFT, padx=10)
         
 
+        self.progressbar = ttk.Progressbar(self.parent, mode='determinate')
+        self.progressbar.pack(anchor=tk.W, fill=tk.X)
+
         #Log Frame
         FrLog = tk.Frame(self.parent)
         FrLog.pack(fill=tk.X)
-        #TODO for other direct tk too
         self.log = tk.scrolledtext.ScrolledText(FrLog,
                             height=10, bg="black", fg="orange")
         self.log.pack(fill=tk.X)
         
+    def memoUnknown(self, callback):
+        self.memory_selected_unknown = self.unknown_list.curselection()
+
+    def CbSSel(self, callback):
+        self.reset_Supports()
+        index = self.CbS.current()
+        if(index):
+            values = self.knownSources[index].split("; ")
+            self.U_pubname.insert(0, values[0])
+            self.U_type.insert(0, values[1])
+            self.U_abr.insert(0, values[2])
+
+        if (self.memory_selected_unknown):
+            self.unknown_list.selection_set(self.memory_selected_unknown)
+
+    def add_support(self):
+        i = self.unknown_list.curselection()
+        if (i):
+            s = self.unknown_list.get(i)
+            n = self.U_pubname.get()
+            t = self.U_type.get() 
+            a = self.U_abr.get() 
+            self.log.insert(1.0, 
+                "Adding to support.publi [%s] as %s; %s; %s\n" % (s, n, t, a))
+            self.Supports.add(s, n, t, a)
+            self.Supports.write()
+            self.populateSupports()
+            self.unknown_list.delete(i)
+
     def sel_dir_html(self):
         self.choosenDir.set("")
         self.reset_lists()
 
-        #TODO for other direct tk too
         directory = tk.filedialog.askdirectory(title="Choose directory")
         self.choosenDir.set(directory)
         self.get_html_list()
         self.log.insert(1.0,
                 "Found %d .html file(s) in %s\n" %(len(self.list_html),
                                                    directory))
+
     def reset_lists(self):
         self.unknown_list.delete(0, 'end')
         self.art_list.delete(0, 'end')        
@@ -149,17 +190,33 @@ class V_E():
         
         directory = self.choosenDir.get()
         if (directory):
-            #self.list_html = glob.glob("%s/*.htm*"%directory)
             rule = re.compile(".*\.htm.", re.IGNORECASE)
             self.list_html = [f for f in os.listdir(directory) if
                 rule.match(f)]
             [self.htm_list.insert("end",
                     os.path.split(item)[1]) for item in self.list_html]
+            self.htm_list.select_set(0, "end")
+
+    def reset_Supports(self): 
+        self.U_pubname.delete(0, 'end')
+        self.U_type.delete(0, 'end')
+        self.U_abr.delete(0, 'end')
+
+    def populateSupports(self):
+        self.reset_Supports()
+        self.knownSources = ["Known sources"]
+        self.knownSources.extend( sorted(["%s; %s; %s" %(k, 
+            self.Supports.sources[k]['type'], self.Supports.sources[k]['abr']) 
+            for k in self.Supports.sources]) )
+        self.CbS['values'] = (self.knownSources)
+        self.CbS.current(0)
 
     def analyse(self):
         self.reset_lists()
 
-        Supports = publi()
+        self.Supports = publi()
+        self.populateSupports()
+            
         unknowns = []
         self.articles_list = []
         for c in self.htm_list.curselection():
@@ -170,7 +227,7 @@ class V_E():
                 for a in p.parsed_articles:
                     if a not in self.articles_list:
                         self.articles_list.append(a)
-                    if (a['source'] not in Supports.codex.keys() and
+                    if (a['source'] not in self.Supports.codex.keys() and
                         a['source'] not in unknowns):
                         unknowns.append(a['source'])
             except:
@@ -181,27 +238,33 @@ class V_E():
 articles and %d unknown source(s)\n'%(len(self.articles_list), len(unknowns)))
         [self.art_list.insert("end", "%s %s %s"%\
             (a['source'], a['date'], a['title'])) for a in self.articles_list]
-
         [self.unknown_list.insert("end", u) for u in unknowns]
 
+        self.art_list.select_set(0, "end")
 
     def sel_dir_w(self):
+        memory_selected_articles = self.art_list.curselection()
         self.choosenDir_w.set("")
         directory = tk.filedialog.askdirectory(title="Choose directory",
-                                               initialdir="C:\corpus")
+                           initialdir=self.initdir)
         self.choosenDir_w.set(directory)
+        for a in memory_selected_articles:
+            self.art_list.selection_set(a)
                   
     def write_articles(self):
         articles = self.art_list.curselection()
         if len(articles):
+            self.progressbar['value'] = 0
+            self.progressbar['maximum'] =  len(articles)
             directory = self.choosenDir_w.get()
             if not (directory):
                 self.log.insert(1.0, 'No directory for Prospero files\n')
             else:
-                for index in articles:
+                for c, index in enumerate(articles):
                     a =  self.articles_list[index]
                     cl = self.CleaningVal.get()
                     f = Process_article(a, directory, cl)
                     self.log.insert(1.0, 'Writing %s\n'%f.filename)
+                    self.progressbar['value'] = c+1
 
                     

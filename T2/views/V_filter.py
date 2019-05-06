@@ -143,7 +143,7 @@ class V_filter():
         self.progressbar['maximum'] =  len(self.list_txt)
 
     def sel_dir(self):
-        directory = tk.filedialog.askdirectory(title="Choose directory",
+        directory = filedialog.askdirectory(title="Choose directory",
                                                initialdir=self.initdir)
         self.choosenPRC.set(directory)
         self.result.delete(1.0, "end")
@@ -196,7 +196,7 @@ class V_filter():
             Eval.dep = int(self.entry_Dep.get())
             
             for c, txt in enumerate(self.list_txt):
-                self.progressbar['value'] = c
+                self.progressbar['value'] = c+1
                 self.parent.update()
                 if os.path.isfile(txt):
                     with open(txt, "r", encoding='iso-8859-1') as f:

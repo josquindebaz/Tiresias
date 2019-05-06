@@ -82,7 +82,7 @@ class parse_html(object):
         
         
     def get_date(self, d):
-        m = re.compile("(\d{1}) (\S*) (\d{4})")
+        m = re.compile("(\d{1,}) (\S*) (\d{4})")
         months = {
             "janvier": "01",
             'février': "02",
