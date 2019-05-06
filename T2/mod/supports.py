@@ -12,11 +12,11 @@ class publi(object):
         if os.path.isfile(path1):
             with open(path1, 'rb') as f:
                 self.path = path1
-                b = (f.read().decode())
+                b = (f.read().decode('cp1252'))
         else:
             with open(path2, 'rb') as f:
                 self.path = path2
-                b = (f.read().decode())
+                b = (f.read().decode('cp1252'))
         lines = re.split('\r*\n', b)
 
         for l in lines:

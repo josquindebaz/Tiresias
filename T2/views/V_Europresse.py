@@ -173,12 +173,12 @@ class V_E():
         self.choosenDir.set("")
         self.reset_lists()
 
-        directory = tk.filedialog.askdirectory(title="Choose directory")
-        self.choosenDir.set(directory)
+        self.htmldirectory = tk.filedialog.askdirectory(title="Choose directory")
+        self.choosenDir.set(self.htmldirectory)
         self.get_html_list()
         self.log.insert(1.0,
                 "Found %d .html file(s) in %s\n" %(len(self.list_html),
-                                                   directory))
+                                                   self.htmldirectory))
 
     def reset_lists(self):
         self.unknown_list.delete(0, 'end')
@@ -223,7 +223,7 @@ class V_E():
             f = self.list_html[c]
             self.log.insert(1.0, 'Analysing %s\n'%f)
             try:
-                p = parse_html(f)
+                p = parse_html(os.path.join(self.htmldirectory, f))
                 for a in p.parsed_articles:
                     if a not in self.articles_list:
                         self.articles_list.append(a)
