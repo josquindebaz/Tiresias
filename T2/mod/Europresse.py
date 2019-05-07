@@ -35,14 +35,16 @@ class parse_html(object):
             return False            
         else:
             a =  html.unescape(a)
-            #split header and article
+            #print("split header and article")
             h, art = re.split('</header>', a)
 
-            #get header infos
+            #print("get header infos")
             pubname = self.in_tag(h, "DocPublicationName")
             pubname = self.form_support(pubname)            
+            #print("pubname")
             date = self.in_tag(h, "DocHeader")
             date = self.get_date(date)
+            #print("date")
             title = self.in_tag(h, "titreArticle")
             title = self.strip_tags(title)
             narrator = self.in_tag(h, "docAuthors")
@@ -52,7 +54,7 @@ class parse_html(object):
             else:
                 subtitle = False
 
-            #get text
+            #print("get text")
             text = self.in_tag(a, "docOcurrContainer")
             text = self.strip_tags(text)
 
@@ -82,7 +84,9 @@ class parse_html(object):
         
         
     def get_date(self, d):
+        #print(d)
         m = re.compile("(\d{1,}) (\S*) (\d{4})")
+        m2 = re.compile("(\S*)\s{1,}(\d{1,})[,\s]{2,}(\d{4})")
         months = {
             "janvier": "01",
             'février': "02",
@@ -117,8 +121,16 @@ class parse_html(object):
             else:
                 month = months[month]
             return "%s/%s/%s" %("%02d" % int(day), month, year)
+        elif m2.search(d):
+            month, day, year = m2.search(d).group(1, 2, 3)
+            if month not in months:
+                print("I don't know this month %s" %month)
+                return False
+            else:
+                month = months[month]
+            return "%s/%s/%s" %("%02d" % int(day), month, year)
         else:
-            print("Problem reading date")
+            print("Problem reading date [%s]"%d)
             return False
             
     def in_tag(self, html, tag):
