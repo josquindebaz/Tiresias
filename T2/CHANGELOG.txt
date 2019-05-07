@@ -1,3 +1,5 @@
-﻿03/05/2019: Filter in folders
+﻿07/05/2019: Word replacement first attempt
+06/05/2019: Unknown supports edition for Europresse
+03/05/2019: Filter in folders
 02/05/2019: html extensions for Europresse, prc encoding an no empty theme in Filter
 19/04/2019: First test version

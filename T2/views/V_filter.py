@@ -91,7 +91,7 @@ class V_filter():
         self.entry_Score.insert(0, "4")
         P322 = tk.PanedWindow(fr32)
         P322.pack()
-        lb_dep = tk.Label(P322,text=u"components >=")
+        lb_dep = tk.Label(P322,text="components >=")
         lb_dep.pack(side=tk.LEFT)
         self.entry_Dep = tk.Entry(P322)
         self.entry_Dep.pack()
@@ -103,15 +103,12 @@ class V_filter():
         
         P323 = tk.PanedWindow(fr32)
         P323.pack(pady=10, anchor=tk.W)
-        bn_save_corpus = tk.Button(P323, text=u"save corpus",
+        bn_save_corpus = tk.Button(P323, text="save corpus",
                                    command=self.save_corpus)
         bn_save_corpus.pack(side=tk.LEFT)
-        bn_save_anticorpus = tk.Button(P323, text=u"save anticorpus",
+        bn_save_anticorpus = tk.Button(P323, text="save anticorpus",
                                    command=self.save_acorpus)
         bn_save_anticorpus.pack()
-        
-##        bn_copyfiles = tk.Button(fr32, text=u"copy files")
-##        bn_copyfiles.pack(side=tk.LEFT)
         
         fr33 = tk.Frame(Fr3)
         fr33.pack(side=tk.RIGHT)

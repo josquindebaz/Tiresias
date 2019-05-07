@@ -12,6 +12,7 @@ import views.V_cleaning
 import views.V_filter
 import views.V_QP
 import views.V_Europresse
+import views.V_W_replace
 
 class MainView(tk.Toplevel):
     def __init__(self, parent):
@@ -50,7 +51,9 @@ https://github.com/josquindebaz/Tiresias",
         Corrector = self.addmenu("Corrections")
         Corrector.add_command(label="Character cleaning",
             command=self.C_cleaning)
-
+        Corrector.add_command(label="Word replace",
+            command=self.Word_Replace)
+        
         PRCmodif = self.addmenu("Project")
         PRCmodif.add_command(label="Filter",
                              command=self.C_filter)
@@ -73,6 +76,10 @@ https://github.com/josquindebaz/Tiresias",
     def C_cleaning(self):
         self.reset_view()
         views.V_cleaning.V_cleaning(self)
+
+    def Word_Replace(self):
+        self.reset_view()
+        views.V_W_replace.V_WR(self)
 
     def C_filter(self):
         self.reset_view()
