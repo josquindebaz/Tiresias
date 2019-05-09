@@ -6,6 +6,9 @@ from threading import Thread
 
 from mod.word_replace import *
 
+import json
+import datetime
+
 class V_WR():
     def __init__(self, parent):
         self.parent = parent
@@ -74,6 +77,16 @@ class V_WR():
         bn_proc = tk.Button(Fr22, text="Replace",
                     command=self.process)
         bn_proc.pack(pady=10)
+
+        Fr23 = tk.LabelFrame(Fr2, 
+            text="History", padx=10)
+        Fr23.pack()
+        self.history = tk.Listbox(Fr23)
+        self.history.pack()
+        self.history_populate()
+        recallBn = tk.Button(Fr23, text='Recall',
+            command=self.Recall)
+        recallBn.pack()
         
         self.progressbar = ttk.Progressbar(self.parent,
             mode='determinate')
@@ -109,31 +122,70 @@ class V_WR():
                 #self.result.insert(1.0, "[%s] added to From list\n"%item)
                 self.w_add_Entry.delete(0, "end")
 
+    def history_populate(self):
+        try:
+            with open("param.json", 'r') as F:
+                self.config = json.load(F)
+            self.history.delete(0, "end")
+            for date in sorted(self.config['WR']['H'].keys()):
+                self.history.insert(0, self.config['WR']['H'][date])
+        except:
+            #print('pb loading history')
+            pass
+        
+    def history_add(self, value):
+        if not hasattr(self, 'config'):
+            self.config = {'WR': {'H': {}}}
+        exists = [d for d, v in self.config['WR']['H'].items()
+                    if (v  == value)] 
+        if (exists):
+            del(self.config['WR']['H'][exists[0]])
+        self.config['WR']['H'][str(datetime.datetime.now())] = value
+        try:
+            with open("param.json", 'w') as f:
+                json.dump(self.config, f)
+        except:
+            print('pb saving history')
+        self.history_populate()
+
+    def Recall(self): 
+        selected = self.history.curselection()
+        if (selected):
+            rec = self.history.get(selected)
+            self.ListFrom.delete(0, "end")
+            self.EntryTo.delete(0, "end")
+            self.EntryTo.insert(0, rec[0])
+            for f in rec[1:]:
+                self.ListFrom.insert("end", f)
+ 
     def process(self):
         folder = self.choosenDir.get()
         From = self.ListFrom.get(0, 'end')
         To = self.EntryTo.get()
+        if (From):
+            ToFrom = [To]
+            ToFrom.extend(From)
+            self.history_add(ToFrom)
 
-        text_list = list_files(folder, recursive=self.Recursive.get())
-        self.result.insert(1.0, "Found %d .txt file(s)\n"%len(text_list))
-        self.progressbar['value'] = 0
-        self.progressbar['maximum'] =  len(text_list)
-        cpt = 0
-        for c, txt in enumerate(text_list):
-            self.progressbar['value'] = c+1
-            with open(txt, 'rb') as f:
-                buf = f.read()
-            B = WR(buf)
-            B.TOFROM = [To]
-            B.TOFROM.extend(From)
-            B.process(m=self.Marks.get())
-            if (B.log):
-                if not self.test.get():
-                    buf = bytes(B.content, 'latin-1')
-                    with open(txt, 'wb') as f:
-                        f.write(buf)
-                self.result.insert(1.0,
-                    "%d change(s) in %s\n"%(B.log, txt))
-                cpt +=1
-            self.parent.update()
-        self.result.insert(1.0, "%d file(s) edited\n"%cpt)
+            text_list = list_files(folder, recursive=self.Recursive.get())
+            self.result.insert(1.0, "Found %d .txt file(s)\n"%len(text_list))
+            self.progressbar['value'] = 0
+            self.progressbar['maximum'] =  len(text_list)
+            cpt = 0
+            for c, txt in enumerate(text_list):
+                self.progressbar['value'] = c+1
+                with open(txt, 'rb') as f:
+                    buf = f.read()
+                B = WR(buf)
+                B.TOFROM = ToFrom
+                B.process(m=self.Marks.get())
+                if (B.log):
+                    if not self.test.get():
+                        buf = bytes(B.content, 'latin-1')
+                        with open(txt, 'wb') as f:
+                            f.write(buf)
+                    self.result.insert(1.0,
+                        "%d change(s) in %s\n"%(B.log, txt))
+                    cpt +=1
+                self.parent.update()
+            self.result.insert(1.0, "%d file(s) edited\n"%cpt)
