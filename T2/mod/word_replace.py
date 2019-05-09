@@ -14,40 +14,55 @@ def list_files(rep='.', exts=['.txt', '.TXT'], recursive=True):
     return L
 
 class WR(object):
-    def __init__(self, content):
-        self.content = content.decode('latin-1') #byte to str
+    def __init__(self):
         self.log = None
+        self.content = None
+        self.motif = None
+        self.repl = None
 
-    def process(self, m=True):
+    def set_content(self, content):
+        self.content = content.decode('latin-1') #byte to str
+
+    def set_motif(self, tofrom, m=True):
         if (m):
-            marks = "[\s\.,;!\?\"':¿\(\)]"
+            marks = '\s"'+re.escape(".,;!?':¿(){}[]-")
         else:
             marks = "\s"
-            
-        FROM = "(^|%s)(%s)(%s|$)" % (marks, '|'.join(self.TOFROM[1:]), marks)
-        
-        motif = re.compile(FROM)
-        n = len(motif.findall(self.content))
-        if (n):
-            self.content = motif.sub("\\1%s\\3"%self.TOFROM[0], self.content)
-            self.log = n
-        
-               
+        From = [re.escape(i) for i in tofrom[1:]]
+        From = "(^|[%s])(%s)([%s]|$)" % (marks,
+                                        '|'.join(From), marks)
+        self.motif = re.compile(From)
+        self.repl = r"\g<1>%s\g<3>"%tofrom[0]
+
+    def process(self):  
+        self.log = 0
+        while(self.motif.search(self.content)):
+            self.content = self.motif.sub(self.repl, self.content, 1)
+            self.log += 1
+       
+              
     
 if __name__ == '__main__':
     list_TXT = list_files(".")
     for txt in list_TXT:
         print(txt)
+        C = WR()
+        list_motif = ["6TEST", "ta", "*", "19", "{"]
+        print(list_motif)
+        C.set_motif(list_motif) #To, From1, From2...
         with open(txt, 'rb') as f:
             buf = f.read()
-        C = WR(buf)
-        C.TOFROM = ["TEST", "ta", "to"] #To, From1, From2...
-        C.process(m=1)
+            C.set_content(buf)
+            C.process()
+        print(buf)
+
+
         if (C.log):
             print (C.log)
-            buf = bytes(C.content, 'latin-1')       
-            with open(txt, 'wb') as f:
-                f.write(buf)
+            buf = bytes(C.content, 'latin-1')
+            print(str(buf))
+            #with open(txt, 'wb') as f:
+            #    f.write(buf)
         
 
 

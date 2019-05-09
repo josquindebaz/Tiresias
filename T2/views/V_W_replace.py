@@ -163,29 +163,36 @@ class V_WR():
         From = self.ListFrom.get(0, 'end')
         To = self.EntryTo.get()
         if (From):
-            ToFrom = [To]
-            ToFrom.extend(From)
-            self.history_add(ToFrom)
+            if To in From:
+                self.result.insert(1.0,
+                    "Error: [%s] is in From list\n"%To)
+            else:
+                ToFrom = [To]
+                ToFrom.extend(From)
+                self.history_add(ToFrom)
 
-            text_list = list_files(folder, recursive=self.Recursive.get())
-            self.result.insert(1.0, "Found %d .txt file(s)\n"%len(text_list))
-            self.progressbar['value'] = 0
-            self.progressbar['maximum'] =  len(text_list)
-            cpt = 0
-            for c, txt in enumerate(text_list):
-                self.progressbar['value'] = c+1
-                with open(txt, 'rb') as f:
-                    buf = f.read()
-                B = WR(buf)
-                B.TOFROM = ToFrom
-                B.process(m=self.Marks.get())
-                if (B.log):
-                    if not self.test.get():
-                        buf = bytes(B.content, 'latin-1')
-                        with open(txt, 'wb') as f:
-                            f.write(buf)
-                    self.result.insert(1.0,
-                        "%d change(s) in %s\n"%(B.log, txt))
-                    cpt +=1
-                self.parent.update()
-            self.result.insert(1.0, "%d file(s) edited\n"%cpt)
+                text_list = list_files(folder, recursive=self.Recursive.get())
+                self.result.insert(1.0, "Found %d .txt file(s)\n"%len(text_list))
+                self.progressbar['value'] = 0
+                self.progressbar['maximum'] =  len(text_list)
+                cpt = 0
+
+                P = WR()
+                P.set_motif(ToFrom, m=self.Marks.get())
+                
+                for c, txt in enumerate(text_list):
+                    self.progressbar['value'] = c+1
+                    with open(txt, 'rb') as f:
+                        buf = f.read()
+                    P.set_content(buf)
+                    P.process()
+                    if (P.log):
+                        if not self.test.get():
+                            buf = bytes(P.content, 'latin-1')
+                            with open(txt, 'wb') as f:
+                                f.write(buf)
+                            cpt +=1
+                        self.result.insert(1.0,
+                            "%d match(es) in %s\n"%(P.log, txt))
+                    self.parent.update()
+                self.result.insert(1.0, "%d file(s) edited\n"%cpt)
