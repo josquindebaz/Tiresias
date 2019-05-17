@@ -21,7 +21,7 @@ def list_files(rep='.', exts=['.txt', '.TXT'],
         
     return L
 
-class cleaner(object):
+class Cleaner(object):
     def __init__(self, content, options="uasdhtpcf"):
         self.content = content
         self.log = {}
@@ -244,7 +244,7 @@ if __name__ == '__main__':
         print( txt)
         with open(txt, 'rb') as f:
             buf = f.read()
-        C = cleaner(buf, "uasdhtpcf")
+        C = Cleaner(buf, "uasdhtpcf")
         print (C.log)
         buf = bytes(C.content, 'latin-1')       
         with open(txt, 'wb') as f:

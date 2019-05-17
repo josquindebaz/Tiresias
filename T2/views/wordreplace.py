@@ -4,12 +4,12 @@ from tkinter import filedialog
 from tkinter.scrolledtext import ScrolledText
 from threading import Thread
 
-from mod.word_replace import *
+from mod.wordreplace import *
 
 import json
 import datetime
 
-class V_WR():
+class ViewReplacer():
     def __init__(self, parent):
         self.parent = parent
         WindowTitle = tk.Label(self.parent, text="Replace words",
@@ -177,7 +177,7 @@ class V_WR():
                 self.progressbar['maximum'] =  len(text_list)
                 cpt = 0
 
-                P = WR()
+                P = Replacer()
                 P.set_motif(ToFrom, m=self.Marks.get())
                 
                 for c, txt in enumerate(text_list):

@@ -5,7 +5,7 @@ import os
 import re
 
 
-class prc_filter(object):
+class PrcFilter(object):
     def __init__(self):
         self.list_txt = []
         self.theme = []
@@ -63,7 +63,7 @@ class prc_filter(object):
         
 
 if __name__ == '__main__':
-    test = prc_filter()
+    test = PrcFilter()
     test.openPRC("C:/corpus/atmosphere/socle.prc")
     test.theme=[
         "test",

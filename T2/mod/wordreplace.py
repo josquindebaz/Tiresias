@@ -13,7 +13,7 @@ def list_files(rep='.', exts=['.txt', '.TXT'], recursive=True):
             break        
     return L
 
-class WR(object):
+class Replacer(object):
     def __init__(self):
         self.log = None
         self.content = None
@@ -46,7 +46,7 @@ if __name__ == '__main__':
     list_TXT = list_files(".")
     for txt in list_TXT:
         print(txt)
-        C = WR()
+        C = Replacer()
         list_motif = ["6TEST", "ta", "*", "19", "{"]
         print(list_motif)
         C.set_motif(list_motif) #To, From1, From2...

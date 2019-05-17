@@ -1,7 +1,7 @@
 import re
 import os
 
-class publi(object):
+class Publi(object):
     def __init__(self):
         self.codex = {}
         self.sources = {}

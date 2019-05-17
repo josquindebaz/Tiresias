@@ -5,9 +5,9 @@ from tkinter.scrolledtext import ScrolledText
 from threading import Thread
 
 from mod.cleaning import list_files
-from mod.cleaning import cleaner
+from mod.cleaning import Cleaner
 
-class V_cleaning():
+class ViewCleaning():
     def __init__(self, parent):
         self.parent = parent
         WindowTitle = tk.Label(parent, text="Character Cleaning",
@@ -160,7 +160,7 @@ class V_cleaning():
         if self.footnotes.get():
             options += "f"
 
-        c = cleaner(b, options)
+        c = Cleaner(b, options)
 
         if not set([x for x in c.log.values()]) == set([0]):
             """if something has to be corrected"""

@@ -7,12 +7,12 @@ import time
 import webbrowser
 import tkinter as tk
 
-import views.V_list_txt
-import views.V_cleaning
-import views.V_filter
-import views.V_QP
-import views.V_Europresse
-import views.V_W_replace
+import views.listtxt
+import views.cleaning
+import views.filter
+import views.qp
+import views.europresse
+import views.wordreplace
 
 class MainView(tk.Toplevel):
     def __init__(self, parent):
@@ -71,27 +71,27 @@ https://github.com/josquindebaz/Tiresias",
 
     def C_list_txt(self):
         self.reset_view()
-        views.V_list_txt.V_list_txt(self)
+        views.listtxt.ViewListTxt(self)
         
     def C_cleaning(self):
         self.reset_view()
-        views.V_cleaning.V_cleaning(self)
+        views.cleaning.ViewCleaning(self)
 
     def Word_Replace(self):
         self.reset_view()
-        views.V_W_replace.V_WR(self)
+        views.wordreplace.ViewReplacer(self)
 
     def C_filter(self):
         self.reset_view()
-        views.V_filter.V_filter(self)
+        views.filter.ViewFilter(self)
         
     def C_QP(self):
         self.reset_view()
-        views.V_QP.V_QP(self)
+        views.qp.ViewQP(self)
 
     def C_EP(self):
         self.reset_view()
-        views.V_Europresse.V_E(self)
+        views.europresse.ViewEuropresse(self)
         
     def reset_view(self):
         for p in self.slaves():

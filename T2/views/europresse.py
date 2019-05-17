@@ -6,10 +6,10 @@ import re
 import os
 from pathlib import Path
 
-from mod.Europresse import *
-from mod.supports import publi
+from mod.europresse import *
+from mod.supports import Publi
 
-class V_E():
+class ViewEuropresse():
     def __init__(self, parent):
         self.parent = parent
         WindowTitle = tk.Label(self.parent, text="Europresse",
@@ -214,7 +214,7 @@ class V_E():
     def analyse(self):
         self.reset_lists()
 
-        self.Supports = publi()
+        self.Supports = Publi()
         self.populateSupports()
             
         unknowns = []
@@ -223,7 +223,7 @@ class V_E():
             f = self.list_html[c]
             self.log.insert(1.0, 'Analysing %s\n'%f)
             try:
-                p = parse_html(os.path.join(self.htmldirectory, f))
+                p = ParseHtml(os.path.join(self.htmldirectory, f))
                 for a in p.parsed_articles:
                     if a not in self.articles_list:
                         self.articles_list.append(a)
@@ -263,7 +263,7 @@ articles and %d unknown source(s)\n'%(len(self.articles_list), len(unknowns)))
                 for c, index in enumerate(articles):
                     a =  self.articles_list[index]
                     cl = self.CleaningVal.get()
-                    f = Process_article(a, directory, cl)
+                    f = ProcessArticle(a, directory, cl)
                     self.log.insert(1.0, 'Writing %s\n'%f.filename)
                     self.progressbar['value'] = c+1
 

@@ -6,13 +6,13 @@ import datetime
 
 try:
     import cleaning
-    from supports import publi
+    from supports import Publi
 except:
-    from mod.cleaning import cleaner
-    from mod.supports import publi
+    from mod.cleaning import Cleaner
+    from mod.supports import Publi
 
  
-class parse_html(object):
+class ParseHtml(object):
     def __init__(self, f):
         with open(f, 'rb') as p:
             b = p.read().decode('utf-8')
@@ -151,10 +151,10 @@ class parse_html(object):
             #print("Can't find tag %s"%tag)
             return False
 
-class Process_article(object):
+class ProcessArticle(object):
     def __init__(self, a, dest, c=1):
         self.dest = dest
-        s = publi()
+        s = Publi()
         if a['source'] not in s.codex.keys():
             prefix = "EUROPRESSE"
             source = a['source']
@@ -186,9 +186,9 @@ class Process_article(object):
         ctx = "\r\n".join(ctx)
 
         if (c):
-            cl_txt = cleaner(text.encode('utf-8'))
+            cl_txt = Cleaner(text.encode('utf-8'))
             text = cl_txt.content.encode('latin-1', 'xmlcharrefreplace') #to bytes
-            cl_ctx = cleaner(ctx.encode('utf-8'))
+            cl_ctx = Cleaner(ctx.encode('utf-8'))
             ctx = cl_ctx.content.encode('latin-1', 'xmlcharrefreplace') #to bytes    
         else:
             ctx = ctx.encode('latin-1', 'xmlcharrefreplace') #to bytes
@@ -222,9 +222,9 @@ class Process_article(object):
 
 if __name__ == "__main__":
     for f in glob.glob("*.htm*"):
-        p = parse_html(f)
+        p = ParseHtml(f)
     for a in p.parsed_articles:
-        Process_article(a, "test")
+        ProcessArticle(a, "test")
         #pass
     
         

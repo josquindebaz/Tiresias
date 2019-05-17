@@ -6,10 +6,10 @@ from tkinter import filedialog
 import webbrowser
 import time
 
-from mod.QP import *
-from mod.cleaning import cleaner
+from mod.qp import *
+from mod.cleaning import Cleaner
 
-class V_QP():
+class ViewQP():
     def __init__(self, parent):
         self.parent = parent
         WindowTitle = tk.Label(self.parent, text="Questions parlementaires",
@@ -155,7 +155,7 @@ class V_QP():
             "Searching for [%s] in Sénat DB from %s to %s)"\
             %(kw, f, t))
         self.parent.update()
-        S = crawl_Senat(kw, f, t)
+        S = CrawlSenat(kw, f, t)
         self.log.insert(1.0, "Found %s question(s)\n"%len(S.dicQ))
         self.SenatListQ = []
         for k, e in S.dicQ.items():
@@ -181,7 +181,7 @@ class V_QP():
                 "Searching for [%s] in Assemblée DB for legislation %s\n" \
                 %(kw, leg) )
             self.parent.update()
-            A = crawl_Ass(leg, kw)
+            A = CrawlAss(leg, kw)
             self.log.insert(1.0, "Found %s question(s)\n"%len(A.dicQ))
             for k in sorted(A.dicQ.keys(),
                         key=lambda x: time.strptime(A.dicQ[x]['date']
@@ -215,7 +215,7 @@ class V_QP():
                     q = self.SenatListQ[c]
                     self.log.insert(1.0,
                         "Processing question %s\n"%q )
-                    PQ = QP(self.dicQ[q]['url'])
+                    PQ = QuestionParlementaire(self.dicQ[q]['url'])
                     PQ.retreive()
                     
                     if (cl):
@@ -235,7 +235,7 @@ class V_QP():
                     q = self.AssListQ[c]
                     self.log.insert(1.0,
                         "Processing question %s\n"%q )
-                    PQ = QP(self.dicQ[q]['url'])
+                    PQ = QuestionParlementaire(self.dicQ[q]['url'])
                     PQ.retreive()
                     
                     if (cl):
@@ -255,5 +255,5 @@ class V_QP():
 
     def clean(self, text):
         text = text.encode('latin-1', 'xmlcharrefreplace') #to bytes
-        c = cleaner(text)
+        c = Cleaner(text)
         return  c.content

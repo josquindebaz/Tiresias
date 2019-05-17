@@ -11,7 +11,7 @@ import time
 
 verbose = 0
 
-class QP(object):
+class QuestionParlementaire(object):
     def __init__(self, url):
         self.url = url
 
@@ -31,9 +31,9 @@ class QP(object):
 
                
             if re.search("questions.assemblee-nationale.fr", self.url):
-                self.D = parse_Ass(buf).data              
+                self.D = ParseAss(buf).data              
             else:
-                self.D = parse_Senat(buf).data
+                self.D = ParseSenat(buf).data
 
     def ctx_content(self, r, title, ref):
         c = [ "fileCtx0005" ]
@@ -133,7 +133,7 @@ class QP(object):
             print("nature unknown: %s"%self.D['nature'])
             nat = "NU"
         
-        TXT = WF(nat, self.D['leg'], self.D['num'], 'txt')
+        TXT = WriteFile(nat, self.D['leg'], self.D['num'], 'txt')
         
         subtitle = "%s %s, publiée au JO le %s"\
                    % (self.D['nature'], self.D['num'], self.D['dpq'])
@@ -150,7 +150,7 @@ class QP(object):
     
         filenames.append( TXT.w(cible, lines) )
         
-        CTX = WF(nat, self.D['leg'], self.D['num'], 'ctx')
+        CTX = WriteFile(nat, self.D['leg'], self.D['num'], 'ctx')
         q_CTX = self.ctx_content(0, self.D['title'], TXT.nom_rep)
         filenames.append( CTX.w(cible, q_CTX) )
 
@@ -171,7 +171,7 @@ class QP(object):
             filenames.append(CTX.w(cible, r_CTX, 1))
 
 
-class WF(object):
+class WriteFile(object):
     """Write a QP for Prospero"""
     def __init__(self, nature, leg, num, extension):
         #nom de fichier complété par des zéros au besoin
@@ -199,7 +199,7 @@ class WF(object):
         return nom
 
 
-class parse_Ass(object):
+class ParseAss(object):
     def __init__(self, html):
         d = {}
         d['leg'] = self.get_leg(html)
@@ -398,7 +398,7 @@ a>.*\((.*) - <span>(.*)</span>')
             return False
 
 
-class crawl_Ass(object):
+class CrawlAss(object):
     """Search in Assemblée db via website form"""
     def __init__(self, leg, words):
         self.dicQ = {}
@@ -445,7 +445,7 @@ class crawl_Ass(object):
         
 
         
-class parse_Senat(object):
+class ParseSenat(object):
     def __init__(self, html):            
         d = {}
         
@@ -604,7 +604,7 @@ sur la liste d'aucun groupe",
             print ("unknown group", g)
             return g
 
-class crawl_Senat(object):
+class CrawlSenat(object):
     """Search in Senat db via website form"""
     def __init__(self, words, date_from, date_to):
         words = words.split(" ")
@@ -693,29 +693,12 @@ class crawl_Senat(object):
         return "https://www.senat.fr/basile/visio.do?id=%s" % q
 
 if __name__ == '__main__':
-##    url  = "http://questions.assemblee-nationale.fr/q13/13-1732QOSD.htm"
-##    test = QP(url)
-##    test.retreive()
-##    test.process()
-
-    test = crawl_Ass(13, '"ronds points"')
+    test = CrawlAss(13, '"ronds points"')
     for q in test.dicQ.keys():
-        t = QP(test.create_url(q))
+        t = QuestionParlementaire(test.create_url(q))
         t.retreive()
         t.process()
         
-##    url = "https://www.senat.fr/basile/visio.do?id=qSEQ180505214"
-##    test = QP(url)
-##    test.retreive()
-##    test.process()
-    
-
-##    test = crawl_Senat("ronds points", "01/01/1977", "01/01/1997")
-##    for q in test.dicQ.keys():
-##        t = QP(test.create_url(q))
-##        t.retreive()
-##        t.process()
-
 
             
 

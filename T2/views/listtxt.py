@@ -6,7 +6,7 @@ from threading import Thread
 
 from mod.cleaning import list_files
 
-class V_list_txt():
+class ViewListTxt():
     def __init__(self, parent):
         self.parent = parent
         WindowTitle = tk.Label(self.parent, text=".txt and .TXT List",

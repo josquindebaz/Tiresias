@@ -5,9 +5,9 @@ from tkinter.scrolledtext import ScrolledText
 import os
 from pathlib import Path
 
-from mod.prc_filter import prc_filter
+from mod.prcfilter import PrcFilter
 
-class V_filter():
+class ViewFilter():
     def __init__(self, parent):
         self.parent = parent
         WindowTitle = tk.Label(self.parent, text="Project Filter",
@@ -187,7 +187,7 @@ class V_filter():
             self.list_txt_absent = []
             self.Corpus_list.delete(1.0, "end")
             self.Acorpus_list.delete(1.0, "end")
-            Eval = prc_filter()
+            Eval = PrcFilter()
             Eval.theme = theme
             Eval.score = int(self.entry_Score.get())
             Eval.dep = int(self.entry_Dep.get())
