@@ -1,19 +1,22 @@
-# Author Josquin Debaz
-# GPL 3
+""" Word Replacer
+Author Josquin Debaz
+GPL 3
+"""
 import os
 import re
 
+def list_files(rep='.', exts=('.txt', '.TXT'), recursive=True):
+    """List txt files"""
+    txt_files = []
+    for roots, _, files in os.walk(u'%s'%rep):
+        txt_files.extend([os.path.join(roots, f) for f in files \
+            if os.path.splitext(f)[1] in exts])
+        if not recursive:
+            break
+    return txt_files
 
-def list_files(rep='.', exts=['.txt', '.TXT'], recursive=True):
-    L = []
-    for roots, dirs, files in os.walk(u'%s'%rep):
-        L.extend([os.path.join(roots, f) for f in files \
-            if (os.path.splitext(f)[1] in exts)] )
-        if recursive == False:
-            break        
-    return L
-
-class Replacer(object):
+class Replacer():
+    """Replace froms with To"""
     def __init__(self):
         self.log = None
         self.content = None
@@ -21,30 +24,30 @@ class Replacer(object):
         self.repl = None
 
     def set_content(self, content):
-        self.content = content.decode('latin-1') #byte to str
+        """byte to str"""
+        self.content = content.decode('latin-1')
 
-    def set_motif(self, tofrom, m=True):
-        if (m):
-            marks = '\s"'+re.escape(".,;!?':¿(){}[]-")
+    def set_motif(self, tofrom, with_marks=True):
+        """Compile from and to"""
+        if with_marks:
+            marks = r'\s"' + re.escape(".,;!?':¿(){}[]-")
         else:
-            marks = "\s"
-        From = [re.escape(i) for i in tofrom[1:]]
-        From = "(^|[%s])(%s)([%s]|$)" % (marks,
-                                        '|'.join(From), marks)
-        self.motif = re.compile(From)
+            marks = r"\s"
+        froms = [re.escape(i) for i in tofrom[1:]]
+        froms = "(^|[%s])(%s)([%s]|$)" % (marks,
+                                          '|'.join(froms), marks)
+        self.motif = re.compile(froms)
         self.repl = r"\g<1>%s\g<3>"%tofrom[0]
 
-    def process(self):  
+    def process(self):
+        """execute replacements"""
         self.log = 0
-        while(self.motif.search(self.content)):
+        while self.motif.search(self.content):
             self.content = self.motif.sub(self.repl, self.content, 1)
             self.log += 1
-       
-              
-    
+
 if __name__ == '__main__':
-    list_TXT = list_files(".")
-    for txt in list_TXT:
+    for txt in list_files("."):
         print(txt)
         C = Replacer()
         list_motif = ["6TEST", "ta", "*", "19", "{"]
@@ -57,12 +60,9 @@ if __name__ == '__main__':
         print(buf)
 
 
-        if (C.log):
-            print (C.log)
+        if C.log:
+            print(C.log)
             buf = bytes(C.content, 'latin-1')
             print(str(buf))
             #with open(txt, 'wb') as f:
             #    f.write(buf)
-        
-
-
