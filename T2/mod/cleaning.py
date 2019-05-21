@@ -1,27 +1,28 @@
-# Author Josquin Debaz
-# GPL 3
+""" Clean text files for Prospero
+Author Josquin Debaz
+GPL 3
+"""
 import os
 import re
 import html
 
-
-def list_files(rep='.', exts=['.txt', '.TXT'],
-               recursive=True, slash=True, repl=[]):
-    L = []
-    for roots, dirs, files in os.walk('%s'%rep):
-        L.extend([os.path.join(roots, f) for f in files \
-            if (os.path.splitext(f)[1] in exts)] )
-        if recursive == False:
+def list_files(rep='.', exts=('.txt', '.TXT'),
+               recursive=True, slash=True, repl=None):
+    """List files with txt or TXT extension"""
+    txt_files = []
+    for roots, _, files in os.walk('%s'%rep):
+        txt_files.extend([os.path.join(roots, f) for f in files \
+            if os.path.splitext(f)[1] in exts])
+        if not recursive:
             break
-        
-    if (repl):
-        L = list(map(lambda x: x.replace(repl[0], repl[1]), L))
-    if (slash):
-        L = list(map(lambda x: x.replace("/", "\\"), L))
-        
-    return L
+    if repl:
+        txt_files = list(map(lambda x: x.replace(repl[0], repl[1]), txt_files))
+    if slash:
+        txt_files = list(map(lambda x: x.replace("/", "\\"), txt_files))
+    return txt_files
 
-class Cleaner(object):
+class Cleaner():
+    """Convert bytes and clean string"""
     def __init__(self, content, options="uasdhtpcf"):
         self.content = content
         self.log = {}
@@ -32,9 +33,9 @@ class Cleaner(object):
                 self.log['utf'] = 1
             else:
                 self.log['utf'] = 0
-                
+
         self.content = self.content.decode('latin-1') #byte to str
-                
+
         if "a" in options:
             self.log['ascii'] = self.replace_ascii()
         if "c" in options:
@@ -53,49 +54,52 @@ class Cleaner(object):
             self.log['footnotes'] = self.footnotes()
 
     def is_utf8(self):
+        """Return True if utf-8"""
         try:
             self.content.decode('utf-8')
-        except UnicodeDecodeError:     
+        except UnicodeDecodeError:
             return False
         else:
             return True
 
     def utf_to_latin(self):
+        """Convert utf to latin"""
         txt_unicode = self.content.decode('utf-8')
         self.content = txt_unicode.encode('latin-1', 'xmlcharrefreplace')
 
     def replace_ascii(self):
         """{unknown ascii code: correct form,}"""
-        D = { 12: "\n",
-              133: "..." ,
-              145: "'" ,
-              146: "'" ,
-              147: '"' ,
-              148: '"' ,
-              149: "-" ,
-              150: "-" ,
-              151: "-" ,
-              160: " ",
-              171:'" ' ,
-              173: "-" ,
-              180: "'" ,
-              183: "-",
-              186: '"' ,
-              187: ' "' ,
-              96: "'" ,
-              156: "oe" ,
-              }
+        asciis = {
+            12: "\n",
+            133: "...",
+            145: "'",
+            146: "'",
+            147: '"',
+            148: '"',
+            149: "-",
+            150: "-",
+            151: "-",
+            160: " ",
+            171:'" ',
+            173: "-",
+            180: "'",
+            183: "-",
+            186: '"',
+            187: ' "',
+            96: "'",
+            156: "oe"
+        }
         total = 0
-        for code, cor in D.items():
-            n = self.content.count(chr(code))
-            if n:
-                total += n
-                self.content = self.content.replace(chr(code), cor)    
-        return total  
+        for code, cor in asciis.items():
+            number = self.content.count(chr(code))
+            if number:
+                total += number
+                self.content = self.content.replace(chr(code), cor)
+        return total
 
     def char_replace(self):
         """{ "correct": ["incorrect 1,", "incorrect 2",],}"""
-        D = {
+        to_be_replaced = {
             "": ["&#65279;",],
             "'": ["&rsquo;",
                   '&#8217;',
@@ -105,17 +109,17 @@ class Cleaner(object):
                     "&raquo;",
                     "&#8220;",
                     "&#8221;",
-                   "&#171;" ,
-                    "&#187;" ,
+                    "&#171;",
+                    "&#187;",
                     "&quot;",
                     "&lt;",
                     "&gt;",
-                   "«",
+                    "«",
                     '»'],
             '... ': ["&hellip;",
                      "&#8230;",
                      "&#x2026;"
-                     ]  ,
+                     ],
             "-": ["&#8211;",
                   "&#8208;",
                   "&sect;",
@@ -127,19 +131,19 @@ class Cleaner(object):
                      "<BR/>",
                      '</br>',
                      '<th>',
-                    "<BR />",
+                     "<BR />",
                      "<br />",
                      '<tr>',
                      "</p>",
                      "</th>",
-                    "</ol>",
+                     "</ol>",
                      "</li>",
                      "&#8232;",
                      '<p />'],
-            "\r\n- " : ["<li>",
-                        "<ol>"],
-            ' - ' : ['&#8212;',
-                     "&ndash;"],
+            "\r\n- ": ["<li>",
+                       "<ol>"],
+            ' - ': ['&#8212;',
+                    "&ndash;"],
             " ": ["&nbsp;",
                   '&#xd;',
                   '#xd;',
@@ -152,105 +156,100 @@ class Cleaner(object):
             "oe": ["&oelig;",
                    "&#156;",
                    "&#339;",
-                   "&#338;" ],
+                   "&#338;"],
             "euros": ["&#8364;",
-                      "&euro;" ,
-                      "&#8364"], 
+                      "&euro;",
+                      "&#8364"],
             "e": ["&#7497;"],
             }
-        
 
-        n = 0 
-        for correcte, incorrectes in D.items() :
+
+        number = 0
+        for correcte, incorrectes in to_be_replaced.items():
             for i in incorrectes:
                 cherche = self.content.count(i)
                 if cherche:
                     self.content = self.content.replace(i, correcte)
-                    n += cherche
-        self.content =  html.unescape(self.content)
-        
-        return n
+                    number += cherche
+        self.content = html.unescape(self.content)
+        return number
 
     def splitted_numbers(self):
         """strip splitted numbers"""
-        n = len(re.findall("\d[ \.]\d{3}", self.content))
-        if n:
-            self.content = re.sub("(\d)[ \.](\d{3})", "\\1\\2", self.content)
-        return n
+        number = len(re.findall(r"\d[ \.]\d{3}", self.content))
+        if number:
+            self.content = re.sub(r"(\d)[ \.](\d{3})", "\\1\\2", self.content)
+        return number
 
     def dash_with_punctuation(self):
         """spacing dashes"""
-        after = re.compile("-([\.,;!\?:'\(\)\[\]])")
+        after = re.compile(r"-([\.,;!\?:'\(\)\[\]])")
         nafter = len(after.findall(self.content))
         if nafter:
             self.content = after.sub(" - \\1", self.content)
-            
-        before = re.compile("([,;!\?:'\(\)\[\]])-")
+
+        before = re.compile(r"([,;!\?:'\(\)\[\]])-")
         # .- is not processed because of firstname abrev like J.-P.
         nbefore = len(before.findall(self.content))
         if nbefore:
             self.content = before.sub("\\1 - ", self.content)
-       
+
         return nbefore + nafter
 
     def hyphens(self):
         """Strip hyphenations"""
-        m = re.compile("-\s*[\r\n]{1,}")
-        n = len(m.findall(self.content))
-        if n:
-            self.content = m.sub("", self.content)
-        return n
+        motif = re.compile(r"-\s*[\r\n]{1,}")
+        number = len(motif.findall(self.content))
+        if number:
+            self.content = motif.sub("", self.content)
+        return number
 
     def html_tags(self):
         """Delete html tags"""
-        tags = [ '<i>','</i>', '<em>', '</em>',
-              '<strong>','</strong>',
-              '</tr>', '<td>', '</td>',
-              '&lt;i&gt;','&lt;/i&gt;',
-              '&lt;/strong&gt;', '&lt;strong&gt;',
-              "<div>", "</div>", "<ul>", "</ul>",
-              "<p>",  "<span>", "</span>",
-              "<b>", "</b>",
-              "<p align='center'>", '<p align="CENTER">',
-                 '<center>', '</center>',
-                 
-              ]
-        n = 0
+        tags = ['<i>', '</i>', '<em>', '</em>',
+                '<strong>', '</strong>',
+                '</tr>', '<td>', '</td>',
+                '&lt;i&gt;', '&lt;/i&gt;',
+                '&lt;/strong&gt;', '&lt;strong&gt;',
+                "<div>", "</div>", "<ul>", "</ul>",
+                "<p>", "<span>", "</span>",
+                "<b>", "</b>",
+                "<p align='center'>", '<p align="CENTER">',
+                '<center>', '</center>',
+                ]
+        number = 0
         for tag in tags:
-            t = self.content.count(tag)
-            if t:
+            tag_number = self.content.count(tag)
+            if tag_number:
                 self.content = self.content.replace(tag, "")
-                n += t
-        return n
+                number += tag_number
+        return number
 
     def parity_marks(self):
         """Separate parity marks -e-s or (e)"""
         #not i.e.
-        m = re.compile("([a-zé](?<!i))(\.e|-e|\(e\)|-ne|-rice|-euse)(\s|\.|-)")
-        n = len(m.findall(self.content))
-        if n:
-            self.content = m.sub("\\1 \\2\\3", self.content) 
-        return n
-    
+        motif = re.compile(r"([a-zé](?<!i))(\.e|-e|\(e\)|-ne|-rice|-euse)(\s|\.|-)")
+        number = len(motif.findall(self.content))
+        if number:
+            self.content = motif.sub("\\1 \\2\\3", self.content)
+        return number
+
     def footnotes(self):
-        m = re.compile('([A-Za-zé]{2,})(\d{1,})(\.|\(|,) ')
-        n = len(m.findall(self.content))
-        if n:
-            self.content = m.sub("\\1 \\2 \\3 ", self.content)
-        return n
-        
-    
+        """Separate footnote calls"""
+        motif = re.compile(r'([A-Za-zé]{2,})(\d{1,})(\.|\(|,) ')
+        number = len(motif.findall(self.content))
+        if number:
+            self.content = motif.sub("\\1 \\2 \\3 ", self.content)
+        return number
+
+
 if __name__ == '__main__':
-    list_TXT = list_files(os.getcwd())
-    for txt in list_TXT:
-        print( txt)
+    for txt in list_files(os.getcwd()):
+        print(txt)
         with open(txt, 'rb') as f:
             buf = f.read()
         C = Cleaner(buf, "uasdhtpcf")
-        print (C.log)
-        buf = bytes(C.content, 'latin-1')       
+        print(C.log)
+        buf = bytes(C.content, 'latin-1')
         with open(txt, 'wb') as f:
             f.write(buf)
-        
-
-
