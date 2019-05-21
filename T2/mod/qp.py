@@ -9,7 +9,7 @@ import os
 import datetime
 import time
 
-verbose = 0
+VERBOSE = 0
 
 class QuestionParlementaire(object):
     def __init__(self, url):
@@ -90,7 +90,7 @@ class QuestionParlementaire(object):
         try:
             c = list(map(lambda x: re.sub('\s{1,}',' ', x), c))
         except:
-            if (verbose):
+            if (VERBOSE):
                 print ("pb ctx list", c)
 
         #source
@@ -404,7 +404,7 @@ class CrawlAss(object):
         self.dicQ = {}
         html = self.getpage(leg, words)
         self.getQuestions(html)
-        if (verbose):
+        if (VERBOSE):
             print("found %d questions" % len(self.dicQ))
 
     def getpage(self, leg, words):
@@ -608,7 +608,9 @@ class CrawlSenat(object):
     """Search in Senat db via website form"""
     def __init__(self, words, date_from, date_to):
         words = words.split(" ")
-        #search after 2 avril 1978. Not digitized before 8th legislation (may 86)
+        #search after 2 avril 1978. 
+        #Not digitized before 8th legislation (may 86)
+
         if (time.strptime(date_from,
             "%d/%m/%Y") < time.strptime("02/04/1978", "%d/%m/%Y")):
             date_from = "02/04/1978"
@@ -625,10 +627,10 @@ class CrawlSenat(object):
                 for offset in range(10, self.n, 10):
                     html = self.getpage(words, date_from, date_to, offset)
                     self.retrieveQ(html)
-            if (verbose):
+            if (VERBOSE):
                 print("found %d questions" % len(self.dicQ) )
         else:
-            if (verbose):
+            if (VERBOSE):
                 print("pb getpage")
             self.dicQ = {}
 
@@ -640,7 +642,7 @@ class CrawlSenat(object):
         urllib.request.urlopen(url)
 
         try:
-            if (verbose):
+            if (VERBOSE):
                 print (url)
             with urllib.request.urlopen(url) as page:
                 charset = page.info().get_param('charset')
@@ -673,7 +675,7 @@ class CrawlSenat(object):
             lk, title = m1.search(q, re.S).group(1, 2)
             title = re.sub("(&#39;|&quot;)", "'" , title)
             if re.search("&", title):
-                if (verbose):
+                if (VERBOSE):
                     print ("&", title)
             num = m2.search(q).group(1)
             if m3.search(q, re.S):

@@ -8,7 +8,7 @@ import html
 def list_files(rep='.', exts=['.txt', '.TXT'],
                recursive=True, slash=True, repl=[]):
     L = []
-    for roots, dirs, files in os.walk(u'%s'%rep):
+    for roots, dirs, files in os.walk('%s'%rep):
         L.extend([os.path.join(roots, f) for f in files \
             if (os.path.splitext(f)[1] in exts)] )
         if recursive == False:
@@ -27,8 +27,8 @@ class Cleaner(object):
         self.log = {}
 
         if "u" in options:
-            if self.testUTF8():
-                self.UTFtoLATIN()
+            if self.is_utf8():
+                self.utf_to_latin()
                 self.log['utf'] = 1
             else:
                 self.log['utf'] = 0
@@ -48,19 +48,19 @@ class Cleaner(object):
         if "p" in options:
             self.log['parity marks'] = self.parity_marks()
         if "d" in options:
-            self.log['Dashes'] = self.DashWithPunctuation()
+            self.log['Dashes'] = self.dash_with_punctuation()
         if "f" in options:
             self.log['footnotes'] = self.footnotes()
 
-    def testUTF8(self):
+    def is_utf8(self):
         try:
-            self.content.decode('UTF-8')
+            self.content.decode('utf-8')
         except UnicodeDecodeError:     
             return False
         else:
             return True
 
-    def UTFtoLATIN(self):
+    def utf_to_latin(self):
         txt_unicode = self.content.decode('utf-8')
         self.content = txt_unicode.encode('latin-1', 'xmlcharrefreplace')
 
@@ -85,11 +85,13 @@ class Cleaner(object):
               96: "'" ,
               156: "oe" ,
               }
+        total = 0
         for code, cor in D.items():
             n = self.content.count(chr(code))
             if n:
+                total += n
                 self.content = self.content.replace(chr(code), cor)    
-        return n  
+        return total  
 
     def char_replace(self):
         """{ "correct": ["incorrect 1,", "incorrect 2",],}"""
@@ -176,7 +178,7 @@ class Cleaner(object):
             self.content = re.sub("(\d)[ \.](\d{3})", "\\1\\2", self.content)
         return n
 
-    def DashWithPunctuation(self):
+    def dash_with_punctuation(self):
         """spacing dashes"""
         after = re.compile("-([\.,;!\?:'\(\)\[\]])")
         nafter = len(after.findall(self.content))

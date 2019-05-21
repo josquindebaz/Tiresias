@@ -172,7 +172,8 @@ class ViewReplacer():
                 self.history_add(ToFrom)
 
                 text_list = list_files(folder, recursive=self.Recursive.get())
-                self.result.insert(1.0, "Found %d .txt file(s)\n"%len(text_list))
+                self.result.insert(1.0, 
+                    "Found %d .txt file(s)\n"%len(text_list))
                 self.progressbar['value'] = 0
                 self.progressbar['maximum'] =  len(text_list)
                 cpt = 0
