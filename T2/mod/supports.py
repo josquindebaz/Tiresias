@@ -1,7 +1,9 @@
+"""Deal with support.publi"""
 import re
 import os
 
-class Publi(object):
+class Publi():
+    """Deal with support.publi"""
     def __init__(self):
         self.codex = {}
         self.sources = {}
@@ -10,44 +12,45 @@ class Publi(object):
         path2 = "../data/support.publi"
 
         if os.path.isfile(path1):
-            with open(path1, 'rb') as f:
+            with open(path1, 'rb') as handle:
                 self.path = path1
-                b = (f.read().decode('cp1252'))
+                buf = (handle.read().decode('cp1252'))
         else:
-            with open(path2, 'rb') as f:
+            with open(path2, 'rb') as handle:
                 self.path = path2
-                b = (f.read().decode('cp1252'))
-        lines = re.split('\r*\n', b)
+                buf = (handle.read().decode('cp1252'))
+        lines = re.split('\r*\n', buf)
 
-        for l in lines:
-            s = l.split(";")
-            if (len(s) == 4):
-                self.codex[s[0]] = {
-                    'source': s[1].strip(),
-                    'type': s[2].strip(),
-                    'abr': s[3].strip()
+        for line in lines:
+            source = line.split(";")
+            if len(source) == 4:
+                self.codex[source[0]] = {
+                    'source': source[1].strip(),
+                    'type': source[2].strip(),
+                    'abr': source[3].strip()
                     }
-                self.sources[s[1].strip()] = {
-                    'type': s[2].strip(),
-                    'abr': s[3].strip()
+                self.sources[source[1].strip()] = {
+                    'type': source[2].strip(),
+                    'abr': source[3].strip()
                     }
 
-    def add(self, k, s, t , a):
+    def add(self, k, source, typ, abbr):
+        """add a source to the dic"""
         self.codex[k] = {
-            'source': s,
-            'type': t,
-            'abr': a
+            'source': source,
+            'type': typ,
+            'abr': abbr
             }
-        if s not in self.sources.keys():
-            self.sources[s] = {
-                'type': t,
-                'abr': a,
+        if source not in self.sources.keys():
+            self.sources[source] = {
+                'type': typ,
+                'abr': abbr
             }
 
     def write(self):
-        L = sorted(["%s; %s; %s; %s\r\n" %(k, 
-                v['source'], v['type'], v['abr']) 
-                for k, v in self.codex.items() ])
-        with open(self.path, 'w') as f:
-            f.writelines(L)
- 
+        """write as file"""
+        sources = sorted(["%s; %s; %s; %s\r\n" %\
+            (k, v['source'], v['type'], v['abr'])\
+            for k, v in self.codex.items()])
+        with open(self.path, 'w') as handle:
+            handle.writelines(sources)
