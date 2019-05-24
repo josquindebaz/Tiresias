@@ -57,6 +57,7 @@ class PrcFilter():
 
             evaluation = [sum(tests), sum(1 for x in tests if x > 0)]
             return testsresults, evaluation
+        return False, False
 
     def save_prc(self, path, txts):
         """save txt list to path prc"""
