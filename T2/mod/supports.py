@@ -52,5 +52,5 @@ class Publi():
         sources = sorted(["%s; %s; %s; %s\r\n" %\
             (k, v['source'], v['type'], v['abr'])\
             for k, v in self.codex.items()])
-        with open(self.path, 'w') as handle:
+        with open(self.path, 'w', encoding='cp1252') as handle:
             handle.writelines(sources)

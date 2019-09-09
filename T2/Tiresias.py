@@ -54,7 +54,7 @@ https://github.com/josquindebaz/Tiresias",
         Corrector.add_command(label="Word replace",
             command=self.Word_Replace)
         
-        PRCmodif = self.addmenu("Project")
+        PRCmodif = self.addmenu("Projects")
         PRCmodif.add_command(label="Filter",
                              command=self.C_filter)
 
