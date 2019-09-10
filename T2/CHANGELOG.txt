@@ -1,4 +1,5 @@
-﻿09/05/2019: Word replacement history
+﻿09/09/2019: supports.publi writer encoding
+09/05/2019: Word replacement history
 07/05/2019: Word replacement first attempt
 06/05/2019: Unknown supports edition for Europresse
 03/05/2019: Filter in folders
