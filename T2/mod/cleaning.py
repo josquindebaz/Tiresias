@@ -7,7 +7,7 @@ import re
 import html
 
 def list_files(rep='.', exts=('.txt', '.TXT'),
-               recursive=True, slash=True, repl=None):
+               recursive=True, slash=False, repl=None):
     """List files with txt or TXT extension"""
     txt_files = []
     for roots, _, files in os.walk('%s'%rep):
@@ -218,11 +218,33 @@ class Cleaner():
                 '<center>', '</center>',
                 ]
         number = 0
+        #delete tags from the list
         for tag in tags:
             tag_number = self.content.count(tag)
             if tag_number:
                 self.content = self.content.replace(tag, "")
                 number += tag_number
+        #delete unknown even tags: <balise>bla bla</balise>
+        unlisted = re.findall("<([a-z]*)>", self.content)
+        if unlisted:
+            for balise in unlisted:
+                opening = re.findall("<%s>"%balise, self.content)
+                closing = re.findall("</%s>"%balise, self.content)
+                if len(opening) == len(closing):
+                    self.content = re.sub("<%s>"%balise, "", self.content)
+                    self.content = re.sub("</%s>"%balise, "", self.content)
+                    number += len(opening)
+        #delete single tags: <tag something>
+        singles = re.findall(r"<[a-z]{1,} \S*>", self.content)
+        if singles:
+            number += len(singles)
+            self.content = re.sub(r"<[a-z]{1,} \S*>", "", self.content)
+        #delete links: <a something>keep me</a>
+        links = re.findall("<a .*>(.*)</a>", self.content)
+        if links:
+            number += len(links)
+            self.content = re.sub("<a .*>(.*)</a>", "\\1", self.content)
+
         return number
 
     def parity_marks(self):
