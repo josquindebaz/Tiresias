@@ -556,6 +556,7 @@ class ParseSenat(object):
         groupes = {
             "CRC": "Groupe Communiste Républicain et Citoyen",
             "CRCE": "Groupe Communiste, Républicain, Citoyen et Écologiste",
+            "CRCE-R": "Groupe Communiste, Républicain, Citoyen et Écologiste",
             "CRC-SPG": "Groupe Communiste Républicain, Citoyen et des \
 sénateurs du Parti de Gauche",
             "SOC": "Groupe Socialiste",
