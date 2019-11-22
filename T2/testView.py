@@ -6,6 +6,8 @@ import views.filter
 import views.qp
 import views.europresse
 import views.wordreplace
+import views.uncapitalise
+import views.qpmap
 
 class MainView(tk.Toplevel):
     def __init__(self, parent):
@@ -20,7 +22,9 @@ class MainView(tk.Toplevel):
         #views.filter.ViewFilter(self)
         #views.qp.ViewQP(self)
         #views.europresse.ViewEuropresse(self)
-        views.wordreplace.ViewReplacer(self)
+        #views.wordreplace.ViewReplacer(self)
+        #views.uncapitalise.ViewReplacer(self)
+        views.qpmap.ViewPaster(self)
 
 if __name__ == '__main__':
     root = tk.Tk()
