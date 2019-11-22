@@ -1,4 +1,5 @@
-﻿18/11/2019: add special character in cleaning
+﻿22/11/2019: QP Atlas
+18/11/2019: add special character in cleaning
 21/10/2019: new senat group
 10/09/2019: clean more html tags
 09/09/2019: supports.publi writer encoding

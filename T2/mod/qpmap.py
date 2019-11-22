@@ -36,7 +36,6 @@ class Mapper():
         self.limits = [None, None, None]
         self.legend = [None, None, None, None]
 
-        content = content.decode('latin-1') #byte to str
         content = harmonize(content)
         self.get_dpt_values(content)
         self.get_dpt_paths()
@@ -50,7 +49,7 @@ class Mapper():
 
     def get_dpt_paths(self):
         """fetch svg path from datafile"""
-        with open("../data/departement_path.tsv", 'rb') as dptpthfile:
+        with open("data/departement_path.tsv", 'rb') as dptpthfile:
             dptpth = dptpthfile.read().decode('utf-8')
             for dpt in re.split("\r*\n", dptpth)[:-1]:
                 dpt_number, dpt_name, dpt_path = re.split("\t", dpt)
@@ -175,12 +174,3 @@ class Mapper():
 
         return mapcontent 
 
-#        with open("test.svg", 'w') as mapfile:
-#            mapfile.write(mapcontent)
-
-#if __name__ == '__main__':
-#    with open("dpt.txt", 'rb') as filer:
-#        CONTENT = filer.read()
-#        TEST = Mapper(CONTENT)
-#        TEST.make_legend()#method="fourth")
-#        TEST.draw_map()

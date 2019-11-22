@@ -13,6 +13,8 @@ import views.filter
 import views.qp
 import views.europresse
 import views.wordreplace
+import views.qpmap
+
 
 class MainView(tk.Toplevel):
     def __init__(self, parent):
@@ -63,6 +65,10 @@ https://github.com/josquindebaz/Tiresias",
                              command=self.C_QP)
         PRCmodif.add_command(label="Europresse",
                              command=self.C_EP)
+
+        Viz = self.addmenu("Datawiz")
+        Viz.add_command(label="QP Atlas",
+                        command=self.QpAtlas)
         
     def addmenu(self, lab):
         men = tk.Menu(self.menubar, tearoff=0)
@@ -92,6 +98,11 @@ https://github.com/josquindebaz/Tiresias",
     def C_EP(self):
         self.reset_view()
         views.europresse.ViewEuropresse(self)
+
+    def QpAtlas(self):
+        self.reset_view()
+        views.qpmap.ViewPaster(self)
+
         
     def reset_view(self):
         for p in self.slaves():

@@ -9,6 +9,8 @@ from tkinter import filedialog
 
 from mod.qpmap import Mapper
 
+import webbrowser
+
 class ViewPaster():
     """Paste window"""
     def __init__(self, parent):
@@ -23,15 +25,16 @@ class ViewPaster():
 
         welcome = tk.Message(fr1,
                              bg="white",
-                             text="Paste list: department[tabulation]value")
-        welcome.pack(fill=tk.X)
+                             text="Paste list: department[tabulation]value",
+                             width=1000)
+        welcome.pack(anchor=tk.W)
 
         self.data_list = ScrolledText(fr1)
         self.data_list.pack(fill=tk.X)
 
 
         fr2 = tk.Frame(parent)
-        fr2.pack(anchor=tk.W)
+        fr2.pack(anchor=tk.W, fill=tk.X)
         bn_paste = tk.Button(fr2,
                              text="Paste", command=self.paste_list)
         bn_paste.pack(side=tk.LEFT)
@@ -41,8 +44,28 @@ class ViewPaster():
         
         bn_process = tk.Button(fr2,
                                text="Draw atlas", command=self.process)
-        bn_process.pack()
+        bn_process.pack(side=tk.LEFT)
 
+        fr3 = tk.LabelFrame(fr2, text="Method", borderwidth=1)
+        fr3.pack(anchor=tk.E)
+        self.method = tk.StringVar()
+        r1_method = tk.Radiobutton(fr3,
+                                   text="Cumulated fourth",
+                                   variable=self.method,
+                                   value="cumulated_fourth")
+        r1_method.pack(side=tk.LEFT)
+        r2_method = tk.Radiobutton(fr3,
+                                   text="Quartiles",
+                                   variable=self.method,
+                                   value="quartiles")
+        r2_method.pack(side=tk.LEFT)
+        r3_method = tk.Radiobutton(fr3,
+                                   text="Quarter",
+                                   variable=self.method,
+                                   value="fourth")
+        r3_method.pack()
+        self.method.set("cumulated_fourth")
+        
     def paste_list(self):
         self.reset()
         self.data_list.insert("end", self.data_list.clipboard_get())
@@ -60,9 +83,9 @@ class ViewPaster():
                 filetypes = [("svg Files","*.svg")])
 
             PROCESS = Mapper(data)
-            PROCESS.make_legend()
+            PROCESS.make_legend(method=self.method.get())
             atlas = PROCESS.draw_map()
-            with open(filename, 'w') as pointer:
-                pointer.write(atlas)
+            with open(filename, 'wb') as pointer:
+                pointer.write(atlas.encode('utf-8'))
             webbrowser.open(filename, 0, 1)
 

@@ -23,8 +23,8 @@ class MainView(tk.Toplevel):
         #views.qp.ViewQP(self)
         #views.europresse.ViewEuropresse(self)
         #views.wordreplace.ViewReplacer(self)
-        #views.uncapitalise.ViewReplacer(self)
-        views.qpmap.ViewPaster(self)
+        views.uncapitalise.ViewReplacer(self)
+        #views.qpmap.ViewPaster(self)
 
 if __name__ == '__main__':
     root = tk.Tk()
