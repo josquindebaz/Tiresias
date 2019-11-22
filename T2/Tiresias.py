@@ -66,7 +66,7 @@ https://github.com/josquindebaz/Tiresias",
         PRCmodif.add_command(label="Europresse",
                              command=self.C_EP)
 
-        Viz = self.addmenu("Datawiz")
+        Viz = self.addmenu("Dataviz")
         Viz.add_command(label="QP Atlas",
                         command=self.QpAtlas)
         
