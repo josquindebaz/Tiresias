@@ -6,6 +6,7 @@ import re
 import time
 import webbrowser
 import tkinter as tk
+import os
 
 import views.listtxt
 import views.cleaning
@@ -23,7 +24,10 @@ class MainView(tk.Toplevel):
         self.title("Tirésias")
         self.protocol('WM_DELETE_WINDOW', self.parent.destroy)
 
-        with open("README.md", 'rb') as f:
+        filename = "README.md"
+##        if '_MEIPASS2' in os.environ:
+##            filename = os.path.join(os.environ['_MEIPASS2'], filename)
+        with open(filename, 'rb') as f:
             welcome_txt = f.read().decode()
         welcome = tk.Message(self, bg="white", text=welcome_txt)
         welcome.pack()
