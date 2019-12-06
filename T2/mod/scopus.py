@@ -7,11 +7,14 @@ import csv
 import re
 import datetime
 import glob
+import os
 
-def ctx_prospero(csvfile):
+
+def ctx_prospero(csvfile, save_dir="."):
     """convert ctx to prospero format files"""
     reader = csv.DictReader(csvfile, delimiter=",")
     papers = {}
+    file_count = 0
     for row in reader:           
         link = row['Link']
         eid = re.search(r'eid=([^\&]*)\&', link).group(1)
@@ -20,9 +23,12 @@ def ctx_prospero(csvfile):
 
     for eid in papers:
         txt_content = papers[eid][1] + "\r\n.\r\n" + papers[eid][3]
-        txt_content = txt_content.encode('latin-1', 'xmlcharrefreplace') #to bytes
-        with open("%s.txt"%eid, 'wb') as txtfile:
+        txt_content = txt_content.encode('latin-1',
+                                         'xmlcharrefreplace') #to bytes
+        filename = os.path.join(save_dir, eid)
+        with open("%s.txt"%filename, 'wb') as txtfile:
             txtfile.write(txt_content)
+            file_count += 1
 
         ctx = [
             "fileCtx0005",
@@ -38,9 +44,12 @@ def ctx_prospero(csvfile):
             "", "n", "n", ""
             ]
         ctx = "\r\n".join(ctx)
-        with open("%s.ctx"%eid, 'wb') as ctxfile:
+        with open("%s.ctx"%filename, 'wb') as ctxfile:
             ctx = ctx.encode('latin-1', 'xmlcharrefreplace') #to bytes
             ctxfile.write(ctx)
+            file_count += 1
+
+    return file_count
 
 if __name__ == "__main__":
     for ctx_file in glob.glob("*.csv"):

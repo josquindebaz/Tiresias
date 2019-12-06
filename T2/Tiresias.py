@@ -15,6 +15,7 @@ import views.qp
 import views.europresse
 import views.wordreplace
 import views.qpmap
+import views.scopus
 
 
 class MainView(tk.Toplevel):
@@ -64,12 +65,14 @@ https://github.com/josquindebaz/Tiresias",
         PRCmodif.add_command(label="Filter",
                              command=self.C_filter)
 
-        PRCmodif = self.addmenu("Databases")
-        PRCmodif.add_command(label="Questions parlementaires",
+        PRCdb = self.addmenu("Databases")
+        PRCdb.add_command(label="Questions parlementaires",
                              command=self.C_QP)
-        PRCmodif.add_command(label="Europresse",
+        PRCdb.add_command(label="Europresse",
                              command=self.C_EP)
-
+        PRCdb.add_command(label="Scopus",
+                             command=self.C_scopus)
+        
         Viz = self.addmenu("Dataviz")
         Viz.add_command(label="QP Atlas",
                         command=self.QpAtlas)
@@ -102,6 +105,11 @@ https://github.com/josquindebaz/Tiresias",
     def C_EP(self):
         self.reset_view()
         views.europresse.ViewEuropresse(self)
+
+    def C_scopus(self):
+        self.reset_view()
+        views.scopus.ViewScopus(self)
+        
 
     def QpAtlas(self):
         self.reset_view()
