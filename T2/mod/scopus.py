@@ -1,5 +1,5 @@
 """Scopus to prospero
-by Robin et Josquin
+by Robin Dianoux et Josquin Debaz
 GPL3
 04/12/2019"""
 
@@ -12,10 +12,10 @@ def ctx_prospero(csvfile):
     """convert ctx to prospero format files"""
     reader = csv.DictReader(csvfile, delimiter=",")
     papers = {}
-    for row in reader:
+    for row in reader:           
         link = row['Link']
         eid = re.search(r'eid=([^\&]*)\&', link).group(1)
-        papers[eid] = (row['\ufeffAuthors'], row['Title'], row['Year'],
+        papers[eid] = (row['Authors'], row['Title'], row['Year'],
                        row['Abstract'])
 
     for eid in papers:
@@ -44,5 +44,6 @@ def ctx_prospero(csvfile):
 
 if __name__ == "__main__":
     for ctx_file in glob.glob("*.csv"):
-        with open(ctx_file, newline='') as csvfile:
+        with open(ctx_file, newline='', encoding='utf-8-sig') as csvfile:
+            #encoding='utf-8-sig' against BOM saved file that generate a "ï»¿"
             ctx_prospero(csvfile)
