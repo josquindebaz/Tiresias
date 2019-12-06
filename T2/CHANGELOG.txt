@@ -1,4 +1,4 @@
-﻿06/12/2019: Scopus
+﻿06/12/2019: Scopus et Factiva
 22/11/2019: QP Atlas
 18/11/2019: add special character in cleaning
 21/10/2019: new senat group

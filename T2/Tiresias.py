@@ -16,6 +16,7 @@ import views.europresse
 import views.wordreplace
 import views.qpmap
 import views.scopus
+import views.factiva
 
 
 class MainView(tk.Toplevel):
@@ -72,6 +73,8 @@ https://github.com/josquindebaz/Tiresias",
                              command=self.C_EP)
         PRCdb.add_command(label="Scopus",
                              command=self.C_scopus)
+        PRCdb.add_command(label="Factiva",
+                             command=self.C_factiva)
         
         Viz = self.addmenu("Dataviz")
         Viz.add_command(label="QP Atlas",
@@ -109,7 +112,10 @@ https://github.com/josquindebaz/Tiresias",
     def C_scopus(self):
         self.reset_view()
         views.scopus.ViewScopus(self)
-        
+
+    def C_factiva(self):
+        self.reset_view()
+        views.factiva.ViewFactiva(self)
 
     def QpAtlas(self):
         self.reset_view()

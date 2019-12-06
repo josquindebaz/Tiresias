@@ -84,7 +84,6 @@ def parse(article):
         result['title'] = "Title problem"
     #remove <b> and </b>
     result['title'] = re.sub(r"</?b>", "", result['title'])
-    print(result)
 
     #get date and support
     divs = re.split('<div>', article)
@@ -105,7 +104,6 @@ def parse(article):
                                   '</td>')
     #format date
     result['date'] = format_date(result['date'])
-    print(result)
 
     #get narrator
     try:

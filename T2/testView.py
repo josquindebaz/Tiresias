@@ -9,6 +9,7 @@ import views.wordreplace
 import views.uncapitalise
 import views.qpmap
 import views.scopus
+import views.factiva
 
 class MainView(tk.Toplevel):
     def __init__(self, parent):
@@ -20,6 +21,7 @@ class MainView(tk.Toplevel):
 
         #views.wordreplace.ViewReplacer(self)
         #views.uncapitalise.ViewReplacer(self)
+        views.factiva.ViewFactiva(self)
 
 if __name__ == '__main__':
     root = tk.Tk()
