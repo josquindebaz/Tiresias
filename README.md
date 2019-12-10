@@ -1,7 +1,8 @@
 ﻿Tiresias made by Josquin Debaz for association Doxa
 http://prosperologie.org
 
-This version use Python3
+__This version use Python3__
+
 Help, comments and suggestions: https://prosperologie.org/forum
 
 Le logiciel Tirésias a pour fonction d'aider à produire les séries textuelles à partir desquelles le chercheur construit ses dossiers et opère ses partitions. 
@@ -14,4 +15,3 @@ Une partie de ses scripts, dédiée à la mise en forme des textes des corpus, e
 
 Script pour Europresse initié par Guillaume Ollivier
 Merci à Bastien, Robin, Federico, Guillaume, Markku, Patrick, Pierrick, Thomas, et les autres pour les suggestions et retours de bug
-
