@@ -10,6 +10,11 @@ import glob
 import random
 import datetime
 
+try:
+    import cleaning
+except:
+    from mod.cleaning import Cleaner
+
 def get(text, begin, end):
     """return the content between two given strings"""
     result = re.split(begin, text, 1)[1]
@@ -165,17 +170,22 @@ class ParseHtm():
                 self.articles[key]['source_type'] = 'unknown source'
                 self.articles[key]['root'] = 'FACTIVA'
 
-    def write_prospero_files(self, save_dir="."):
+    def write_prospero_files(self, save_dir=".", cleaning=False):
         """for each article, write txt and ctx in a given directory"""
         for article in self.articles.values():
             filepath = file_name(article['date'],
                                  article['root'],
                                  save_dir)
             path = os.path.join(save_dir, filepath + ".txt")
-            #to bytes
-            text = article['text'].encode('latin-1', 'xmlcharrefreplace')
+
+            if cleaning:
+                text_cleaner = Cleaner(article['text'].encode('utf-8'))
+                text = text_cleaner.content
+            else:
+                text = article['text']
             with open(path, 'wb') as file:
-                file.write(text)
+                #to bytes
+                file.write(text.encode('latin-1', 'xmlcharrefreplace'))
             ctx = [
                 "fileCtx0005",
                 article['title'],

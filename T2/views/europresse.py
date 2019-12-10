@@ -261,9 +261,9 @@ articles and %d unknown source(s)\n'%(len(self.articles_list), len(unknowns)))
                 self.log.insert(1.0, 'No directory for Prospero files\n')
             else:
                 for c, index in enumerate(articles):
-                    a =  self.articles_list[index]
-                    cl = self.CleaningVal.get()
-                    f = ProcessArticle(a, directory, cl)
+                    article =  self.articles_list[index]
+                    f = ProcessArticle(article, directory,
+                                       self.CleaningVal.get())
                     self.log.insert(1.0, 'Writing %s\n'%f.filename)
                     self.progressbar['value'] = c+1
 

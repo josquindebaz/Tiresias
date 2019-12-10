@@ -41,6 +41,12 @@ class ViewFactiva():
         #Frame 3
         Fr3 = tk.Frame(self.parent)
         Fr3.pack(anchor=tk.W)
+        self.CleaningVal= tk.BooleanVar()
+        Bn_Cleaning = tk.Checkbutton(Fr3,
+                        text="clean texts",
+                        variable=self.CleaningVal)
+        Bn_Cleaning.select()
+        Bn_Cleaning.pack(side=tk.LEFT)
         bn_process = tk.Button(Fr3, text="Process", command=self.process)
         bn_process.pack(side=tk.LEFT)
 
@@ -78,7 +84,7 @@ class ViewFactiva():
                             "%d unknown(s) source(s)\n" %len(parse.unknowns))
             for unknown in parse.unknowns:
                 self.log.insert(1.0, "unknown: %s\n" % unknown)
-            parse.write_prospero_files(save_dir)
+            parse.write_prospero_files(save_dir, self.CleaningVal.get())
         else:
             self.log.insert(1.0, "Missing file to process\n")
         

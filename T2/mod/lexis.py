@@ -9,6 +9,11 @@ import re
 import os
 import datetime
 
+try:
+    import cleaning
+except:
+    from mod.cleaning import Cleaner
+
 
 def format_date(date):
     """return the number of a french or English or German month"""
@@ -158,19 +163,23 @@ class ParseTxt(object):
                     
         return article_data  
 
-    def write_prospero_files(self, save_dir="."):
+    def write_prospero_files(self, save_dir=".", cleaning=False):
         """for each article, write txt and ctx in a given directory"""
         for article in self.articles.values():
             filepath = file_name(article['date'],
                                  article['root'],
                                  save_dir)
             path = os.path.join(save_dir, filepath + ".txt")
-            
+
             article['text'] = article['title'] +  "\r\n.\r\n" + article['text']
-            #to bytes
-            text = article['text'].encode('latin-1', 'xmlcharrefreplace')
+            if cleaning:
+                text_cleaner = Cleaner(article['text'].encode('utf-8'))
+                text = text_cleaner.content
+            else:
+                text = article['text']
             with open(path, 'wb') as file:
-                file.write(text)
+                #to bytes
+                file.write(text.encode('latin-1', 'xmlcharrefreplace'))
             ctx = [
                 "fileCtx0005",
                 article['title'],
