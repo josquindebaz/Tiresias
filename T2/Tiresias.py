@@ -17,6 +17,7 @@ import views.wordreplace
 import views.qpmap
 import views.scopus
 import views.factiva
+import views.lexis
 
 
 class MainView(tk.Toplevel):
@@ -75,6 +76,8 @@ https://github.com/josquindebaz/Tiresias",
                              command=self.C_scopus)
         PRCdb.add_command(label="Factiva",
                              command=self.C_factiva)
+        PRCdb.add_command(label="Lexis Nexis",
+                             command=self.C_lexis)
         
         Viz = self.addmenu("Dataviz")
         Viz.add_command(label="QP Atlas",
@@ -116,6 +119,10 @@ https://github.com/josquindebaz/Tiresias",
     def C_factiva(self):
         self.reset_view()
         views.factiva.ViewFactiva(self)
+
+    def C_lexis(self):
+        self.reset_view()
+        views.lexis.ViewLexis(self)
 
     def QpAtlas(self):
         self.reset_view()

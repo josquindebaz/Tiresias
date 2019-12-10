@@ -77,12 +77,14 @@ class ParseTxt(object):
     def __init__(self, filename):
         self.articles = {}
         self.unknowns = []
+        self.count = 0
         with open(filename, 'rb') as file:
             buf = file.read()
             buf = buf.decode('utf-8') #byte to str
         cut_articles = re.split("(.*Do[kc]ument \d{1,} (von|de|of) \d{1,}.*)",
                                  buf)[1:]
         while cut_articles:
+            self.count += 1
             cut_articles.pop(0)#number
             cut_articles.pop(0)#language mark
             id_article = random.randint(0, 1000000)
@@ -141,8 +143,6 @@ class ParseTxt(object):
 
         article_data = {}
         article_data['text'] = re.sub("HIGHLIGHT:\s*", "", article)
-
-
         
         metas = re.split("\r?\n\r\n\s*", head)
         article_data["media"] = metas[1]
@@ -165,6 +165,8 @@ class ParseTxt(object):
                                  article['root'],
                                  save_dir)
             path = os.path.join(save_dir, filepath + ".txt")
+            
+            article['text'] = article['title'] +  "\r\n.\r\n" + article['text']
             #to bytes
             text = article['text'].encode('latin-1', 'xmlcharrefreplace')
             with open(path, 'wb') as file:
