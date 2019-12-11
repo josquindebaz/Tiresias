@@ -5,8 +5,6 @@ GPL3
 
 import re
 
-
-
 months = [
     "année",
     "janvier",

@@ -20,6 +20,7 @@ import views.qpmap
 import views.scopus
 import views.factiva
 import views.lexis
+import views.cited_years
 
 
 class MainView(tk.Toplevel):
@@ -78,6 +79,8 @@ class MainView(tk.Toplevel):
         Viz = self.addmenu("Dataviz")
         Viz.add_command(label="QP Atlas",
                         command=self.QpAtlas)
+        Viz.add_command(label="Cited years timeline",
+                        command=self.cited_years)
         
     def addmenu(self, lab):
         men = tk.Menu(self.menubar, tearoff=0)
@@ -123,6 +126,10 @@ class MainView(tk.Toplevel):
     def QpAtlas(self):
         self.reset_view()
         views.qpmap.ViewPaster(self)
+
+    def cited_years(self):
+        self.reset_view()
+        views.cited_years.ViewYears(self)
         
     def reset_view(self):
         for p in self.slaves():

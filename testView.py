@@ -11,6 +11,7 @@ import views.qpmap
 import views.scopus
 import views.factiva
 import views.lexis
+import views.cited_years
 
 class MainView(tk.Toplevel):
     def __init__(self, parent):
@@ -22,7 +23,7 @@ class MainView(tk.Toplevel):
 
         #views.wordreplace.ViewReplacer(self)
         #views.uncapitalise.ViewReplacer(self)
-        views.scopus.ViewScopus(self)
+        views.cited_years.ViewYears(self)
 
 if __name__ == '__main__':
     root = tk.Tk()
