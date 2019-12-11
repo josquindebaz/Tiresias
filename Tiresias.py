@@ -49,6 +49,8 @@ class MainView(tk.Toplevel):
 
         Files = self.addmenu("Files")
         Files.add_command(label="List .txt", command=self.C_list_txt)
+        Files.add_command(label="Go to code repository",
+                          command=self.get_new_version)
         Files.add_command(label="Quit", command=self.parent.destroy)
 
         Corrector = self.addmenu("Corrections")
