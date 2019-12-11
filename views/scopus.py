@@ -72,13 +72,16 @@ class ViewScopus():
         Bn_index_keywords.select()
         Bn_index_keywords.pack(side=tk.LEFT)
         
-        bn_process = tk.Button(Fr3, text="Process", command=self.process)
-        bn_process.pack(side=tk.LEFT)
-
         #Frame 4
         Fr4 = tk.Frame(self.parent)
-        Fr4.pack()
-        self.log = ScrolledText(Fr4, height=10, bg="black", fg="orange")
+        Fr4.pack(anchor=tk.W)        
+        bn_process = tk.Button(Fr4, text="Process", command=self.process)
+        bn_process.pack(side=tk.LEFT)
+
+        #Frame 5
+        Fr5 = tk.Frame(self.parent)
+        Fr5.pack()
+        self.log = ScrolledText(Fr5, height=10, bg="black", fg="orange")
         self.log.pack()
 
     def sel_file(self):

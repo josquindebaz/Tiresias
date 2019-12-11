@@ -1,9 +1,13 @@
-﻿Tiresias made by Josquin Debaz for association Doxa
-http://prosperologie.org
+﻿Tiresias made by Josquin Debaz for association Doxa (http://prosperologie.org)
 
 __This version use Python3__
+Code available on https://github.com/josquindebaz/Tiresias
+For windows users, a .exe is available on https://github.com/josquindebaz/Tiresias/raw/master/EXEC/Tiresias.zip
+
 
 Help, comments and suggestions: https://prosperologie.org/forum
+
+
 
 Le logiciel Tirésias a pour fonction d'aider à produire les séries textuelles à partir desquelles le chercheur construit ses dossiers et opère ses partitions. 
 

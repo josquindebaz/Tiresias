@@ -7,6 +7,8 @@ import time
 import webbrowser
 import tkinter as tk
 import os
+from threading import Thread
+
 
 import views.listtxt
 import views.cleaning
@@ -35,20 +37,12 @@ class MainView(tk.Toplevel):
         welcome = tk.Message(self, bg="white", text=welcome_txt)
         welcome.pack()
 
-        test = self.test_version()
-        if (test):
-            if (test == -1):
-                version = tk.Label(self, text="Can't retrieve last version")
-            else:
-                version = tk.Button(self,
-                    text="A new version is avalaible on \
-https://github.com/josquindebaz/Tiresias",
-                    foreground="red", 
-                    command=self.get_new_version )
-        else:
-            version = tk.Label(self, text="Your version is up to date")
+        self.update_string = tk.StringVar()
+        version = tk.Label(self, textvariable=self.update_string)               
         version.pack()
-
+        self.update_string.set("Checking for a newer version")
+        self._thread = Thread(target=self.check_update)
+        self._thread.start()
    
         self.menubar = tk.Menu(self)
         self.config(menu=self.menubar)
@@ -127,28 +121,29 @@ https://github.com/josquindebaz/Tiresias",
     def QpAtlas(self):
         self.reset_view()
         views.qpmap.ViewPaster(self)
-
         
     def reset_view(self):
         for p in self.slaves():
             p.destroy()
 
-    def test_version(self):
+    def check_update(self):
         try:
-            url = "https://raw.githubusercontent.com/josquindebaz/Tiresias/master/T2/CHANGELOG.txt"
-            #https://raw.githubusercontent.com/josquindebaz/Tiresias/master/CHANGELOG.txt"
-            with urllib.request.urlopen(url) as p:
-                b = p.read().decode()
-                last = time.strptime(re.findall("\d{2}/\d{2}/\d{4}",  b)[0], "%d/%m/%Y")
-            with open("CHANGELOG.txt", 'rb') as f:
-                bl = f.read().decode()
-                loc = time.strptime(re.findall("\d{2}/\d{2}/\d{4}", bl)[0], "%d/%m/%Y")
+            url = "https://raw.githubusercontent.com/josquindebaz/\
+Tiresias/master/CHANGELOG.txt"
+            with urllib.request.urlopen(url) as page:
+                buf = page.read().decode()
+                last = time.strptime(re.findall("\d{2}/\d{2}/\d{4}",
+                                                buf)[0], "%d/%m/%Y")
+            with open("CHANGELOG.txt", 'rb') as file:
+                buf2 = file.read().decode()
+                loc = time.strptime(re.findall("\d{2}/\d{2}/\d{4}",
+                                               buf2)[0], "%d/%m/%Y")
             if last > loc:
-                return 1
+                self.update_string.set("A new version is avalaible")
             else:
-                return 0
+                self.update_string.set("Your version is up to date")
         except:
-            return -1
+            self.update_string.set("Can't retrieve last version")       
 
     def get_new_version(self):
         webbrowser.open("https://github.com/josquindebaz/Tiresias", 0, 1)
