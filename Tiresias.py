@@ -31,8 +31,8 @@ class MainView(tk.Toplevel):
         self.protocol('WM_DELETE_WINDOW', self.parent.destroy)
 
         filename = "README.md"
-##        if '_MEIPASS2' in os.environ:
-##            filename = os.path.join(os.environ['_MEIPASS2'], filename)
+        if '_MEIPASS2' in os.environ:
+            filename = os.path.join(os.environ['_MEIPASS2'], filename)
         with open(filename, 'rb') as f:
             welcome_txt = f.read().decode()
         welcome = tk.Message(self, bg="white", text=welcome_txt)
