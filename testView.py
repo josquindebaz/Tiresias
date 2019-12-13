@@ -11,6 +11,7 @@ import views.qpmap
 import views.scopus
 import views.factiva
 import views.lexis
+import views.newton
 import views.cited_years
 
 class MainView(tk.Toplevel):
@@ -21,7 +22,7 @@ class MainView(tk.Toplevel):
         self.protocol('WM_DELETE_WINDOW', self.
                       parent.destroy)
 
-        views.wordreplace.ViewReplacer(self)
+        views.newton.ViewNewton(self)
         #views.uncapitalise.ViewReplacer(self)
 
 if __name__ == '__main__':

@@ -20,6 +20,7 @@ import views.qpmap
 import views.scopus
 import views.factiva
 import views.lexis
+import views.newton
 import views.cited_years
 
 
@@ -75,6 +76,8 @@ class MainView(tk.Toplevel):
                              command=self.C_factiva)
         PRCdb.add_command(label="Lexis Nexis",
                              command=self.C_lexis)
+        PRCdb.add_command(label="Newton",
+                             command=self.C_newton)
         
         Viz = self.addmenu("Dataviz")
         Viz.add_command(label="QP Atlas",
@@ -122,6 +125,11 @@ class MainView(tk.Toplevel):
     def C_lexis(self):
         self.reset_view()
         views.lexis.ViewLexis(self)
+        
+    def C_newton(self):
+        self.reset_view()
+        views.newton.ViewNewton(self)
+        
 
     def QpAtlas(self):
         self.reset_view()
