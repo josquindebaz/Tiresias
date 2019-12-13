@@ -28,14 +28,15 @@ class Replacer():
         self.content = content.decode('latin-1')
 
     def set_motif(self, tofrom, with_marks=True):
-        """Compile from and to"""
+        """Compile from and to, with marks before and after, or not"""
         if with_marks:
             marks = r'\s"' + re.escape(".,;!?':¿(){}[]-")
         else:
             marks = r"\s"
         froms = [re.escape(i) for i in tofrom[1:]]
         froms = "(^|[%s])(%s)([%s]|$)" % (marks,
-                                          '|'.join(froms), marks)
+                                          '|'.join(froms),
+                                          marks)
         self.motif = re.compile(froms)
         self.repl = r"\g<1>%s\g<3>"%tofrom[0]
 

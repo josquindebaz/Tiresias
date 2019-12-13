@@ -21,8 +21,8 @@ class MainView(tk.Toplevel):
         self.protocol('WM_DELETE_WINDOW', self.
                       parent.destroy)
 
-        #views.wordreplace.ViewReplacer(self)
-        views.uncapitalise.ViewReplacer(self)
+        views.wordreplace.ViewReplacer(self)
+        #views.uncapitalise.ViewReplacer(self)
 
 if __name__ == '__main__':
     root = tk.Tk()

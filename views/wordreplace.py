@@ -12,6 +12,8 @@ import datetime
 class ViewReplacer():
     def __init__(self, parent):
         self.parent = parent
+        self.HISTORY_JSON = ".wordreplace_history.json"
+
         WindowTitle = tk.Label(self.parent, text="Replace words",
             font=("Helvetica", 12, "bold"))
         WindowTitle.pack(fill=tk.X)
@@ -81,7 +83,7 @@ class ViewReplacer():
         Fr23 = tk.LabelFrame(Fr2, 
             text="History", padx=10)
         Fr23.pack()
-        self.history = tk.Listbox(Fr23)
+        self.history = tk.Listbox(Fr23, width=45)
         self.history.pack()
         self.history_populate()
         recallBn = tk.Button(Fr23, text='Recall',
@@ -124,13 +126,13 @@ class ViewReplacer():
 
     def history_populate(self):
         try:
-            with open("param.json", 'r') as F:
+            with open(self.HISTORY_JSON, 'r') as F:
                 self.config = json.load(F)
             self.history.delete(0, "end")
             for date in sorted(self.config['WR']['H'].keys()):
                 self.history.insert(0, self.config['WR']['H'][date])
         except:
-            #print('pb loading history')
+            print('pb loading history')
             pass
         
     def history_add(self, value):
@@ -142,7 +144,7 @@ class ViewReplacer():
             del(self.config['WR']['H'][exists[0]])
         self.config['WR']['H'][str(datetime.datetime.now())] = value
         try:
-            with open("param.json", 'w') as f:
+            with open(self.HISTORY_JSON, 'w') as f:
                 json.dump(self.config, f)
         except:
             print('pb saving history')
@@ -178,22 +180,22 @@ class ViewReplacer():
                 self.progressbar['maximum'] =  len(text_list)
                 cpt = 0
 
-                P = Replacer()
-                P.set_motif(ToFrom, m=self.Marks.get())
+                Processer = Replacer()
+                Processer.set_motif(ToFrom, with_marks=self.Marks.get())
                 
                 for c, txt in enumerate(text_list):
                     self.progressbar['value'] = c+1
                     with open(txt, 'rb') as f:
                         buf = f.read()
-                    P.set_content(buf)
-                    P.process()
-                    if (P.log):
+                    Processer.set_content(buf)
+                    Processer.process()
+                    if (Processer.log):
                         if not self.test.get():
-                            buf = bytes(P.content, 'latin-1')
+                            buf = bytes(Processer.content, 'latin-1')
                             with open(txt, 'wb') as f:
                                 f.write(buf)
                             cpt +=1
                         self.result.insert(1.0,
-                            "%d match(es) in %s\n"%(P.log, txt))
+                            "%d match(es) in %s\n"%(Processer.log, txt))
                     self.parent.update()
                 self.result.insert(1.0, "%d file(s) edited\n"%cpt)
