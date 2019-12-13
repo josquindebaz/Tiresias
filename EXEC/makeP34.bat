@@ -1,4 +1,4 @@
-del Tiresias.zip
+del TiresiasP34.zip
 mkdir Tiresias
 "C:\Python34\Scripts\pyinstaller.exe"  -y --clean --onefile --distpath Tiresias "..\Tiresias.py"
 rd /S /Q build
