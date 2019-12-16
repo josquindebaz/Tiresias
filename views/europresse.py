@@ -6,8 +6,8 @@ import re
 import os
 from pathlib import Path
 
-from mod.europresse import *
-from mod.supports import Publi
+from mods.europresse import *
+from mods.supports import Publi
 
 class ViewEuropresse():
     def __init__(self, parent):

@@ -9,8 +9,8 @@ from tkinter import filedialog
 from tkinter.scrolledtext import ScrolledText
 from threading import Thread
 
-from mod.cleaning import list_files
-from mod.cleaning import Cleaner
+from mods.cleaning import list_files
+from mods.cleaning import Cleaner
 
 class ViewCleaning():
     """cleaning window"""

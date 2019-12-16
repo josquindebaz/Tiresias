@@ -1,0 +1,1081 @@
+{
+    "20mn": {
+        "author": "20 Minutes"
+    },
+    "60M": {
+        "authorship": "Presse consum\u00e9riste",
+        "media-type": "News et Magazines",
+        "medium": "60 Millions de consommateurs"
+    },
+    "AAAA": {
+        "author": "Association des Authentiques Amateurs d'Andouillettes Ard\u00e9choises",
+        "authorship": "Gourmet",
+        "localisation": "Ard\u00e8che",
+        "media-type": "Revue",
+        "medium": "Bulletin de l'AAAAA",
+        "observations": "R\u00e9f\u00e9rences externes de d\u00e9monstration",
+        "open-field-1": "Attention aux graisses",
+        "open-field-2": "Alimentation \u00e0 risques sanitaires"
+    },
+    "ABCNews": {
+        "author": "ABC News",
+        "medium": "ABC News"
+    },
+    "ACRO": {
+        "author": "ACRO",
+        "authorship": "Laboratoire ind\u00e9pendant",
+        "medium": "ACRO"
+    },
+    "AFMT": {
+        "author": "AFMT"
+    },
+    "AFP": {
+        "author": "AFP",
+        "authorship": "Journaliste",
+        "media-type": "Agence de presse",
+        "medium": "AFP"
+    },
+    "AFSSA": {
+        "author": "AFSSA",
+        "authorship": "Organisme de contr\u00f4le officiel",
+        "medium": "AFSSA"
+    },
+    "AFSSET": {
+        "author": "AFSSET",
+        "authorship": "Organisme de contr\u00f4le officiel",
+        "medium": "AFSSET"
+    },
+    "AGORAVOX": {
+        "medium": "Agoravox"
+    },
+    "ALS": {
+        "author": "L'Alsace",
+        "authorship": "Journaliste",
+        "media-type": "Presse Quotidienne R\u00e9gionale",
+        "medium": "L'Alsace"
+    },
+    "ANDRA": {
+        "author": "ANDRA",
+        "authorship": "Exploitant"
+    },
+    "ANQP": {
+        "media-type": "Texte parlementaire",
+        "medium": "Questions au gouvernement"
+    },
+    "AP": {
+        "author": "Associated Press",
+        "medium": "Associated Press"
+    },
+    "APR": {
+        "authorship": "Journaliste",
+        "media-type": "Agence de presse",
+        "medium": "Associated Press"
+    },
+    "ARTE": {
+        "media-type": "Audiovisuel",
+        "medium": "Arte"
+    },
+    "ASN": {
+        "author": "ASN",
+        "authorship": "Organisme de contr\u00f4le officiel",
+        "medium": "ASN"
+    },
+    "AVIF": {
+        "author": "AVIF"
+    },
+    "AcadSc": {
+        "author": "Acad\u00e9mie des Sciences"
+    },
+    "Actu-Environnement": {
+        "author": "Actu-Environnement",
+        "medium": "Actu-Environnement"
+    },
+    "ActuOGM": {
+        "author": "ActuOGM",
+        "medium": "ActuOGM"
+    },
+    "Afrikcom": {
+        "author": "Afrik.com"
+    },
+    "Alsace": {
+        "author": "L'Alsace",
+        "authorship": "Journaliste",
+        "media-type": "Presse Quotidienne R\u00e9gionale",
+        "medium": "L'Alsace"
+    },
+    "Alt": {
+        "media-type": "Presse \u00e9conomique p\u00e9riodique",
+        "medium": "Alternatives Economiques"
+    },
+    "Alternet": {
+        "author": "Alternet",
+        "medium": "Alternet"
+    },
+    "Amnesty": {
+        "media-type": "Critique",
+        "medium": "Amnesty"
+    },
+    "Areva": {
+        "author": "Areva",
+        "authorship": "Exploitants",
+        "medium": "Areva"
+    },
+    "BBC": {
+        "author": "BBC"
+    },
+    "BFM": {
+        "media-type": "Audiovisuel",
+        "medium": "BFM"
+    },
+    "BIT": {
+        "author": "BIT",
+        "authorship": "Instance internationale",
+        "medium": "BIT"
+    },
+    "BPU": {
+        "media-type": "Presse Quotidienne R\u00e9gionale",
+        "medium": "Le Bien Public"
+    },
+    "Bachelot": {
+        "author": "Bachelot"
+    },
+    "BanAsbestos": {
+        "author": "Ban Asbestos"
+    },
+    "Baquiast": {
+        "author": "Baquiast"
+    },
+    "BerryRep": {
+        "author": "Berry R\u00e9publicain",
+        "authorship": "Journaliste",
+        "media-type": "Presse Quotidienne R\u00e9gionale"
+    },
+    "Berz": {
+        "author": "Berliner Zeitung",
+        "media-type": "Presse \u00e9trang\u00e8re",
+        "medium": "Berliner Zeitung"
+    },
+    "BeyondPesticides": {
+        "author": "Beyond Pesticides",
+        "medium": "Beyond Pesticides"
+    },
+    "Bigballs": {
+        "author": "Bigballs",
+        "medium": "Brave Patrie"
+    },
+    "Braun": {
+        "author": "Braun",
+        "medium": "Brave Patrie"
+    },
+    "CAM": {
+        "media-type": "News et Magazines",
+        "medium": "Ca m'int\u00e9resse"
+    },
+    "CBS": {
+        "author": "CBS"
+    },
+    "CEE": {
+        "author": "Communaut\u00e9 europ\u00e9enne",
+        "authorship": "Instance internationale",
+        "medium": "Communaut\u00e9 europ\u00e9enne"
+    },
+    "CERTA": {
+        "author": "CERTA"
+    },
+    "CFDT": {
+        "author": "CFDT",
+        "authorship": "Syndicat",
+        "medium": "CFDT"
+    },
+    "CGT": {
+        "author": "CGT",
+        "authorship": "Syndicat",
+        "medium": "CGT"
+    },
+    "CHO": {
+        "author": "Que Choisir ?",
+        "authorship": "Presse consum\u00e9riste",
+        "media-type": "News et Magazines",
+        "medium": "Que Choisir ?"
+    },
+    "CI": {
+        "media-type": "News et Magazines",
+        "medium": "Courrier International"
+    },
+    "CIO": {
+        "author": "CIO",
+        "authorship": "Instance internationale",
+        "medium": "CIO"
+    },
+    "CIPR": {
+        "author": "CIPR",
+        "authorship": "Organisme de contr\u00f4le officiel"
+    },
+    "CIRC": {
+        "author": "CIRC",
+        "medium": "CIRC"
+    },
+    "CNCCEDN": {
+        "author": "Coordination nationale des collectifs contre l'enfouissement des d\u00e9chets radioactifs",
+        "authorship": "Militant(s) antinucl\u00e9aire(s)"
+    },
+    "CNDP": {
+        "author": "CNDP",
+        "authorship": "Instances et rapporteurs officiels",
+        "medium": "CNDP"
+    },
+    "CNE": {
+        "author": "Commission Nationale d'Evaluation",
+        "authorship": "Rapporteurs officiels"
+    },
+    "CNV": {
+        "author": "CNV@",
+        "media-type": ""
+    },
+    "CRII-RAD": {
+        "author": "CRII-RAD",
+        "authorship": "Laboratoire ind\u00e9pendant",
+        "medium": "CRII-RAD"
+    },
+    "CRIIRAD": {
+        "author": "CRII-RAD",
+        "authorship": "Laboratoire ind\u00e9pendant",
+        "medium": "CRII-RAD"
+    },
+    "CRILAN": {
+        "author": "CRILAN",
+        "authorship": "Militant(s) antinucl\u00e9aire(s)"
+    },
+    "CSres": {
+        "author": "Conseil de s\u00e9curit\u00e9 de l'ONU",
+        "authorship": "Organisation des Nations Unies",
+        "medium": "R\u00e9solutions de l'ONU"
+    },
+    "CUN": {
+        "media-type": "Presse \u00e9trang\u00e8re",
+        "medium": "Courrier de l'Unesco"
+    },
+    "Can": {
+        "author": "Canard Encha\u00een\u00e9",
+        "media-type": "News et Magazines",
+        "medium": "Canard Encha\u00een\u00e9"
+    },
+    "Cap": {
+        "media-type": "News et Magazines",
+        "medium": "Capital"
+    },
+    "Chomsky": {
+        "author": "Chomsky",
+        "authorship": "Intellectual"
+    },
+    "ConfPays": {
+        "author": "CONFEDERATION-PAYSANNE@",
+        "authorship": "Syndicat",
+        "medium": "Conf\u00e9d\u00e9ration paysanne"
+    },
+    "Confp": {
+        "author": "CONFEDERATION-PAYSANNE@",
+        "authorship": "Syndicat",
+        "medium": "Conf\u00e9d\u00e9ration paysanne"
+    },
+    "ConseilEtat": {
+        "author": "Conseil d\u2019Etat",
+        "authorship": "Instance officielle",
+        "medium": ""
+    },
+    "Coorurale": {
+        "author": "COORDINATION-RURALE@"
+    },
+    "Corcuff": {
+        "author": "Corcuff"
+    },
+    "Cords": {
+        "media-type": "Presse \u00e9trang\u00e8re",
+        "medium": "Corriere Della Serra"
+    },
+    "CorseMatin": {
+        "author": "Corse Matin",
+        "authorship": "Journaliste",
+        "media-type": "Presse Quotidienne R\u00e9gionale"
+    },
+    "Ctrl": {
+        "media-type": "Presse sectorielle",
+        "medium": "Contr\u00f4le"
+    },
+    "Cx": {
+        "author": "La Croix",
+        "media-type": "Presse Quotidienne Nationale",
+        "medium": "La Croix"
+    },
+    "DHL": {
+        "author": "Hervieu-L\u00e9ger"
+    },
+    "Dau": {
+        "author": "Le Dauphin\u00e9 Lib\u00e9r\u00e9",
+        "authorship": "Journaliste",
+        "media-type": "Presse Quotidienne R\u00e9gionale",
+        "medium": "Le Dauphin\u00e9 Lib\u00e9r\u00e9"
+    },
+    "Dna": {
+        "author": "Derni\u00e8res Nouvelles d'Alsace",
+        "media-type": "Presse Quotidienne R\u00e9gionale",
+        "medium": "Derni\u00e8res Nouvelles d'Alsace"
+    },
+    "DoD": {
+        "medium": "US Department of Defence"
+    },
+    "Doctissimo": {
+        "author": "Doctissimo",
+        "medium": "Doctissimo"
+    },
+    "D\u00e9cret": {
+        "author": "Gouvernement",
+        "medium": "D\u00e9cret"
+    },
+    "EDF": {
+        "author": "EDF",
+        "authorship": "Exploitants",
+        "medium": "EDF"
+    },
+    "EDJ": {
+        "author": "L'Ev\u00e9nement du Jeudi",
+        "media-type": "News et Magazines",
+        "medium": "L'Ev\u00e9nement du Jeudi"
+    },
+    "EHN": {
+        "author": "Environmental Health News",
+        "medium": "Environmental Health News"
+    },
+    "EPA": {
+        "author": "EPA",
+        "medium": "EPA"
+    },
+    "ETC": {
+        "author": "ETC",
+        "medium": "ETC Group"
+    },
+    "EU1": {
+        "media-type": "Audiovisuel",
+        "medium": "Europe 1"
+    },
+    "EWG": {
+        "author": "Environmental Working Group",
+        "medium": "Environmental Working Group"
+    },
+    "Ech": {
+        "author": "Les Echos",
+        "media-type": "Presse \u00e9conomique p\u00e9riodique",
+        "medium": "Les Echos"
+    },
+    "Echos": {
+        "author": "Les Echos",
+        "media-type": "Presse \u00e9conomique p\u00e9riodique",
+        "medium": "Les Echos"
+    },
+    "EnerPress": {
+        "author": "EnerPress"
+    },
+    "Equip": {
+        "author": "L'Equipe",
+        "medium": "L'Equipe"
+    },
+    "Est": {
+        "author": "L'Est R\u00e9publicain",
+        "media-type": "Presse Quotidienne R\u00e9gionale",
+        "medium": "L'Est R\u00e9publicain"
+    },
+    "Euronews": {
+        "author": "Euronews"
+    },
+    "EuropEcologie": {
+        "author": "Europe Ecologie",
+        "medium": "Europe Ecologie"
+    },
+    "Europe1": {
+        "media-type": "Audiovisuel",
+        "medium": "Europe 1"
+    },
+    "Exp": {
+        "author": "L'Express",
+        "authorship": "Journaliste",
+        "media-type": "News et Magazines",
+        "medium": "L'Express"
+    },
+    "Expan": {
+        "media-type": "Presse \u00e9conomique p\u00e9riodique",
+        "medium": "L'Expansion"
+    },
+    "FAO": {
+        "author": "FAO"
+    },
+    "FAO-OIE": {
+        "author": "FAO-OIE"
+    },
+    "FCULT": {
+        "media-type": "Audiovisuel",
+        "medium": "France Culture"
+    },
+    "FInter": {
+        "media-type": "Audiovisuel",
+        "medium": "France Inter"
+    },
+    "FNSEA": {
+        "author": "FNSEA",
+        "authorship": "Syndicat",
+        "medium": "FNSEA"
+    },
+    "FO": {
+        "author": "Force-Ouvri\u00e8re",
+        "authorship": "Syndicat",
+        "medium": "Force-Ouvri\u00e8re"
+    },
+    "FR2": {
+        "media-type": "Audiovisuel",
+        "medium": "France 2"
+    },
+    "FSA": {
+        "author": "FSA",
+        "medium": "FSA"
+    },
+    "FSC": {
+        "author": "Fondation Sciences Citoyennes"
+    },
+    "Fig": {
+        "author": "Le Figaro",
+        "authorship": "Journaliste",
+        "media-type": "Presse Quotidienne Nationale",
+        "medium": "Le Figaro"
+    },
+    "Figm": {
+        "media-type": "News et Magazines",
+        "medium": "Le Figaro Magazine"
+    },
+    "Finfo": {
+        "authorship": "Journaliste",
+        "media-type": "Audiovisuel",
+        "medium": "France Info"
+    },
+    "Forlib": {
+        "author": "",
+        "authorship": "",
+        "localisation": "",
+        "media-type": "Forum sur Internet",
+        "medium": "Forum Lib\u00e9ration",
+        "observations": "",
+        "open-field-1": "",
+        "open-field-2": ""
+    },
+    "FranceInfos": {
+        "author": "France Infos",
+        "authorship": "Journaliste",
+        "media-type": "Audiovisuel"
+    },
+    "Fs": {
+        "author": "France Soir",
+        "authorship": "Journaliste",
+        "media-type": "Audiovisuel",
+        "medium": "France Soir"
+    },
+    "GFP": {
+        "author": "Global Foot Print",
+        "medium": "Global Foot Print"
+    },
+    "GMO-Journal": {
+        "author": "GMO-Journal",
+        "medium": "GMO-Journal"
+    },
+    "GNISetc": {
+        "author": "Gnis - Ol\u00e9osem - Seproma - UIPP",
+        "medium": "ogm.org"
+    },
+    "Gouv": {
+        "author": "Gouvernement",
+        "authorship": "Gouvernement",
+        "medium": "Gouvernement"
+    },
+    "GreenWire": {
+        "author": "GreenWire",
+        "medium": "GreenWire"
+    },
+    "Greenp": {
+        "author": "GREENPEACE@",
+        "authorship": "Organisation \u00e9cologiste",
+        "medium": "Greenpeace"
+    },
+    "GrenEnv": {
+        "author": "Grenelle de l'Environnement",
+        "medium": "Grenelle de l'Environnement"
+    },
+    "HTrib": {
+        "author": "Herarld Tribune"
+    },
+    "Helmut": {
+        "author": "Helmut",
+        "medium": "Brave Patrie"
+    },
+    "Hum": {
+        "author": "L'Humanit\u00e9",
+        "authorship": "Journaliste",
+        "media-type": "Presse Quotidienne Nationale",
+        "medium": "L'Humanit\u00e9"
+    },
+    "IAEA": {
+        "author": "IAEA",
+        "authorship": "International Agency",
+        "medium": "IAEA"
+    },
+    "INFOGM": {
+        "author": "Inf'OGM",
+        "medium": "Inf'OGM"
+    },
+    "INVS": {
+        "author": "INVS",
+        "authorship": "Organisme de contr\u00f4le officiel",
+        "medium": "INVS"
+    },
+    "IPCC": {
+        "author": "IPCC"
+    },
+    "IRD": {
+        "author": "IRD"
+    },
+    "IRSN": {
+        "author": "IRSN",
+        "authorship": "Organisme de contr\u00f4le officiel",
+        "medium": "IRSN"
+    },
+    "InfosDiep": {
+        "author": "Informations dieppoises",
+        "authorship": "Presse locale",
+        "media-type": "Presse Quotidienne R\u00e9gionale"
+    },
+    "InsidePrevention": {
+        "author": "Inside Prevention"
+    },
+    "IssuesST": {
+        "medium": "IssuesST"
+    },
+    "JDD": {
+        "authorship": "Journaliste",
+        "media-type": "News et Magazines",
+        "medium": "Le Journal du Dimanche"
+    },
+    "JDLE": {
+        "author": "Journal de l'Environnement",
+        "authorship": "Journaliste",
+        "medium": "JDLE"
+    },
+    "JHM": {
+        "author": "Journal de la Haute-Marne"
+    },
+    "JenneferS": {
+        "author": "Sass",
+        "medium": "NRDC"
+    },
+    "Kala": {
+        "author": "Kala",
+        "medium": "Brave Patrie"
+    },
+    "LCI": {
+        "media-type": "Audiovisuel",
+        "medium": "LCI"
+    },
+    "LCR": {
+        "author": "LCR",
+        "authorship": "Parti politique"
+    },
+    "LEE": {
+        "medium": "La Lettre de l'Expansion"
+    },
+    "LNXMAG": {
+        "media-type": "Magazine sp\u00e9cialis\u00e9 mensuel",
+        "medium": "LinuxMag"
+    },
+    "LOGIN": {
+        "media-type": "Magazine sp\u00e9cialis\u00e9 mensuel",
+        "medium": "Login"
+    },
+    "Lacinq": {
+        "media-type": "Audiovisuel",
+        "medium": "La Cinqui\u00e8me"
+    },
+    "LePen": {
+        "author": "Le Pen/FN"
+    },
+    "Lib": {
+        "author": "Lib\u00e9ration",
+        "authorship": "Journaliste",
+        "localisation": "Paris",
+        "media-type": "Presse Quotidienne Nationale",
+        "medium": "Lib\u00e9ration"
+    },
+    "LibBelg": {
+        "author": "Libre Belgique",
+        "media-type": "Presse Quotidienne Etrang\u00e8re"
+    },
+    "Lib\u00e9": {
+        "author": "Lib\u00e9ration",
+        "authorship": "Journaliste",
+        "localisation": "Paris",
+        "media-type": "Presse Quotidienne Nationale",
+        "medium": "Lib\u00e9ration"
+    },
+    "LindaG": {
+        "author": "Greer",
+        "medium": "NRDC"
+    },
+    "Loose": {
+        "author": "Loose",
+        "medium": "Brave Patrie"
+    },
+    "M6": {
+        "media-type": "Audiovisuel",
+        "medium": "M6"
+    },
+    "MAR": {
+        "media-type": "News et Magazines",
+        "medium": "Marianne"
+    },
+    "MDiplo": {
+        "author": "Le Monde diplomatique",
+        "authorship": "",
+        "media-type": "",
+        "medium": "Le Monde diplomatique"
+    },
+    "MONT": {
+        "authorship": "Journaliste",
+        "media-type": "Presse Quotidienne R\u00e9gionale",
+        "medium": "La Montagne"
+    },
+    "Michaels": {
+        "author": "Michaels"
+    },
+    "Midi": {
+        "author": "La D\u00e9p\u00eache du Midi",
+        "authorship": "Journaliste",
+        "media-type": "Presse Quotidienne R\u00e9gionale",
+        "medium": "La D\u00e9p\u00eache du Midi"
+    },
+    "Midlib": {
+        "author": "Midi Libre",
+        "authorship": "Journaliste",
+        "media-type": "Presse Quotidienne R\u00e9gionale",
+        "medium": "Midi Libre"
+    },
+    "NEC": {
+        "author": "Le Nouvel Economiste",
+        "media-type": "Presse \u00e9conomique p\u00e9riodique",
+        "medium": "Le Nouvel Economiste"
+    },
+    "NIC": {
+        "author": "Nice Matin",
+        "media-type": "Presse Quotidienne R\u00e9gionale",
+        "medium": "Nice Matin"
+    },
+    "NObs": {
+        "authorship": "Journaliste",
+        "media-type": "News et Magazines",
+        "medium": "Le Nouvel Observateur"
+    },
+    "NRCO": {
+        "author": "Nouvelle R\u00e9publique du Centre-Ouest",
+        "authorship": "Presse locale",
+        "media-type": "PQR",
+        "medium": "Nouvelle R\u00e9publique du Centre-Ouest"
+    },
+    "NRDC": {
+        "author": "Natural Ressources Defense Council",
+        "medium": "NRDC"
+    },
+    "NYT": {
+        "author": "New York Times"
+    },
+    "Novethic": {
+        "author": "Novethic"
+    },
+    "OANF": {
+        "author": "Observatoire des armes nucl\u00e9aires fran\u00e7aises",
+        "authorship": "Laboratoire ind\u00e9pendant"
+    },
+    "OF": {
+        "author": "Ouest France",
+        "authorship": "Journaliste",
+        "media-type": "Presse Quotidienne R\u00e9gionale",
+        "medium": "Ouest France"
+    },
+    "OIE": {
+        "author": "OIE"
+    },
+    "OMS": {
+        "author": "OMS",
+        "authorship": "Instance internationale",
+        "medium": "OMS"
+    },
+    "ONU": {
+        "author": "ONU",
+        "authorship": "Instance internationale",
+        "medium": "ONU"
+    },
+    "OPECST": {
+        "author": "Office Parlementaire d'Evaluation des Choix Scientifiques et Tech",
+        "authorship": "Rapporteurs officiels"
+    },
+    "OSCE": {
+        "authorship": "Instance internationale",
+        "medium": "OSCE"
+    },
+    "Obs": {
+        "authorship": "Journaliste",
+        "media-type": "News et Magazines",
+        "medium": "Le Nouvel Observateur"
+    },
+    "ObsNucl": {
+        "author": "Observatoire du nucl\u00e9aire",
+        "authorship": "Militant(s) antinucl\u00e9aire(s)",
+        "media-type": "site critique",
+        "medium": "Observatoire du nucl\u00e9aire"
+    },
+    "PAR": {
+        "author": "Le Parisien",
+        "authorship": "Journaliste",
+        "media-type": "Presse Quotidienne R\u00e9gionale",
+        "medium": "Le Parisien"
+    },
+    "PCEXP": {
+        "media-type": "Magazine sp\u00e9cialis\u00e9 mensuel",
+        "medium": "PC Expert"
+    },
+    "PEL": {
+        "media-type": "News et Magazines",
+        "medium": "P\u00e8lerin Magazine"
+    },
+    "PMA": {
+        "author": "La Presse de la Manche",
+        "authorship": "Journaliste",
+        "media-type": "Presse Quotidienne R\u00e9gionale",
+        "medium": "La Presse de la Manche"
+    },
+    "PMO": {
+        "author": "PMO@"
+    },
+    "PNOR": {
+        "author": "Paris Normandie",
+        "media-type": "Presse Quotidienne R\u00e9gionale",
+        "medium": "Paris Normandie"
+    },
+    "POLITIS": {
+        "author": "POLITIS",
+        "media-type": "P\u00e9riodique critique"
+    },
+    "Point": {
+        "author": "Le Point",
+        "media-type": "News et Magazines",
+        "medium": "Le Point"
+    },
+    "Prog": {
+        "author": "Le Progr\u00e8s",
+        "authorship": "Journaliste",
+        "media-type": "Presse Quotidienne R\u00e9gionale",
+        "medium": "Le Progr\u00e8s"
+    },
+    "ProgDeLyon": {
+        "author": "Progr\u00e8s de Lyon",
+        "authorship": "Journaliste",
+        "media-type": "Presse Quotidienne R\u00e9gionale"
+    },
+    "Prov": {
+        "author": "La Provence",
+        "authorship": "Journaliste",
+        "media-type": "Presse Quotidienne R\u00e9gionale",
+        "medium": "La Provence"
+    },
+    "Pynchon": {
+        "author": "Pynchon",
+        "medium": "Brave Patrie"
+    },
+    "P\u00e9cresse": {
+        "author": "P\u00e9cresse"
+    },
+    "RES": {
+        "author": "Revue Electronique de Sociologie",
+        "media-type": "Internet"
+    },
+    "RFI": {
+        "media-type": "Audiovisuel",
+        "medium": "RFI"
+    },
+    "RFS": {
+        "media-type": "Revue",
+        "medium": "Revue Fran\u00e7aise de Sociologie"
+    },
+    "RMC": {
+        "media-type": "Audiovisuel",
+        "medium": "RMC"
+    },
+    "RTBF": {
+        "author": "RTBF",
+        "authorship": "Journaliste",
+        "media-type": "Presse \u00e9trang\u00e8re"
+    },
+    "RTL": {
+        "media-type": "Audiovisuel",
+        "medium": "RTL"
+    },
+    "RadioCanada": {
+        "author": "Radio Canada"
+    },
+    "RencParl": {
+        "author": "",
+        "authorship": "",
+        "localisation": "",
+        "media-type": "",
+        "medium": "Rencontres Parlementaires",
+        "observations": "",
+        "open-field-1": "",
+        "open-field-2": ""
+    },
+    "Replor": {
+        "author": "Le R\u00e9publicain Lorrain",
+        "media-type": "Presse Quotidienne R\u00e9gionale",
+        "medium": "Le R\u00e9publicain Lorrain"
+    },
+    "Resnuc": {
+        "author": "R\u00e9seau Sortir du nucl\u00e9aire",
+        "authorship": "Militant(s) antinucl\u00e9aire(s)",
+        "media-type": "P\u00e9riodique critique",
+        "medium": "R\u00e9seau Sortir du nucl\u00e9aire"
+    },
+    "Reuters": {
+        "author": "Reuters",
+        "authorship": "Journaliste",
+        "media-type": "Agence de presse",
+        "medium": "Reuters"
+    },
+    "Risk": {
+        "medium": "Risk"
+    },
+    "Rue89": {
+        "author": "Rue89"
+    },
+    "SCA": {
+        "author": "Science et avenir",
+        "media-type": "News et Magazines",
+        "medium": "Science et avenir"
+    },
+    "SFEN": {
+        "media-type": "News et Magazines",
+        "medium": "SFEN"
+    },
+    "SLR": {
+        "author": "Sauvons La Recherche"
+    },
+    "SO": {
+        "author": "Sud Ouest",
+        "authorship": "Journaliste",
+        "media-type": "Presse Quotidienne R\u00e9gionale",
+        "medium": "Sud Ouest"
+    },
+    "SOC": {
+        "media-type": "Revue",
+        "medium": "Soci\u00e9tal"
+    },
+    "SV": {
+        "author": "Science & Vie",
+        "media-type": "News et Magazines",
+        "medium": "Science & Vie"
+    },
+    "SarkoCAD": {
+        "author": "Sarkozy confront\u00e9 \u00e0 d'autres"
+    },
+    "SarkoEco": {
+        "author": "Sarkozy",
+        "authorship": "Ministre de l'Economie"
+    },
+    "SarkoHS": {
+        "author": "Sarkozy Elu des Hauts-de-Seine"
+    },
+    "SarkoInt": {
+        "author": "Sarkozy",
+        "authorship": "Ministre de l'Int\u00e9rieur"
+    },
+    "SarkoTem": {
+        "author": "Sarkozy",
+        "authorship": "Pr\u00e9sident de l'UMP",
+        "date": "25/07/2006",
+        "medium": "T\u00e9moignage"
+    },
+    "SarkoUmp": {
+        "author": "Sarkozy",
+        "authorship": "Pr\u00e9sident de l'UMP"
+    },
+    "Sarkonet": {
+        "author": "Sarkozy",
+        "authorship": "Pr\u00e9sident de l'UMP",
+        "medium": "Site internet de campagne"
+    },
+    "Science ADvisBoard": {
+        "author": "Science ADvisory Board",
+        "medium": "Science ADvisory Board"
+    },
+    "SecretDef": {
+        "author": "secret D\u00e9fense",
+        "authorship": "blogueur",
+        "media-type": "Blog",
+        "medium": "Blog Secret D\u00e9fense"
+    },
+    "Sisyphe": {
+        "author": "sisyphe",
+        "authorship": "blogueur",
+        "media-type": "Blog",
+        "medium": "Blog Sisyphe"
+    },
+    "Spieg": {
+        "media-type": "Presse \u00e9trang\u00e8re",
+        "medium": "Der Spiegel"
+    },
+    "StopFess": {
+        "author": "Stop-Fessenheim",
+        "authorship": "Militant(s) antinucl\u00e9aire(s)"
+    },
+    "StopNog": {
+        "author": "Comit\u00e9 Stop-Nogent",
+        "authorship": "Militant(s) antinucl\u00e9aire(s)",
+        "media-type": "P\u00e9riodique critique",
+        "medium": "Comit\u00e9 Stop-Nogent"
+    },
+    "Sud": {
+        "author": "Sud",
+        "authorship": "Syndicat",
+        "medium": "Sud"
+    },
+    "S\u00e9nat": {
+        "author": "S\u00e9nat",
+        "authorship": "Parlement",
+        "medium": "S\u00e9nat"
+    },
+    "TCHBLAYE": {
+        "author": "TchernoBlaye",
+        "authorship": "Militant(s) antinucl\u00e9aire(s)"
+    },
+    "TEL": {
+        "author": "T\u00e9l\u00e9rama"
+    },
+    "TELB": {
+        "authorship": "Journaliste",
+        "media-type": "Presse Quotidienne R\u00e9gionale",
+        "medium": "Le T\u00e9l\u00e9gramme de Brest"
+    },
+    "TF1": {
+        "media-type": "Audiovisuel",
+        "medium": "TF1"
+    },
+    "TheIndep": {
+        "author": "The Independent"
+    },
+    "Tim": {
+        "authorship": "Journaliste",
+        "media-type": "Presse \u00e9trang\u00e8re",
+        "medium": "The Times"
+    },
+    "Times": {
+        "author": "Times"
+    },
+    "Transversales": {
+        "media-type": "site Internet",
+        "medium": "Transversales"
+    },
+    "Trib": {
+        "media-type": "Presse \u00e9conomique p\u00e9riodique",
+        "medium": "La Tribune"
+    },
+    "TribGenev": {
+        "author": "Tribune de Gen\u00e8ve"
+    },
+    "UNAF": {
+        "author": "UNAF"
+    },
+    "Usin": {
+        "media-type": "News et Magazines",
+        "medium": "L'Usine Nouvelle"
+    },
+    "VAC": {
+        "media-type": "Presse \u00e9conomique p\u00e9riodique",
+        "medium": "Valeurs Actuelles"
+    },
+    "VDN": {
+        "author": "La Voix du Nord",
+        "authorship": "Journaliste",
+        "media-type": "Presse Quotidienne R\u00e9gionale",
+        "medium": "La Voix du Nord"
+    },
+    "Verts": {
+        "author": "Les Verts"
+    },
+    "WHO": {
+        "author": "WHO",
+        "authorship": "Instance internationale",
+        "medium": "WHO"
+    },
+    "WP": {
+        "author": "Washington Post",
+        "medium": "Washington Post"
+    },
+    "WTA": {
+        "author": "World Transhumanist Association"
+    },
+    "ZDNet": {
+        "author": "ZDNet"
+    },
+    "cnrs": {
+        "author": "CNRS",
+        "authorship": "Pro-Techno",
+        "medium": "Site CNRS"
+    },
+    "hoaxbuster": {
+        "author": "Hoaxbuster",
+        "authorship": "",
+        "localisation": "",
+        "media-type": "site Web",
+        "medium": "",
+        "observations": "",
+        "open-field-1": "",
+        "open-field-2": ""
+    },
+    "irakforum": {
+        "authorship": "",
+        "localisation": "",
+        "media-type": "Forum",
+        "medium": "Forum Lib\u00e9ration",
+        "observations": "",
+        "open-field-1": "",
+        "open-field-2": ""
+    },
+    "md": {
+        "author": "Le Monde",
+        "authorship": "Journaliste",
+        "media-type": "Presse Quotidienne Nationale",
+        "medium": "Le Monde"
+    },
+    "notre-planete": {
+        "author": "notre-planete.info",
+        "medium": "notre-planete.info"
+    },
+    "planet-info": {
+        "author": "notre-planete.info",
+        "medium": "notre-planete.info"
+    },
+    "rech": {
+        "author": "La Recherche",
+        "medium": "La Recherche"
+    },
+    "tlm": {
+        "medium": "tlm"
+    },
+    "tlmae": {
+        "medium": "tlmae"
+    },
+    "vivagora": {
+        "author": "Vivagora",
+        "medium": "Vivagora"
+    }
+}

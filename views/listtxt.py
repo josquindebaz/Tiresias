@@ -4,7 +4,7 @@ from tkinter import filedialog
 from tkinter.scrolledtext import ScrolledText
 from threading import Thread
 
-from mod.cleaning import list_files
+from mods.cleaning import list_files
 
 class ViewListTxt():
     def __init__(self, parent):

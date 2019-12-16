@@ -4,7 +4,7 @@ from tkinter import filedialog
 from tkinter.scrolledtext import ScrolledText
 from threading import Thread
 
-from mod.uncapitalise import *
+from mods.uncapitalise import *
 
 import json
 import datetime

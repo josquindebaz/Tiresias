@@ -4,7 +4,7 @@ from tkinter import ttk
 from tkinter import filedialog as fd
 from tkinter.scrolledtext import ScrolledText
 
-from mod.newton import parseNewton
+from mods.newton import parseNewton
 
 class ViewNewton():
     def __init__(self, parent):

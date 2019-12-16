@@ -5,7 +5,7 @@ from tkinter.scrolledtext import ScrolledText
 import os
 from pathlib import Path
 
-from mod.prcfilter import PrcFilter
+from mods.prcfilter import PrcFilter
 
 class ViewFilter():
     def __init__(self, parent):

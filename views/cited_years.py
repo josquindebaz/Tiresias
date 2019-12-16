@@ -3,7 +3,7 @@ from tkinter import ttk
 from tkinter import filedialog
 from tkinter.scrolledtext import ScrolledText
 
-from mod.cited_years import find_years
+from mods.cited_years import find_years
 
 class ViewYears():
     def __init__(self, parent):

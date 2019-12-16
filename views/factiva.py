@@ -4,7 +4,7 @@ from tkinter import ttk
 from tkinter import filedialog as fd
 from tkinter.scrolledtext import ScrolledText
 
-from mod.factiva import ParseHtm
+from mods.factiva import ParseHtm
 
 class ViewFactiva():
     def __init__(self, parent):

@@ -4,7 +4,7 @@ from tkinter import ttk
 from tkinter import filedialog as fd
 from tkinter.scrolledtext import ScrolledText
 
-from mod.scopus import ctx_prospero
+from mods.scopus import ctx_prospero
 
 class ViewScopus():
     def __init__(self, parent):

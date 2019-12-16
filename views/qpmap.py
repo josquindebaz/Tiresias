@@ -7,7 +7,7 @@ import tkinter as tk
 from tkinter.scrolledtext import ScrolledText
 from tkinter import filedialog
 
-from mod.qpmap import Mapper
+from mods.qpmap import Mapper
 
 import webbrowser
 

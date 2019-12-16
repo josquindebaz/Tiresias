@@ -6,8 +6,8 @@ from tkinter import filedialog
 import webbrowser
 import time
 
-from mod.qp import *
-from mod.cleaning import Cleaner
+from mods.qp import *
+from mods.cleaning import Cleaner
 
 class ViewQP():
     def __init__(self, parent):
