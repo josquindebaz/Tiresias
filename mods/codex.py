@@ -49,6 +49,37 @@ def parse_codex_cfg(codex_path):
                                       if key != "ABREV"}
     return codex
 
+def merge_codex(dic1, dic2):
+    """update dic2 with dic1, add new dic2 keys to dic1 when common,
+    keep dic1 values when conflict, return conflicts"""
+    commons = {common: dic2[common]
+               for common
+               in set(dic1.keys()) & set(dic2.keys())
+               }
+    for common in commons:
+        print("dic 1", dic1[common])
+        print("dic 2", dic2[common])
+##        print("3", {key: value
+##                    for key, value in dic2[common].items()
+##                    if key not in dic1[common]
+##                    })
+        dic1[common].update({key: value
+                    for key, value in dic2[common].items()
+                    if key not in dic1[common]
+                    })
+       # print("new dic1", dic1[common])
+        print("conflict", {key: value
+                    for key, value in dic2[common].items()
+                    if (key in dic1[common]
+                           and dic1[common][key] != dic2[common][key])
+                    }
+            )
+        
+        
+    
+    #dic2.update(dic1)
+
+
 
 def save_codex_json(codex, filename):
     """save codex as json in filename"""
@@ -56,8 +87,11 @@ def save_codex_json(codex, filename):
         json.dump(codex, codexfile, indent=4, sort_keys=True)
 
 if __name__ == "__main__":
-##    supports = parse_supports_publi("../data/support.publi")
-##    save_codex_json(supports, "codex.json")
+    supports_publi = parse_supports_publi("../data/support.publi")
+##    save_codex_json(supports_publi, "codex.json")
 
-    supports = parse_codex_cfg(r"C:\Program Files (x86)\Doxa\Prospéro-I\codex.cfg")
-    save_codex_json(supports, "codex.json")
+    supports_codex = parse_codex_cfg(r"C:\Program Files (x86)\Doxa\Prospéro-I\codex.cfg")
+##    save_codex_json(supports_codex, "codex.json")
+    merge_codex(supports_publi, supports_codex)
+
+    
