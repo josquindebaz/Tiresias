@@ -29,7 +29,6 @@ class ViewReplacer():
         self.choosenDir = tk.StringVar()
         dir_entry = tk.Entry(Fr1, width=52,
             textvariable=self.choosenDir)
-        self.choosenDir.set("C:\\corpus\\test")
         dir_entry.pack(side=tk.LEFT)
 
         self.Recursive = tk.BooleanVar()
@@ -41,15 +40,16 @@ class ViewReplacer():
         self.test = tk.BooleanVar()
         bn_test = tk.Checkbutton(Fr1, 
             text='test only', var=self.test)
-        bn_test.select()
+        #bn_test.select()
         bn_test.pack(side=tk.LEFT)
 
         #Frame 2
         Fr2 = tk.PanedWindow(self.parent)
         Fr2.pack(anchor=tk.W)
         
-        Fr21 = tk.LabelFrame(Fr2, 
-            text="From patterns", padx=10)
+        Fr21 = tk.LabelFrame(Fr2,
+                             text="From patterns",
+                             padx=10)
         Fr21.pack(anchor=tk.N, side=tk.LEFT)
         self.ListFrom = tk.Listbox(Fr21)
         self.ListFrom.pack(fill=tk.X)

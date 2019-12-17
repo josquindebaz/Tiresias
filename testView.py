@@ -13,6 +13,7 @@ import views.factiva
 import views.lexis
 import views.newton
 import views.cited_years
+import views.codex
 
 class MainView(tk.Toplevel):
     def __init__(self, parent):
@@ -22,7 +23,7 @@ class MainView(tk.Toplevel):
         self.protocol('WM_DELETE_WINDOW', self.
                       parent.destroy)
 
-        views.newton.ViewNewton(self)
+        views.codex.ViewCodex(self)
         #views.uncapitalise.ViewReplacer(self)
 
 if __name__ == '__main__':

@@ -16,7 +16,7 @@ import datetime
 try:
     from cleaning import Cleaner
 except:
-    from mod.cleaning import Cleaner
+    from mods.cleaning import Cleaner
 
 def file_name(date, prefix, save_dir):
     """return a name in Prospero style"""

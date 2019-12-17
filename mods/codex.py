@@ -49,6 +49,10 @@ def parse_codex_cfg(codex_path):
                                       if key != "ABREV"}
     return codex
 
+class Codex():
+    def __init__(self, codexpath):
+        with open(codexpath, 'r') as filepointer:
+            self.codex = json.load(filepointer)
 
 def save_codex_json(codex, filename):
     """save codex as json in filename"""

@@ -12,7 +12,7 @@ import datetime
 try:
     from cleaning import Cleaner
 except:
-    from mod.cleaning import Cleaner
+    from mods.cleaning import Cleaner
 
 
 def format_date(date):

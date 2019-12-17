@@ -13,7 +13,7 @@ import datetime
 try:
     import cleaning
 except:
-    from mod.cleaning import Cleaner
+    from mods.cleaning import Cleaner
 
 def get(text, begin, end):
     """return the content between two given strings"""

@@ -8,8 +8,8 @@ try:
     import cleaning
     from supports import Publi
 except:
-    from mod.cleaning import Cleaner
-    from mod.supports import Publi
+    from mods.cleaning import Cleaner
+    from mods.supports import Publi
 
  
 class ParseHtml(object):

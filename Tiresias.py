@@ -9,7 +9,6 @@ import tkinter as tk
 import os
 from threading import Thread
 
-
 import views.listtxt
 import views.cleaning
 import views.filter
