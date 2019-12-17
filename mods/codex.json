@@ -1,1081 +1,3627 @@
 {
-    "20mn": {
-        "author": "20 Minutes"
+    "01INF": {
+        "author": "01Informatique",
+        "media-type": "News et magazines",
+        "medium": "01Informatique"
     },
-    "60M": {
-        "authorship": "Presse consum\u00e9riste",
-        "media-type": "News et Magazines",
-        "medium": "60 Millions de consommateurs"
+    "01NET": {
+        "author": "01net",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "01net"
     },
-    "AAAA": {
-        "author": "Association des Authentiques Amateurs d'Andouillettes Ard\u00e9choises",
-        "authorship": "Gourmet",
-        "localisation": "Ard\u00e8che",
-        "media-type": "Revue",
-        "medium": "Bulletin de l'AAAAA",
-        "observations": "R\u00e9f\u00e9rences externes de d\u00e9monstration",
-        "open-field-1": "Attention aux graisses",
-        "open-field-2": "Alimentation \u00e0 risques sanitaires"
+    "20MIN": {
+        "author": "20 Minutes",
+        "media-type": "Presse gratuite",
+        "medium": "20 Minutes"
     },
-    "ABCNews": {
-        "author": "ABC News",
-        "medium": "ABC News"
+    "21E": {
+        "author": "La maison du 21e si\u00e8cle",
+        "media-type": "Presse canadienne",
+        "medium": "La maison du 21e si\u00e8cle"
     },
-    "ACRO": {
-        "author": "ACRO",
-        "authorship": "Laboratoire ind\u00e9pendant",
-        "medium": "ACRO"
+    "24H": {
+        "author": "24 Heures",
+        "media-type": "Presse suisse",
+        "medium": "24 Heures"
     },
-    "AFMT": {
-        "author": "AFMT"
+    "A31": {
+        "author": "Antennes 31",
+        "media-type": "Site internet",
+        "medium": "Antennes 31"
+    },
+    "ACANO": {
+        "author": "L'Acadie Nouvelle",
+        "media-type": "Presse canadienne",
+        "medium": "L'Acadie Nouvelle"
+    },
+    "ACMN": {
+        "author": "Communications of the ACM",
+        "media-type": "Presse professionnelle",
+        "medium": "Communications of the ACM"
+    },
+    "ADCN": {
+        "author": "Asiainfo Daily China News",
+        "media-type": "Agence de presse",
+        "medium": "Asiainfo Daily China News"
+    },
+    "ADNK": {
+        "author": "Adnkronos",
+        "media-type": "Presse italienne",
+        "medium": "Adnkronos"
+    },
+    "ADV": {
+        "author": "The Advertiser",
+        "media-type": "Presse australienne",
+        "medium": "The Advertiser"
+    },
+    "ADVA": {
+        "author": "Advertising Age",
+        "media-type": "Presse professionnelle",
+        "medium": "Advertising Age"
+    },
+    "ADWE": {
+        "author": "Adweek",
+        "media-type": "Presse professionnelle",
+        "medium": "Adweek"
+    },
+    "AENV": {
+        "author": "http://www.actu-environnement.com",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "http://www.actu-environnement.com"
+    },
+    "AEUR": {
+        "author": "Agence Europe",
+        "media-type": "Agence de presse",
+        "medium": "Agence Europe"
+    },
+    "AFARM": {
+        "author": "Arable Farming",
+        "media-type": "Presse brittanique",
+        "medium": "Arable Farming"
     },
     "AFP": {
         "author": "AFP",
-        "authorship": "Journaliste",
         "media-type": "Agence de presse",
         "medium": "AFP"
     },
-    "AFSSA": {
-        "author": "AFSSA",
-        "authorship": "Organisme de contr\u00f4le officiel",
-        "medium": "AFSSA"
-    },
-    "AFSSET": {
-        "author": "AFSSET",
-        "authorship": "Organisme de contr\u00f4le officiel",
-        "medium": "AFSSET"
-    },
-    "AGORAVOX": {
-        "medium": "Agoravox"
-    },
-    "ALS": {
-        "author": "L'Alsace",
-        "authorship": "Journaliste",
-        "media-type": "Presse Quotidienne R\u00e9gionale",
-        "medium": "L'Alsace"
-    },
-    "ANDRA": {
-        "author": "ANDRA",
-        "authorship": "Exploitant"
-    },
-    "ANQP": {
-        "media-type": "Texte parlementaire",
-        "medium": "Questions au gouvernement"
-    },
-    "AP": {
-        "author": "Associated Press",
-        "medium": "Associated Press"
-    },
-    "APR": {
-        "authorship": "Journaliste",
+    "AFR": {
+        "author": "All Africa",
         "media-type": "Agence de presse",
-        "medium": "Associated Press"
+        "medium": "All Africa"
     },
-    "ARTE": {
-        "media-type": "Audiovisuel",
-        "medium": "Arte"
+    "AFRV": {
+        "author": "Australian Financial Review",
+        "media-type": "Presse australienne",
+        "medium": "Australian Financial Review"
     },
-    "ASN": {
-        "author": "ASN",
-        "authorship": "Organisme de contr\u00f4le officiel",
-        "medium": "ASN"
+    "AGE": {
+        "author": "The Age",
+        "media-type": "Presse australienne",
+        "medium": "The Age"
     },
-    "AVIF": {
-        "author": "AVIF"
+    "AGF": {
+        "author": "L'Ag\u00e9fi Suisse",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "L'Ag\u00e9fi Suisse"
     },
-    "AcadSc": {
-        "author": "Acad\u00e9mie des Sciences"
+    "AGIT": {
+        "author": "Agenzia Giornalistica Italia",
+        "media-type": "Presse italienne",
+        "medium": "Agenzia Giornalistica Italia"
     },
-    "Actu-Environnement": {
-        "author": "Actu-Environnement",
-        "medium": "Actu-Environnement"
+    "AIA": {
+        "author": "Ar\u00f4mes Ingr\u00e9dients Additifs",
+        "media-type": "Presse professionnelle",
+        "medium": "Ar\u00f4mes Ingr\u00e9dients Additifs"
     },
-    "ActuOGM": {
-        "author": "ActuOGM",
-        "medium": "ActuOGM"
+    "AII": {
+        "author": "Arirline Industry Information",
+        "media-type": "Agence de presse",
+        "medium": "Arirline Industry Information"
     },
-    "Afrikcom": {
-        "author": "Afrik.com"
+    "AIRCO": {
+        "author": "Air & Cosmos",
+        "media-type": "News et magazines",
+        "medium": "Air & Cosmos"
     },
-    "Alsace": {
-        "author": "L'Alsace",
-        "authorship": "Journaliste",
-        "media-type": "Presse Quotidienne R\u00e9gionale",
-        "medium": "L'Alsace"
+    "AKBO": {
+        "author": "Akron Beacon Journal (MCT)",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "Akron Beacon Journal (MCT)"
     },
-    "Alt": {
-        "media-type": "Presse \u00e9conomique p\u00e9riodique",
+    "ALBY": {
+        "author": "Al Bayane",
+        "media-type": "Presse marocaine",
+        "medium": "Al Bayane"
+    },
+    "ALENV": {
+        "author": "alerte-environnement.fr",
+        "media-type": "Site lobby",
+        "medium": "alerte-environnement.fr"
+    },
+    "ALT": {
+        "author": "Alternatives Economiques",
+        "media-type": "Presse \u00e9conomique",
         "medium": "Alternatives Economiques"
     },
-    "Alternet": {
-        "author": "Alternet",
-        "medium": "Alternet"
+    "AMRC": {
+        "author": "America",
+        "media-type": "News et magazines",
+        "medium": "America"
     },
-    "Amnesty": {
-        "media-type": "Critique",
-        "medium": "Amnesty"
+    "ANE": {
+        "author": "actualites-news-environnement",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "actualites-news-environnement"
     },
-    "Areva": {
-        "author": "Areva",
-        "authorship": "Exploitants",
-        "medium": "Areva"
+    "ANEN": {
+        "author": "ANSA - English Media Service",
+        "media-type": "Agence de presse",
+        "medium": "ANSA - English Media Service"
+    },
+    "ANEWS": {
+        "author": "ActusNewsWire",
+        "media-type": "Agence de presse",
+        "medium": "ActusNewsWire"
+    },
+    "ANSA": {
+        "author": "ANSA",
+        "media-type": "Presse italienne",
+        "medium": "ANSA"
+    },
+    "APA": {
+        "author": "APANEWS",
+        "media-type": "Presse s\u00e9n\u00e9galaise",
+        "medium": "APANEWS"
+    },
+    "APCOM": {
+        "author": "APCOM",
+        "media-type": "Presse italienne",
+        "medium": "APCOM"
+    },
+    "APM": {
+        "author": "APM",
+        "media-type": "Agence de presse",
+        "medium": "APM"
+    },
+    "ASASHI": {
+        "author": "Asahi Shimbun",
+        "media-type": "Presse japonaise",
+        "medium": "Asahi Shimbun"
+    },
+    "ASCA": {
+        "author": "ASCA",
+        "media-type": "Presse italienne",
+        "medium": "ASCA"
+    },
+    "ASIAN": {
+        "author": "Asian News International",
+        "media-type": "Agence de presse",
+        "medium": "Asian News International"
+    },
+    "ASSN": {
+        "author": "Indo-Asian News Service",
+        "media-type": "Agence de presse",
+        "medium": "Indo-Asian News Service"
+    },
+    "ATCO": {
+        "author": "atlantico",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "atlantico"
+    },
+    "ATJR": {
+        "author": "The Atlanta Journal",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "The Atlanta Journal"
+    },
+    "ATS": {
+        "author": "Agence T\u00e9l\u00e9graphique Suisse",
+        "media-type": "Agence de presse",
+        "medium": "Agence T\u00e9l\u00e9graphique Suisse"
+    },
+    "AUJ": {
+        "author": "Aujourd'hui en France",
+        "media-type": "Presse nationale",
+        "medium": "Aujourd'hui en France"
+    },
+    "AVIR": {
+        "author": "Les Annales de la Voirie",
+        "media-type": "News et magazines",
+        "medium": "Les Annales de la Voirie"
+    },
+    "AWP": {
+        "author": "AWP Swiss News",
+        "media-type": "Agence de presse",
+        "medium": "AWP Swiss News"
+    },
+    "ActPub": {
+        "author": "Acteurs Publics",
+        "media-type": "News et magazines",
+        "medium": "Acteurs Publics"
+    },
+    "BAK": {
+        "author": "Bakchich",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "Bakchich"
+    },
+    "BALT": {
+        "author": "Baltic News Service",
+        "media-type": "Agence de presse",
+        "medium": "Baltic News Service"
+    },
+    "BANG": {
+        "author": "Bangkok Post",
+        "media-type": "Presse thailandaise",
+        "medium": "Bangkok Post"
+    },
+    "BASTA": {
+        "author": "basta!",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "basta!"
+    },
+    "BASZ": {
+        "author": "Basler Zeitung",
+        "media-type": "Presse suisse",
+        "medium": "Basler Zeitung"
+    },
+    "BATH": {
+        "author": "Bath Chronicle",
+        "media-type": "Presse brittanique",
+        "medium": "Bath Chronicle"
+    },
+    "BBBD": {
+        "author": "Baltic Business Daily",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "Baltic Business Daily"
     },
     "BBC": {
-        "author": "BBC"
+        "author": "BBC Worldwide Monitoring",
+        "media-type": "Agence de presse",
+        "medium": "BBC Worldwide Monitoring"
     },
-    "BFM": {
-        "media-type": "Audiovisuel",
-        "medium": "BFM"
+    "BBN": {
+        "author": "Biotechnology Business News",
+        "media-type": "Agence de presse",
+        "medium": "Biotechnology Business News"
     },
-    "BIT": {
-        "author": "BIT",
-        "authorship": "Instance internationale",
-        "medium": "BIT"
+    "BDAY": {
+        "author": "Business Day",
+        "media-type": "Presse sud-africaine",
+        "medium": "Business Day"
     },
-    "BPU": {
-        "media-type": "Presse Quotidienne R\u00e9gionale",
-        "medium": "Le Bien Public"
+    "BELF": {
+        "author": "Belfast News Letter",
+        "media-type": "Presse brittanique",
+        "medium": "Belfast News Letter"
     },
-    "Bachelot": {
-        "author": "Bachelot"
+    "BELGA": {
+        "author": "Agence Belga",
+        "media-type": "Agence de presse",
+        "medium": "Agence Belga"
     },
-    "BanAsbestos": {
-        "author": "Ban Asbestos"
+    "BELT": {
+        "author": "Belfast Telegraph",
+        "media-type": "Presse irlandaise",
+        "medium": "Belfast Telegraph"
     },
-    "Baquiast": {
-        "author": "Baquiast"
+    "BERL": {
+        "author": "Berlingske Tidende",
+        "media-type": "Presse allemande",
+        "medium": "Berlingske Tidende"
     },
-    "BerryRep": {
-        "author": "Berry R\u00e9publicain",
-        "authorship": "Journaliste",
-        "media-type": "Presse Quotidienne R\u00e9gionale"
+    "BERN": {
+        "author": "Bernama",
+        "media-type": "Agence de presse",
+        "medium": "Bernama"
     },
-    "Berz": {
-        "author": "Berliner Zeitung",
-        "media-type": "Presse \u00e9trang\u00e8re",
-        "medium": "Berliner Zeitung"
+    "BIEN": {
+        "author": "Bio & Nature",
+        "media-type": "News et magazines",
+        "medium": "Bio & Nature"
     },
-    "BeyondPesticides": {
-        "author": "Beyond Pesticides",
-        "medium": "Beyond Pesticides"
+    "BIRME": {
+        "author": "Birmingham Evening Mail",
+        "media-type": "Presse brittanique",
+        "medium": "Birmingham Evening Mail"
     },
-    "Bigballs": {
-        "author": "Bigballs",
-        "medium": "Brave Patrie"
+    "BIRMP": {
+        "author": "Birmingham Post",
+        "media-type": "Presse brittanique",
+        "medium": "Birmingham Post"
     },
-    "Braun": {
-        "author": "Braun",
-        "medium": "Brave Patrie"
+    "BITW": {
+        "author": "Biotech Week",
+        "media-type": "Presse professionnelle",
+        "medium": "Biotech Week"
     },
-    "CAM": {
-        "media-type": "News et Magazines",
-        "medium": "Ca m'int\u00e9resse"
+    "BLDD": {
+        "author": "Belarus: Daily News",
+        "media-type": "Presse russe",
+        "medium": "Belarus: Daily News"
     },
-    "CBS": {
-        "author": "CBS"
+    "BLPL": {
+        "author": "The Gazette (Blackpool)",
+        "media-type": "Presse brittanique",
+        "medium": "The Gazette (Blackpool)"
     },
-    "CEE": {
-        "author": "Communaut\u00e9 europ\u00e9enne",
-        "authorship": "Instance internationale",
-        "medium": "Communaut\u00e9 europ\u00e9enne"
+    "BOHE": {
+        "author": "Boston Herald",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "Boston Herald"
     },
-    "CERTA": {
-        "author": "CERTA"
+    "BORB": {
+        "author": "Borneo Bulletin",
+        "media-type": "Presse born\u00e9aise",
+        "medium": "Borneo Bulletin"
     },
-    "CFDT": {
-        "author": "CFDT",
-        "authorship": "Syndicat",
-        "medium": "CFDT"
+    "BORS": {
+        "author": "Borsen-Zeitung",
+        "media-type": "Presse allemande",
+        "medium": "Borsen-Zeitung"
     },
-    "CGT": {
-        "author": "CGT",
-        "authorship": "Syndicat",
-        "medium": "CGT"
+    "BOS": {
+        "author": "The Boston Globe",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "The Boston Globe"
     },
-    "CHO": {
-        "author": "Que Choisir ?",
-        "authorship": "Presse consum\u00e9riste",
-        "media-type": "News et Magazines",
-        "medium": "Que Choisir ?"
+    "BOUR": {
+        "author": "Boursorama",
+        "media-type": "site web",
+        "medium": "Boursorama"
     },
-    "CI": {
-        "media-type": "News et Magazines",
-        "medium": "Courrier International"
+    "BOURS": {
+        "author": "Boursier.com",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "Boursier.com"
     },
-    "CIO": {
-        "author": "CIO",
-        "authorship": "Instance internationale",
-        "medium": "CIO"
+    "BREF": {
+        "author": "Bref Rh\u00f4ne-Alpes",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "Bref Rh\u00f4ne-Alpes"
     },
-    "CIPR": {
-        "author": "CIPR",
-        "authorship": "Organisme de contr\u00f4le officiel"
+    "BRIS": {
+        "author": "Bristol Evening Post",
+        "media-type": "Presse brittanique",
+        "medium": "Bristol Evening Post"
     },
-    "CIRC": {
-        "author": "CIRC",
-        "medium": "CIRC"
+    "BRSN": {
+        "author": "B\u00f8rsen",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "B\u00f8rsen"
     },
-    "CNCCEDN": {
-        "author": "Coordination nationale des collectifs contre l'enfouissement des d\u00e9chets radioactifs",
-        "authorship": "Militant(s) antinucl\u00e9aire(s)"
+    "BUFF": {
+        "author": "Buffalo News",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "Buffalo News"
+    },
+    "BULQ": {
+        "author": "Bulletin Quotidien",
+        "media-type": "Agence de presse",
+        "medium": "Bulletin Quotidien"
+    },
+    "BUSI": {
+        "author": "Business Times Singapore",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "Business Times Singapore"
+    },
+    "BUSL": {
+        "author": "Business Line",
+        "media-type": "Presse indienne",
+        "medium": "Business Line"
+    },
+    "BUST": {
+        "author": "Business Today",
+        "media-type": "Presse indienne",
+        "medium": "Business Today"
+    },
+    "BUSWE": {
+        "author": "Business Week",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "Business Week"
+    },
+    "BUSWI": {
+        "author": "Business Wire",
+        "media-type": "Communiqu\u00e9 de presse",
+        "medium": "Business Wire"
+    },
+    "BUSWO": {
+        "author": "BusinessWorld",
+        "media-type": "Presse philippine",
+        "medium": "BusinessWorld"
+    },
+    "BWTD": {
+        "author": "BIOWORLD Today",
+        "media-type": "Presse scientifique",
+        "medium": "BIOWORLD Today"
+    },
+    "CAAR": {
+        "author": "Cape Argus",
+        "media-type": "Presse sud-africaine",
+        "medium": "Cape Argus"
+    },
+    "CAE": {
+        "author": "Le Canard Encha\u00een\u00e9",
+        "media-type": "News et magazines",
+        "medium": "Le Canard Encha\u00een\u00e9"
+    },
+    "CANAD": {
+        "author": "La Presse Canadienne",
+        "media-type": "Agence de presse",
+        "medium": "La Presse Canadienne"
+    },
+    "CANT": {
+        "author": "Canberra Times",
+        "media-type": "Presse australienne",
+        "medium": "Canberra Times"
+    },
+    "CAPI": {
+        "author": "La Capitale",
+        "media-type": "Presse R\u00e9gionale",
+        "medium": "La Capitale"
+    },
+    "CATM": {
+        "author": "Cape Times",
+        "media-type": "Presse sud-africaine",
+        "medium": "Cape Times"
+    },
+    "CAWL": {
+        "author": "Cancer Weekly",
+        "media-type": "News et magazines",
+        "medium": "Cancer Weekly"
+    },
+    "CBNN": {
+        "author": "eSource Canada Business News Network",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "eSource Canada Business News Network"
+    },
+    "CCB": {
+        "author": "Crain's Chicago Business",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "Crain's Chicago Business"
+    },
+    "CCCP": {
+        "author": "Congressional Documents and Publications",
+        "media-type": "Presse professionnelle",
+        "medium": "Congressional Documents and Publications"
+    },
+    "CCHR": {
+        "author": "Cochrane Times",
+        "media-type": "Presse canadienne",
+        "medium": "Cochrane Times"
+    },
+    "CELEX": {
+        "author": "Celex",
+        "media-type": "Base de donn\u00e9es du droit europ\u00e9en",
+        "medium": "Celex"
+    },
+    "CEN": {
+        "author": "Centre Presse",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "Centre Presse"
+    },
+    "CERD": {
+        "author": "China Economic Review - Daily Briefings",
+        "media-type": "Presse chinoise",
+        "medium": "China Economic Review - Daily Briefings"
+    },
+    "CGTW": {
+        "author": "Cancer Gene Therapy Week",
+        "media-type": "Presse m\u00e9dicale",
+        "medium": "Cancer Gene Therapy Week"
+    },
+    "CHAL": {
+        "author": "Challenges",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "Challenges"
+    },
+    "CHAR": {
+        "author": "La Charente Libre",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "La Charente Libre"
+    },
+    "CHDAY": {
+        "author": "China Daily",
+        "media-type": "Presse chinoise",
+        "medium": "China Daily"
+    },
+    "CHELW": {
+        "author": "Chemical Week",
+        "media-type": "Presse professionnelle",
+        "medium": "Chemical Week"
+    },
+    "CHEMB": {
+        "author": "Chemical Business NewsBase",
+        "media-type": "Presse professionnelle",
+        "medium": "Chemical Business NewsBase"
+    },
+    "CHEMI": {
+        "author": "Chemistry and Industry",
+        "media-type": "Presse professionnelle",
+        "medium": "Chemistry and Industry"
+    },
+    "CHND": {
+        "author": "Chinadaily.com.cn",
+        "media-type": "Presse chinoise",
+        "medium": "Chinadaily.com.cn"
+    },
+    "CHNO": {
+        "author": "China Online",
+        "media-type": "Presse chinoise",
+        "medium": "China Online"
+    },
+    "CHPO": {
+        "author": "China Post",
+        "media-type": "Presse chinoise",
+        "medium": "China Post"
+    },
+    "CHRL": {
+        "author": "Charleston Gazette",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "Charleston Gazette"
+    },
+    "CHRN": {
+        "author": "Chronicle of Higher Education",
+        "media-type": "Presse professionnelle",
+        "medium": "Chronicle of Higher Education"
+    },
+    "CHRT": {
+        "author": "The Chronicle (Toowoomba)",
+        "media-type": "Presse australienne",
+        "medium": "The Chronicle (Toowoomba)"
+    },
+    "CHWN": {
+        "author": "China Weekly News",
+        "media-type": "Presse chinoise",
+        "medium": "China Weekly News"
+    },
+    "CLBC": {
+        "author": "Clubic",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "Clubic"
+    },
+    "CLFE": {
+        "author": "California Energy & Climate Report",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "California Energy & Climate Report"
+    },
+    "CLPN": {
+        "author": "Clinical Psychiatry News",
+        "media-type": "News et magazines",
+        "medium": "Clinical Psychiatry News"
+    },
+    "CMLL": {
+        "author": "Le Courrier des Maires et des Elus locaux",
+        "media-type": "Presse professionnelle",
+        "medium": "Le Courrier des Maires et des Elus locaux"
     },
     "CNDP": {
-        "author": "CNDP",
-        "authorship": "Instances et rapporteurs officiels",
-        "medium": "CNDP"
+        "author": "The Canadian Press",
+        "media-type": "Agence de presse",
+        "medium": "The Canadian Press"
     },
-    "CNE": {
-        "author": "Commission Nationale d'Evaluation",
-        "authorship": "Rapporteurs officiels"
+    "CNG": {
+        "author": "CompanynewsGroupe",
+        "media-type": "Communiqu\u00e9 de presse",
+        "medium": "CompanynewsGroupe"
     },
-    "CNV": {
-        "author": "CNV@",
-        "media-type": ""
+    "CNW": {
+        "author": "CNW",
+        "media-type": "Agence de presse",
+        "medium": "CNW"
     },
-    "CRII-RAD": {
-        "author": "CRII-RAD",
-        "authorship": "Laboratoire ind\u00e9pendant",
-        "medium": "CRII-RAD"
+    "CODI": {
+        "author": "The Columbus Dispatch",
+        "media-type": "Presse canadienne",
+        "medium": "The Columbus Dispatch"
     },
-    "CRIIRAD": {
-        "author": "CRII-RAD",
-        "authorship": "Laboratoire ind\u00e9pendant",
-        "medium": "CRII-RAD"
+    "CORECO": {
+        "author": "La Correspondance Economique",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "La Correspondance Economique"
     },
-    "CRILAN": {
-        "author": "CRILAN",
-        "authorship": "Militant(s) antinucl\u00e9aire(s)"
+    "CORM": {
+        "author": "Corse-Matin",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "Corse-Matin"
     },
-    "CSres": {
-        "author": "Conseil de s\u00e9curit\u00e9 de l'ONU",
-        "authorship": "Organisation des Nations Unies",
-        "medium": "R\u00e9solutions de l'ONU"
+    "CORP": {
+        "author": "Company Reports",
+        "media-type": "Presse professionnelle",
+        "medium": "Company Reports"
     },
-    "CUN": {
-        "media-type": "Presse \u00e9trang\u00e8re",
-        "medium": "Courrier de l'Unesco"
+    "CORRS": {
+        "author": "Corriere della Sera",
+        "media-type": "Presse italienne",
+        "medium": "Corriere della Sera"
     },
-    "Can": {
-        "author": "Canard Encha\u00een\u00e9",
-        "media-type": "News et Magazines",
-        "medium": "Canard Encha\u00een\u00e9"
+    "COSMH": {
+        "author": "Cosm\u00e9tique Hebdo",
+        "media-type": "Presse professionnelle",
+        "medium": "Cosm\u00e9tique Hebdo"
     },
-    "Cap": {
-        "media-type": "News et Magazines",
-        "medium": "Capital"
+    "COU": {
+        "author": "Courrier International",
+        "media-type": "News et magazines",
+        "medium": "Courrier International"
     },
-    "Chomsky": {
-        "author": "Chomsky",
-        "authorship": "Intellectual"
+    "COUEST": {
+        "author": "Le Courrier de l'Ouest",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "Le Courrier de l'Ouest"
     },
-    "ConfPays": {
-        "author": "CONFEDERATION-PAYSANNE@",
-        "authorship": "Syndicat",
-        "medium": "Conf\u00e9d\u00e9ration paysanne"
+    "COUM": {
+        "author": "Courier Mail",
+        "media-type": "Presse australienne",
+        "medium": "Courier Mail"
     },
-    "Confp": {
-        "author": "CONFEDERATION-PAYSANNE@",
-        "authorship": "Syndicat",
-        "medium": "Conf\u00e9d\u00e9ration paysanne"
+    "COUN": {
+        "author": "Countryman",
+        "media-type": "Presse australienne",
+        "medium": "Countryman"
     },
-    "ConseilEtat": {
-        "author": "Conseil d\u2019Etat",
-        "authorship": "Instance officielle",
-        "medium": ""
+    "CPHH": {
+        "author": "Chimie Pharma Hebdo",
+        "media-type": "Presse professionnelle",
+        "medium": "Chimie Pharma Hebdo"
     },
-    "Coorurale": {
-        "author": "COORDINATION-RURALE@"
+    "CPICA": {
+        "author": "Courrier Picard",
+        "media-type": "Presse R\u00e9gionale",
+        "medium": "Courrier Picard"
     },
-    "Corcuff": {
-        "author": "Corcuff"
+    "CRRSP": {
+        "author": "La Correspondance de la Presse",
+        "media-type": "Presse nationale",
+        "medium": "La Correspondance de la Presse"
     },
-    "Cords": {
-        "media-type": "Presse \u00e9trang\u00e8re",
-        "medium": "Corriere Della Serra"
+    "CRSP": {
+        "author": "La Correspondance de la Publicit\u00e9",
+        "media-type": "News et magazines",
+        "medium": "La Correspondance de la Publicit\u00e9"
     },
-    "CorseMatin": {
-        "author": "Corse Matin",
-        "authorship": "Journaliste",
-        "media-type": "Presse Quotidienne R\u00e9gionale"
+    "CSM": {
+        "author": "Christian Science Monitor",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "Christian Science Monitor"
     },
-    "Ctrl": {
-        "media-type": "Presse sectorielle",
-        "medium": "Contr\u00f4le"
+    "CSMM": {
+        "author": "Cosm\u00e9tique Mag",
+        "media-type": "News et magazines",
+        "medium": "Cosm\u00e9tique Mag"
     },
-    "Cx": {
-        "author": "La Croix",
-        "media-type": "Presse Quotidienne Nationale",
-        "medium": "La Croix"
+    "CSMN": {
+        "author": "The Christian Science Monitor",
+        "media-type": "Presse Internationale",
+        "medium": "The Christian Science Monitor"
     },
-    "DHL": {
-        "author": "Hervieu-L\u00e9ger"
+    "CTKB": {
+        "author": "CTK Business News",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "CTK Business News"
     },
-    "Dau": {
-        "author": "Le Dauphin\u00e9 Lib\u00e9r\u00e9",
-        "authorship": "Journaliste",
-        "media-type": "Presse Quotidienne R\u00e9gionale",
-        "medium": "Le Dauphin\u00e9 Lib\u00e9r\u00e9"
+    "CWWN": {
+        "author": "Computer Weekly News",
+        "media-type": "Presse professionnelle",
+        "medium": "Computer Weekly News"
     },
-    "Dna": {
-        "author": "Derni\u00e8res Nouvelles d'Alsace",
-        "media-type": "Presse Quotidienne R\u00e9gionale",
-        "medium": "Derni\u00e8res Nouvelles d'Alsace"
+    "DAGN": {
+        "author": "Dagens Nyheter",
+        "media-type": "Presse danoise",
+        "medium": "Dagens Nyheter"
     },
-    "DoD": {
-        "medium": "US Department of Defence"
+    "DAIPO": {
+        "author": "Daily Post (Liverpool)",
+        "media-type": "Presse brittanique",
+        "medium": "Daily Post (Liverpool)"
     },
-    "Doctissimo": {
-        "author": "Doctissimo",
-        "medium": "Doctissimo"
+    "DAITG": {
+        "author": "Daily Telegraph (Sydney, Australia)",
+        "media-type": "Presse australienne",
+        "medium": "Daily Telegraph (Sydney, Australia)"
     },
-    "D\u00e9cret": {
-        "author": "Gouvernement",
-        "medium": "D\u00e9cret"
+    "DAU": {
+        "author": "Le Dauphin\u00e9",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "Le Dauphin\u00e9"
     },
-    "EDF": {
-        "author": "EDF",
-        "authorship": "Exploitants",
-        "medium": "EDF"
+    "DAYMI": {
+        "author": "Daily Mirror",
+        "media-type": "Presse brittanique",
+        "medium": "Daily Mirror"
     },
-    "EDJ": {
-        "author": "L'Ev\u00e9nement du Jeudi",
-        "media-type": "News et Magazines",
-        "medium": "L'Ev\u00e9nement du Jeudi"
+    "DAYN": {
+        "author": "Daily News",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "Daily News"
     },
-    "EHN": {
-        "author": "Environmental Health News",
-        "medium": "Environmental Health News"
+    "DAYTL": {
+        "author": "The Daily Telegraph",
+        "media-type": "Presse brittanique",
+        "medium": "The Daily Telegraph"
+    },
+    "DCCC": {
+        "author": "Deccan Chronicle",
+        "media-type": "Presse indienne",
+        "medium": "Deccan Chronicle"
+    },
+    "DDDD": {
+        "author": "Device & Diagnostic Letter",
+        "media-type": "Presse m\u00e9dicale",
+        "medium": "Device & Diagnostic Letter"
+    },
+    "DDMAG": {
+        "author": "ddmagazine.com",
+        "media-type": "Presse environnementale",
+        "medium": "ddmagazine.com"
+    },
+    "DDSP": {
+        "author": "Daily Dispatch",
+        "media-type": "Presse sud-africaine",
+        "medium": "Daily Dispatch"
+    },
+    "DEEE": {
+        "author": "Defense Environment Alert",
+        "media-type": "Presse environnementale",
+        "medium": "Defense Environment Alert"
+    },
+    "DEIPA": {
+        "author": "Daily The Pak Banker",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "Daily The Pak Banker"
+    },
+    "DEP": {
+        "author": "La D\u00e9p\u00eache du Midi",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "La D\u00e9p\u00eache du Midi"
+    },
+    "DEV": {
+        "author": "Le Devoir",
+        "media-type": "Presse canadienne",
+        "medium": "Le Devoir"
+    },
+    "DHBE": {
+        "author": "DH.be",
+        "media-type": "site web",
+        "medium": "DH.be"
+    },
+    "DII": {
+        "author": "Direction Informatique",
+        "media-type": "Presse canadienne",
+        "medium": "Direction Informatique"
+    },
+    "DIM": {
+        "author": "Direct Matin",
+        "media-type": "Presse gratuite",
+        "medium": "Direct Matin"
+    },
+    "DIY": {
+        "author": "DIY Week",
+        "media-type": "Presse brittanique",
+        "medium": "DIY Week"
+    },
+    "DJB": {
+        "author": "DJ Bourse",
+        "media-type": "Agence de presse",
+        "medium": "DJ Bourse"
+    },
+    "DMAIL": {
+        "author": "Daily Mail",
+        "media-type": "Presse brittanique",
+        "medium": "Daily Mail"
+    },
+    "DNT": {
+        "author": "Le Dentiste",
+        "media-type": "Presse m\u00e9dicale",
+        "medium": "Le Dentiste"
+    },
+    "DOIB": {
+        "author": "The Daily Oil Bulletin",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "The Daily Oil Bulletin"
+    },
+    "DOW": {
+        "author": "Dow Jones International News",
+        "media-type": "Agence de presse",
+        "medium": "Dow Jones International News"
+    },
+    "DRDL": {
+        "author": "Dordogne Libre",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "Dordogne Libre"
+    },
+    "DREC": {
+        "author": "Daily Record",
+        "media-type": "Presse \u00e9cossaise",
+        "medium": "Daily Record"
+    },
+    "DROITENV": {
+        "author": "Droit de l'Environnement",
+        "media-type": "Presse professionnelle",
+        "medium": "Droit de l'Environnement"
+    },
+    "DRUG": {
+        "author": "Drug Week",
+        "media-type": "Presse professionnelle",
+        "medium": "Drug Week"
+    },
+    "DSTAR": {
+        "author": "Daily Star",
+        "media-type": "Presse brittanique",
+        "medium": "Daily Star"
+    },
+    "DTWL": {
+        "author": "Deutsche Welle",
+        "media-type": "Presse allemande",
+        "medium": "Deutsche Welle"
+    },
+    "DWEL": {
+        "author": "The Dominion",
+        "media-type": "Presse n\u00e9oz\u00e9landaise",
+        "medium": "The Dominion"
+    },
+    "DYOM": {
+        "author": "The Daily Yomiuri",
+        "media-type": "Presse japonaise",
+        "medium": "The Daily Yomiuri"
+    },
+    "EBUU": {
+        "author": "Bulletin of the European Union",
+        "media-type": "Presse juridique",
+        "medium": "Bulletin of the European Union"
+    },
+    "ECH": {
+        "author": "Les Echos",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "Les Echos"
+    },
+    "ECHH": {
+        "author": "L'Echo R\u00e9publicain",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "L'Echo R\u00e9publicain"
+    },
+    "ECO": {
+        "author": "The Economist",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "The Economist"
+    },
+    "EEEC": {
+        "author": "Ecology, Environment & Conservation",
+        "media-type": "Presse environnementale",
+        "medium": "Ecology, Environment & Conservation"
+    },
+    "EEEN": {
+        "author": "Electronic Engineering Times",
+        "media-type": "Presse professionnelle",
+        "medium": "Electronic Engineering Times"
+    },
+    "EEEPH": {
+        "author": "Environmental Policy Alert",
+        "media-type": "Presse environnementale",
+        "medium": "Environmental Policy Alert"
+    },
+    "EEFR": {
+        "author": "Europe1.fr",
+        "media-type": "Radio",
+        "medium": "Europe1.fr"
+    },
+    "EEWW": {
+        "author": "Economics Week",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "Economics Week"
+    },
+    "EHST": {
+        "author": "EHS Today",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "EHS Today"
+    },
+    "EHSaction": {
+        "author": "http://ehs-action.org",
+        "media-type": "Site internet",
+        "medium": "http://ehs-action.org"
+    },
+    "EIUC": {
+        "author": "Economist Intelligence Unit - Country Commerce",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "Economist Intelligence Unit - Country Commerce"
+    },
+    "ELP": {
+        "author": "El Pais",
+        "media-type": "Presse hispanique",
+        "medium": "El Pais"
+    },
+    "EMBM": {
+        "author": "Emballagesmagazine.com",
+        "media-type": "Presse professionnelle",
+        "medium": "Emballagesmagazine.com"
+    },
+    "EMR": {
+        "author": "eMarrakech",
+        "media-type": "Presse marocaine",
+        "medium": "eMarrakech"
+    },
+    "ENDAILY": {
+        "author": "The Energy Daily",
+        "media-type": "Presse professionnelle",
+        "medium": "The Energy Daily"
+    },
+    "ENGEC": {
+        "author": "Energy Economist",
+        "media-type": "Presse professionnelle",
+        "medium": "Energy Economist"
+    },
+    "ENGI": {
+        "author": "The Engineer",
+        "media-type": "Presse professionnelle",
+        "medium": "The Engineer"
+    },
+    "ENTP": {
+        "author": "L'Entreprise",
+        "media-type": "Presse professionnelle",
+        "medium": "L'Entreprise"
+    },
+    "ENTREP": {
+        "author": "Entreprendre",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "Entreprendre"
+    },
+    "ENV2B": {
+        "author": "Enviro2B",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "Enviro2B"
+    },
+    "ENVMAG": {
+        "author": "Environnement-Magazine.fr",
+        "media-type": "Presse environnementale",
+        "medium": "Environnement-Magazine.fr"
+    },
+    "ENVO": {
+        "author": "Environnement-online",
+        "media-type": "Site internet",
+        "medium": "Environnement-online"
+    },
+    "ENVOLIN": {
+        "author": "Environnement Online",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "Environnement Online"
+    },
+    "ENVSTRAT": {
+        "author": "Environnement & Strat\u00e9gie",
+        "media-type": "Presse professionnelle",
+        "medium": "Environnement & Strat\u00e9gie"
     },
     "EPA": {
-        "author": "EPA",
-        "medium": "EPA"
+        "author": "Environmental Protection Agency Documents and Publications",
+        "media-type": "Communiqu\u00e9 de presse",
+        "medium": "Environmental Protection Agency Documents and Publications"
     },
-    "ETC": {
-        "author": "ETC",
-        "medium": "ETC Group"
-    },
-    "EU1": {
-        "media-type": "Audiovisuel",
-        "medium": "Europe 1"
-    },
-    "EWG": {
-        "author": "Environmental Working Group",
-        "medium": "Environmental Working Group"
-    },
-    "Ech": {
-        "author": "Les Echos",
-        "media-type": "Presse \u00e9conomique p\u00e9riodique",
-        "medium": "Les Echos"
-    },
-    "Echos": {
-        "author": "Les Echos",
-        "media-type": "Presse \u00e9conomique p\u00e9riodique",
-        "medium": "Les Echos"
-    },
-    "EnerPress": {
-        "author": "EnerPress"
-    },
-    "Equip": {
+    "EQU": {
         "author": "L'Equipe",
+        "media-type": "Presse sportive",
         "medium": "L'Equipe"
     },
-    "Est": {
+    "EQUIL": {
+        "author": "Equilibre",
+        "media-type": "News et magazines",
+        "medium": "Equilibre"
+    },
+    "EST": {
         "author": "L'Est R\u00e9publicain",
-        "media-type": "Presse Quotidienne R\u00e9gionale",
+        "media-type": "Presse r\u00e9gionale",
         "medium": "L'Est R\u00e9publicain"
     },
-    "Euronews": {
-        "author": "Euronews"
+    "ESTE": {
+        "author": "L'Est \u00e9clair",
+        "media-type": "Presse R\u00e9gionale",
+        "medium": "L'Est \u00e9clair"
     },
-    "EuropEcologie": {
-        "author": "Europe Ecologie",
-        "medium": "Europe Ecologie"
+    "ETO": {
+        "author": "L'Echo touristique",
+        "media-type": "Site internet",
+        "medium": "L'Echo touristique"
     },
-    "Europe1": {
+    "EUP": {
+        "author": "Europolitique",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "Europolitique"
+    },
+    "EURAC": {
+        "author": "EurActiv",
+        "media-type": "Agence de presse",
+        "medium": "EurActiv"
+    },
+    "EURAG": {
+        "author": "Europe Agro",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "Europe Agro"
+    },
+    "EURENV": {
+        "author": "Europe Environnement",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "Europe Environnement"
+    },
+    "EURINF": {
+        "author": "Europe Information",
+        "media-type": "Agence de presse",
+        "medium": "Europe Information"
+    },
+    "EURL": {
+        "author": "EUR-Lex",
+        "media-type": "Base de donn\u00e9es du droit europ\u00e9en",
+        "medium": "EUR-Lex"
+    },
+    "EURNEW": {
+        "author": "Euronews",
         "media-type": "Audiovisuel",
-        "medium": "Europe 1"
+        "medium": "Euronews"
     },
-    "Exp": {
+    "EVEP": {
+        "author": "The Evening Post",
+        "media-type": "Presse n\u00e9oz\u00e9landaise",
+        "medium": "The Evening Post"
+    },
+    "EVES": {
+        "author": "Evening Standard",
+        "media-type": "Presse brittanique",
+        "medium": "Evening Standard"
+    },
+    "EVET": {
+        "author": "Evening Times",
+        "media-type": "Presse \u00e9cossaise",
+        "medium": "Evening Times"
+    },
+    "EVGA": {
+        "author": "Evening Gazette",
+        "media-type": "Presse brittanique",
+        "medium": "Evening Gazette"
+    },
+    "EWNW": {
+        "author": "Energy Weekly News",
+        "media-type": "Presse professionnelle",
+        "medium": "Energy Weekly News"
+    },
+    "EXBR": {
+        "author": "Economist Intelligence Unit - Executive Briefing",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "Economist Intelligence Unit - Executive Briefing"
+    },
+    "EXL": {
+        "author": "The Express",
+        "media-type": "Presse brittanique",
+        "medium": "The Express"
+    },
+    "EXP": {
         "author": "L'Express",
-        "authorship": "Journaliste",
-        "media-type": "News et Magazines",
+        "media-type": "News et magazines",
         "medium": "L'Express"
     },
-    "Expan": {
-        "media-type": "Presse \u00e9conomique p\u00e9riodique",
+    "EXPAN": {
+        "author": "L'Expansion",
+        "media-type": "Presse \u00e9conomique",
         "medium": "L'Expansion"
     },
-    "FAO": {
-        "author": "FAO"
+    "F365": {
+        "author": "Football 365",
+        "media-type": "presse sportive",
+        "medium": "Football 365"
     },
-    "FAO-OIE": {
-        "author": "FAO-OIE"
+    "FARG": {
+        "author": "Farmers Guardian",
+        "media-type": "Presse brittanique",
+        "medium": "Farmers Guardian"
     },
-    "FCULT": {
-        "media-type": "Audiovisuel",
-        "medium": "France Culture"
+    "FARN": {
+        "author": "Farming News",
+        "media-type": "Presse brittanique",
+        "medium": "Farming News"
     },
-    "FInter": {
-        "media-type": "Audiovisuel",
-        "medium": "France Inter"
+    "FARS": {
+        "author": "FARS News Agency",
+        "media-type": "Agence de presse",
+        "medium": "FARS News Agency"
     },
-    "FNSEA": {
-        "author": "FNSEA",
-        "authorship": "Syndicat",
-        "medium": "FNSEA"
+    "FARW": {
+        "author": "Farmers Weekly",
+        "media-type": "Presse brittanique",
+        "medium": "Farmers Weekly"
     },
-    "FO": {
-        "author": "Force-Ouvri\u00e8re",
-        "authorship": "Syndicat",
-        "medium": "Force-Ouvri\u00e8re"
+    "FAZ": {
+        "author": "Frankfurter Allgemeine Zeitung",
+        "media-type": "Presse allemande",
+        "medium": "Frankfurter Allgemeine Zeitung"
     },
-    "FR2": {
-        "media-type": "Audiovisuel",
-        "medium": "France 2"
+    "FBLEU": {
+        "author": "France bleu",
+        "media-type": "presse r\u00e9gionale",
+        "medium": "France bleu"
     },
-    "FSA": {
-        "author": "FSA",
-        "medium": "FSA"
+    "FBT": {
+        "author": "Forestry & British Timber",
+        "media-type": "Presse brittanique",
+        "medium": "Forestry & British Timber"
     },
-    "FSC": {
-        "author": "Fondation Sciences Citoyennes"
+    "FCCN": {
+        "author": "Food Chemical News",
+        "media-type": "Presse scientifique",
+        "medium": "Food Chemical News"
     },
-    "Fig": {
+    "FDAW": {
+        "author": "FDA Week",
+        "media-type": "Presse m\u00e9dicale",
+        "medium": "FDA Week"
+    },
+    "FERC": {
+        "author": "Inside F.E.R.C.'s Gas Market Report",
+        "media-type": "Presse professionnelle",
+        "medium": "Inside F.E.R.C.'s Gas Market Report"
+    },
+    "FFOOT": {
+        "author": "France Football",
+        "media-type": "Presse sportive",
+        "medium": "France Football"
+    },
+    "FIG": {
         "author": "Le Figaro",
-        "authorship": "Journaliste",
-        "media-type": "Presse Quotidienne Nationale",
+        "media-type": "Presse nationale",
         "medium": "Le Figaro"
     },
-    "Figm": {
-        "media-type": "News et Magazines",
-        "medium": "Le Figaro Magazine"
+    "FINET": {
+        "author": "De Financieel Ekonomische Tijd",
+        "media-type": "Presse belge",
+        "medium": "De Financieel Ekonomische Tijd"
     },
-    "Finfo": {
-        "authorship": "Journaliste",
+    "FINPO": {
+        "author": "The Financial Post",
+        "media-type": "Presse canadienne",
+        "medium": "The Financial Post"
+    },
+    "FMSF": {
+        "author": "Financial Mail",
+        "media-type": "Presse sud-africaine",
+        "medium": "Financial Mail"
+    },
+    "FNXI": {
+        "author": "Financial Express (India)",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "Financial Express (India)"
+    },
+    "FNZM": {
+        "author": "Finanza e Mercati",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "Finanza e Mercati"
+    },
+    "FOR": {
+        "author": "Forbes",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "Forbes"
+    },
+    "FR24": {
+        "author": "France 24",
         "media-type": "Audiovisuel",
-        "medium": "France Info"
+        "medium": "France 24"
     },
-    "Forlib": {
-        "author": "",
-        "authorship": "",
-        "localisation": "",
-        "media-type": "Forum sur Internet",
-        "medium": "Forum Lib\u00e9ration",
-        "observations": "",
-        "open-field-1": "",
-        "open-field-2": ""
-    },
-    "FranceInfos": {
-        "author": "France Infos",
-        "authorship": "Journaliste",
-        "media-type": "Audiovisuel"
-    },
-    "Fs": {
-        "author": "France Soir",
-        "authorship": "Journaliste",
+    "FR3": {
+        "author": "France 3",
         "media-type": "Audiovisuel",
-        "medium": "France Soir"
+        "medium": "France 3"
     },
-    "GFP": {
-        "author": "Global Foot Print",
-        "medium": "Global Foot Print"
+    "FRR": {
+        "author": "Frankfurter Rundschau",
+        "media-type": "Presse allemande",
+        "medium": "Frankfurter Rundschau"
     },
-    "GMO-Journal": {
-        "author": "GMO-Journal",
-        "medium": "GMO-Journal"
+    "FSNT": {
+        "author": "F\u00e9minin Sant\u00e9",
+        "media-type": "News et magazines",
+        "medium": "F\u00e9minin Sant\u00e9"
     },
-    "GNISetc": {
-        "author": "Gnis - Ol\u00e9osem - Seproma - UIPP",
-        "medium": "ogm.org"
+    "FTINFO": {
+        "author": "FranceTv Info",
+        "media-type": "Audiovisuel",
+        "medium": "FranceTv Info"
     },
-    "Gouv": {
-        "author": "Gouvernement",
-        "authorship": "Gouvernement",
-        "medium": "Gouvernement"
+    "FTJD": {
+        "author": "De Financieel Economische Tijd",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "De Financieel Economische Tijd"
     },
-    "GreenWire": {
-        "author": "GreenWire",
-        "medium": "GreenWire"
+    "FTL": {
+        "author": "Financial Times",
+        "media-type": "Presse brittanique",
+        "medium": "Financial Times"
     },
-    "Greenp": {
-        "author": "GREENPEACE@",
-        "authorship": "Organisation \u00e9cologiste",
-        "medium": "Greenpeace"
+    "GAM": {
+        "author": "The Globe and Mail",
+        "media-type": "Presse canadienne",
+        "medium": "The Globe and Mail"
     },
-    "GrenEnv": {
-        "author": "Grenelle de l'Environnement",
-        "medium": "Grenelle de l'Environnement"
+    "GAZ": {
+        "author": "The Gazette",
+        "media-type": "Presse canadienne",
+        "medium": "The Gazette"
     },
-    "HTrib": {
-        "author": "Herarld Tribune"
+    "GCBL": {
+        "author": "The Gold Coast Bulletin",
+        "media-type": "Presse australienne",
+        "medium": "The Gold Coast Bulletin"
     },
-    "Helmut": {
-        "author": "Helmut",
-        "medium": "Brave Patrie"
+    "GCSC": {
+        "author": "Gold Coast Sun - Central",
+        "media-type": "Presse australienne",
+        "medium": "Gold Coast Sun - Central"
     },
-    "Hum": {
+    "GDLY": {
+        "author": "Gas Daily",
+        "media-type": "Presse professionnelle",
+        "medium": "Gas Daily"
+    },
+    "GGPR": {
+        "author": "Government Publications and Press Releases",
+        "media-type": "Communiqu\u00e9 de presse",
+        "medium": "Government Publications and Press Releases"
+    },
+    "GIEN": {
+        "author": "Le Journal de Gien",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "Le Journal de Gien"
+    },
+    "GLBN": {
+        "author": "GlobeNewswire",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "GlobeNewswire"
+    },
+    "GNMK": {
+        "author": "Genomics & Genetics Weekly",
+        "media-type": "Presse scientifique",
+        "medium": "Genomics & Genetics Weekly"
+    },
+    "GNNN": {
+        "author": "Genetics",
+        "media-type": "Presse scientifique",
+        "medium": "Genetics"
+    },
+    "GRDN": {
+        "author": "Guardian.co.uk",
+        "media-type": "Presse brittanique",
+        "medium": "Guardian.co.uk"
+    },
+    "GRNL": {
+        "author": "Il Giornale",
+        "media-type": "Presse italienne",
+        "medium": "Il Giornale"
+    },
+    "GRO": {
+        "author": "The Grocer",
+        "media-type": "Presse professionnelle",
+        "medium": "The Grocer"
+    },
+    "GRWR": {
+        "author": "Greenwire",
+        "media-type": "Presse professionnelle",
+        "medium": "Greenwire"
+    },
+    "GTHW": {
+        "author": "Gene Therapy Weekly",
+        "media-type": "Presse m\u00e9dicale",
+        "medium": "Gene Therapy Weekly"
+    },
+    "GUARD": {
+        "author": "The Guardian",
+        "media-type": "Presse brittanique",
+        "medium": "The Guardian"
+    },
+    "GWFF": {
+        "author": "Global Warming Focus",
+        "media-type": "Presse scientifique",
+        "medium": "Global Warming Focus"
+    },
+    "GZCC": {
+        "author": "La Gazette des Communes",
+        "media-type": "Presse collectivit\u00e9s locales",
+        "medium": "La Gazette des Communes"
+    },
+    "GZSS": {
+        "author": "La Gazette Sant\u00e9 Social",
+        "media-type": "Presse professionnelle",
+        "medium": "La Gazette Sant\u00e9 Social"
+    },
+    "HAN": {
+        "author": "Handelsblatt",
+        "media-type": "Presse allemande",
+        "medium": "Handelsblatt"
+    },
+    "HAVL": {
+        "author": "Havre Libre",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "Havre Libre"
+    },
+    "HDJ": {
+        "author": "L'H\u00e9raut du Jour",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "L'H\u00e9raut du Jour"
+    },
+    "HEBDO": {
+        "author": "L'Hebdo",
+        "media-type": "News et magazines",
+        "medium": "L'Hebdo"
+    },
+    "HEMI": {
+        "author": "l'H\u00e9micycle",
+        "media-type": "News et magazines",
+        "medium": "l'H\u00e9micycle"
+    },
+    "HER": {
+        "author": "Hermes Database",
+        "media-type": "Presse brittanique",
+        "medium": "Hermes Database"
+    },
+    "HFD": {
+        "author": "Het Financieele Dagblad",
+        "media-type": "Presse n\u00e9erlandaise",
+        "medium": "Het Financieele Dagblad"
+    },
+    "HHEL": {
+        "author": "Health & Beauty Close-Up",
+        "media-type": "News et magazines",
+        "medium": "Health & Beauty Close-Up"
+    },
+    "HIN": {
+        "author": "The Hindu",
+        "media-type": "Presse indienne",
+        "medium": "The Hindu"
+    },
+    "HKS": {
+        "author": "Hong Kong Standard",
+        "media-type": "Presse chinoise",
+        "medium": "Hong Kong Standard"
+    },
+    "HMLS": {
+        "author": "The Hamilton Spectator",
+        "media-type": "Presse canadienne",
+        "medium": "The Hamilton Spectator"
+    },
+    "HMNN": {
+        "author": "Humanist",
+        "media-type": "News et magazines",
+        "medium": "Humanist"
+    },
+    "HMWW": {
+        "author": "Health & Medicine Week",
+        "media-type": "Presse professionnelle",
+        "medium": "Health & Medicine Week"
+    },
+    "HOB": {
+        "author": "Hobart Mercury",
+        "media-type": "Presse australienne",
+        "medium": "Hobart Mercury"
+    },
+    "HOR": {
+        "author": "Horizons",
+        "media-type": "Presse Internationale",
+        "medium": "Horizons"
+    },
+    "HOUC": {
+        "author": "Houston Chronicle",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "Houston Chronicle"
+    },
+    "HRG": {
+        "author": "The Herald - Glasgow",
+        "media-type": "Presse \u00e9cossaise",
+        "medium": "The Herald - Glasgow"
+    },
+    "HRMT": {
+        "author": "24 heures Montr\u00e9al",
+        "media-type": "Presse canadienne",
+        "medium": "24 heures Montr\u00e9al"
+    },
+    "HRS": {
+        "author": "Herald Sun",
+        "media-type": "Presse australienne",
+        "medium": "Herald Sun"
+    },
+    "HUF": {
+        "author": "Le Huffington Post",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "Le Huffington Post"
+    },
+    "HUM": {
         "author": "L'Humanit\u00e9",
-        "authorship": "Journaliste",
-        "media-type": "Presse Quotidienne Nationale",
+        "media-type": "Presse nationale",
         "medium": "L'Humanit\u00e9"
     },
-    "IAEA": {
-        "author": "IAEA",
-        "authorship": "International Agency",
-        "medium": "IAEA"
+    "HWSW": {
+        "author": "Hazardous Waste Superfund Week",
+        "media-type": "Presse professionnelle",
+        "medium": "Hazardous Waste Superfund Week"
     },
-    "INFOGM": {
-        "author": "Inf'OGM",
-        "medium": "Inf'OGM"
+    "HYD": {
+        "author": "Hydroplus",
+        "media-type": "Presse professionnelle",
+        "medium": "Hydroplus"
     },
-    "INVS": {
-        "author": "INVS",
-        "authorship": "Organisme de contr\u00f4le officiel",
-        "medium": "INVS"
+    "ICI": {
+        "author": "ICI Radio-Canada",
+        "media-type": "Presse canadienne",
+        "medium": "ICI Radio-Canada"
     },
-    "IPCC": {
-        "author": "IPCC"
+    "ICIS": {
+        "author": "ICIS Chemical Business",
+        "media-type": "Presse professionnelle",
+        "medium": "ICIS Chemical Business"
     },
-    "IRD": {
-        "author": "IRD"
+    "IEMA": {
+        "author": "ISI Emerging Markets Africawire",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "ISI Emerging Markets Africawire"
     },
-    "IRSN": {
-        "author": "IRSN",
-        "authorship": "Organisme de contr\u00f4le officiel",
-        "medium": "IRSN"
+    "IET": {
+        "author": "Industrie et Technologies",
+        "media-type": "Presse professionnelle",
+        "medium": "Industrie et Technologies"
     },
-    "InfosDiep": {
-        "author": "Informations dieppoises",
-        "authorship": "Presse locale",
-        "media-type": "Presse Quotidienne R\u00e9gionale"
+    "IHSG": {
+        "author": "IHS Global Insight Daily Analysis",
+        "media-type": "Presse professionnelle",
+        "medium": "IHS Global Insight Daily Analysis"
     },
-    "InsidePrevention": {
-        "author": "Inside Prevention"
+    "IHT": {
+        "author": "International Herald Tribune",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "International Herald Tribune"
     },
-    "IssuesST": {
-        "medium": "IssuesST"
+    "IIPH": {
+        "author": "International Pharmaceutical Regulatory Monitor",
+        "media-type": "Presse m\u00e9dicale",
+        "medium": "International Pharmaceutical Regulatory Monitor"
+    },
+    "IITW": {
+        "author": "Information Technology Newsweekly",
+        "media-type": "News et magazines",
+        "medium": "Information Technology Newsweekly"
+    },
+    "INDEP": {
+        "author": "L'Ind\u00e9pendant",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "L'Ind\u00e9pendant"
+    },
+    "INDP": {
+        "author": "The Independent",
+        "media-type": "Presse brittanique",
+        "medium": "The Independent"
+    },
+    "INDW": {
+        "author": "Industry Week",
+        "media-type": "Presse professionnelle",
+        "medium": "Industry Week"
+    },
+    "INFQC": {
+        "author": "L'Information",
+        "media-type": "Presse canadienne",
+        "medium": "L'Information"
+    },
+    "INSA": {
+        "author": "L'Information du Nord - Ste-Agathe",
+        "media-type": "Presse canadienne",
+        "medium": "L'Information du Nord - Ste-Agathe"
+    },
+    "INSD": {
+        "author": "Inside Energy",
+        "media-type": "Presse professionnelle",
+        "medium": "Inside Energy"
+    },
+    "INVH": {
+        "author": "Investir Hebdo",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "Investir Hebdo"
+    },
+    "IOS": {
+        "author": "Independent on Sunday",
+        "media-type": "Presse brittanique",
+        "medium": "Independent on Sunday"
+    },
+    "IRI": {
+        "author": "The Irish Times",
+        "media-type": "Presse irlandaise",
+        "medium": "The Irish Times"
+    },
+    "ISOL": {
+        "author": "Il Sole 24 Ore",
+        "media-type": "Presse italienne",
+        "medium": "Il Sole 24 Ore"
+    },
+    "ISSS": {
+        "author": "Information Society",
+        "media-type": "Presse professionnelle",
+        "medium": "Information Society"
+    },
+    "ITAR": {
+        "author": "ITAR-TASS",
+        "media-type": "Agence de presse",
+        "medium": "ITAR-TASS"
+    },
+    "ITEXP": {
+        "author": "ITespresso.fr",
+        "media-type": "Presse professionnelle",
+        "medium": "ITespresso.fr"
+    },
+    "ITTM": {
+        "author": "Industrie Technique et Management",
+        "media-type": "Presse professionnelle",
+        "medium": "Industrie Technique et Management"
+    },
+    "IWYN": {
+        "author": "Investment Weekly News",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "Investment Weekly News"
+    },
+    "JAK": {
+        "author": "Jakarta Post",
+        "media-type": "Presse indon\u00e9sienne",
+        "medium": "Jakarta Post"
+    },
+    "JAMA": {
+        "author": "JAMA: Journal of the American Medical Association",
+        "media-type": "Presse m\u00e9dicale",
+        "medium": "JAMA: Journal of the American Medical Association"
+    },
+    "JAPT": {
+        "author": "The Japan Times",
+        "media-type": "Presse japonaise",
+        "medium": "The Japan Times"
+    },
+    "JCCCP": {
+        "author": "Journal of Consumer Policy",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "Journal of Consumer Policy"
+    },
+    "JDC": {
+        "author": "Journal des Communes",
+        "media-type": "Presse collectivit\u00e9s locales",
+        "medium": "Journal des Communes"
+    },
+    "JDCC": {
+        "author": "Le Journal du Centre",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "Le Journal du Centre"
     },
     "JDD": {
-        "authorship": "Journaliste",
-        "media-type": "News et Magazines",
+        "author": "Le Journal du Dimanche",
+        "media-type": "News et magazines",
         "medium": "Le Journal du Dimanche"
+    },
+    "JDF": {
+        "author": "Le Journal des Finances",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "Le Journal des Finances"
     },
     "JDLE": {
         "author": "Journal de l'Environnement",
-        "authorship": "Journaliste",
-        "medium": "JDLE"
+        "media-type": "Presse environnementale",
+        "medium": "Journal de l'Environnement"
     },
-    "JHM": {
-        "author": "Journal de la Haute-Marne"
+    "JEEN": {
+        "author": "Journal of Engineering",
+        "media-type": "Presse professionnelle",
+        "medium": "Journal of Engineering"
     },
-    "JenneferS": {
-        "author": "Sass",
-        "medium": "NRDC"
+    "JER": {
+        "author": "The Jerusalem Report",
+        "media-type": "Presse isra\u00e9lienne",
+        "medium": "The Jerusalem Report"
     },
-    "Kala": {
-        "author": "Kala",
-        "medium": "Brave Patrie"
+    "JERP": {
+        "author": "Jerusalem Post",
+        "media-type": "Presse isra\u00e9lienne",
+        "medium": "Jerusalem Post"
     },
-    "LCI": {
-        "media-type": "Audiovisuel",
-        "medium": "LCI"
+    "JFL": {
+        "author": "Journal des Flandres",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "Journal des Flandres"
     },
-    "LCR": {
-        "author": "LCR",
-        "authorship": "Parti politique"
+    "JIM": {
+        "author": "Journal international de m\u00e9decine",
+        "media-type": "Presse m\u00e9dicale",
+        "medium": "Journal international de m\u00e9decine"
     },
-    "LEE": {
+    "JJIN": {
+        "author": "Journal of India",
+        "media-type": "Presse indienne",
+        "medium": "Journal of India"
+    },
+    "JMONT": {
+        "author": "Le Journal de Montr\u00e9al",
+        "media-type": "Presse canadienne",
+        "medium": "Le Journal de Montr\u00e9al"
+    },
+    "JOEM": {
+        "author": "Journal of Occupational & Environmental Medicine",
+        "media-type": "Presse m\u00e9dicale",
+        "medium": "Journal of Occupational & Environmental Medicine"
+    },
+    "JQB": {
+        "author": "Le Journal du Qu\u00e9bec",
+        "media-type": "Presse canadienne",
+        "medium": "Le Journal du Qu\u00e9bec"
+    },
+    "JSL": {
+        "author": "Le Journal de Sa\u00f4ne et Loire",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "Le Journal de Sa\u00f4ne et Loire"
+    },
+    "JUT": {
+        "author": "Jutarnji List",
+        "media-type": "Presse croate",
+        "medium": "Jutarnji List"
+    },
+    "JVCR": {
+        "author": "Je vais Construire et R\u00e9nover",
+        "media-type": "News et magazines",
+        "medium": "Je vais Construire et R\u00e9nover"
+    },
+    "KAL": {
+        "author": "Kalgoorlie Miner",
+        "media-type": "Presse australienne",
+        "medium": "Kalgoorlie Miner"
+    },
+    "KALM": {
+        "author": "Kalgoorlie Miner",
+        "media-type": "Presse australienne",
+        "medium": "Kalgoorlie Miner"
+    },
+    "KBSF": {
+        "author": "KBS World News",
+        "media-type": "Agence de presse",
+        "medium": "KBS World News"
+    },
+    "KEN": {
+        "author": "Nation Kenya",
+        "media-type": "Presse kenyanne",
+        "medium": "Nation Kenya"
+    },
+    "KIP": {
+        "author": "Kiplinger",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "Kiplinger"
+    },
+    "KORH": {
+        "author": "Korea Herald",
+        "media-type": "Presse cor\u00e9enne",
+        "medium": "Korea Herald"
+    },
+    "KRT": {
+        "author": "Korea Times",
+        "media-type": "Presse cor\u00e9enne",
+        "medium": "Korea Times"
+    },
+    "LAC": {
+        "author": "La C\u00f4te",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "La C\u00f4te"
+    },
+    "LAFF": {
+        "author": "LesAffaires.com",
+        "media-type": "Site internet",
+        "medium": "LesAffaires.com"
+    },
+    "LAN": {
+        "author": "Presse r\u00e9gionale",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "Presse r\u00e9gionale"
+    },
+    "LAT": {
+        "author": "Los Angeles Times",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "Los Angeles Times"
+    },
+    "LAV": {
+        "author": "Presse belge",
+        "media-type": "Presse belge",
+        "medium": "Presse belge"
+    },
+    "LBF": {
+        "author": "Leberry.fr",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "Leberry.fr"
+    },
+    "LBP": {
+        "author": "Le Bien Public",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "Le Bien Public"
+    },
+    "LBR": {
+        "author": "Le Berry R\u00e9publicain",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "Le Berry R\u00e9publicain"
+    },
+    "LBT": {
+        "author": "Libert\u00e9 (Alg\u00e9rie",
+        "media-type": "Presse alg\u00e9rienne",
+        "medium": "Libert\u00e9 (Alg\u00e9rie"
+    },
+    "LCHT": {
+        "author": "L\u00b4Echotouristique.com",
+        "media-type": "News et magazines",
+        "medium": "L\u00b4Echotouristique.com"
+    },
+    "LCNS": {
+        "author": "Lancaster New Era/Intelligencer Journal/Sunday News",
+        "media-type": "Presse brittanique",
+        "medium": "Lancaster New Era/Intelligencer Journal/Sunday News"
+    },
+    "LCV": {
+        "author": "Le Courrier du Vietnam",
+        "media-type": "Presse vietnamienne",
+        "medium": "Le Courrier du Vietnam"
+    },
+    "LCX": {
+        "author": "La Croix",
+        "media-type": "Presse nationale",
+        "medium": "La Croix"
+    },
+    "LDP": {
+        "author": "Lindsay Daily Post",
+        "media-type": "Presse canadienne",
+        "medium": "Lindsay Daily Post"
+    },
+    "LEGEN": {
+        "author": "Le G\u00e9n\u00e9raliste",
+        "media-type": "Presse professionnelle",
+        "medium": "Le G\u00e9n\u00e9raliste"
+    },
+    "LEIT": {
+        "author": "Leitrim Observer",
+        "media-type": "Presse irlandaise",
+        "medium": "Leitrim Observer"
+    },
+    "LEN": {
+        "author": "La Lettre de l'Environnement",
+        "media-type": "Presse environnementale",
+        "medium": "La Lettre de l'Environnement"
+    },
+    "LEPR": {
+        "author": "L'Expression",
+        "media-type": "News et magazines",
+        "medium": "L'Expression"
+    },
+    "LESPR": {
+        "author": "L\u00b4Espresso",
+        "media-type": "News et magazines",
+        "medium": "L\u00b4Espresso"
+    },
+    "LETAE": {
+        "author": "La Lettre Afrique Energies",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "La Lettre Afrique Energies"
+    },
+    "LETCON": {
+        "author": "La Lettre du Continent",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "La Lettre du Continent"
+    },
+    "LETOI": {
+        "author": "La Lettre de l'Ocean Indien",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "La Lettre de l'Ocean Indien"
+    },
+    "LFA": {
+        "author": "La France Agricole",
+        "media-type": "Presse professionnelle",
+        "medium": "La France Agricole"
+    },
+    "LGRN": {
+        "author": "Il Giorno",
+        "media-type": "Presse italienne",
+        "medium": "Il Giorno"
+    },
+    "LIB": {
+        "author": "Lib\u00e9ration",
+        "media-type": "Presse nationale",
+        "medium": "Lib\u00e9ration"
+    },
+    "LIBB": {
+        "author": "La Libre Belgique",
+        "media-type": "Presse belge",
+        "medium": "La Libre Belgique"
+    },
+    "LIR": {
+        "author": "Lire",
+        "media-type": "News et magazines",
+        "medium": "Lire"
+    },
+    "LIV": {
+        "author": "Liverpool Daily Echo",
+        "media-type": "Presse brittanique",
+        "medium": "Liverpool Daily Echo"
+    },
+    "LJD": {
+        "author": "Le Jeudi",
+        "media-type": "News et magazines",
+        "medium": "Le Jeudi"
+    },
+    "LJDC": {
+        "author": "Lejdc.fr",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "Lejdc.fr"
+    },
+    "LJTB": {
+        "author": "Le Journal de l'Automobile",
+        "media-type": "News et magazines",
+        "medium": "Le Journal de l'Automobile"
+    },
+    "LLAA": {
+        "author": "La Lettre A",
+        "media-type": "News et magazines",
+        "medium": "La Lettre A"
+    },
+    "LLLD": {
+        "author": "Le Lloyd",
+        "media-type": "Presse professionnelle",
+        "medium": "Le Lloyd"
+    },
+    "LLNN": {
+        "author": "La Lettre des Nominations",
+        "media-type": "Presse administrative",
+        "medium": "La Lettre des Nominations"
+    },
+    "LLOY": {
+        "author": "Lloyd's List",
+        "media-type": "Presse professionnelle",
+        "medium": "Lloyd's List"
+    },
+    "LMG": {
+        "author": "Le Magazine",
+        "media-type": "News et magazines",
+        "medium": "Le Magazine"
+    },
+    "LML": {
+        "author": "Le Monde Libertaire",
+        "media-type": "Presse Internationale",
+        "medium": "Le Monde Libertaire"
+    },
+    "LNAZ": {
+        "author": "La Nazione",
+        "media-type": "Presse italienne",
+        "medium": "La Nazione"
+    },
+    "LNGI": {
+        "author": "LNG Intelligence",
+        "media-type": "Presse professionnelle",
+        "medium": "LNG Intelligence"
+    },
+    "LNO": {
+        "author": "Le Nouvelliste",
+        "media-type": "Presse canadienne",
+        "medium": "Le Nouvelliste"
+    },
+    "LNST": {
+        "author": "Lancashire Telegraph",
+        "media-type": "Presse brittanique",
+        "medium": "Lancashire Telegraph"
+    },
+    "LOCALTIS": {
+        "author": "Localtis.info",
+        "media-type": "Presse collectivit\u00e9s locales",
+        "medium": "Localtis.info"
+    },
+    "LPC": {
+        "author": "Le Populaire du Centre",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "Le Populaire du Centre"
+    },
+    "LPF": {
+        "author": "Le Progr\u00e8s de F\u00e9camp",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "Le Progr\u00e8s de F\u00e9camp"
+    },
+    "LPTT": {
+        "author": "L\u2019Express-L\u2019Impartial",
+        "media-type": "News et magazines",
+        "medium": "L\u2019Express-L\u2019Impartial"
+    },
+    "LRP": {
+        "author": "La Revue Parlementaire",
+        "media-type": "News et magazines",
+        "medium": "La Revue Parlementaire"
+    },
+    "LSA": {
+        "author": "LSA",
+        "media-type": "News et magazines",
+        "medium": "LSA"
+    },
+    "LSO": {
+        "author": "Le Soir",
+        "media-type": "Presse belge",
+        "medium": "Le Soir"
+    },
+    "LSTM": {
+        "author": "La Stampa",
+        "media-type": "Presse italienne",
+        "medium": "La Stampa"
+    },
+    "LSWY": {
+        "author": "Life Science Weekly",
+        "media-type": "News et magazines",
+        "medium": "Life Science Weekly"
+    },
+    "LTXP": {
+        "author": "La Lettre de l'Expansion",
+        "media-type": "Presse \u00e9conomique",
         "medium": "La Lettre de l'Expansion"
     },
-    "LNXMAG": {
-        "media-type": "Magazine sp\u00e9cialis\u00e9 mensuel",
-        "medium": "LinuxMag"
+    "LVI": {
+        "author": "la Vie",
+        "media-type": "News et magazines",
+        "medium": "la Vie"
     },
-    "LOGIN": {
-        "media-type": "Magazine sp\u00e9cialis\u00e9 mensuel",
-        "medium": "Login"
+    "LVIM": {
+        "author": "LaVieImmo.com",
+        "media-type": "Presse professionnelle",
+        "medium": "LaVieImmo.com"
     },
-    "Lacinq": {
-        "media-type": "Audiovisuel",
-        "medium": "La Cinqui\u00e8me"
+    "LVRJ": {
+        "author": "The Las Vegas Review-Journal",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "The Las Vegas Review-Journal"
     },
-    "LePen": {
-        "author": "Le Pen/FN"
+    "LYCAP": {
+        "author": "Lyon capitale",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "Lyon capitale"
     },
-    "Lib": {
-        "author": "Lib\u00e9ration",
-        "authorship": "Journaliste",
-        "localisation": "Paris",
-        "media-type": "Presse Quotidienne Nationale",
-        "medium": "Lib\u00e9ration"
+    "MABE": {
+        "author": "Marn\u00e9 Beukes",
+        "media-type": "Presse sud-africaine",
+        "medium": "Marn\u00e9 Beukes"
     },
-    "LibBelg": {
-        "author": "Libre Belgique",
-        "media-type": "Presse Quotidienne Etrang\u00e8re"
+    "MAGH": {
+        "author": "Maghreb Confidentiel",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "Maghreb Confidentiel"
     },
-    "Lib\u00e9": {
-        "author": "Lib\u00e9ration",
-        "authorship": "Journaliste",
-        "localisation": "Paris",
-        "media-type": "Presse Quotidienne Nationale",
-        "medium": "Lib\u00e9ration"
+    "MAIN": {
+        "author": "Le Maine Libre",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "Le Maine Libre"
     },
-    "LindaG": {
-        "author": "Greer",
-        "medium": "NRDC"
+    "MAINF": {
+        "author": "maire-info",
+        "media-type": "Presse collectivit\u00e9s locales",
+        "medium": "maire-info"
     },
-    "Loose": {
-        "author": "Loose",
-        "medium": "Brave Patrie"
-    },
-    "M6": {
-        "media-type": "Audiovisuel",
-        "medium": "M6"
+    "MANI": {
+        "author": "Mani\u00e8re de voir",
+        "media-type": "News et magazines",
+        "medium": "Mani\u00e8re de voir"
     },
     "MAR": {
-        "media-type": "News et Magazines",
+        "author": "Marianne",
+        "media-type": "News et magazines",
         "medium": "Marianne"
     },
-    "MDiplo": {
-        "author": "Le Monde diplomatique",
-        "authorship": "",
-        "media-type": "",
-        "medium": "Le Monde diplomatique"
+    "MAT": {
+        "author": "Le Matin",
+        "media-type": "Presse suisse",
+        "medium": "Le Matin"
     },
-    "MONT": {
-        "authorship": "Journaliste",
-        "media-type": "Presse Quotidienne R\u00e9gionale",
+    "MATCH": {
+        "author": "Paris Match",
+        "media-type": "News et magazines",
+        "medium": "Paris Match"
+    },
+    "MCLP": {
+        "author": "Manufacturing Close-Up",
+        "media-type": "Presse professionnelle",
+        "medium": "Manufacturing Close-Up"
+    },
+    "MDCM": {
+        "author": "Mediacom",
+        "media-type": "Agence de presse",
+        "medium": "Mediacom"
+    },
+    "MDD": {
+        "author": "Le Monde du Droit",
+        "media-type": "Presse juridique",
+        "medium": "Le Monde du Droit"
+    },
+    "MDIP": {
+        "author": "Le Monde Diplomatique",
+        "media-type": "News et magazines",
+        "medium": "Le Monde Diplomatique"
+    },
+    "MDN": {
+        "author": "Mainichi Daily News",
+        "media-type": "Presse japonaise",
+        "medium": "Mainichi Daily News"
+    },
+    "MDST": {
+        "author": "Medical Devices & Surgical Technology Week",
+        "media-type": "Presse m\u00e9dicale",
+        "medium": "Medical Devices & Surgical Technology Week"
+    },
+    "MED": {
+        "author": "Mediapart",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "Mediapart"
+    },
+    "MEMA": {
+        "author": "Mer et Marine",
+        "media-type": "News et magazines",
+        "medium": "Mer et Marine"
+    },
+    "MEN": {
+        "author": "Middle East Newsfile",
+        "media-type": "Agence de presse",
+        "medium": "Middle East Newsfile"
+    },
+    "MERC": {
+        "author": "The Mercury",
+        "media-type": "Presse australienne",
+        "medium": "The Mercury"
+    },
+    "MERY": {
+        "author": "Merinews",
+        "media-type": "Presse indienne",
+        "medium": "Merinews"
+    },
+    "MEU": {
+        "author": "La Meuse",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "La Meuse"
+    },
+    "MFMF": {
+        "author": "MF - Mercati Finanziari",
+        "media-type": "Presse italienne",
+        "medium": "MF - Mercati Finanziari"
+    },
+    "MHHD": {
+        "author": "Mental Health Weekly Digest",
+        "media-type": "Presse m\u00e9dicale",
+        "medium": "Mental Health Weekly Digest"
+    },
+    "MHMDVI": {
+        "author": "Discours du Roi Mohamed 6",
+        "media-type": "Discours",
+        "medium": "Discours du Roi Mohamed 6"
+    },
+    "MIAH": {
+        "author": "The Miami Herald",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "The Miami Herald"
+    },
+    "MICRO": {
+        "author": "Micro Hebdo",
+        "media-type": "Presse professionnelle",
+        "medium": "Micro Hebdo"
+    },
+    "MIL": {
+        "author": "Le Midi Libre",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "Le Midi Libre"
+    },
+    "MINT": {
+        "author": "Mint",
+        "media-type": "News et magazines",
+        "medium": "Mint"
+    },
+    "MIR": {
+        "author": "The Mirror",
+        "media-type": "Presse brittanique",
+        "medium": "The Mirror"
+    },
+    "MITT": {
+        "author": "MIT Technology Review",
+        "media-type": "Presse scientifique",
+        "medium": "MIT Technology Review"
+    },
+    "MJP": {
+        "author": "Morgenavisen Jyllands-Posten",
+        "media-type": "Presse danoise",
+        "medium": "Morgenavisen Jyllands-Posten"
+    },
+    "MLBL": {
+        "author": "Manila Bulletin",
+        "media-type": "Presse philippine",
+        "medium": "Manila Bulletin"
+    },
+    "MNPS": {
+        "author": "Market News Publishing",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "Market News Publishing"
+    },
+    "MON": {
+        "author": "Le Monde",
+        "media-type": "Presse nationale",
+        "medium": "Le Monde"
+    },
+    "MOS": {
+        "author": "Mail on Sunday",
+        "media-type": "Presse brittanique",
+        "medium": "Mail on Sunday"
+    },
+    "MOST": {
+        "author": "The Moscow Times",
+        "media-type": "Presse russe",
+        "medium": "The Moscow Times"
+    },
+    "MOT": {
+        "author": "La Montagne",
+        "media-type": "Presse r\u00e9gionale",
         "medium": "La Montagne"
     },
-    "Michaels": {
-        "author": "Michaels"
+    "MPWR": {
+        "author": "M2 Presswire",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "M2 Presswire"
     },
-    "Midi": {
-        "author": "La D\u00e9p\u00eache du Midi",
-        "authorship": "Journaliste",
-        "media-type": "Presse Quotidienne R\u00e9gionale",
-        "medium": "La D\u00e9p\u00eache du Midi"
+    "MQBR": {
+        "author": "Mondaq Business Briefing",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "Mondaq Business Briefing"
     },
-    "Midlib": {
-        "author": "Midi Libre",
-        "authorship": "Journaliste",
-        "media-type": "Presse Quotidienne R\u00e9gionale",
-        "medium": "Midi Libre"
+    "MSWN": {
+        "author": "Moscow News",
+        "media-type": "Presse russe",
+        "medium": "Moscow News"
+    },
+    "MTBB": {
+        "author": "Le Moniteur des Travaux Publics et du B\u00e2timent",
+        "media-type": "Presse professionnelle",
+        "medium": "Le Moniteur des Travaux Publics et du B\u00e2timent"
+    },
+    "MTI": {
+        "author": "MTI Econews",
+        "media-type": "Agence de presse",
+        "medium": "MTI Econews"
+    },
+    "MTRO": {
+        "author": "Metro",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "Metro"
+    },
+    "MYTK": {
+        "author": "Moneytalk",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "Moneytalk"
+    },
+    "MYWK": {
+        "author": "MoneyWeek",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "MoneyWeek"
+    },
+    "NATP": {
+        "author": "The Nation (Pakistan)",
+        "media-type": "Presse pakistanaise",
+        "medium": "The Nation (Pakistan)"
+    },
+    "NATT": {
+        "author": "The Nation (Thailand)",
+        "media-type": "Presse thailandaise",
+        "medium": "The Nation (Thailand)"
+    },
+    "NBR": {
+        "author": "Nordic Business Report",
+        "media-type": "Agence de presse",
+        "medium": "Nordic Business Report"
     },
     "NEC": {
-        "author": "Le Nouvel Economiste",
-        "media-type": "Presse \u00e9conomique p\u00e9riodique",
-        "medium": "Le Nouvel Economiste"
+        "author": "Nouvel Economiste",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "Nouvel Economiste"
     },
-    "NIC": {
-        "author": "Nice Matin",
-        "media-type": "Presse Quotidienne R\u00e9gionale",
-        "medium": "Nice Matin"
+    "NEPA": {
+        "author": "The Nepali Times",
+        "media-type": "Presse n\u00e9palaise",
+        "medium": "The Nepali Times"
     },
-    "NObs": {
-        "authorship": "Journaliste",
-        "media-type": "News et Magazines",
-        "medium": "Le Nouvel Observateur"
+    "NGID": {
+        "author": "NGI's Daily Gas Price Index",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "NGI's Daily Gas Price Index"
     },
-    "NRCO": {
-        "author": "Nouvelle R\u00e9publique du Centre-Ouest",
-        "authorship": "Presse locale",
-        "media-type": "PQR",
-        "medium": "Nouvelle R\u00e9publique du Centre-Ouest"
+    "NGIN": {
+        "author": "Natural Gas Intelligence",
+        "media-type": "Presse professionnelle",
+        "medium": "Natural Gas Intelligence"
     },
-    "NRDC": {
-        "author": "Natural Ressources Defense Council",
-        "medium": "NRDC"
+    "NICM": {
+        "author": "Nice-Matin",
+        "media-type": "Presse R\u00e9gionale",
+        "medium": "Nice-Matin"
+    },
+    "NIK": {
+        "author": "The Nikkei Weekly",
+        "media-type": "Presse japonaise",
+        "medium": "The Nikkei Weekly"
+    },
+    "NLIT": {
+        "author": "Nord Littoral",
+        "media-type": "Presse R\u00e9gionale",
+        "medium": "Nord Littoral"
+    },
+    "NNNW": {
+        "author": "Nutraceuticals World",
+        "media-type": "Presse m\u00e9dicale",
+        "medium": "Nutraceuticals World"
+    },
+    "NNTW": {
+        "author": "Nanotechnology Weekly",
+        "media-type": "Presse scientifique",
+        "medium": "Nanotechnology Weekly"
+    },
+    "NOGA": {
+        "author": "La Nouvelle Gazette",
+        "media-type": "Pesse belge",
+        "medium": "La Nouvelle Gazette"
+    },
+    "NOR": {
+        "author": "Nord Eclair",
+        "media-type": "Presse nationale",
+        "medium": "Nord Eclair"
+    },
+    "NORE": {
+        "author": "The Northern Echo",
+        "media-type": "Presse brittanique",
+        "medium": "The Northern Echo"
+    },
+    "NPC": {
+        "author": "National Post",
+        "media-type": "Presse canadienne",
+        "medium": "National Post"
+    },
+    "NPLINFO": {
+        "author": "notre-planete.info",
+        "media-type": "Presse associative",
+        "medium": "notre-planete.info"
+    },
+    "NPTT": {
+        "author": "NPR: Talk of the Nation/Science Friday",
+        "media-type": "News et magazines",
+        "medium": "NPR: Talk of the Nation/Science Friday"
+    },
+    "NRC": {
+        "author": "La Nouvelle R\u00e9publique du Centre Ouest",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "La Nouvelle R\u00e9publique du Centre Ouest"
+    },
+    "NRP": {
+        "author": "La Nouvelle R\u00e9publique du Centre Ouest",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "La Nouvelle R\u00e9publique du Centre Ouest"
+    },
+    "NSSS": {
+        "author": "New Scientist",
+        "media-type": "Presse scientifique",
+        "medium": "New Scientist"
+    },
+    "NSTM": {
+        "author": "New Straits Times",
+        "media-type": "Presse malaise",
+        "medium": "New Straits Times"
+    },
+    "NSWK": {
+        "author": "Newsweek International",
+        "media-type": "News et magazines",
+        "medium": "Newsweek International"
+    },
+    "NUCPLANT": {
+        "author": "Nuclear Plant Journal",
+        "media-type": "Presse professionnelle",
+        "medium": "Nuclear Plant Journal"
+    },
+    "NUCW": {
+        "author": "Nucleonics Week",
+        "media-type": "Presse professionnelle",
+        "medium": "Nucleonics Week"
+    },
+    "NWD": {
+        "author": "Newsring",
+        "media-type": "Agence de presse",
+        "medium": "Newsring"
+    },
+    "NWK": {
+        "author": "Newsweek",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "Newsweek"
+    },
+    "NWP": {
+        "author": "NEWS Press",
+        "media-type": "Communiqu\u00e9 de presse",
+        "medium": "NEWS Press"
+    },
+    "NWSO": {
+        "author": "The News & Observer",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "The News & Observer"
+    },
+    "NXI": {
+        "author": "nextinpact",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "nextinpact"
+    },
+    "NYLJ": {
+        "author": "New York Law Journal",
+        "media-type": "Presse juridique",
+        "medium": "New York Law Journal"
     },
     "NYT": {
-        "author": "New York Times"
+        "author": "New York Times",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "New York Times"
     },
-    "Novethic": {
-        "author": "Novethic"
+    "NZH": {
+        "author": "New Zealand Herald",
+        "media-type": "Presse n\u00e9oz\u00e9landaise",
+        "medium": "New Zealand Herald"
     },
-    "OANF": {
-        "author": "Observatoire des armes nucl\u00e9aires fran\u00e7aises",
-        "authorship": "Laboratoire ind\u00e9pendant"
-    },
-    "OF": {
-        "author": "Ouest France",
-        "authorship": "Journaliste",
-        "media-type": "Presse Quotidienne R\u00e9gionale",
-        "medium": "Ouest France"
-    },
-    "OIE": {
-        "author": "OIE"
-    },
-    "OMS": {
-        "author": "OMS",
-        "authorship": "Instance internationale",
-        "medium": "OMS"
-    },
-    "ONU": {
-        "author": "ONU",
-        "authorship": "Instance internationale",
-        "medium": "ONU"
-    },
-    "OPECST": {
-        "author": "Office Parlementaire d'Evaluation des Choix Scientifiques et Tech",
-        "authorship": "Rapporteurs officiels"
-    },
-    "OSCE": {
-        "authorship": "Instance internationale",
-        "medium": "OSCE"
-    },
-    "Obs": {
-        "authorship": "Journaliste",
-        "media-type": "News et Magazines",
+    "OBS": {
+        "author": "Le Nouvel Observateur",
+        "media-type": "News et magazines",
         "medium": "Le Nouvel Observateur"
     },
-    "ObsNucl": {
-        "author": "Observatoire du nucl\u00e9aire",
-        "authorship": "Militant(s) antinucl\u00e9aire(s)",
-        "media-type": "site critique",
-        "medium": "Observatoire du nucl\u00e9aire"
+    "OFF": {
+        "author": "Off Licence News",
+        "media-type": "Presse professionnelle",
+        "medium": "Off Licence News"
+    },
+    "OID": {
+        "author": "The Oil Daily",
+        "media-type": "Presse canadienne",
+        "medium": "The Oil Daily"
+    },
+    "OJUE": {
+        "author": "Official Journal of the European Union L Legislation",
+        "media-type": "Base de donn\u00e9es du droit europ\u00e9en",
+        "medium": "Official Journal of the European Union L Legislation"
+    },
+    "OOWK": {
+        "author": "Clinical Oncology Week",
+        "media-type": "Presse m\u00e9dicale",
+        "medium": "Clinical Oncology Week"
+    },
+    "OOWW": {
+        "author": "Obesity, Fitness & Wellness Week",
+        "media-type": "Presse m\u00e9dicale",
+        "medium": "Obesity, Fitness & Wellness Week"
+    },
+    "ORDI": {
+        "author": "L'Ordinateur Individuel",
+        "media-type": "Presse professionnelle",
+        "medium": "L'Ordinateur Individuel"
+    },
+    "ORI": {
+        "author": "L'Orient-Le Jour",
+        "media-type": "Presse nationale",
+        "medium": "L'Orient-Le Jour"
+    },
+    "OTTA": {
+        "author": "The Ottawa Citizen",
+        "media-type": "Presse canadienne",
+        "medium": "The Ottawa Citizen"
+    },
+    "OUF": {
+        "author": "Ouest-France",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "Ouest-France"
+    },
+    "PACK": {
+        "author": "Packaging Magazine",
+        "media-type": "Presse professionnelle",
+        "medium": "Packaging Magazine"
+    },
+    "PAN": {
+        "author": "Paris-Normandie",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "Paris-Normandie"
     },
     "PAR": {
         "author": "Le Parisien",
-        "authorship": "Journaliste",
-        "media-type": "Presse Quotidienne R\u00e9gionale",
+        "media-type": "Presse r\u00e9gionale",
         "medium": "Le Parisien"
     },
-    "PCEXP": {
-        "media-type": "Magazine sp\u00e9cialis\u00e9 mensuel",
-        "medium": "PC Expert"
+    "PBLG": {
+        "author": "Le Petit Bleu de Lot-et-Garonne",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "Le Petit Bleu de Lot-et-Garonne"
     },
-    "PEL": {
-        "media-type": "News et Magazines",
-        "medium": "P\u00e8lerin Magazine"
+    "PEGD": {
+        "author": "Platts European Gas Daily",
+        "media-type": "Presse professionnelle",
+        "medium": "Platts European Gas Daily"
     },
-    "PMA": {
-        "author": "La Presse de la Manche",
-        "authorship": "Journaliste",
-        "media-type": "Presse Quotidienne R\u00e9gionale",
-        "medium": "La Presse de la Manche"
+    "PELE": {
+        "author": "P\u00e8lerin",
+        "media-type": "News et magazines",
+        "medium": "P\u00e8lerin"
     },
-    "PMO": {
-        "author": "PMO@"
+    "PENT": {
+        "author": "Inside the Pentagon",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "Inside the Pentagon"
     },
-    "PNOR": {
-        "author": "Paris Normandie",
-        "media-type": "Presse Quotidienne R\u00e9gionale",
-        "medium": "Paris Normandie"
+    "PEO": {
+        "author": "The People",
+        "media-type": "Presse brittanique",
+        "medium": "The People"
     },
-    "POLITIS": {
-        "author": "POLITIS",
-        "media-type": "P\u00e9riodique critique"
+    "PERW": {
+        "author": "Petroleum Review",
+        "media-type": "Presse professionnelle",
+        "medium": "Petroleum Review"
     },
-    "Point": {
+    "PHAR": {
+        "author": "Le Pharmacien",
+        "media-type": "Presse m\u00e9dicale",
+        "medium": "Le Pharmacien"
+    },
+    "PHBW": {
+        "author": "Pharma Business Week",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "Pharma Business Week"
+    },
+    "PHI": {
+        "author": "Philadelphia Inquirer",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "Philadelphia Inquirer"
+    },
+    "PHIN": {
+        "author": "The Philadelphia Inquirer",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "The Philadelphia Inquirer"
+    },
+    "PHLD": {
+        "author": "The Philadelphia Daily News",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "The Philadelphia Daily News"
+    },
+    "PHRL": {
+        "author": "Pharma Marketletter",
+        "media-type": "Presse m\u00e9dicale",
+        "medium": "Pharma Marketletter"
+    },
+    "PLAS": {
+        "author": "Plastics News",
+        "media-type": "Presse professionnelle",
+        "medium": "Plastics News"
+    },
+    "PLATTS": {
+        "author": "Platts Commodity News",
+        "media-type": "Presse professionnelle",
+        "medium": "Platts Commodity News"
+    },
+    "PLOG": {
+        "author": "Platts Oilgram News",
+        "media-type": "Presse professionnelle",
+        "medium": "Platts Oilgram News"
+    },
+    "PLTC": {
+        "author": "Politics & the Life Sciences",
+        "media-type": "News et magazines",
+        "medium": "Politics & the Life Sciences"
+    },
+    "PLTW": {
+        "author": "Politics & Government Week",
+        "media-type": "News et magazines",
+        "medium": "Politics & Government Week"
+    },
+    "PMPL": {
+        "author": "Precise Media Planner",
+        "media-type": "Presse professionnelle",
+        "medium": "Precise Media Planner"
+    },
+    "PNB": {
+        "author": "Polish News Bulletin",
+        "media-type": "Agence de presse",
+        "medium": "Polish News Bulletin"
+    },
+    "POC": {
+        "author": "Presse Oc\u00e9an",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "Presse Oc\u00e9an"
+    },
+    "POI": {
         "author": "Le Point",
-        "media-type": "News et Magazines",
+        "media-type": "News et magazines",
         "medium": "Le Point"
     },
-    "Prog": {
-        "author": "Le Progr\u00e8s",
-        "authorship": "Journaliste",
-        "media-type": "Presse Quotidienne R\u00e9gionale",
-        "medium": "Le Progr\u00e8s"
+    "POL": {
+        "author": "Politis",
+        "media-type": "News et magazines",
+        "medium": "Politis"
     },
-    "ProgDeLyon": {
-        "author": "Progr\u00e8s de Lyon",
-        "authorship": "Journaliste",
-        "media-type": "Presse Quotidienne R\u00e9gionale"
+    "POLI": {
+        "author": "Politiken",
+        "media-type": "Presse allemande",
+        "medium": "Politiken"
     },
-    "Prov": {
+    "POWEUR": {
+        "author": "Power in Europe",
+        "media-type": "Presse professionnelle",
+        "medium": "Power in Europe"
+    },
+    "PPDV": {
+        "author": "Points de Vente",
+        "media-type": "News et magazines",
+        "medium": "Points de Vente"
+    },
+    "PQM": {
+        "author": "Pourquoi Magazine",
+        "media-type": "News et magazines",
+        "medium": "Pourquoi Magazine"
+    },
+    "PRE": {
+        "author": "The Press",
+        "media-type": "Presse n\u00e9oz\u00e9landaise",
+        "medium": "The Press"
+    },
+    "PRG": {
+        "author": "Progressive Grocer",
+        "media-type": "Presse professionnelle",
+        "medium": "Progressive Grocer"
+    },
+    "PRLINE": {
+        "author": "PRLine",
+        "media-type": "Communiqu\u00e9 de presse",
+        "medium": "PRLine"
+    },
+    "PRNEWS": {
+        "author": "PR NewsWire",
+        "media-type": "Communiqu\u00e9 de presse",
+        "medium": "PR NewsWire"
+    },
+    "PRO": {
+        "author": "Process Engineering",
+        "media-type": "Presse professionnelle",
+        "medium": "Process Engineering"
+    },
+    "PROA": {
+        "author": "Le Pays Roannais",
+        "media-type": "Presse R\u00e9gionale",
+        "medium": "Le Pays Roannais"
+    },
+    "PRODI": {
+        "author": "Le Progr\u00e8s-dimanche",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "Le Progr\u00e8s-dimanche"
+    },
+    "PROV": {
         "author": "La Provence",
-        "authorship": "Journaliste",
-        "media-type": "Presse Quotidienne R\u00e9gionale",
+        "media-type": "Presse r\u00e9gionale",
         "medium": "La Provence"
     },
-    "Pynchon": {
-        "author": "Pynchon",
-        "medium": "Brave Patrie"
+    "PRSC": {
+        "author": "Prescrire",
+        "media-type": "Presse m\u00e9dicale",
+        "medium": "Prescrire"
     },
-    "P\u00e9cresse": {
-        "author": "P\u00e9cresse"
+    "PRTN": {
+        "author": "Pretoria News",
+        "media-type": "Presse sud-africaine",
+        "medium": "Pretoria News"
     },
-    "RES": {
-        "author": "Revue Electronique de Sociologie",
-        "media-type": "Internet"
+    "PRTW": {
+        "author": "Proteomics Weekly",
+        "media-type": "Presse scientifique",
+        "medium": "Proteomics Weekly"
     },
-    "RFI": {
-        "media-type": "Audiovisuel",
-        "medium": "RFI"
+    "PRW": {
+        "author": "PR Week",
+        "media-type": "Agence de presse",
+        "medium": "PR Week"
     },
-    "RFS": {
-        "media-type": "Revue",
-        "medium": "Revue Fran\u00e7aise de Sociologie"
+    "PTBT": {
+        "author": "Pittsburgh Business Times",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "Pittsburgh Business Times"
     },
-    "RMC": {
-        "media-type": "Audiovisuel",
-        "medium": "RMC"
+    "PTCN": {
+        "author": "Pesticide & Toxic Chemical News",
+        "media-type": "Presse scientifique",
+        "medium": "Pesticide & Toxic Chemical News"
     },
-    "RTBF": {
-        "author": "RTBF",
-        "authorship": "Journaliste",
-        "media-type": "Presse \u00e9trang\u00e8re"
+    "PTTS": {
+        "author": "Pittsburgh Post-Gazette",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "Pittsburgh Post-Gazette"
     },
-    "RTL": {
-        "media-type": "Audiovisuel",
-        "medium": "RTL"
+    "PZV": {
+        "author": "Prot\u00e9gez-Vous",
+        "media-type": "Presse canadienne",
+        "medium": "Prot\u00e9gez-Vous"
     },
-    "RadioCanada": {
-        "author": "Radio Canada"
+    "PoPH": {
+        "author": "Portland Press Herald",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "Portland Press Herald"
     },
-    "RencParl": {
-        "author": "",
-        "authorship": "",
-        "localisation": "",
-        "media-type": "",
-        "medium": "Rencontres Parlementaires",
-        "observations": "",
-        "open-field-1": "",
-        "open-field-2": ""
+    "Priartem": {
+        "author": "Priartem@",
+        "media-type": "Site internet",
+        "medium": "Priartem@"
     },
-    "Replor": {
-        "author": "Le R\u00e9publicain Lorrain",
-        "media-type": "Presse Quotidienne R\u00e9gionale",
-        "medium": "Le R\u00e9publicain Lorrain"
+    "Priaterm": {
+        "author": "Priarterm@_et_APE@",
+        "media-type": "Communiqu\u00e9 de presse",
+        "medium": "Priarterm@_et_APE@"
     },
-    "Resnuc": {
-        "author": "R\u00e9seau Sortir du nucl\u00e9aire",
-        "authorship": "Militant(s) antinucl\u00e9aire(s)",
-        "media-type": "P\u00e9riodique critique",
-        "medium": "R\u00e9seau Sortir du nucl\u00e9aire"
+    "QBC": {
+        "author": "Le Journal de Qu\u00e9bec",
+        "media-type": "Presse canadienne",
+        "medium": "Le Journal de Qu\u00e9bec"
     },
-    "Reuters": {
+    "QEET": {
+        "author": "The Queensland Times",
+        "media-type": "Presse australienne",
+        "medium": "The Queensland Times"
+    },
+    "QMD": {
+        "author": "Le Quotidien du M\u00e9decin",
+        "media-type": "Presse m\u00e9dicale",
+        "medium": "Le Quotidien du M\u00e9decin"
+    },
+    "QMED": {
+        "author": "Le Quotidien du m\u00e9decin",
+        "media-type": "Presse m\u00e9dicale",
+        "medium": "Le Quotidien du m\u00e9decin"
+    },
+    "QOTO": {
+        "author": "Le Quotidien du Tourisme",
+        "media-type": "Site internet",
+        "medium": "Le Quotidien du Tourisme"
+    },
+    "QPR": {
+        "author": "Question Pratique",
+        "media-type": "News et magazines",
+        "medium": "Question Pratique"
+    },
+    "QUOT": {
+        "author": "Le Quotidien",
+        "media-type": "Presse nationale",
+        "medium": "Le Quotidien"
+    },
+    "QUPP": {
+        "author": "Le Quotidien du Peuple",
+        "media-type": "Presse chinoise",
+        "medium": "Le Quotidien du Peuple"
+    },
+    "R89": {
+        "author": "Rue89",
+        "media-type": "Presse nationale",
+        "medium": "Rue89"
+    },
+    "RCYRCUP": {
+        "author": "Recyclage R\u00e9cup\u00e9ration",
+        "media-type": "Presse professionnelle",
+        "medium": "Recyclage R\u00e9cup\u00e9ration"
+    },
+    "REACH": {
+        "author": "Research Policy",
+        "media-type": "Presse scientifique",
+        "medium": "Research Policy"
+    },
+    "REC": {
+        "author": "La Recherche",
+        "media-type": "Presse scientifique",
+        "medium": "La Recherche"
+    },
+    "RELAX": {
+        "author": "Relaxnews",
+        "media-type": "Agence de presse",
+        "medium": "Relaxnews"
+    },
+    "RENOUV": {
+        "author": "Le Renouveau",
+        "media-type": "Presse nationale",
+        "medium": "Le Renouveau"
+    },
+    "REPUB": {
+        "author": "La Repubblica",
+        "media-type": "Presse italienne",
+        "medium": "La Repubblica"
+    },
+    "RETW": {
+        "author": "Retail Week",
+        "media-type": "Presse professionnelle",
+        "medium": "Retail Week"
+    },
+    "REU": {
         "author": "Reuters",
-        "authorship": "Journaliste",
         "media-type": "Agence de presse",
         "medium": "Reuters"
     },
-    "Risk": {
-        "medium": "Risk"
+    "REVEXP": {
+        "author": "Revue Experts",
+        "media-type": "Presse professionnelle",
+        "medium": "Revue Experts"
     },
-    "Rue89": {
-        "author": "Rue89"
+    "RFI": {
+        "author": "Radio France Internationale",
+        "media-type": "News et magazines",
+        "medium": "Radio France Internationale"
     },
-    "SCA": {
-        "author": "Science et avenir",
-        "media-type": "News et Magazines",
-        "medium": "Science et avenir"
+    "RIA": {
+        "author": "RIA Novosti",
+        "media-type": "Agence de presse",
+        "medium": "RIA Novosti"
     },
-    "SFEN": {
-        "media-type": "News et Magazines",
-        "medium": "SFEN"
+    "RIAO": {
+        "author": "RIA Oreanda",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "RIA Oreanda"
     },
-    "SLR": {
-        "author": "Sauvons La Recherche"
+    "RISKASS": {
+        "author": "RiskAssur-hebdo",
+        "media-type": "Presse professionnelle",
+        "medium": "RiskAssur-hebdo"
     },
-    "SO": {
-        "author": "Sud Ouest",
-        "authorship": "Journaliste",
-        "media-type": "Presse Quotidienne R\u00e9gionale",
-        "medium": "Sud Ouest"
+    "RLY": {
+        "author": "Revue Lamy",
+        "media-type": "Presse juridique",
+        "medium": "Revue Lamy"
     },
-    "SOC": {
-        "media-type": "Revue",
-        "medium": "Soci\u00e9tal"
+    "RMC": {
+        "author": "RMC",
+        "media-type": "Audiovisuel",
+        "medium": "RMC"
     },
-    "SV": {
-        "author": "Science & Vie",
-        "media-type": "News et Magazines",
-        "medium": "Science & Vie"
+    "RNZN": {
+        "author": "Radio New Zealand News",
+        "media-type": "Presse n\u00e9oz\u00e9landaise",
+        "medium": "Radio New Zealand News"
     },
-    "SarkoCAD": {
-        "author": "Sarkozy confront\u00e9 \u00e0 d'autres"
+    "ROB": {
+        "author": "Robin des Toits",
+        "media-type": "Site internet",
+        "medium": "Robin des Toits"
     },
-    "SarkoEco": {
-        "author": "Sarkozy",
-        "authorship": "Ministre de l'Economie"
+    "RPOTR": {
+        "author": "Reporterre",
+        "media-type": "Presse environnementale",
+        "medium": "Reporterre"
     },
-    "SarkoHS": {
-        "author": "Sarkozy Elu des Hauts-de-Seine"
+    "RPP": {
+        "author": "La r\u00e9publique des Pyr\u00e9n\u00e9es",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "La r\u00e9publique des Pyr\u00e9n\u00e9es"
     },
-    "SarkoInt": {
-        "author": "Sarkozy",
-        "authorship": "Ministre de l'Int\u00e9rieur"
+    "RRRP": {
+        "author": "Risk Policy Report",
+        "media-type": "Presse environnementale",
+        "medium": "Risk Policy Report"
     },
-    "SarkoTem": {
-        "author": "Sarkozy",
-        "authorship": "Pr\u00e9sident de l'UMP",
-        "date": "25/07/2006",
-        "medium": "T\u00e9moignage"
+    "RSKM": {
+        "author": "Risk Management",
+        "media-type": "Presse environnementale",
+        "medium": "Risk Management"
     },
-    "SarkoUmp": {
-        "author": "Sarkozy",
-        "authorship": "Pr\u00e9sident de l'UMP"
+    "RSSN": {
+        "author": "Reason",
+        "media-type": "News et magazines",
+        "medium": "Reason"
     },
-    "Sarkonet": {
-        "author": "Sarkozy",
-        "authorship": "Pr\u00e9sident de l'UMP",
-        "medium": "Site internet de campagne"
+    "RSTCR": {
+        "author": "Il Resto del Carlino",
+        "media-type": "Presse italienne",
+        "medium": "Il Resto del Carlino"
     },
-    "Science ADvisBoard": {
-        "author": "Science ADvisory Board",
-        "medium": "Science ADvisory Board"
+    "RTBF": {
+        "author": "RTFB",
+        "media-type": "Presse belge",
+        "medium": "RTFB"
     },
-    "SecretDef": {
-        "author": "secret D\u00e9fense",
-        "authorship": "blogueur",
-        "media-type": "Blog",
-        "medium": "Blog Secret D\u00e9fense"
+    "RTECH": {
+        "author": "Religare Technova News Service",
+        "media-type": "Presse professionnelle",
+        "medium": "Religare Technova News Service"
     },
-    "Sisyphe": {
-        "author": "sisyphe",
-        "authorship": "blogueur",
-        "media-type": "Blog",
-        "medium": "Blog Sisyphe"
+    "RTF": {
+        "author": "RT France",
+        "media-type": "Audiovisuel",
+        "medium": "RT France"
     },
-    "Spieg": {
-        "media-type": "Presse \u00e9trang\u00e8re",
+    "RTMB": {
+        "author": "Revue Automobile",
+        "media-type": "News et magazines",
+        "medium": "Revue Automobile"
+    },
+    "RTWW": {
+        "author": "Respiratory Therapeutics Week",
+        "media-type": "Presse m\u00e9dicale",
+        "medium": "Respiratory Therapeutics Week"
+    },
+    "SAAP": {
+        "author": "SAPA (South African Press Association)",
+        "media-type": "Presse sud-africaine",
+        "medium": "SAPA (South African Press Association)"
+    },
+    "SABI": {
+        "author": "SABI",
+        "media-type": "Agence de presse",
+        "medium": "SABI"
+    },
+    "SAIG": {
+        "author": "The Saigon Times Daily",
+        "media-type": "Presse vietnamienne",
+        "medium": "The Saigon Times Daily"
+    },
+    "SBSW": {
+        "author": "SBS World News",
+        "media-type": "Agence de presse",
+        "medium": "SBS World News"
+    },
+    "SBZ": {
+        "author": "Sunday Business",
+        "media-type": "Presse brittanique",
+        "medium": "Sunday Business"
+    },
+    "SCAV": {
+        "author": "Sciences et avenir",
+        "media-type": "News et magazines",
+        "medium": "Sciences et avenir"
+    },
+    "SCCC": {
+        "author": "Scoop.co.nz",
+        "media-type": "Presse n\u00e9oz\u00e9landaise",
+        "medium": "Scoop.co.nz"
+    },
+    "SCDL": {
+        "author": "Sunshine Coast Daily",
+        "media-type": "Presse australienne",
+        "medium": "Sunshine Coast Daily"
+    },
+    "SCI": {
+        "author": "Science Magazine",
+        "media-type": "Presse scientifique",
+        "medium": "Science Magazine"
+    },
+    "SCM": {
+        "author": "Scotsman",
+        "media-type": "Presse \u00e9cossaise",
+        "medium": "Scotsman"
+    },
+    "SCMP": {
+        "author": "South China Morning Post",
+        "media-type": "Presse chinoise",
+        "medium": "South China Morning Post"
+    },
+    "SCR": {
+        "author": "Science Revue",
+        "media-type": "News et magazines",
+        "medium": "Science Revue"
+    },
+    "SCS": {
+        "author": "Scotland on Sunday",
+        "media-type": "Presse \u00e9cossaise",
+        "medium": "Scotland on Sunday"
+    },
+    "SDE": {
+        "author": "Sunday Express",
+        "media-type": "Presse brittanique",
+        "medium": "Sunday Express"
+    },
+    "SDM": {
+        "author": "Sunday Mail",
+        "media-type": "Presse brittanique",
+        "medium": "Sunday Mail"
+    },
+    "SDMI": {
+        "author": "Sunday Mirror",
+        "media-type": "Presse brittanique",
+        "medium": "Sunday Mirror"
+    },
+    "SEMJUR": {
+        "author": "La Semaine Juridique",
+        "media-type": "Presse professionnelle",
+        "medium": "La Semaine Juridique"
+    },
+    "SHR": {
+        "author": "Sunday Herald",
+        "media-type": "Presse \u00e9cossaise",
+        "medium": "Sunday Herald"
+    },
+    "SHS": {
+        "author": "Sunday Herald Sun",
+        "media-type": "Presse australienne",
+        "medium": "Sunday Herald Sun"
+    },
+    "SILFR": {
+        "author": "Silicon.fr",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "Silicon.fr"
+    },
+    "SMN": {
+        "author": "The Sydney Morning Herald",
+        "media-type": "Presse australienne",
+        "medium": "The Sydney Morning Herald"
+    },
+    "SNR": {
+        "author": "Sant\u00e9 Revue",
+        "media-type": "News et magazines",
+        "medium": "Sant\u00e9 Revue"
+    },
+    "SNSS": {
+        "author": "States News Service",
+        "media-type": "Agence de presse",
+        "medium": "States News Service"
+    },
+    "SOL": {
+        "author": "Le Soleil",
+        "media-type": "Presse canadienne",
+        "medium": "Le Soleil"
+    },
+    "SOWE": {
+        "author": "Sowetan",
+        "media-type": "Presse sud-africaine",
+        "medium": "Sowetan"
+    },
+    "SP24": {
+        "author": "Sport 24",
+        "media-type": "Presse sportive",
+        "medium": "Sport 24"
+    },
+    "SPI": {
+        "author": "Der Spiegel",
+        "media-type": "Presse allemande",
         "medium": "Der Spiegel"
     },
-    "StopFess": {
-        "author": "Stop-Fessenheim",
-        "authorship": "Militant(s) antinucl\u00e9aire(s)"
+    "SPS": {
+        "author": "Science et pseudo-sciences",
+        "media-type": "Presse associative",
+        "medium": "Science et pseudo-sciences"
     },
-    "StopNog": {
-        "author": "Comit\u00e9 Stop-Nogent",
-        "authorship": "Militant(s) antinucl\u00e9aire(s)",
-        "media-type": "P\u00e9riodique critique",
-        "medium": "Comit\u00e9 Stop-Nogent"
+    "SPT": {
+        "author": "St. Petersburg Times",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "St. Petersburg Times"
     },
-    "Sud": {
-        "author": "Sud",
-        "authorship": "Syndicat",
-        "medium": "Sud"
+    "SRC": {
+        "author": "SRC T\u00e9l\u00e9vision - D\u00e9couverte",
+        "media-type": "Audiovisuel",
+        "medium": "SRC T\u00e9l\u00e9vision - D\u00e9couverte"
     },
-    "S\u00e9nat": {
-        "author": "S\u00e9nat",
-        "authorship": "Parlement",
-        "medium": "S\u00e9nat"
+    "SRCAT": {
+        "author": "SRC Atlantique",
+        "media-type": "News et magazines",
+        "medium": "SRC Atlantique"
     },
-    "TCHBLAYE": {
-        "author": "TchernoBlaye",
-        "authorship": "Militant(s) antinucl\u00e9aire(s)"
+    "SSBB": {
+        "author": "Science Business",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "Science Business"
+    },
+    "SSCL": {
+        "author": "Science Letter",
+        "media-type": "Presse scientifique",
+        "medium": "Science Letter"
+    },
+    "SSN": {
+        "author": "Shanghai Securities News",
+        "media-type": "Agence de presse",
+        "medium": "Shanghai Securities News"
+    },
+    "STAC": {
+        "author": "The Standard",
+        "media-type": "Presse chinoise",
+        "medium": "The Standard"
+    },
+    "STAN": {
+        "author": "De Standaard",
+        "media-type": "Presse belge",
+        "medium": "De Standaard"
+    },
+    "STAR": {
+        "author": "The Star",
+        "media-type": "Presse sud-africaine",
+        "medium": "The Star"
+    },
+    "STAS": {
+        "author": "Sunday Tasmanian",
+        "media-type": "Presse australienne",
+        "medium": "Sunday Tasmanian"
+    },
+    "STEL": {
+        "author": "Sunday Telegraph",
+        "media-type": "Presse brittanique",
+        "medium": "Sunday Telegraph"
+    },
+    "STHT": {
+        "author": "The Southland Times",
+        "media-type": "Presse n\u00e9oz\u00e9landaise",
+        "medium": "The Southland Times"
+    },
+    "STI": {
+        "author": "Statesman India",
+        "media-type": "Presse indienne",
+        "medium": "Statesman India"
+    },
+    "STIML": {
+        "author": "Sunday Times",
+        "media-type": "Presse brittanique",
+        "medium": "Sunday Times"
+    },
+    "STRAT": {
+        "author": "Strat\u00e9gies",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "Strat\u00e9gies"
+    },
+    "STRT": {
+        "author": "Straits Times",
+        "media-type": "News et magazines",
+        "medium": "Straits Times"
+    },
+    "STS": {
+        "author": "Straits Times Singapore",
+        "media-type": "Presse singapourienne",
+        "medium": "Straits Times Singapore"
+    },
+    "STTRV": {
+        "author": "Sant\u00e9 et Travail",
+        "media-type": "Presse professionnelle",
+        "medium": "Sant\u00e9 et Travail"
+    },
+    "SUD": {
+        "author": "Sud Presse",
+        "media-type": "News et magazines",
+        "medium": "Sud Presse"
+    },
+    "SUN": {
+        "author": "The Sun",
+        "media-type": "Presse brittanique",
+        "medium": "The Sun"
+    },
+    "SUNA": {
+        "author": "Sunday Mail (Aus)",
+        "media-type": "Presse australienne",
+        "medium": "Sunday Mail (Aus)"
+    },
+    "SUNM": {
+        "author": "Sunday Mercury",
+        "media-type": "Presse brittanique",
+        "medium": "Sunday Mercury"
+    },
+    "SURF": {
+        "author": "Superfund Report",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "Superfund Report"
+    },
+    "SUZ": {
+        "author": "Suddeutsche Zeitung",
+        "media-type": "Presse allemande",
+        "medium": "Suddeutsche Zeitung"
+    },
+    "SVD": {
+        "author": "Svenska Dagbladet",
+        "media-type": "Presse su\u00e9doise",
+        "medium": "Svenska Dagbladet"
+    },
+    "SWEC": {
+        "author": "South Wales Echo",
+        "media-type": "Presse brittanique",
+        "medium": "South Wales Echo"
+    },
+    "SWI": {
+        "author": "swissinfo.ch",
+        "media-type": "Agence de presse",
+        "medium": "swissinfo.ch"
+    },
+    "T&N": {
+        "author": "Terre & Nature",
+        "media-type": "News et magazines",
+        "medium": "Terre & Nature"
+    },
+    "TAIN": {
+        "author": "Taiwan News",
+        "media-type": "Presse tawainaise",
+        "medium": "Taiwan News"
+    },
+    "TAP": {
+        "author": "The Associated Press",
+        "media-type": "Agence de presse",
+        "medium": "The Associated Press"
+    },
+    "TAUS": {
+        "author": "The Australian",
+        "media-type": "Presse australienne",
+        "medium": "The Australian"
+    },
+    "TAUSFR": {
+        "author": "The Australian Financial Review",
+        "media-type": "Presse australienne",
+        "medium": "The Australian Financial Review"
+    },
+    "TAUSM": {
+        "author": "The Australian Magazine",
+        "media-type": "Presse australienne",
+        "medium": "The Australian Magazine"
+    },
+    "TBRK": {
+        "author": "TB & Outbreaks Week",
+        "media-type": "News et magazines",
+        "medium": "TB & Outbreaks Week"
+    },
+    "TDNW": {
+        "author": "Taranaki Daily News",
+        "media-type": "Presse n\u00e9oz\u00e9landaise",
+        "medium": "Taranaki Daily News"
+    },
+    "TDZZ": {
+        "author": "Today.az",
+        "media-type": "Presse azerba\u00efdjanaise",
+        "medium": "Today.az"
+    },
+    "TECO": {
+        "author": "Terra eco",
+        "media-type": "Presse environnementale",
+        "medium": "Terra eco"
     },
     "TEL": {
-        "author": "T\u00e9l\u00e9rama"
-    },
-    "TELB": {
-        "authorship": "Journaliste",
-        "media-type": "Presse Quotidienne R\u00e9gionale",
+        "author": "Le T\u00e9l\u00e9gramme de Brest",
+        "media-type": "Presse r\u00e9gionale",
         "medium": "Le T\u00e9l\u00e9gramme de Brest"
     },
-    "TF1": {
-        "media-type": "Audiovisuel",
-        "medium": "TF1"
+    "TELG": {
+        "author": "Telegraph",
+        "media-type": "Presse brittanique",
+        "medium": "Telegraph"
     },
-    "TheIndep": {
-        "author": "The Independent"
+    "TEM": {
+        "author": "Le Temps",
+        "media-type": "Presse nationale",
+        "medium": "Le Temps"
     },
-    "Tim": {
-        "authorship": "Journaliste",
-        "media-type": "Presse \u00e9trang\u00e8re",
+    "TEW": {
+        "author": "Telecomworldwire",
+        "media-type": "Agence de presse",
+        "medium": "Telecomworldwire"
+    },
+    "TEXL": {
+        "author": "Texas Law Review",
+        "media-type": "Presse juridique",
+        "medium": "Texas Law Review"
+    },
+    "TGLO": {
+        "author": "The Globe and Mail",
+        "media-type": "Presse canadienne",
+        "medium": "The Globe and Mail"
+    },
+    "THBL": {
+        "author": "The Blade (MCT)",
+        "media-type": "News et magazines",
+        "medium": "The Blade (MCT)"
+    },
+    "THC": {
+        "author": "The Houston Chronicle",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "The Houston Chronicle"
+    },
+    "THNS": {
+        "author": "Thai News Service",
+        "media-type": "Agence de presse",
+        "medium": "Thai News Service"
+    },
+    "THOG": {
+        "author": "The Oil and Gas Journal",
+        "media-type": "Presse professionnelle",
+        "medium": "The Oil and Gas Journal"
+    },
+    "TIM": {
+        "author": "The Times",
+        "media-type": "Presse brittanique",
         "medium": "The Times"
     },
-    "Times": {
-        "author": "Times"
+    "TLRM": {
+        "author": "T\u00e9l\u00e9rama",
+        "media-type": "News et magazines",
+        "medium": "T\u00e9l\u00e9rama"
     },
-    "Transversales": {
-        "media-type": "site Internet",
-        "medium": "Transversales"
+    "TMER": {
+        "author": "The Mercury",
+        "media-type": "Presse tanzanienne",
+        "medium": "The Mercury"
     },
-    "Trib": {
-        "media-type": "Presse \u00e9conomique p\u00e9riodique",
+    "TMNW": {
+        "author": "TM News",
+        "media-type": "Presse italienne",
+        "medium": "TM News"
+    },
+    "TNP": {
+        "author": "The News",
+        "media-type": "Presse pakistanaise",
+        "medium": "The News"
+    },
+    "TNTH": {
+        "author": "The Nation - Thailand",
+        "media-type": "Presse thailandaise",
+        "medium": "The Nation - Thailand"
+    },
+    "TOBS": {
+        "author": "T\u00e9l\u00e9Obs",
+        "media-type": "News et magazines",
+        "medium": "T\u00e9l\u00e9Obs"
+    },
+    "TOHE": {
+        "author": "Tour Hebdo",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "Tour Hebdo"
+    },
+    "TOI": {
+        "author": "The Times of India",
+        "media-type": "Presse indienne",
+        "medium": "The Times of India"
+    },
+    "TORS": {
+        "author": "Toronto Star",
+        "media-type": "Presse canadienne",
+        "medium": "Toronto Star"
+    },
+    "TPCH": {
+        "author": "Transport Echo",
+        "media-type": "Presse belge",
+        "medium": "Transport Echo"
+    },
+    "TPSS": {
+        "author": "Top Sant\u00e9",
+        "media-type": "News et magazines",
+        "medium": "Top Sant\u00e9"
+    },
+    "TRDS": {
+        "author": "Trends/Tendances",
+        "media-type": "Presse \u00e9conomique",
+        "medium": "Trends/Tendances"
+    },
+    "TRI": {
+        "author": "La Tribune",
+        "media-type": "Presse \u00e9conomique",
         "medium": "La Tribune"
     },
-    "TribGenev": {
-        "author": "Tribune de Gen\u00e8ve"
+    "TRIG": {
+        "author": "La Tribune de Gen\u00e8ve",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "La Tribune de Gen\u00e8ve"
     },
-    "UNAF": {
-        "author": "UNAF"
+    "TRNS": {
+        "author": "The Toronto Star",
+        "media-type": "Presse canadienne",
+        "medium": "The Toronto Star"
     },
-    "Usin": {
-        "media-type": "News et Magazines",
-        "medium": "L'Usine Nouvelle"
+    "TSFC": {
+        "author": "The San Francisco Chronicle",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "The San Francisco Chronicle"
+    },
+    "TSSS": {
+        "author": "Top Sant\u00e9",
+        "media-type": "News et magazines",
+        "medium": "Top Sant\u00e9"
+    },
+    "TTHS": {
+        "author": "The Times Higher Education Supplement",
+        "media-type": "News et magazines",
+        "medium": "The Times Higher Education Supplement"
+    },
+    "TTNS": {
+        "author": "Targeted News Service",
+        "media-type": "Agence de presse",
+        "medium": "Targeted News Service"
+    },
+    "TTTCT": {
+        "author": "The Capital Times & Wisconsin State Journal",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "The Capital Times & Wisconsin State Journal"
+    },
+    "TTTT": {
+        "author": "Technology Times",
+        "media-type": "Presse professionnelle",
+        "medium": "Technology Times"
+    },
+    "TTTWW": {
+        "author": "Ottawa Citizen",
+        "media-type": "Presse canadienne",
+        "medium": "Ottawa Citizen"
+    },
+    "TVMAG": {
+        "author": "TV Mag",
+        "media-type": "News et magazines",
+        "medium": "TV Mag"
+    },
+    "TWAUS": {
+        "author": "The Weekend Australian",
+        "media-type": "Presse australienne",
+        "medium": "The Weekend Australian"
+    },
+    "TXRN": {
+        "author": "Toxics Regulation News",
+        "media-type": "Presse m\u00e9dicale",
+        "medium": "Toxics Regulation News"
+    },
+    "UFC": {
+        "author": "UFC-Que choisir",
+        "media-type": "News et magazines",
+        "medium": "UFC-Que choisir"
+    },
+    "UKT": {
+        "author": "The Ukrainian Times",
+        "media-type": "Presse ukrainienne",
+        "medium": "The Ukrainian Times"
+    },
+    "UNI": {
+        "author": "L'Union",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "L'Union"
+    },
+    "UNNI": {
+        "author": "UNI (United News of India)",
+        "media-type": "Presse indienne",
+        "medium": "UNI (United News of India)"
+    },
+    "UNSR": {
+        "author": "Unione Sarda",
+        "media-type": "Presse italienne",
+        "medium": "Unione Sarda"
+    },
+    "UPER": {
+        "author": "UPI Energy Resources",
+        "media-type": "Presse professionnelle",
+        "medium": "UPI Energy Resources"
+    },
+    "USAT": {
+        "author": "USA Today",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "USA Today"
+    },
+    "USFN": {
+        "author": "US Fed News",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "US Fed News"
+    },
+    "USHE": {
+        "author": "U.S. Health & Human Services Documents",
+        "media-type": "Presse m\u00e9dicale",
+        "medium": "U.S. Health & Human Services Documents"
+    },
+    "USNN": {
+        "author": "L'Usine nouvelle",
+        "media-type": "Presse professionnelle",
+        "medium": "L'Usine nouvelle"
+    },
+    "UTW": {
+        "author": "Utility Week",
+        "media-type": "Presse professionnelle",
+        "medium": "Utility Week"
+    },
+    "UWIR": {
+        "author": "U-Wire",
+        "media-type": "Agence de presse",
+        "medium": "U-Wire"
     },
     "VAC": {
-        "media-type": "Presse \u00e9conomique p\u00e9riodique",
+        "author": "Valeurs Actuelles",
+        "media-type": "News et magazines",
         "medium": "Valeurs Actuelles"
+    },
+    "VDE": {
+        "author": "La Voix de l'Est",
+        "media-type": "Presse canadienne",
+        "medium": "La Voix de l'Est"
     },
     "VDN": {
         "author": "La Voix du Nord",
-        "authorship": "Journaliste",
-        "media-type": "Presse Quotidienne R\u00e9gionale",
+        "media-type": "Presse r\u00e9gionale",
         "medium": "La Voix du Nord"
     },
-    "Verts": {
-        "author": "Les Verts"
+    "VIET": {
+        "author": "The Vietnam Investment Review",
+        "media-type": "Presse vietnamienne",
+        "medium": "The Vietnam Investment Review"
     },
-    "WHO": {
-        "author": "WHO",
-        "authorship": "Instance internationale",
-        "medium": "WHO"
+    "VIF": {
+        "author": "Le Vif / L'Express",
+        "media-type": "Presse belge",
+        "medium": "Le Vif / L'Express"
     },
-    "WP": {
+    "VIGAGRO": {
+        "author": "Vigie Agronomie et Industrie Alimentaire",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "Vigie Agronomie et Industrie Alimentaire"
+    },
+    "VIGC": {
+        "author": "Vigie Chimie",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "Vigie Chimie"
+    },
+    "VIGENE": {
+        "author": "Vigie Energie-Globe",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "Vigie Energie-Globe"
+    },
+    "VIGENV": {
+        "author": "Vigie Environnement",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "Vigie Environnement"
+    },
+    "VIGGC": {
+        "author": "Vigie G\u00e9nie Civil",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "Vigie G\u00e9nie Civil"
+    },
+    "VIGIA": {
+        "author": "Vigie Informatique Appliqu\u00e9e",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "Vigie Informatique Appliqu\u00e9e"
+    },
+    "VIGMA": {
+        "author": "Vigie Mat\u00e9riaux",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "Vigie Mat\u00e9riaux"
+    },
+    "VIGMAT": {
+        "author": "Vigie Mat\u00e9riaux Avanc\u00e9s",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "Vigie Mat\u00e9riaux Avanc\u00e9s"
+    },
+    "VIGMP": {
+        "author": "Vigie M\u00e9decine-Pharmacie",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "Vigie M\u00e9decine-Pharmacie"
+    },
+    "VIGOE": {
+        "author": "Vigie Opto-Electronique",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "Vigie Opto-Electronique"
+    },
+    "VIGSPT": {
+        "author": "Vigie Strat\u00e9gie et Politique Technologique",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "Vigie Strat\u00e9gie et Politique Technologique"
+    },
+    "VIGTIC": {
+        "author": "Vigie Technologies de l'Information",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "Vigie Technologies de l'Information"
+    },
+    "VNAN": {
+        "author": "http://veillenanos.fr",
+        "media-type": "Site internet",
+        "medium": "http://veillenanos.fr"
+    },
+    "VNCVS": {
+        "author": "Vancouver Sun",
+        "media-type": "Presse canadienne",
+        "medium": "Vancouver Sun"
+    },
+    "VOIX": {
+        "author": "Voice of America Press Releases and Documents",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "Voice of America Press Releases and Documents"
+    },
+    "VOLK": {
+        "author": "De Volkskrant",
+        "media-type": "Presse n\u00e9erlandaise",
+        "medium": "De Volkskrant"
+    },
+    "VUNET": {
+        "author": "VNUnet.fr",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "VNUnet.fr"
+    },
+    "WASN": {
+        "author": "Waste News",
+        "media-type": "Presse professionnelle",
+        "medium": "Waste News"
+    },
+    "WASP": {
         "author": "Washington Post",
+        "media-type": "Presse am\u00e9ricaine",
         "medium": "Washington Post"
     },
-    "WTA": {
-        "author": "World Transhumanist Association"
+    "WAST": {
+        "author": "The Washington Times",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "The Washington Times"
     },
-    "ZDNet": {
-        "author": "ZDNet"
+    "WEEKT": {
+        "author": "The Weekly Times",
+        "media-type": "Presse professionnelle",
+        "medium": "The Weekly Times"
     },
-    "cnrs": {
-        "author": "CNRS",
-        "authorship": "Pro-Techno",
-        "medium": "Site CNRS"
+    "WELT": {
+        "author": "Die Welt",
+        "media-type": "Presse allemande",
+        "medium": "Die Welt"
     },
-    "hoaxbuster": {
-        "author": "Hoaxbuster",
-        "authorship": "",
-        "localisation": "",
-        "media-type": "site Web",
-        "medium": "",
-        "observations": "",
-        "open-field-1": "",
-        "open-field-2": ""
+    "WELTS": {
+        "author": "Welt Am Sonntag",
+        "media-type": "Presse allemande",
+        "medium": "Welt Am Sonntag"
     },
-    "irakforum": {
-        "authorship": "",
-        "localisation": "",
-        "media-type": "Forum",
-        "medium": "Forum Lib\u00e9ration",
-        "observations": "",
-        "open-field-1": "",
-        "open-field-2": ""
+    "WESTD": {
+        "author": "Western Daily Press",
+        "media-type": "Presse brittanique",
+        "medium": "Western Daily Press"
     },
-    "md": {
-        "author": "Le Monde",
-        "authorship": "Journaliste",
-        "media-type": "Presse Quotidienne Nationale",
-        "medium": "Le Monde"
+    "WESTM": {
+        "author": "Western Mail",
+        "media-type": "Presse brittanique",
+        "medium": "Western Mail"
     },
-    "notre-planete": {
-        "author": "notre-planete.info",
-        "medium": "notre-planete.info"
+    "WLSS": {
+        "author": "Wales on Sunday",
+        "media-type": "Presse brittanique",
+        "medium": "Wales on Sunday"
     },
-    "planet-info": {
-        "author": "notre-planete.info",
-        "medium": "notre-planete.info"
+    "WPST": {
+        "author": "Weekend Post",
+        "media-type": "Presse sud-africaine",
+        "medium": "Weekend Post"
     },
-    "rech": {
-        "author": "La Recherche",
-        "medium": "La Recherche"
+    "WSJ": {
+        "author": "Wall street Journal",
+        "media-type": "Presse am\u00e9ricaine",
+        "medium": "Wall street Journal"
     },
-    "tlm": {
-        "medium": "tlm"
+    "WTN": {
+        "author": "El Watan",
+        "media-type": "Presse alg\u00e9rienne",
+        "medium": "El Watan"
     },
-    "tlmae": {
-        "medium": "tlmae"
+    "WWRL": {
+        "author": "Wireless News",
+        "media-type": "Presse professionnelle",
+        "medium": "Wireless News"
     },
-    "vivagora": {
-        "author": "Vivagora",
-        "medium": "Vivagora"
+    "XNA": {
+        "author": "Xinhua",
+        "media-type": "Agence de presse",
+        "medium": "Xinhua"
+    },
+    "XPRL": {
+        "author": "L'Express-L'Impartial",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "L'Express-L'Impartial"
+    },
+    "YKP": {
+        "author": "Yorkshire Post",
+        "media-type": "Presse brittanique",
+        "medium": "Yorkshire Post"
+    },
+    "YON": {
+        "author": "L'Yonne R\u00e9publicaine",
+        "media-type": "Presse r\u00e9gionale",
+        "medium": "L'Yonne R\u00e9publicaine"
+    },
+    "ZDNET": {
+        "author": "ZDNet",
+        "media-type": "Presse \u00e9lectronique",
+        "medium": "ZDNet"
+    },
+    "ZIM": {
+        "author": "Zimbabwe Standard",
+        "media-type": "Presse zimbabw\u00e9enne",
+        "medium": "Zimbabwe Standard"
+    },
+    "arazi": {
+        "author": "Arazi",
+        "media-type": "Blog",
+        "medium": "Arazi"
+    },
+    "electroallergique": {
+        "author": "http://electroallergique.wordpress.com",
+        "media-type": "Blog",
+        "medium": "http://electroallergique.wordpress.com"
+    },
+    "lgdsfr": {
+        "author": "legazdeschiste.fr",
+        "media-type": "Site lobby",
+        "medium": "legazdeschiste.fr"
+    },
+    "mieuxprevenir": {
+        "author": "http://mieuxprevenir2.blogspot.fr",
+        "media-type": "Site internet",
+        "medium": "http://mieuxprevenir2.blogspot.fr"
+    },
+    "rivasi": {
+        "author": "michele-rivasi.eu",
+        "media-type": "Site internet",
+        "medium": "michele-rivasi.eu"
     }
 }
