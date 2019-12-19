@@ -116,7 +116,8 @@ class Cleaner():
                     "&lt;",
                     "&gt;",
                     "«",
-                    '»'],
+                    '»',
+                    ],
             '... ': ["&hellip;",
                      "&#8230;",
                      "&#x2026;"
@@ -192,7 +193,6 @@ class Cleaner():
             "@": ["&#8294;"]
             }
 
-
         number = 0
         for correcte, incorrectes in to_be_replaced.items():
             for i in incorrectes:
@@ -201,6 +201,9 @@ class Cleaner():
                     self.content = self.content.replace(i, correcte)
                     number += cherche
         self.content = html.unescape(self.content)
+        #remove unescape characters not compatible with latin1
+        self.content = re.sub("\u2033", '"', self.content)
+        self.content = re.sub('\u2219', '.', self.content)
         return number
 
     def splitted_numbers(self):

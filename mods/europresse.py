@@ -5,7 +5,7 @@ import os
 import datetime
 
 try:
-    import cleaning
+    from cleaning import Cleaner
     from supports import Publi
 except:
     from mods.cleaning import Cleaner
@@ -224,7 +224,7 @@ if __name__ == "__main__":
     for f in glob.glob("*.htm*"):
         p = ParseHtml(f)
     for a in p.parsed_articles:
-        ProcessArticle(a, "test")
+        ProcessArticle(a, ".")
         #pass
     
         
