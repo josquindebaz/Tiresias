@@ -5,17 +5,28 @@ GPL3
 
 import re
 import json
+import os
 
 def parse_supports_publi(supports_path):
     """get the supports from support.publi"""
+    sources = {}
     with open(supports_path, "r") as buf:
-        return {item[3]: {'medium': item[1],
-                          'author': item[1],
-                          'media-type': item[2]}
-                for item in [re.split(r"\s*;\s*", line)
-                             for line in re.split(r"\r?\n", buf.read())
-                             if not re.match(r"^\s*$", line)
-                             and len(re.split(r"\s*;\s*", line)) == 4]}
+        source_list = [item for item
+                       in [re.split(r"\s*;\s*", line)
+                           for line in re.split(r"\r?\n", buf.read())
+                           if not re.match(r"^\s*$", line)
+                           and len(re.split(r"\s*;\s*", line)) == 4]
+                       ]
+    for item in source_list[0:15]:
+        if item[3] in sources:
+            sources[item[3]]['forms'].append(item[0])
+        else:
+            sources[item[3]] = {'medium': item[1],
+                                'author': item[1],
+                                'media-type': item[2],
+                                'forms': [item[0]]}
+    return sources
+
 
 def parse_codex_cfg(codex_path):
     """get the supports from codex.cfg"""
@@ -49,46 +60,49 @@ def parse_codex_cfg(codex_path):
                                       if key != "ABREV"}
     return codex
 
-class Codex():
-    def __init__(self, codexpath):
-        with open(codexpath, 'r') as filepointer:
-            self.codex = json.load(filepointer)
-
-def save_codex_json(codex, filename):
-    """save codex as json in filename"""
-    with open(filename, 'w') as codexfile:
-        json.dump(codex, codexfile, indent=4, sort_keys=True)
-
-class Merger():
-    """Manage merging"""
-    def __init__(self, local, candidate):
-        self.local = local
-        self.candidate = candidate
-        self.merged = local
+class CodexManager():
+    def __init__(self, codexpath=""):
         self.conflicts = []
+        self.codex = {}
+
+        if os.path.isfile(codexpath):
+            with open(codexpath, 'r') as filepointer:
+                self.codex = json.load(filepointer)
+
+    def get_fields(self):
+        fields = []
+        for item in self.codex.values():
+           for key in item.keys():
+                if key not in fields:
+                    fields.append(key)
+        return fields
+    
+    def save_codex_json(self, filename):
+        """save codex as json in filename"""
+        with open(filename, 'w') as codexfile:
+            json.dump(self.codex, codexfile, indent=4, sort_keys=True)
         
-    def merge_codex(self):
+    def merge_codex(self, candidate):
         """merge candidate with local and keep conflict"""
-        for support in self.candidate:
-            if support not in self.local:
-                self.merged[support] = self.candidate[support]
-            elif self.candidate[support] == self.local[support]:
-                self.merged[support] = self.candidate[support]
-            else:
+        for support in candidate:
+            if support not in self.codex:
+                self.codex[support] = candidate[support]
+            elif candidate[support] != self.codex[support]:
                 self.conflicts.append(support)
     
 if __name__ == "__main__":
     supports_publi = parse_supports_publi("../data/support.publi")
-##    save_codex_json(supports_publi, "codex.json")
+    m = CodexManager()
+    m.merge_codex(supports_publi)
+    m.save_codex_json("codex.json")
 
-    supports_codex = parse_codex_cfg(r"C:\Program Files (x86)\Doxa\Prospéro-I\codex.cfg")
+##    supports_codex = parse_codex_cfg(r"C:\Program Files (x86)\Doxa\Prospéro-I\codex.cfg")
 ##    save_codex_json(supports_codex, "codex.json")
-    Merger = Merger(supports_publi, supports_codex)
-    Merger.merge_codex()
-    for conflict in Merger.conflicts:
-        print("Conflict for ", conflict)
-        print("reference: ", supports_publi[conflict])
-        print("candidate: ", supports_codex[conflict])
-        pass
-
-    
+##    Merger = Merger(supports_publi, supports_codex)
+##    Merger.merge_codex()
+##    for conflict in Merger.conflicts:
+##        print("Conflict for ", conflict)
+##        print("reference: ", supports_publi[conflict])
+##        print("candidate: ", supports_codex[conflict])
+##        pass
+        

@@ -19,7 +19,7 @@ class ViewNewton():
         Fr1.pack(anchor=tk.W)
 
         bn_csv = tk.Button(Fr1, text="Select a html file",
-            command=self.sel_file)
+                           command=self.sel_file)
         bn_csv.pack(side=tk.RIGHT)
 
         self.choosen_file = tk.StringVar()
