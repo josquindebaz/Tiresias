@@ -11,6 +11,7 @@ class ViewCodex():
     """Viewer for Codex"""
     def __init__(self, parent):
         self.manager = CodexManager("data/codex.json")
+        self.fields = []
         
         w_title = tk.Label(parent,
                            text="Codex management",
@@ -23,47 +24,61 @@ class ViewCodex():
                                   background='red')
         self.f_sources.pack()
         
-        P_top = tk.PanedWindow(self.f_sources,
+        p_top = tk.PanedWindow(self.f_sources,
                                background='blue')
-        P_top.pack()
+        p_top.pack()
         
-        vsb = ttk.Scrollbar(P_top,
+        vsb = ttk.Scrollbar(p_top,
                             orient="vertical",)
-        self.tree = ttk.Treeview(P_top,
+        self.tree = ttk.Treeview(p_top,
                                  selectmode="browse",
-                                 height=20,
+                                 height=10,
                                  yscrollcommand = vsb.set)
-        self.tree.pack(side=tk.LEFT,)
+        self.tree.heading("#0", text="radical")
+        self.tree.column("#0", width=60)
+        self.tree.pack(side=tk.LEFT)
+        self.tree.bind("<<TreeviewSelect>>", self.on_tree_select)
         vsb.config(command=self.tree.yview)
         vsb.pack(side=tk.LEFT, fill=tk.Y)
 
         self.populate_source_tree()
 
 
-        P_buttons = tk.PanedWindow(self.f_sources,
+        p_buttons = tk.PanedWindow(self.f_sources,
                                    background='yellow')
-        P_buttons.pack(fill=tk.X)
+        p_buttons.pack(fill=tk.X)
 
-        b_search = tk.Button(P_buttons, text="Search")
+        b_search = tk.Button(p_buttons, text="Search")
         b_search.pack(side=tk.LEFT, anchor=tk.N)
-        b_add = tk.Button(P_buttons, text="b_add")
+        b_add = tk.Button(p_buttons, text="b_add")
         b_add.pack(side=tk.LEFT, anchor=tk.N)
-        b_del = tk.Button(P_buttons, text="b_del")
+        b_del = tk.Button(p_buttons, text="b_del")
         b_del.pack(side=tk.LEFT, anchor=tk.N)
-        b_edit = tk.Button(P_buttons, text="b_edit")
+        b_edit = tk.Button(p_buttons, text="b_edit")
         b_edit.pack(side=tk.LEFT, anchor=tk.N)
         
-        b_merge = tk.Button(P_buttons,
+        b_merge = tk.Button(p_buttons,
                             text="Merge",
                             command=self.sel_file_merge)
         b_merge.pack(side=tk.LEFT, anchor=tk.N)
 
-        b_save = tk.Button(P_buttons, text="b_save")
+        b_save = tk.Button(p_buttons, text="b_save")
         b_save.pack(side=tk.RIGHT, anchor=tk.N)
-        b_pull = tk.Button(P_buttons, text="b_pull")
+        b_pull = tk.Button(p_buttons, text="b_pull")
         b_pull.pack(side=tk.RIGHT, anchor=tk.N)
-        b_push = tk.Button(P_buttons, text="b_push")
+        b_push = tk.Button(p_buttons, text="b_push")
         b_push.pack(side=tk.RIGHT, anchor=tk.N)
+
+        p_details = tk.PanedWindow(self.f_sources,
+                                   background='cyan')
+        p_details.pack(fill=tk.X)
+        self.tree_details = ttk.Treeview(p_details, height=11)
+        self.tree_details.pack(side=tk.LEFT)
+        self.tree_details.heading("#0", text="field")
+        self.tree_details["columns"]=("values")
+        self.tree_details.heading("values", text="values")
+        self.tree_details.bind("<Double-1>", self.tree_details_event)
+
         
     def populate_source_tree(self):
         """feed the source list"""
@@ -73,22 +88,28 @@ class ViewCodex():
         self.tree.delete(*self.tree.get_children())
 
         #get field list and set columns
-        fields = self.manager.get_fields()
-        #fields.remove('forms')
+        self.fields = self.manager.get_fields()
         self.tree["columns"]=(' '.join(map(lambda string: '"%s"'%string,
-                                           fields)))
-        for field in fields:
+                                           self.fields)))
+        for field in self.fields:
             self.tree.heading(field, text=field)
+            if field == 'forms':
+                self.tree.column(field, width=200)
+            else:
+                self.tree.column(field, width=120)
             
         for source in sorted(self.manager.codex):
             values = ""
-            for field in fields:
+            for field in self.fields:
                 if field in self.manager.codex[source]:
-                    values += '"%s" '%self.manager.codex[source][field]
+                    if field == 'forms':
+                        values += '"%s" '%\
+                                  "|".join(self.manager.codex[source][field])
+                    else:
+                        values += '"%s" '%self.manager.codex[source][field]
                 else:
                     values += '" " '
-            id_line = self.tree.insert("", "end", text=source, values=values)
-            
+            self.tree.insert("", "end", text=source, values=values)
             
     def sel_file_merge(self):
         message = "Select a codex.json, support.publi or codex.cfg file"
@@ -104,4 +125,21 @@ class ViewCodex():
             
         self.manager.merge_codex(candidate)
         self.populate_source_tree()
+        
+    def on_tree_select(self, event):
+        """selected on first tree populate the detailed list"""
+        self.tree_details.delete(*self.tree_details.get_children())
 
+        current = self.tree.item(self.tree.focus())
+        self.tree_details.insert("", "end",
+                                 text="radical",
+                                 values=current['text'])
+        for index, value in enumerate(current['values']):
+            self.tree_details.insert("", "end",
+                                 text=self.fields[index],
+                                 values=(value,) )           
+
+    def tree_details_event(self, event):
+        item = self.tree_details.selection()[0]
+        print("you clicked on", self.tree_details.item(item,"text")
+)
