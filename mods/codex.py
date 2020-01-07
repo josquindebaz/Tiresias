@@ -76,7 +76,10 @@ class CodexManager():
                 if key not in fields:
                     fields.append(key)
         return fields
-    
+
+    def get_field_values(self, field):
+        return [value[field] for value in self.codex.values()]
+        
     def save_codex_json(self, filename):
         """save codex as json in filename"""
         with open(filename, 'w') as codexfile:

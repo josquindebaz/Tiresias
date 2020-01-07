@@ -77,8 +77,11 @@ class ViewCodex():
         self.tree_details.heading("#0", text="field")
         self.tree_details["columns"]=("values")
         self.tree_details.heading("values", text="values")
-        self.tree_details.bind("<Double-1>", self.tree_details_event)
+        #self.tree_details.bind("<1>", self.tree_details_event)
+        self.tree_details.bind("<<TreeviewSelect>>", self.tree_details_event)
 
+        self.detailcombo = ttk.Combobox(p_details)
+        self.detailcombo.pack()
         
     def populate_source_tree(self):
         """feed the source list"""
@@ -141,5 +144,7 @@ class ViewCodex():
 
     def tree_details_event(self, event):
         item = self.tree_details.selection()[0]
-        print("you clicked on", self.tree_details.item(item,"text")
-)
+        field = self.tree_details.item(item, "text")
+        print("you clicked on", self.tree_details.item(item, "text"))
+
+        self.detailcombo['values'] = (self.manager.get_field_values(field))
