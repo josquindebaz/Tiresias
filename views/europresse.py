@@ -17,8 +17,11 @@ class ViewEuropresse():
         WindowTitle.pack(fill=tk.X)
 
         corpus_path_windows = "C:\corpus"
-        home = str(Path.home())
-        corpus_path_unix = "%s/.wine/drive_c/corpus"%home
+        try:
+            home = str(Path.home())
+            corpus_path_unix = "%s/.wine/drive_c/corpus"%home
+        except:
+            corpus_path_unix = "/home"
         if os.path.isdir(corpus_path_windows):
             self.initdir = corpus_path_windows
         elif os.path.isdir(corpus_path_unix):
