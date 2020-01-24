@@ -29,7 +29,7 @@ class ViewReplacer():
         self.choosenDir = tk.StringVar()
         dir_entry = tk.Entry(Fr1, width=52,
             textvariable=self.choosenDir)
-        self.choosenDir.set("C:\\corpus\\test")
+        #self.choosenDir.set("C:\\corpus\\test")
         dir_entry.pack(side=tk.LEFT)
 
         self.Recursive = tk.BooleanVar()

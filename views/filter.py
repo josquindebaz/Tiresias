@@ -32,8 +32,9 @@ class ViewFilter():
         Fr1 = tk.Frame(self.parent)
         Fr1.pack(anchor=tk.W)
 
-        bnPrc = tk.Button(Fr1, text=u"Select project",
-            command=self.sel_PRC)
+        bnPrc = tk.Button(Fr1,
+                          text="Select project",
+                          command=self.sel_PRC)
         bnPrc.pack(side=tk.LEFT)
 
         self.choosenPRC = tk.StringVar()
@@ -41,17 +42,26 @@ class ViewFilter():
             textvariable=self.choosenPRC)
         PRC_entry.pack(side=tk.LEFT)
 
-        bnDir = tk.Button(Fr1, text=u"Select directory", 
-            command=self.sel_dir)
+        bnDir = tk.Button(Fr1,
+                          text=u"Select directory",
+                          command=self.sel_dir)
         bnDir.pack(side=tk.LEFT)
         
         #Frame corpus/anticorpus
-        Fr2 = tk.LabelFrame(self.parent, 
-            text="corpus/anticorpus", borderwidth=1)
+        Fr2 = tk.LabelFrame(self.parent,
+                            text="corpus/anticorpus",
+                            borderwidth=1,
+                            height=100)
         Fr2.pack(fill=tk.X)
-        self.Corpus_list = ScrolledText(Fr2)
+        self.Corpus_list = ScrolledText(Fr2,
+                                        height=15,
+                                        #width=60,
+                                        font=("Helvetica", 9))
         self.Corpus_list.pack(side=tk.LEFT)
-        self.Acorpus_list = ScrolledText(Fr2)
+        self.Acorpus_list = ScrolledText(Fr2,
+                                         height=15,
+                                         #width=60,
+                                         font=("Helvetica", 9))
         self.Acorpus_list.pack(side=tk.LEFT)
 
         self.progressbar = ttk.Progressbar(self.parent, mode='determinate')
@@ -112,7 +122,10 @@ class ViewFilter():
         
         fr33 = tk.Frame(Fr3)
         fr33.pack(side=tk.RIGHT)
-        self.result = ScrolledText(fr33, height=15, bg="black", fg="orange")
+        self.result = ScrolledText(fr33,
+                                   height=15,
+                                   bg="black",
+                                   fg="orange")
         self.result.pack()
          
         

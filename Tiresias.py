@@ -36,7 +36,11 @@ class MainView(tk.Toplevel):
 ##            filename = os.path.join(os.environ['_MEIPASS2'], filename)
         with open(filename, 'rb') as f:
             welcome_txt = f.read().decode()
-        welcome = tk.Message(self, bg="white", text=welcome_txt)
+        welcome_txt = re.sub(r"[\r\n]{1,}", "\n", welcome_txt)  
+        welcome = tk.Message(self,
+                             bg="white",
+                             width=1024,
+                             text=welcome_txt)
         welcome.pack()
 
         self.update_string = tk.StringVar()

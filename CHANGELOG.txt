@@ -1,4 +1,5 @@
-﻿13/12/2019: word replace, newton
+﻿24/01/2020: Project window resize for low resolution
+13/12/2019: word replace, newton
 11/12/2019: cited years
 10/12/2019: Lexis
 06/12/2019: Scopus et Factiva
