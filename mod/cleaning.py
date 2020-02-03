@@ -65,6 +65,13 @@ class Cleaner():
     def utf_to_latin(self):
         """Convert utf to latin"""
         txt_unicode = self.content.decode('utf-8')
+        txt_unicode = txt_unicode.replace('e\u0301', 'é')
+        txt_unicode = txt_unicode.replace('E\u0301', 'É')
+        txt_unicode = txt_unicode.replace('e\u0300', 'è')
+        txt_unicode = txt_unicode.replace('E\u0300', 'è'.upper())
+        txt_unicode = txt_unicode.replace('a\u0300', 'à')
+        txt_unicode = txt_unicode.replace('A\u0300', 'à'.upper())
+        txt_unicode = txt_unicode.replace('u\u0300', 'ù')
         self.content = txt_unicode.encode('latin-1', 'xmlcharrefreplace')
 
     def replace_ascii(self):
@@ -172,7 +179,9 @@ class Cleaner():
             "e": ["&#7497;"],
             "à": ["a&#768;"],
             "À": ["A&#768;"],
-            "é": ["e&#769;"],
+            "é": ["e&#769;",
+                  "e\u0301"],
+            "É": ["E\u0301"],
             "ê": ["e&#770;"],
             "è": ["e&#768;"],
             "â": ["a&#770;"],

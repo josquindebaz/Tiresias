@@ -1,4 +1,5 @@
-﻿24/01/2020: Project window resize for low resolution
+﻿03/02/2020: Accent problem with utf-8 correction
+24/01/2020: Project window resize for low resolution
 13/12/2019: word replace, newton
 11/12/2019: cited years
 10/12/2019: Lexis
