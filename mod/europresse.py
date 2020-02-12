@@ -176,7 +176,7 @@ class ProcessArticle(object):
             source,
             "","",
             a['date'],
-            "",
+            source,
             source_type,
             "", "", "",
             "Processed by Tiresias on %s"\
