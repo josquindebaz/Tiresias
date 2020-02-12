@@ -12,6 +12,7 @@ from mod.supports import Publi
 class ViewEuropresse():
     def __init__(self, parent):
         self.parent = parent
+        self.htmldirectory = None
         WindowTitle = tk.Label(self.parent, text="Europresse",
             font=("Helvetica", 12, "bold"))
         WindowTitle.pack(fill=tk.X)
@@ -199,6 +200,8 @@ class ViewEuropresse():
             [self.htm_list.insert("end",
                     os.path.split(item)[1]) for item in self.list_html]
             self.htm_list.select_set(0, "end")
+            if not self.htmldirectory:
+                self.htmldirectory = directory
 
     def reset_Supports(self): 
         self.U_pubname.delete(0, 'end')
@@ -218,7 +221,7 @@ class ViewEuropresse():
         self.reset_lists()
 
         self.Supports = Publi()
-        self.populateSupports()
+        self.populateSupports()          
             
         unknowns = []
         self.articles_list = []
@@ -226,7 +229,8 @@ class ViewEuropresse():
             f = self.list_html[c]
             self.log.insert(1.0, 'Analysing %s\n'%f)
             try:
-                p = ParseHtml(os.path.join(self.htmldirectory, f))
+                path = os.path.join(self.htmldirectory, f)
+                p = ParseHtml(path)
                 for a in p.parsed_articles:
                     if a not in self.articles_list:
                         self.articles_list.append(a)

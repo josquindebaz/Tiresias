@@ -1,4 +1,5 @@
-﻿03/02/2020: Accent problem with utf-8 correction
+﻿12/02/2020: small error correction in Europresse
+03/02/2020: Accent problem with utf-8 correction
 24/01/2020: Project window resize for low resolution
 13/12/2019: word replace, newton
 11/12/2019: cited years

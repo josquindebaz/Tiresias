@@ -5,12 +5,12 @@ import os
 import datetime
 
 try:
-    import cleaning
+    #import cleaning
+    from cleaning import Cleaner
     from supports import Publi
 except:
     from mod.cleaning import Cleaner
     from mod.supports import Publi
-
  
 class ParseHtml(object):
     def __init__(self, f):
@@ -224,7 +224,7 @@ if __name__ == "__main__":
     for f in glob.glob("*.htm*"):
         p = ParseHtml(f)
     for a in p.parsed_articles:
-        ProcessArticle(a, "test")
+        ProcessArticle(a, ".")
         #pass
     
         
