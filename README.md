@@ -5,7 +5,7 @@ Code available on https://github.com/josquindebaz/Tiresias
 For windows users, a .exe is available on https://github.com/josquindebaz/Tiresias/raw/master/EXEC/Tiresias.zip
 
 
-Help, comments and suggestions: https://prosperologie.org/forum
+Help, comments and suggestions: http://prosperologie.org/forum/viewtopic.php?f=16&t=445
 
 
 
