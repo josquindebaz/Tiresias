@@ -198,9 +198,9 @@ class Cleaner():
             "µ": ["&#956"],
             "d": ["&#948;"],
             "e": ["&#279;"],
-            "@": ["&#8294;"]
+            "@": ["&#8294;"],
+            "phi": ["&#966;"],
             }
-
 
         number = 0
         for correcte, incorrectes in to_be_replaced.items():
@@ -310,6 +310,7 @@ if __name__ == '__main__':
             buf = f.read()
         C = Cleaner(buf, "uasdhtpcf")
         print(C.log)
+        print(re.findall('.*\u03c6.*', C.content))
         buf = bytes(C.content, 'latin-1')
         with open(txt, 'wb') as f:
             f.write(buf)
