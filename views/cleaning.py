@@ -79,6 +79,15 @@ class ViewCleaning():
                                          var=self.char_replace)
         bn_char_replace.select()
         bn_char_replace.pack(side=tk.LEFT)
+        
+        self.html_chars = tk.BooleanVar()
+        bn_html_unescape = tk.Checkbutton(fr2,
+                                         text='html chars',
+                                         var=self.html_chars)
+        bn_html_unescape.select()
+        bn_html_unescape.pack(side=tk.LEFT)
+
+
         self.split = tk.BooleanVar()
         bn_split = tk.Checkbutton(fr2,
                                   text='splitted numbers',
@@ -170,6 +179,8 @@ class ViewCleaning():
             options += "a"
         if self.char_replace.get():
             options += "c"
+        if self.html_chars.get():
+            options += "e"
         if self.split.get():
             options += "s"
         if self.hyphens.get():
@@ -189,7 +200,7 @@ class ViewCleaning():
             #if something has to be corrected
             self.result.insert("end", "%s  "%txt)
             self.result.insert("end",
-                               "%s\n"%"; ".join(["%s: %d"%(x, y)\
+                               "%s\n"%"; ".join(["%s: %s"%(x, y)\
                                for x, y in c.log.items() if y != 0]))
             if not self.test.get():
                 #if not test mode

@@ -1,4 +1,5 @@
-﻿18/02/2020: phi character in cleaner
+﻿20/02/2020: hmtl characters in cleaner
+18/02/2020: phi character in cleaner
 12/02/2020: small error correction in Europresse
 03/02/2020: Accent problem with utf-8 correction
 24/01/2020: Project window resize for low resolution

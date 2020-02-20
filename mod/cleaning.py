@@ -23,7 +23,7 @@ def list_files(rep='.', exts=('.txt', '.TXT'),
 
 class Cleaner():
     """Convert bytes and clean string"""
-    def __init__(self, content, options="uasdhtpcf"):
+    def __init__(self, content, options="uasdhtpcef"):
         self.content = content
         self.log = {}
 
@@ -40,6 +40,8 @@ class Cleaner():
             self.log['ascii'] = self.replace_ascii()
         if "c" in options:
             self.log['chars'] = self.char_replace()
+        if "e" in options:
+            self.log['html characters'] = self.unescape()
         if "s" in options:
             self.log['splitted numbers'] = self.splitted_numbers()
         if "h" in options:
@@ -72,7 +74,7 @@ class Cleaner():
         txt_unicode = txt_unicode.replace('a\u0300', 'à')
         txt_unicode = txt_unicode.replace('A\u0300', 'à'.upper())
         txt_unicode = txt_unicode.replace('u\u0300', 'ù')
-        self.content = txt_unicode.encode('latin-1', 'xmlcharrefreplace')
+        self.content = txt_unicode.encode('latin-1', 'xmlcharrefreplace')      
 
     def replace_ascii(self):
         """{unknown ascii code: correct form,}"""
@@ -108,7 +110,11 @@ class Cleaner():
         """{ "correct": ["incorrect 1,", "incorrect 2",],}"""
         to_be_replaced = {
             "": ["&#65279;",
-                 "&#8206;"],
+                 "&#8206;",
+                 "&#61514;",
+                 "&#61672;",
+                 "&#61692;",
+                 "&#61607;"],
             "'": ["&rsquo;",
                   '&#8217;',
                   '&#8216;',
@@ -132,7 +138,11 @@ class Cleaner():
                   "&#8208;",
                   "&sect;",
                   "&bull;",
-                  "&#8209;"],
+                  "&#8209;",
+                  "&#9658;",
+                  "&#127809;",
+                  "&#9688;",
+                  "&#9033;"],
             "\r\n": ["<br>",
                      "<br/>",
                      "<BR>",
@@ -168,7 +178,7 @@ class Cleaner():
                   "&#8294;",
                   "&#8297;",
                   "&#8202;",
-                  "&#8200;"],
+                  "&#8200;",],
             "oe": ["&oelig;",
                    "&#156;",
                    "&#339;",
@@ -200,6 +210,7 @@ class Cleaner():
             "e": ["&#279;"],
             "@": ["&#8294;"],
             "phi": ["&#966;"],
+            "°": ["&#730;"],
             }
 
         number = 0
@@ -209,8 +220,22 @@ class Cleaner():
                 if cherche:
                     self.content = self.content.replace(i, correcte)
                     number += cherche
-        self.content = html.unescape(self.content)
         return number
+
+    def unescape(self):
+        """html entities"""
+        log = ""
+        temp = html.unescape(self.content)
+        try:
+            bytes(temp, 'latin-1')
+            if self.content == temp:
+                log = 0
+            else:
+                self.content = temp
+                log = "Done without error"
+        except UnicodeEncodeError as error:
+            log = "Skipped: " + str(error)
+        return log
 
     def splitted_numbers(self):
         """strip splitted numbers"""
@@ -308,9 +333,8 @@ if __name__ == '__main__':
         print(txt)
         with open(txt, 'rb') as f:
             buf = f.read()
-        C = Cleaner(buf, "uasdhtpcf")
+        C = Cleaner(buf, "uasdhtpcef")
         print(C.log)
-        print(re.findall('.*\u03c6.*', C.content))
         buf = bytes(C.content, 'latin-1')
         with open(txt, 'wb') as f:
             f.write(buf)
