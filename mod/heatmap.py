@@ -5,6 +5,20 @@ GPL 3
 
 import re
 
+def quartiles(values):
+    """return quartiles of a series"""
+    values = sorted(values)
+    size = len(values)
+    if size % 2:
+        first = values[(size//4)]
+        median = values[(size//2)]
+        third = values[(size*3//4)]
+    else:
+        first = (values[size//4] + values[(size//4)+1])/2
+        median = (values[size//2] + values[(size//2)+1])/2
+        third = (values[size*3//4] + values[(size*3//4)+1])/2
+    return first, median, third
+
 def parse_data(data):
     values = {}
     months = {"janvier": 1,
@@ -32,12 +46,13 @@ def parse_data(data):
     return(values)
 
 def create_svg(values):
-    max_value = max([max(month.values())
-                      for month in
-                      [values for values in values.values()]])
-    min_value = min([min(month.values())
-                      for month in
-                      [values for values in values.values()]])
+    text_num = []
+    for year, months in values.items():
+        for month, texts in months.items():
+            text_num.append(texts)
+    max_value = max(text_num)
+    min_value = min(text_num)
+    first_q, median, third_q = quartiles(text_num)
     
     svg = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n\
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg">\n'
@@ -65,12 +80,31 @@ font-size="12">%s</text>\n' %(y+10, year)
 
     svg += '<rect width="50" height="50" x="%s" y="100" \
 style="stroke:gray;stroke-width:1;fill:blue;fill-opacity:\
-%s"></rect>'%(y+60,min_value/float(max_value))
+%s"></rect>'%(y+60, min_value/float(max_value))
     svg += '\n <text x="%s" y="130" font-family="sans-serif" \
 font-size="14">%s</text>\n' %(y+120, min_value)
+
     svg += '<rect width="50" height="50" x="%s" y="150" \
-style="stroke:gray;stroke-width:1;fill:blue"></rect>'%(y+60)
+style="stroke:gray;stroke-width:1;fill:blue;fill-opacity:\
+%s"></rect>'%(y+60, 0.25)
     svg += '\n <text x="%s" y="180" font-family="sans-serif" \
+font-size="14">%s</text>\n' %(y+120, max_value/4)
+
+    svg += '<rect width="50" height="50" x="%s" y="200" \
+style="stroke:gray;stroke-width:1;fill:blue;fill-opacity:\
+%s"></rect>'%(y+60, 0.5)
+    svg += '\n <text x="%s" y="240" font-family="sans-serif" \
+font-size="14">%s</text>\n' %(y+120, max_value/2)
+
+    svg += '<rect width="50" height="50" x="%s" y="250" \
+style="stroke:gray;stroke-width:1;fill:blue;fill-opacity:\
+%s"></rect>'%(y+60, 0.75)
+    svg += '\n <text x="%s" y="290" font-family="sans-serif" \
+font-size="14">%s</text>\n' %(y+120, 3*max_value/4)
+
+    svg += '<rect width="50" height="50" x="%s" y="300" \
+style="stroke:gray;stroke-width:1;fill:blue"></rect>'%(y+60)
+    svg += '\n <text x="%s" y="340" font-family="sans-serif" \
 font-size="14">%s</text>\n' %(y+120, max_value)
     
     svg += "\n</svg>"
