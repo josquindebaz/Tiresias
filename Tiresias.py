@@ -22,7 +22,7 @@ import views.factiva
 import views.lexis
 import views.newton
 import views.cited_years
-
+import views.heatmap
 
 class MainView(tk.Toplevel):
     def __init__(self, parent):
@@ -88,6 +88,8 @@ class MainView(tk.Toplevel):
                         command=self.QpAtlas)
         Viz.add_command(label="Cited years timeline",
                         command=self.cited_years)
+        Viz.add_command(label="Month heatmap",
+                        command=self.heatmap)
         
     def addmenu(self, lab):
         men = tk.Menu(self.menubar, tearoff=0)
@@ -133,7 +135,6 @@ class MainView(tk.Toplevel):
     def C_newton(self):
         self.reset_view()
         views.newton.ViewNewton(self)
-        
 
     def QpAtlas(self):
         self.reset_view()
@@ -142,6 +143,10 @@ class MainView(tk.Toplevel):
     def cited_years(self):
         self.reset_view()
         views.cited_years.ViewYears(self)
+
+    def heatmap(self):
+        self.reset_view()
+        views.heatmap.ViewPaster(self)
         
     def reset_view(self):
         for p in self.slaves():

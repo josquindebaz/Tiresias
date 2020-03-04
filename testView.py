@@ -13,6 +13,7 @@ import views.factiva
 import views.lexis
 import views.newton
 import views.cited_years
+import views.heatmap
 
 class MainView(tk.Toplevel):
     def __init__(self, parent):
@@ -22,8 +23,9 @@ class MainView(tk.Toplevel):
         self.protocol('WM_DELETE_WINDOW', self.
                       parent.destroy)
 
-        views.newton.ViewNewton(self)
+        #views.newton.ViewNewton(self)
         #views.uncapitalise.ViewReplacer(self)
+        views.heatmap.ViewPaster(self)
 
 if __name__ == '__main__':
     root = tk.Tk()
