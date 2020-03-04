@@ -54,59 +54,65 @@ def create_svg(values):
     min_value = min(text_num)
     first_q, median, third_q = quartiles(text_num)
     
-    svg = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n\
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg">\n'
-
-    for month in range(1, 13):
+    svg = ''
+    for month in range(12, 0, -1):
         svg += '<text x="25" y="%s" font-family="sans-serif" \
-font-size="12">%s</text>\n' %(month*50+25, month)
+font-size="12">%s</text>\n' %(645-month*50, month)
 
     y = 0
     for year in range(min(values), max(values)+1):
         y += 50
-        svg += ' <text x="%s" y="35" font-family="sans-serif" \
-font-size="12">%s</text>\n' %(y+10, year)
-
-        for month in range(1, 13):
+        for month in range(12, 0, -1):
             if month in values[year]:
                 svg += '<rect width="50" height="50" '
-                svg += 'x="%d" y="%d" '%(y,month*50)
+                svg += 'x="%d" y="%d" '%(y, 620-month*50)
                 svg += 'style="stroke:gray;stroke-width:1;fill:blue;'
                 svg += 'fill-opacity:%s">'%(values[year][month]/float(max_value))
                 svg += '<title>%s/%s: %s</title>'%(month,
                                                    year,
                                                    values[year][month])
                 svg += '</rect>\n'
-
-    svg += '<rect width="50" height="50" x="%s" y="100" \
+        svg += ' <text x="%s" y="%s" font-family="sans-serif" \
+font-size="12">%s</text>\n' %(y+10, 640, year)
+        
+    svg += '<rect width="50" height="50" x="%s" y="300" \
 style="stroke:gray;stroke-width:1;fill:blue;fill-opacity:\
 %s"></rect>'%(y+60, min_value/float(max_value))
-    svg += '\n <text x="%s" y="130" font-family="sans-serif" \
+    svg += '\n <text x="%s" y="330" font-family="sans-serif" \
 font-size="14">%s</text>\n' %(y+120, min_value)
 
-    svg += '<rect width="50" height="50" x="%s" y="150" \
+    svg += '<rect width="50" height="50" x="%s" y="250" \
 style="stroke:gray;stroke-width:1;fill:blue;fill-opacity:\
 %s"></rect>'%(y+60, 0.25)
-    svg += '\n <text x="%s" y="180" font-family="sans-serif" \
-font-size="14">%s</text>\n' %(y+120, max_value/4)
+    svg += '\n <text x="%s" y="280" font-family="sans-serif" \
+font-size="14">%s</text>\n' %(y+120,int(max_value/4))
 
     svg += '<rect width="50" height="50" x="%s" y="200" \
 style="stroke:gray;stroke-width:1;fill:blue;fill-opacity:\
 %s"></rect>'%(y+60, 0.5)
-    svg += '\n <text x="%s" y="240" font-family="sans-serif" \
-font-size="14">%s</text>\n' %(y+120, max_value/2)
+    svg += '\n <text x="%s" y="230" font-family="sans-serif" \
+font-size="14">%s</text>\n' %(y+120, int(max_value/2))
 
-    svg += '<rect width="50" height="50" x="%s" y="250" \
+    svg += '<rect width="50" height="50" x="%s" y="150" \
 style="stroke:gray;stroke-width:1;fill:blue;fill-opacity:\
 %s"></rect>'%(y+60, 0.75)
-    svg += '\n <text x="%s" y="290" font-family="sans-serif" \
-font-size="14">%s</text>\n' %(y+120, 3*max_value/4)
+    svg += '\n <text x="%s" y="180" font-family="sans-serif" \
+font-size="14">%s</text>\n' %(y+120, int(3*max_value/4))
 
-    svg += '<rect width="50" height="50" x="%s" y="300" \
+    svg += '<rect width="50" height="50" x="%s" y="100" \
 style="stroke:gray;stroke-width:1;fill:blue"></rect>'%(y+60)
-    svg += '\n <text x="%s" y="340" font-family="sans-serif" \
+    svg += '\n <text x="%s" y="130" font-family="sans-serif" \
 font-size="14">%s</text>\n' %(y+120, max_value)
-    
-    svg += "\n</svg>"
-    return svg
 
+    svg += '\n <text x="%s" y="380" font-family="sans-serif" \
+font-size="14">Q1:%s</text>\n' %(y+60, first_q)   
+    svg += '\n <text x="%s" y="400" font-family="sans-serif" \
+font-size="14">Q2:%s</text>\n' %(y+60, median)
+    svg += '\n <text x="%s" y="420" font-family="sans-serif" \
+font-size="14">Q3:%s</text>\n' %(y+60, third_q)
+        
+    svg = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n\
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="%s">\n'%(y+200) + svg
+    svg += "\n</svg>"
+
+    return svg
