@@ -53,18 +53,30 @@ def create_svg(values):
     max_value = max(text_num)
     min_value = min(text_num)
     first_q, median, third_q = quartiles(text_num)
+
+    step = 50
+    svg_width = step*(max(values) - min(values))+200
+    if svg_width > 1000:
+        step = (1000-200)/(max(values) - min(values))
+        if step < 20:
+            step = 20
+        svg_width = step*(max(values) - min(values))+200
     
-    svg = ''
+    svg = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n\
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" \
+width="%s">\n'%(svg_width)
+
     for month in range(12, 0, -1):
-        svg += '<text x="25" y="%s" font-family="sans-serif" \
-font-size="12">%s</text>\n' %(645-month*50, month)
+        svg += '<text x="%s" y="%s" '%(step-20, 645-month*50)
+        svg += 'font-family="sans-serif" font-size="14">'
+        svg += '%s</text>\n'%(month)
 
     y = 0
     for year in range(min(values), max(values)+1):
-        y += 50
+        y += step
         for month in range(12, 0, -1):
             if month in values[year]:
-                svg += '<rect width="50" height="50" '
+                svg += ' <rect width="%s" height="50" '%(step)
                 svg += 'x="%d" y="%d" '%(y, 620-month*50)
                 svg += 'style="stroke:gray;stroke-width:1;fill:blue;'
                 svg += 'fill-opacity:%s">'%(values[year][month]/float(max_value))
@@ -72,47 +84,40 @@ font-size="12">%s</text>\n' %(645-month*50, month)
                                                    year,
                                                    values[year][month])
                 svg += '</rect>\n'
-        svg += ' <text x="%s" y="%s" font-family="sans-serif" \
-font-size="12">%s</text>\n' %(y+10, 640, year)
+        svg += '<text x="%s" y="%s" '%(y+5, 640)
+        svg += 'font-family="sans-serif" font-size="12">'
+        svg += '%s</text>\n'%(year)
+
+    legend_list = [[min_value, min_value]]
+    if third_q < int(max_value/4) and third_q != 0:
+        legend_list.extend([["Q3:%s"%third_q, third_q/max_value],
+                           [int(max_value/2), 0.5],
+                           [int(3*max_value/4), 0.75]])
+    else:
+        if median <= int(max_value/4) and median != 0:
+            legend_list.append(["Q2:%s"%median, median/max_value])
+        else:
+            legend_list.append([int(max_value/4), 0.25])
+        legend_list.extend([[int(max_value/2), 0.5],
+                           [int(3*max_value/4), 0.75]])
+    legend_list.append([max_value, max_value])
+    
+    for index, legend in enumerate(legend_list):                    
+        svg += '<rect width="%s" height="50" '%(step)
+        svg += 'x="%s" y="%s" '%(y+step+10, 300-50*index)
+        svg += 'style="stroke:gray;stroke-width:1;fill:blue;'
+        svg += 'fill-opacity:%s"></rect>'%(legend[1])
+        svg += '\n <text x="%s" y="%s" '%(y+2*step+15, 330-50*index)
+        svg += 'font-family="sans-serif" font-size="14">'
+        svg += '%s</text>\n'%(legend[0])
+
+##    svg += '\n <text x="%s" y="380" font-family="sans-serif" \
+##font-size="14">Q1:%s</text>\n' %(y+60, first_q)   
+##    svg += '\n <text x="%s" y="400" font-family="sans-serif" \
+##font-size="14">Q2:%s</text>\n' %(y+60, median)
+##    svg += '\n <text x="%s" y="420" font-family="sans-serif" \
+##font-size="14">Q3:%s</text>\n' %(y+60, third_q)
         
-    svg += '<rect width="50" height="50" x="%s" y="300" \
-style="stroke:gray;stroke-width:1;fill:blue;fill-opacity:\
-%s"></rect>'%(y+60, min_value/float(max_value))
-    svg += '\n <text x="%s" y="330" font-family="sans-serif" \
-font-size="14">%s</text>\n' %(y+120, min_value)
-
-    svg += '<rect width="50" height="50" x="%s" y="250" \
-style="stroke:gray;stroke-width:1;fill:blue;fill-opacity:\
-%s"></rect>'%(y+60, 0.25)
-    svg += '\n <text x="%s" y="280" font-family="sans-serif" \
-font-size="14">%s</text>\n' %(y+120,int(max_value/4))
-
-    svg += '<rect width="50" height="50" x="%s" y="200" \
-style="stroke:gray;stroke-width:1;fill:blue;fill-opacity:\
-%s"></rect>'%(y+60, 0.5)
-    svg += '\n <text x="%s" y="230" font-family="sans-serif" \
-font-size="14">%s</text>\n' %(y+120, int(max_value/2))
-
-    svg += '<rect width="50" height="50" x="%s" y="150" \
-style="stroke:gray;stroke-width:1;fill:blue;fill-opacity:\
-%s"></rect>'%(y+60, 0.75)
-    svg += '\n <text x="%s" y="180" font-family="sans-serif" \
-font-size="14">%s</text>\n' %(y+120, int(3*max_value/4))
-
-    svg += '<rect width="50" height="50" x="%s" y="100" \
-style="stroke:gray;stroke-width:1;fill:blue"></rect>'%(y+60)
-    svg += '\n <text x="%s" y="130" font-family="sans-serif" \
-font-size="14">%s</text>\n' %(y+120, max_value)
-
-    svg += '\n <text x="%s" y="380" font-family="sans-serif" \
-font-size="14">Q1:%s</text>\n' %(y+60, first_q)   
-    svg += '\n <text x="%s" y="400" font-family="sans-serif" \
-font-size="14">Q2:%s</text>\n' %(y+60, median)
-    svg += '\n <text x="%s" y="420" font-family="sans-serif" \
-font-size="14">Q3:%s</text>\n' %(y+60, third_q)
-        
-    svg = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n\
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="%s">\n'%(y+200) + svg
     svg += "\n</svg>"
 
     return svg
