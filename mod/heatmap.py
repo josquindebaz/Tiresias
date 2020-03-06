@@ -55,7 +55,7 @@ def create_svg(values):
     first_q, median, third_q = quartiles(text_num)
 
     step = 50
-    svg_width = step*(max(values) - min(values))+200
+    svg_width = step*(max(values) - min(values))+250
     if svg_width > 1000:
         step = (1000-200)/(max(values) - min(values))
         if step < 20:
@@ -84,8 +84,8 @@ width="%s">\n'%(svg_width)
                                                    year,
                                                    values[year][month])
                 svg += '</rect>\n'
-        svg += '<text x="%s" y="%s" '%(y+5, 640)
-        svg += 'font-family="sans-serif" font-size="12">'
+        svg += '<text x="%s" y="%s" '%(y+step/2, 630)
+        svg += 'font-family="sans-serif" font-size="14" style="writing-mode: tb;">'
         svg += '%s</text>\n'%(year)
 
     legend_list = [[min_value, min_value]]
