@@ -33,7 +33,7 @@ def parse_data(data):
               "octobre": 10,
               "novembre": 11,
               "décembre": 12}
-    
+   
     for line in data.split("\n"):
         if not re.search("sans date", line) and not re.match("^\s*$", line):
             row = line.split('\t')
@@ -46,6 +46,20 @@ def parse_data(data):
     return(values)
 
 def create_svg(values):
+
+    month_index = {1: "j",
+                   2: "f",
+                   3: "m",
+                   4: "a",
+                   5: "m",
+                   6: "j",
+                   7: "j",
+                   8: "a",
+                   9: "s",
+                   10: "o",
+                   11: "n",
+                   12: "d"}
+
     text_num = []
     for year, months in values.items():
         for month, texts in months.items():
@@ -62,14 +76,18 @@ def create_svg(values):
             step = 20
         svg_width = step*(max(values) - min(values))+200
     
-    svg = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n\
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" \
-width="%s">\n'%(svg_width)
+    svg = """<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="%s">
+<style>
+	.norm { font:14px sans-serif; }
+	.vert { font:14px sans-serif; writing-mode: tb; }
+	.rect { stroke:gray; stroke-width:1; fill:blue; }
+</style>
+"""%(svg_width)
 
     for month in range(12, 0, -1):
         svg += '<text x="%s" y="%s" '%(step-20, 645-month*50)
-        svg += 'font-family="sans-serif" font-size="14">'
-        svg += '%s</text>\n'%(month)
+        svg += 'class="norm">%s</text>\n'%(month_index[month])
 
     y = 0
     for year in range(min(values), max(values)+1):
@@ -77,18 +95,16 @@ width="%s">\n'%(svg_width)
         for month in range(12, 0, -1):
             if month in values[year]:
                 svg += ' <rect width="%s" height="50" '%(step)
-                svg += 'x="%d" y="%d" '%(y, 620-month*50)
-                svg += 'style="stroke:gray;stroke-width:1;fill:blue;'
-                svg += 'fill-opacity:%s">'%(values[year][month]/float(max_value))
+                svg += 'x="%d" y="%d" class="rect" '%(y, 620-month*50)
+                svg += 'style="fill-opacity:%s">'%(values[year][month]/float(max_value))
                 svg += '<title>%s/%s: %s</title>'%(month,
                                                    year,
                                                    values[year][month])
                 svg += '</rect>\n'
         svg += '<text x="%s" y="%s" '%(y+step/2, 630)
-        svg += 'font-family="sans-serif" font-size="14" style="writing-mode: tb;">'
-        svg += '%s</text>\n'%(year)
+        svg += 'class="vert">%s</text>\n'%(year)
 
-    legend_list = [[min_value, min_value]]
+    legend_list = [[min_value, min_value/max_value]]
     if third_q < int(max_value/4) and third_q != 0:
         legend_list.extend([["Q3:%s"%third_q, third_q/max_value],
                            [int(max_value/2), 0.5],
@@ -105,11 +121,10 @@ width="%s">\n'%(svg_width)
     for index, legend in enumerate(legend_list):                    
         svg += '<rect width="%s" height="50" '%(step)
         svg += 'x="%s" y="%s" '%(y+step+10, 300-50*index)
-        svg += 'style="stroke:gray;stroke-width:1;fill:blue;'
+        svg += 'class="rect" style="'
         svg += 'fill-opacity:%s"></rect>'%(legend[1])
         svg += '\n <text x="%s" y="%s" '%(y+2*step+15, 330-50*index)
-        svg += 'font-family="sans-serif" font-size="14">'
-        svg += '%s</text>\n'%(legend[0])
+        svg += 'class="norm">%s</text>\n'%(legend[0])
 
 ##    svg += '\n <text x="%s" y="380" font-family="sans-serif" \
 ##font-size="14">Q1:%s</text>\n' %(y+60, first_q)   
