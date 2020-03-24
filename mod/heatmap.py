@@ -80,20 +80,24 @@ def create_svg(values):
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="%s">
 <style>
 	.norm { font:14px sans-serif; }
+	.small { font:12px sans-serif; }
 	.vert { font:14px sans-serif; writing-mode: tb; }
 	.rect { stroke:gray; stroke-width:1; fill:blue; }
 </style>
 """%(svg_width)
 
     for month in range(12, 0, -1):
-        svg += '<text x="%s" y="%s" '%(step-20, 645-month*50)
+        svg += '<text x="%s" y="%s" '%(step-15, 645-month*50)
         svg += 'class="norm">%s</text>\n'%(month_index[month])
 
     y = 0
+    year_sums = {}
     for year in range(min(values), max(values)+1):
         y += step
+        year_sum = 0
         for month in range(12, 0, -1):
             if month in values[year]:
+                year_sum += values[year][month]
                 svg += ' <rect width="%s" height="50" '%(step)
                 svg += 'x="%d" y="%d" class="rect" '%(y, 620-month*50)
                 svg += 'style="fill-opacity:%s">'%(values[year][month]/float(max_value))
@@ -101,9 +105,22 @@ def create_svg(values):
                                                    year,
                                                    values[year][month])
                 svg += '</rect>\n'
+                year_sum += values[year][month]
         svg += '<text x="%s" y="%s" '%(y+step/2, 630)
         svg += 'class="vert">%s</text>\n'%(year)
+        year_sums[year] = year_sum
 
+    x = 0
+    max_year_value = max(year_sums.values())
+    for year in range(min(values), max(values)+1):
+        x += step
+        y_value = 100*year_sums[year]/float(max_year_value)
+        svg += '   <rect width="%d" height="%s" '%(step, y_value)
+        svg += 'x="%d" y="%d" class="rect">'%(x, 670)
+        svg += '<title>%s: %d</title>'%(year, year_sums[year])
+        svg += '</rect>\n   <text x="%s" y="%s" '%(x, y_value+685)
+        svg += 'class="small">%s</text>\n'%year_sums[year]
+                                                
     legend_list = [[min_value, min_value/max_value]]
     if third_q < int(max_value/4) and third_q != 0:
         legend_list.extend([["Q3:%s"%third_q, third_q/max_value],
