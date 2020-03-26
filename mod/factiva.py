@@ -154,7 +154,7 @@ class ParseHtm():
             buf = buf.decode('cp1252') #byte to str
             lines = re.split("\r*\n", buf)
         for line in lines:
-            media = re.split('; ', line[:-1])
+            media = re.split('; ', line)
             if media:
                 medias[media[0]] = media[1:]
 
@@ -208,10 +208,11 @@ class ParseHtm():
 if __name__ == "__main__":
     SUPPORTS_FILE = "support.publi"
     for filename in glob.glob("*.htm"):
-        parse = ParseHtm(filename)
-        print("%s: found %d article(s)"%(filename, len(parse.content)))
-        parse.get_supports(SUPPORTS_FILE)
-        print("%d unknown(s) source(s)" %len(parse.unknowns))
-        for unknown in parse.unknowns:
+        print(filename)
+        run = ParseHtm(filename)
+        print("%s: found %d article(s)"%(filename, len(run.content)))
+        run.get_supports(SUPPORTS_FILE)
+        print("%d unknown(s) source(s)" %len(run.unknowns))
+        for unknown in run.unknowns:
             print("unknown: %s" % unknown)
-        parse.write_prospero_files(".")
+        run.write_prospero_files(".")
