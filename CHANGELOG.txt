@@ -1,4 +1,5 @@
-﻿24/03/2020: month heatmap with year distribution
+﻿09/04/2020: change case first version
+24/03/2020: month heatmap with year distribution
 04/03/2020: add month heatmap
 20/02/2020: hmtl characters in cleaner
 18/02/2020: phi character in cleaner

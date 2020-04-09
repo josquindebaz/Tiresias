@@ -23,6 +23,8 @@ import views.lexis
 import views.newton
 import views.cited_years
 import views.heatmap
+import views.capitals
+
 
 class MainView(tk.Toplevel):
     def __init__(self, parent):
@@ -64,6 +66,8 @@ class MainView(tk.Toplevel):
             command=self.C_cleaning)
         Corrector.add_command(label="Word replace",
             command=self.Word_Replace)
+        Corrector.add_command(label="Case change",
+            command=self.case_change)
         
         PRCmodif = self.addmenu("Projects")
         PRCmodif.add_command(label="Filter",
@@ -108,6 +112,10 @@ class MainView(tk.Toplevel):
         self.reset_view()
         views.wordreplace.ViewReplacer(self)
 
+    def case_change(self):
+        self.reset_view()
+        views.capitals.ViewCap(self)
+        
     def C_filter(self):
         self.reset_view()
         views.filter.ViewFilter(self)
