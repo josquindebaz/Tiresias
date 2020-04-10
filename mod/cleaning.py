@@ -177,6 +177,7 @@ class Cleaner():
                   "\xc2",
                   "&#128073;",
                   "&#8294;",
+                  "&#8195;",
                   "&#8297;",
                   "&#8202;",
                   "&#8200;",],
@@ -280,6 +281,7 @@ class Cleaner():
                 "<b>", "</b>",
                 "<p align='center'>", '<p align="CENTER">',
                 '<center>', '</center>',
+                '</pre>',
                 ]
         number = 0
         #delete tags from the list

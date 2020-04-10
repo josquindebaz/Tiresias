@@ -6,7 +6,6 @@ import views.filter
 import views.qp
 import views.europresse
 import views.wordreplace
-import views.uncapitalise
 import views.qpmap
 import views.scopus
 import views.factiva

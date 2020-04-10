@@ -1,10 +1,18 @@
 import tkinter as tk
 from tkinter import ttk
-from tkinter import filedialog 
+from tkinter import filedialog
 from tkinter.scrolledtext import ScrolledText
 import os
 import re
 from pathlib import Path
+
+accents = ["à", "á", "â", "ã", "ä", "å", "æ", "ã", "ç",
+           "è", "é", "ê", "ë",
+           "ì", "í", "î", "ï", "ĩ",
+           "ð", "ò", "ó", "ô", "õ", "ö", "õ", "ø", "ñ",
+           "ù", "ú", "û", "ü", "ũ", "ý", "þ", "ÿ"]
+upper_accents = [letter.upper() for letter in accents]
+
 
 class ViewCap():
     def __init__(self, parent):
@@ -29,7 +37,7 @@ class ViewCap():
             self.initdir = corpus_path_unix
         else:
             self.initdir = "."
-        
+
         """Frame project / directory"""
         Fr1 = tk.Frame(self.parent)
         Fr1.pack(anchor=tk.W)
@@ -49,13 +57,13 @@ class ViewCap():
                           command=self.sel_dir)
         bnDir.pack(side=tk.LEFT)
 
-               
+
         """Frame parameters"""
         Fr2 = tk.LabelFrame(self.parent,
                             text="Search parameters",
                             borderwidth=1)
         Fr2.pack(fill=tk.X)
-        
+
         lb_min = tk.Label(Fr2, text="minimum")
         lb_min.pack(side=tk.LEFT)
         self.entry_min = tk.Entry(Fr2, width=5)
@@ -84,8 +92,9 @@ class ViewCap():
                                      height=20,
                                      width=60)
         self.found_list.pack(side=tk.LEFT)
-        self.found_list_scrollbar = ttk.Scrollbar(orient="vertical",
-                                                  command=self.found_list)
+        self.found_list_scrollbar = ttk.Scrollbar(Fr3,
+                                                  orient="vertical",
+                                                  command=self.found_list.yview)
         self.found_list.configure(yscrollcommand=self.found_list_scrollbar.set)
         self.found_list_scrollbar.pack(side=tk.LEFT, fill=tk.Y)
         self.found_list.bind('<ButtonRelease-1>', self.found_list_clic)
@@ -100,19 +109,18 @@ class ViewCap():
                                       text="Deselect all",
                                       command=self.desel_all)
         self.bn_desel_all.pack()
-        
+
         self.selected_list = tk.Listbox(Fr3,
                                         height=20,
                                         width=60)
         self.selected_list.pack(side=tk.LEFT)
-        self.selected_list_scrollbar = ttk.Scrollbar(orient="vertical",
-                                                  command=self.selected_list)
+        self.selected_list_scrollbar = ttk.Scrollbar(Fr3,
+                                                     orient="vertical",
+                                                     command=self.selected_list.yview)
         self.selected_list.configure(yscrollcommand=self.selected_list_scrollbar.set)
         self.selected_list_scrollbar.pack(side=tk.LEFT, fill=tk.Y)
         self.selected_list.bind('<ButtonRelease-1>', self.selected_list_clic)
 
-        """FIX scrollbars"""
-        
         """Frame actions"""
         Fr4 = tk.LabelFrame(self.parent,
                             text="Actions",
@@ -133,7 +141,7 @@ class ViewCap():
 
         self.progressbar = ttk.Progressbar(self.parent, mode='determinate')
         self.progressbar.pack(anchor=tk.W, fill=tk.X)
-        
+
         fr_logs = tk.Frame(self.parent)
         fr_logs.pack(fill=tk.X)
         self.result = ScrolledText(fr_logs,
@@ -142,42 +150,47 @@ class ViewCap():
                                    fg="orange")
         self.result.pack(fill=tk.X)
 
-##        """remove me """
-##        self.sel_dir()
-     
-        
+
     def sel_PRC(self):
         self.choosenPRC.set("")
         p = filedialog.askopenfilename(
             filetypes=[("project file","*.prc")],
             title='Select a project',
             initialdir=self.initdir)
-        self.choosenPRC.set(p)
 
-        self.result.delete(1.0, tk.END)
+        if p:
+            self.choosenPRC.set(p)
+            self.result.delete(1.0, tk.END)
 
-        with open(p, 'r', encoding='iso-8859-1') as f:
-            self.prc = f.readlines()
-            self.list_txt = [l[:-1] for l in self.prc[6:-1]]
+            with open(p, 'r', encoding='iso-8859-1') as f:
+                self.prc = f.readlines()
+            candidates = [l[:-1] for l in self.prc[6:-1]]
+            self.list_txt = [txt for txt in candidates if os.path.isfile(txt)]
+            absents = set(candidates)-set(self.list_txt)
 
-        self.result.insert(1.0,
-                           "Found %d .txt(s) in %s\n"%(len(self.list_txt), p))
+            self.result.insert(1.0,
+                               "Found %d .txt(s)\
+in %s\n"%(len(self.list_txt), p))
+            if absents:
+                self.result.insert(1.0,
+                                   "warning !\
+ %d .txt cannot be found: %s\n"%(len(absents), " ".join(absents)))
 
-        self.progressbar['value'] = 0
-        self.progressbar['maximum'] =  len(self.list_txt)
+
+            self.progressbar['value'] = 0
+            self.progressbar['maximum'] =  len(self.list_txt)
 
     def sel_dir(self):
         directory = filedialog.askdirectory(title="Choose directory",
                                                initialdir=self.initdir)
-        
-##        directory = 'C:/Users/gspr/Desktop/traitement'
+
         self.choosenPRC.set(directory)
         self.result.delete(1.0, tk.END)
 
         self.list_txt = []
         for root, rep, files in os.walk(directory):
-            self.list_txt.extend([os.path.join(root, name) 
-                for name in files 
+            self.list_txt.extend([os.path.join(root, name)
+                for name in files
                 if os.path.splitext(name)[1] in [".txt", ".TXT"]
                 ])
 
@@ -188,51 +201,60 @@ class ViewCap():
     def show_groups(self, groups):
         self.found_list.delete(0, tk.END)
         self.selected_list.delete(0, tk.END)
-        
+
         self.result.insert(1.0, "Found %d term(s)\n"%len(groups))
         if len(groups):
             for found in sorted(groups):
                 self.found_list.insert('end', found)
-                
+
     def list_groups(self):
         self.result.insert(1.0, "Searching for uppercase groups\n")
+        self.progressbar['value'] = 0
+        self.parent.update()
         minimum = int(self.entry_min.get())
         maximum = int(self.entry_max.get())
-        aggregate = []
-        motif = re.compile(r"[A-ZÉÈÜÄËÖÊ\-]{%d,%d}"%(minimum, maximum))
-        for filename in self.list_txt:
+        aggregate = set([])
+        motif = re.compile(r"[A-Z%s\-]{%d,%d}"%("".join(upper_accents),
+                                                minimum,
+                                                maximum))
+        for c, filename in enumerate(self.list_txt):
+            self.progressbar['value'] = c+1
+            self.parent.update()
             with open(filename, 'r') as pointer:
                 content = pointer.read()
-            matches = motif.findall(content)
-            aggregate.extend(list(set(matches)))
-        self.show_groups(aggregate)
+            aggregate.update(set(motif.findall(content)))
+        self.show_groups(list(aggregate))
 
     def list_caps(self):
         self.result.insert(1.0,
                            "Searching for terms with first letter capitalized\n")
-        aggregate = []
-        motif = re.compile(r"([A-Z][a-z]+ ?)+")
-        for filename in self.list_txt:
+        self.progressbar['value'] = 0
+        self.parent.update()
+        aggregate = set([])
+        motif = re.compile(r"[A-Z%s][a-z%s]+"%("".join(upper_accents),
+                                               "".join(accents)))
+        for c, filename in enumerate(self.list_txt):
+            self.progressbar['value'] = c+1
+            self.parent.update()
             with open(filename, 'r') as pointer:
                 content = pointer.read()
-            matches = motif.findall(content)
-            aggregate.extend(list(set(matches)))
-        self.show_groups(aggregate)
+            aggregate.update(set(motif.findall(content)))
+        self.show_groups(list(aggregate))
 
     def found_list_clic(self, something):
-        select =  self.found_list.curselection()
+        select = self.found_list.curselection()
         self.selected_list.insert(tk.END,
                                   self.found_list.get(select))
         self.sort_listbox(self.selected_list)
-        self.found_list.delete(select)        
+        self.found_list.delete(select)
 
     def selected_list_clic(self, something):
-        select =  self.selected_list.curselection()
+        select = self.selected_list.curselection()
         self.found_list.insert(tk.END,
                                   self.selected_list.get(select))
         self.sort_listbox(self.found_list)
         self.selected_list.delete(select)
-   
+
     def sort_listbox(self, listbox):
         """
         function to sort listbox items
@@ -251,25 +273,40 @@ class ViewCap():
     def desel_all(self):
         for item in list(self.selected_list.get(0, tk.END)):
             self.found_list.insert(tk.END, item)
-            self.selected_list.delete(0)            
+            self.selected_list.delete(0)
 
     def lower_case(self):
         selected = list(self.selected_list.get(0, tk.END))
         if selected and self.list_txt:
+            self.result.insert(1.0, "Lowering case\n")
             self.transform(selected, "lower")
+        else:
+            self.result.insert(1.0, "Nothing selected\n")            
 
     def capitalize_case(self):
         selected = list(self.selected_list.get(0, tk.END))
         if selected and self.list_txt:
+            self.result.insert(1.0, "Capitalizing\n")
             self.transform(selected, "capitalize")
-
+        else:
+            self.result.insert(1.0, "Nothing selected\n")
+            
     def upper_case(self):
         selected = list(self.selected_list.get(0, tk.END))
         if selected and self.list_txt:
+            self.result.insert(1.0, "Uppering case\n")
             self.transform(selected, "upper")
+        else:
+            self.result.insert(1.0, "Nothing selected\n")
             
     def transform(self, selected, action):
-        for filename in self.list_txt:
+        self.selected_list.delete(0, tk.END)
+        self.found_list.delete(0, tk.END)
+        self.progressbar['value'] = 0
+        self.parent.update()
+        for c, filename in enumerate(self.list_txt):
+            self.progressbar['value'] = c+1
+            self.parent.update()
             with open(filename, 'r') as pointer:
                 content = pointer.read()
             change = 0
@@ -291,26 +328,4 @@ class ViewCap():
                     content = re.sub(item, corrected, content)
             if change:
                 with open(filename, 'w') as pointer:
-                    pointer.write(content)          
-
-##                                                    if (action == "capitalize"):
-##                                                            neo = "-".join(map(lambda x : x.capitalize(),M.split("-")))
-##                                                            neo = re.sub("(\S)É","\\1é",neo)
-##                                                            neo = re.sub("(\S)È","\\1è",neo)
-##                                                            neo = re.sub("(\S)Ü","\\1ü",neo)
-##                                                            neo = re.sub("(\S)Ä","\\1ä",neo)
-##                                                            neo = re.sub("(\S)Ë","\\1ë",neo)
-##                                                            neo = re.sub("(\S)Ö","\\1ö",neo)
-##                                                            neo = re.sub("(\S)Ê","\\1ê",neo)
-##                                                    elif (action == "lower"):
-##                                                            neo = M.lower()
-##                                                            neo = re.sub("É","é",neo)
-##                                                            neo = re.sub("È","è",neo)
-##                                                            neo = re.sub("Ü","ü",neo)
-##                                                            neo = re.sub("Ä","ä",neo)
-##                                                            neo = re.sub("Ë","ë",neo)
-##                                                            neo = re.sub("(\S)Ö","\\1ö",neo)
-##                                                            neo = re.sub("(\S)Ê","\\1ê",neo)
-##
-##
-##
+                    pointer.write(content)
