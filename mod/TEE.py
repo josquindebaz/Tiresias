@@ -103,15 +103,53 @@ class ProcessArticle(object):
         path = os.path.join(dest, filename + ".ctx")        
         with open(path, 'wb') as f:
             f.write(ctx)
+            
+class IndexArticles(object):
+    def __init__(self):
+        dest = "C:\\corpus\\EnergiCorpus\\FR\\TEE\\article_list.txt"
+        url = "https://www.transitionsenergies.com"
 
+        article_list = []
 
+        while(url):
+            print(url)
+            self.get_page(url)
+            for article in self.get_articles():
+                if article not in article_list:
+                    article_list.append(article)
+            print(len(article_list))
+            url = self.get_next()
 
+        with open(dest, 'w') as list_file:
+            list_file.write("\r\n".join(article_list))
 
         
-
-
+            
+            
     
+    def get_page(self, url):
+        with urllib.request.urlopen(url) as page:
+            self.soup = BeautifulSoup(page, "lxml")
 
-url = "https://www.transitionsenergies.com/renouvelables-trop-ou-trop-peu-electricite/"
-ProcessArticle(url)
+    def get_next(self):
+        for links in self.soup.find_all('a'):
+            href =  links.get('href')
+            if href:
+                if re.search('/page/', href):
+                    return(href)
+        return False
 
+    def get_articles(self):      
+        articles = []
+        for article in self.soup.find_all('article'):
+            for link in article.find_all('a'):
+                href = link['href']
+                if not re.search("/category/", href) and href not in articles:
+                    articles.append(href)
+        return articles
+
+
+##url = "https://www.transitionsenergies.com/renouvelables-trop-ou-trop-peu-electricite/"
+##ProcessArticle(url)
+
+IndexArticles()
