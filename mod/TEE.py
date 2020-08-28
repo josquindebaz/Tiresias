@@ -31,17 +31,19 @@ def formate_date(date):
     day = "%s"%("%02d" % int(date[0]))
     return "%s/%s/%s"%(day, months[date[1]], date[2])
 
-def formate_ctx(title, date):
+def formate_ctx(title, date, url):
     ctx = [
         "fileCtx0005",
         title,
         'Transitions & Energies',
-        "", "",
+        "",
+        "",
         date,
         "Transitions & Energies",
         'Presse sectorielle',
         '',
-        "", "",
+        "",
+        url,
         "Processed by Tiresias on %s"\
             % datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
         "", "n", "n", ""
@@ -85,7 +87,7 @@ class ProcessArticle(object):
                 content += el.text
 
         date = formate_date(date)
-        ctx = formate_ctx(title, date)
+        ctx = formate_ctx(title, date, url)
 
         ctx_cleaner =  Cleaner(ctx.encode('utf-8'))
         ctx = ctx_cleaner.content.encode('latin-1', 'xmlcharrefreplace') #to bytes
