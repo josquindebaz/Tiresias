@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Author Josquin Debaz
 # GPL 3
-#27/08/2020
+# 28/08/2020
 
 import urllib.request, urllib.parse
 from bs4 import BeautifulSoup
@@ -121,10 +121,7 @@ class IndexArticles(object):
             url = self.get_next()
 
         with open(dest, 'w') as list_file:
-            list_file.write("\r\n".join(article_list))
-
-        
-            
+            list_file.write("\r\n".join(article_list))          
             
     
     def get_page(self, url):
@@ -148,8 +145,42 @@ class IndexArticles(object):
                     articles.append(href)
         return articles
 
+class RetreiveArticles(object):
+    def __init__(self):
+        source = "C:\\corpus\\EnergiCorpus\\FR\\TEE\\article_list.txt"
+        donepath = "C:\\corpus\\EnergiCorpus\\FR\\TEE\\article_retreived.txt"
+        with open(source, 'r') as sourcefile:
+            to_do = [line for line in re.split('\n\n', sourcefile.read())]
+            #print(to_do[:5])
 
-##url = "https://www.transitionsenergies.com/renouvelables-trop-ou-trop-peu-electricite/"
-##ProcessArticle(url)
+        if not os.path.isfile(donepath):
+            with open(donepath, 'w') as donefile:
+                donefile.write("")
 
-IndexArticles()
+        with open(donepath, 'r') as donefile:
+            done = [line for line in re.split('\n\n', donefile.read())]
+            #print(done[:5])
+
+        for url in to_do[0:]:
+            #print(url)
+            if url not in done:
+                ProcessArticle(url)
+                done.append(url)
+        
+                with open(donepath, 'a') as donefile:
+                    donefile.write("%s\r\n"%url)
+##            else:
+##                print("already done")
+
+
+
+"""
+    create a list of all articles found on the website transitionsenergies.com
+    store in a file  "C:\\corpus\\EnergiCorpus\\FR\\TEE\\article_list.txt"
+"""
+#IndexArticles()
+
+"""
+    Process all undone articles in the index
+"""
+RetreiveArticles()
