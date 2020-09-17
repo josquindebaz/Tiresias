@@ -105,6 +105,57 @@ class ProcessArticle(object):
         path = os.path.join(dest, filename + ".ctx")        
         with open(path, 'wb') as f:
             f.write(ctx)
+
+class IndexNewArticles(object):
+    def __init__(self):
+        to_do = "C:\\corpus\\EnergiCorpus\\FR\\TEE\\article_list.txt"
+        url = "https://www.transitionsenergies.com"
+        donepath = "C:\\corpus\\EnergiCorpus\\FR\\TEE\\article_retreived.txt"
+
+        with open(donepath, 'r') as donefile:
+            article_list = [line for line in re.split('\n\n', donefile.read())]
+        print(len(article_list), article_list[:5])
+     
+        while(url):
+            print(url)
+            
+            self.get_page(url)
+            list_to_do = []
+            for article in self.get_articles():
+                list_to_do.append(article not in article_list)
+                if article not in article_list:
+                    article_list.append(article)
+            print(len(article_list))
+            
+            """Next page if something was new"""
+            if set(list_to_do) != {False}:
+                url = self.get_next()
+            else:
+                url = False
+                
+        with open(to_do, 'w') as list_file:
+            list_file.write("\r\n".join(article_list))              
+
+    def get_page(self, url):
+        with urllib.request.urlopen(url) as page:
+            self.soup = BeautifulSoup(page, "lxml")
+
+    def get_articles(self):      
+        articles = []
+        for article in self.soup.find_all('article'):
+            for link in article.find_all('a'):
+                href = link['href']
+                if not re.search("/category/", href) and href not in articles:
+                    articles.append(href)
+        return articles
+
+    def get_next(self):
+        for links in self.soup.find_all('a'):
+            href =  links.get('href')
+            if href:
+                if re.search('/page/', href):
+                    return(href)
+        return False
             
 class IndexArticles(object):
     def __init__(self):
@@ -181,6 +232,9 @@ class RetreiveArticles(object):
     store in a file  "C:\\corpus\\EnergiCorpus\\FR\\TEE\\article_list.txt"
 """
 #IndexArticles()
+
+
+IndexNewArticles()
 
 """
     Process all undone articles in the index
