@@ -24,6 +24,7 @@ import views.newton
 import views.cited_years
 import views.heatmap
 import views.capitals
+import views.openbooks
 
 
 class MainView(tk.Toplevel):
@@ -86,6 +87,8 @@ class MainView(tk.Toplevel):
                              command=self.C_lexis)
         PRCdb.add_command(label="Newton",
                              command=self.C_newton)
+        PRCdb.add_command(label="books.openedition",
+                             command=self.C_openbooks)
         
         Viz = self.addmenu("Dataviz")
         Viz.add_command(label="QP Atlas",
@@ -143,6 +146,11 @@ class MainView(tk.Toplevel):
     def C_newton(self):
         self.reset_view()
         views.newton.ViewNewton(self)
+
+    def C_openbooks(self):
+        self.reset_view()
+        views.openbooks.ViewOpenbooks(self)
+        
 
     def QpAtlas(self):
         self.reset_view()

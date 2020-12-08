@@ -14,6 +14,7 @@ import views.newton
 import views.cited_years
 import views.heatmap
 import views.capitals
+import views.openbooks
 
 class MainView(tk.Toplevel):
     def __init__(self, parent):
@@ -25,7 +26,7 @@ class MainView(tk.Toplevel):
 
         #views.newton.ViewNewton(self)
         #views.uncapitalise.ViewReplacer(self)
-        views.capitals.ViewCap(self)
+        views.openbooks.ViewOpenbooks(self)
 
 if __name__ == '__main__':
     root = tk.Tk()

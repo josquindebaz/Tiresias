@@ -54,3 +54,10 @@ class Publi():
             for k, v in self.codex.items()])
         with open(self.path, 'w', encoding='cp1252') as handle:
             handle.writelines(sources)
+
+
+if __name__ == '__main__':
+    with open("support.publi", 'r') as filehandle:
+        content = filehandle.readlines()
+        print(content[:1])
+    
