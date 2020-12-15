@@ -15,7 +15,7 @@ import datetime
 
 
 try:
-    import cleaning
+    from cleaning import Cleaner
 except:
     from mod.cleaning import Cleaner
 
@@ -39,27 +39,30 @@ def file_name(dest, date, prefix):
 def extract_chapter(soup):
     titre = soup.find("h1", "title").text
     text = titre +  "\r\n.\r\n\r\n"    
-
     notes = {}
-    for note in soup.find_all("p", {"class": "notesbaspage"}):
-        notes[note.a.text] = note.contents[1].string.strip()
-
+    notesoup = soup.find("div", {"id": "notes"})
+    if notesoup:
+        for note in notesoup.find_all("p"):
+            notes[note.a.text] = " ".join([str(el.string).strip()
+                                          for el in note.contents[1:]])
+              
     for paragraph in soup.find_all("p", {"class": "texte"}):
-        for node in paragraph.children:
-            if node.name != 'span':
-                if node.name == "a":
-                    if "class" in node.attrs:
-                        if node["class"] == ['footnotecall']:
-                            text += " [%s] " % re.sub(".$", "",
-                                                      notes[node.string])
+        if not paragraph.find("a", {"class": "FootnoteSymbol"}):
+            for node in paragraph.children:
+                if node.name != 'span':
+                    if node.name == "a":
+                        if "class" in node.attrs:
+                            if node["class"] == ['footnotecall']:
+                                text += " [%s] " % re.sub(".$", "",
+                                                          notes[node.string])
+                        else:
+                            #print(node.attrs)
+                            pass
                     else:
-                        #print(node.attrs)
-                        pass
-                else:
-                    try:
-                        text += node.string
-                    except:
-                        text += str(node.string)
+                        try:
+                            text += node.string
+                        except:
+                            text += str(node.string)
         text += "\r\n\r\n"
     return text
 
@@ -160,8 +163,11 @@ def traite_url(url, save_dir="."):
 
 if __name__ == "__main__":
     #url = "https://books.openedition.org/igpde/6841"
-    #url = "https://books.openedition.org/igpde/6486"
-    url = "https://books.openedition.org/igpde/6546"
-    traite_url(url, ".")
+##    url = "https://books.openedition.org/igpde/6486"
+##    url = "http://books.openedition.org/igpde/6591"
+    url = "https://books.openedition.org/editionsmsh/12006"
+    #url = "https://books.openedition.org/editionsmsh/12030"
+    #url = "https://books.openedition.org/enseditions/12892"
+    traite_url(url, "C:\\Users\\gspr\\Desktop\\traitement")
         
   
