@@ -1,4 +1,5 @@
-﻿08/12/2020: openbooks first version
+﻿18/12/2020: openbooks rc and .exe
+08/12/2020: openbooks first version
 10/04/2020: change case rc
 09/04/2020: change case first version
 24/03/2020: month heatmap with year distribution
