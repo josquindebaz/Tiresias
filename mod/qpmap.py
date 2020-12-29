@@ -33,6 +33,7 @@ class Mapper():
         self.dpt_values = {}
         self.department_paths = {}
         self.departement_numbers = {}
+        self.departement_prefs = {}
         self.limits = [None, None, None]
         self.legend = [None, None, None, None]
 
@@ -52,9 +53,10 @@ class Mapper():
         with open("data/departement_path.tsv", 'rb') as dptpthfile:
             dptpth = dptpthfile.read().decode('utf-8')
             for dpt in re.split("\r*\n", dptpth)[:-1]:
-                dpt_number, dpt_name, dpt_path = re.split("\t", dpt)
+                dpt_number, dpt_name, dpt_path, dpt_pref = re.split("\t", dpt)
                 self.department_paths[dpt_name] = dpt_path
                 self.departement_numbers[dpt_name] = dpt_number
+                self.departement_prefs[dpt_name] = dpt_pref
 
     def cumulated_fourth(self):
         """return four quarters from cumulated values"""
@@ -142,7 +144,7 @@ class Mapper():
         mapcontent += "\n\n"
 
         for dpt, path in self.department_paths.items():
-            mapcontent += "  <path style=\"stroke: silver; fill: "
+            mapcontent += "  <path style=\"stroke: white; fill: "
             if dpt in self.dpt_values:
                 if self.dpt_values[dpt] <= self.limits[0]:
                     mapcontent += "url(#P0)"
@@ -174,3 +176,59 @@ class Mapper():
 
         return mapcontent 
 
+
+    def draw_map_graduated(self):
+        """draw svg graduated circles map"""
+        max_r = 50
+        color = "rgb(1, 144, 3)"
+
+        mapcontent = """<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+ """
+        max_size = max(self.dpt_values.values())
+
+        for i in [3, 3/2, 1]:
+            mapcontent += """
+ <circle cx = "%s" cy = "%s" r = "%d"\
+ fill="%s" fill-opacity="0.4" />"""%(max_r+5, 2*max_r+5-max_r/i, max_r/i, color)
+
+        for i in [3, 3/2, 1]:
+            mapcontent += """
+<text x="%s" y="%d" font-family="sans-serif" font-size="12" >%s\
+</text>"""%(max_r+5, 2*max_r+max_r/2-2*max_r/i, int(max_size/i))
+
+        mapcontent += "\n\n"
+
+        for dpt, path in self.department_paths.items():
+            mapcontent += "  <path style=\"stroke: silver; fill: white;"
+            mapcontent += "\" d=\"%s\">"%path
+            mapcontent += "<title>(%s) %s"%(self.departement_numbers[dpt],
+                                            dpt)
+            if dpt in self.dpt_values:
+                mapcontent += ": %d"%self.dpt_values[dpt]
+
+            mapcontent += "</title></path>\n"
+ 
+
+        for dpt in self.dpt_values:
+            x, y = re.split(",", self.departement_prefs[dpt])
+            r = self.dpt_values[dpt]/max_size*max_r
+            mapcontent += """
+ <circle cx = "%s" cy = "%s" r = "%s"\
+ fill="%s" fill-opacity="0.4">"""%(x, y, r, color)
+            mapcontent += "<title>(%s) %s"%(self.departement_numbers[dpt],
+                                            dpt)
+            mapcontent += ": %d"%self.dpt_values[dpt]
+            mapcontent += "</title></circle>"
+
+        mapcontent += "\n</svg>"
+
+        return mapcontent
+         
+
+if __name__ == '__main__':
+    testing = "Hérault\t142\nEure\t100\nAin\t50\nParis\t12\nGard\t140\nFinistère\t22\nRéunion\t25\nMorbihan\t43\nLoiret\t45\nDrôme\t32"
+    test = Mapper(testing)
+    svg = test.draw_map_graduated()
+    with open('test.svg', 'w') as fsvg:
+        fsvg.write(svg)

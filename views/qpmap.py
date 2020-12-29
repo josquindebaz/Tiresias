@@ -63,9 +63,14 @@ class ViewPaster():
                                    text="Quarter",
                                    variable=self.method,
                                    value="fourth")
-        r3_method.pack()
+        r3_method.pack(side=tk.LEFT)
+        r4_method = tk.Radiobutton(fr3,
+                                   text="Proportional circles",
+                                   variable=self.method,
+                                   value="graduated")
+        r4_method.pack()
         self.method.set("cumulated_fourth")
-        
+         
     def paste_list(self):
         self.reset()
         self.data_list.insert("end", self.data_list.clipboard_get())
@@ -83,8 +88,12 @@ class ViewPaster():
                 filetypes = [("svg Files","*.svg")])
 
             PROCESS = Mapper(data)
-            PROCESS.make_legend(method=self.method.get())
-            atlas = PROCESS.draw_map()
+            method = self.method.get()
+            if method == "graduated":
+                atlas = PROCESS.draw_map_graduated()
+            else:
+                PROCESS.make_legend(method=method)
+                atlas = PROCESS.draw_map()
             with open(filename, 'wb') as pointer:
                 pointer.write(atlas.encode('utf-8'))
             webbrowser.open(filename, 0, 1)
