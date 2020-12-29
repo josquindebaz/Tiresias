@@ -144,7 +144,7 @@ class Mapper():
         mapcontent += "\n\n"
 
         for dpt, path in self.department_paths.items():
-            mapcontent += "  <path style=\"stroke: white; fill: "
+            mapcontent += "  <path style=\"stroke: gray; fill: "
             if dpt in self.dpt_values:
                 if self.dpt_values[dpt] <= self.limits[0]:
                     mapcontent += "url(#P0)"
@@ -155,7 +155,8 @@ class Mapper():
                 else:
                     mapcontent += "url(#P3)"
             else:
-                mapcontent += "rgb(195, 195, 195);"
+                #mapcontent += "rgb(195, 195, 195);"
+                mapcontent += "rgb(237, 237, 237);"
             mapcontent += "\" d=\"%s\">"%path
             mapcontent += "<title>(%s) %s"%(self.departement_numbers[dpt],
                                             dpt)
@@ -194,7 +195,7 @@ class Mapper():
 
         for i in [3, 3/2, 1]:
             mapcontent += """
-<text x="%s" y="%d" font-family="sans-serif" font-size="12" >%s\
+<text x="%s" y="%d" font-family="sans-serif" font-size="16" >%s\
 </text>"""%(max_r+5, 2*max_r+max_r/2-2*max_r/i, int(max_size/i))
 
         mapcontent += "\n\n"
@@ -210,16 +211,25 @@ class Mapper():
             mapcontent += "</title></path>\n"
  
 
-        for dpt in self.dpt_values:
-            x, y = re.split(",", self.departement_prefs[dpt])
-            r = self.dpt_values[dpt]/max_size*max_r
+        for dpt in self.department_paths:
+            if dpt in self.dpt_values:
+                x, y = re.split(",", self.departement_prefs[dpt])
+                r = self.dpt_values[dpt]/max_size*max_r
+                mapcontent += """
+     <circle cx = "%s" cy = "%s" r = "%s"\
+     fill="%s" fill-opacity="0.4">"""%(x, y, r, color)
+                mapcontent += "<title>(%s) %s"%(self.departement_numbers[dpt],
+                                                dpt)
+                mapcontent += ": %d"%self.dpt_values[dpt]
+                mapcontent += "</title></circle>"
+
+        height = 520
+        for dpt in set(self.dpt_values.keys()).difference(\
+                        set(self.department_paths.keys())):
             mapcontent += """
- <circle cx = "%s" cy = "%s" r = "%s"\
- fill="%s" fill-opacity="0.4">"""%(x, y, r, color)
-            mapcontent += "<title>(%s) %s"%(self.departement_numbers[dpt],
-                                            dpt)
-            mapcontent += ": %d"%self.dpt_values[dpt]
-            mapcontent += "</title></circle>"
+<text x="120" y="%d" font-family="sans-serif" font-size="12">%s:\
+%d</text>"""%(height, dpt, self.dpt_values[dpt])
+            height += 13
 
         mapcontent += "\n</svg>"
 
