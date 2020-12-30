@@ -29,7 +29,7 @@ def quartiles(values):
 
 class Mapper():
     """take a list with department[\t]value[\r\n] to produce a map"""
-    def __init__(self, content):
+    def __init__(self, content, pathfile="data/departement_path.tsv"):
         self.dpt_values = {}
         self.department_paths = {}
         self.departement_numbers = {}
@@ -39,7 +39,7 @@ class Mapper():
 
         content = harmonize(content)
         self.get_dpt_values(content)
-        self.get_dpt_paths()
+        self.get_dpt_paths(pathfile)
 
     def get_dpt_values(self, content):
         """put values in dictionnary"""
@@ -48,9 +48,9 @@ class Mapper():
             if (len(splitter) == 2 and splitter[0] != ''):
                 self.dpt_values[splitter[0]] = int(splitter[1])
 
-    def get_dpt_paths(self):
+    def get_dpt_paths(self, pathfile):
         """fetch svg path from datafile"""
-        with open("data/departement_path.tsv", 'rb') as dptpthfile:
+        with open(pathfile, 'rb') as dptpthfile:
             dptpth = dptpthfile.read().decode('utf-8')
             for dpt in re.split("\r*\n", dptpth)[:-1]:
                 dpt_number, dpt_name, dpt_path, dpt_pref = re.split("\t", dpt)
@@ -179,27 +179,48 @@ class Mapper():
 
 
     def draw_map_graduated(self):
-        """draw svg graduated circles map"""
-        max_r = 50
+        """draw svg graduated square map"""
+        
         color = "rgb(1, 144, 3)"
+
+        max_size = max(self.dpt_values.values())
+        s_max_v = max_size**2
+      
+        if max_size > 64:
+            r_max = 64
+        elif max_size < 42:
+            r_max = 42
+        else:
+            r_max = max_size
+        s_max_d = r_max**2        
+         
 
         mapcontent = """<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
  """
-        max_size = max(self.dpt_values.values())
 
-        for i in [3, 3/2, 1]:
+        #Draw legend squares
+        for i in [1, 2, 8]:
+            a = (s_max_d/i)**.5
             mapcontent += """
- <circle cx = "%s" cy = "%s" r = "%d"\
- fill="%s" fill-opacity="0.4" />"""%(max_r+5, 2*max_r+5-max_r/i, max_r/i, color)
-
-        for i in [3, 3/2, 1]:
+ <rect x="%s" y="%s" width="%d" height="%s"\
+ fill="%s" fill-opacity="0.4" />"""%(5,
+                                     5,
+                                     a,
+                                     a,
+                                     color)
+        #Draw legend digits
+        for i in [1, 2, 8]:
+            a = (s_max_d/i)**.5
             mapcontent += """
-<text x="%s" y="%d" font-family="sans-serif" font-size="16" >%s\
-</text>"""%(max_r+5, 2*max_r+max_r/2-2*max_r/i, int(max_size/i))
+<text x="%s" y="%d" font-family="sans-serif" font-size="12" >%s\
+</text>"""%(a-9,
+            a+3,
+            int(max_size/i))
 
         mapcontent += "\n\n"
 
+        #Draw paths
         for dpt, path in self.department_paths.items():
             mapcontent += "  <path style=\"stroke: silver; fill: white;"
             mapcontent += "\" d=\"%s\">"%path
@@ -209,20 +230,27 @@ class Mapper():
                 mapcontent += ": %d"%self.dpt_values[dpt]
 
             mapcontent += "</title></path>\n"
- 
 
+        #Draw squares
         for dpt in self.department_paths:
             if dpt in self.dpt_values:
                 x, y = re.split(",", self.departement_prefs[dpt])
-                r = self.dpt_values[dpt]/max_size*max_r
+
+                a = (self.dpt_values[dpt]/max_size*s_max_d)**.5
+
                 mapcontent += """
-     <circle cx = "%s" cy = "%s" r = "%s"\
-     fill="%s" fill-opacity="0.4">"""%(x, y, r, color)
+ <rect x="%s" y="%s" width="%s" height="%s"\
+ fill="%s" fill-opacity="0.4" >"""%(float(x)-a/2,
+                                    float(y)-a/2,
+                                    a,
+                                    a,
+                                    color)
                 mapcontent += "<title>(%s) %s"%(self.departement_numbers[dpt],
                                                 dpt)
                 mapcontent += ": %d"%self.dpt_values[dpt]
-                mapcontent += "</title></circle>"
+                mapcontent += "</title></rect>"
 
+        #Dpt with no path
         height = 520
         for dpt in set(self.dpt_values.keys()).difference(\
                         set(self.department_paths.keys())):
@@ -236,9 +264,3 @@ class Mapper():
         return mapcontent
          
 
-if __name__ == '__main__':
-    testing = "Hérault\t142\nEure\t100\nAin\t50\nParis\t12\nGard\t140\nFinistère\t22\nRéunion\t25\nMorbihan\t43\nLoiret\t45\nDrôme\t32"
-    test = Mapper(testing)
-    svg = test.draw_map_graduated()
-    with open('test.svg', 'w') as fsvg:
-        fsvg.write(svg)

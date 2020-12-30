@@ -1,4 +1,5 @@
-﻿28/12/2020: proportional circles in QPmaps
+﻿29/12/2020: square proportional rather than circles
+28/12/2020: proportional circles in QPmaps
 18/12/2020: openbooks rc and .exe
 08/12/2020: openbooks first version
 10/04/2020: change case rc

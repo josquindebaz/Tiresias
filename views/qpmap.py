@@ -65,7 +65,7 @@ class ViewPaster():
                                    value="fourth")
         r3_method.pack(side=tk.LEFT)
         r4_method = tk.Radiobutton(fr3,
-                                   text="Proportional circles",
+                                   text="Proportional",
                                    variable=self.method,
                                    value="graduated")
         r4_method.pack()
