@@ -49,15 +49,31 @@ class Publi():
 
     def write(self):
         """write as file"""
-        sources = sorted(["%s; %s; %s; %s\r\n" %\
+        sources = sorted(["%s; %s; %s; %s\n" %\
             (k, v['source'], v['type'], v['abr'])\
             for k, v in self.codex.items()])
         with open(self.path, 'w', encoding='cp1252') as handle:
             handle.writelines(sources)
 
+    def fusion(self, candidats_file):
+        with open(candidats_file, 'rb') as handle:
+            buf = (handle.read().decode('cp1252'))        
+        lines = re.split('\r*\n', buf)
+        for candidat in [re.split(";\s+", support) for support in lines]:
+            if len(candidat) == 4:
+                if candidat[0] not in self.codex:
+                    self.add(candidat[0],
+                             candidat[1],
+                             candidat[2],
+                             candidat[3])
+
 
 if __name__ == '__main__':
-    with open("support.publi", 'r') as filehandle:
-        content = filehandle.readlines()
-        print(content[:1])
-    
+##    with open("support.publi", 'r') as filehandle:
+##        content = filehandle.readlines()
+##        print(content[:1])
+    test = Publi()
+    print(len(test.codex))
+    test.fusion(r"C:\Users\gspr\Downloads\support.publi")
+    print(len(test.codex))
+    test.write()
