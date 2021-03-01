@@ -9,6 +9,9 @@ import os
 import datetime
 import time
 
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
+
 VERBOSE = 0
 
 class QuestionParlementaire(object):
