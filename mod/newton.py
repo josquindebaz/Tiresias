@@ -85,11 +85,16 @@ class parseNewton(object):
             '&#352;': 'S',
             '&#353;': 's',
             '&#357;': "t'",
+            '&#366;': 'U',
             '&#367;': 'u',
+            '&#381;': 'Z',
             '&#382;': 'z',
             '&#8211;': '-',
+            '&#8216;': "'",
+            '&#8218;': "'",
             '&#8220;': '"',
             '&#8222;': '"',
+            '&#8230;': '...',
             '&amp;': '&',
             }
         
@@ -120,7 +125,10 @@ class parseNewton(object):
 ##                print(meta_data)
         article_data["observations"] = ""
         article_data['text'] = content.find(class_="article-content").text.strip()
-        return article_data
+##        for element in article_data:
+##            article_data[element] = self.replace_cz(article_data[element])
+        return {element: self.replace_cz(value)
+                for element, value in article_data.items()}
 
 
 ##    def get_articles_old(self, text):
