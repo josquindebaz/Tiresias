@@ -1,4 +1,5 @@
-﻿01/03/2021: bypass ssl certif pb with assemblee
+﻿12/05/2021: format modification for Newton
+01/03/2021: bypass ssl certif pb with assemblee
 29/12/2020: square proportional rather than circles
 28/12/2020: proportional circles in QPmaps
 18/12/2020: openbooks rc and .exe
