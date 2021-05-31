@@ -55,7 +55,6 @@ class parseNewton(object):
             while id_article in self.articles.keys():
                 id_article = random.randint(0, 1000000)                
             self.articles[id_article] = self.process(article)#content
-            
 
 
     def get_articles(self, text):
@@ -71,24 +70,28 @@ class parseNewton(object):
 
 
     def replace_cz(self, text):
-        latin1 = text.encode('ISO-8859-1', 'xmlcharrefreplace')
-        text = latin1.decode('ISO-8859-1')
+##        latin1 = text.encode('ISO-8859-1', 'xmlcharrefreplace')
+##        text = latin1.decode('ISO-8859-1')
+
+        latin2 = text.encode('iso-8859-2', 'xmlcharrefreplace')
+        text = latin2.decode('iso-8859-2')
+        
         table = {
-            '&#268;': 'C',
-            '&#269;': 'c',
-            '&#271;': "d'",
-            "&#282;": 'E',
-            "&#283;": 'e',
-            '&#328;': 'n',
-            '&#344;': 'R',
-            "&#345;": 'r',
-            '&#352;': 'S',
-            '&#353;': 's',
-            '&#357;': "t'",
-            '&#366;': 'U',
-            '&#367;': 'u',
-            '&#381;': 'Z',
-            '&#382;': 'z',
+##            '&#268;': 'Č',
+##            '&#269;': 'č',
+##            '&#271;': "d'",
+##            "&#282;": 'Ě',
+##            "&#283;": 'ě',
+##            '&#328;': 'ň',
+##            '&#344;': 'Ř',
+##            "&#345;": 'ř',
+##            '&#352;': 'Š',
+##            '&#353;': 'š',
+##            '&#357;': "ť",
+##            '&#366;': 'Ů',
+##            '&#367;': 'ů',
+##            '&#381;': 'Ž',
+##            '&#382;': 'ž',
             '&#8211;': '-',
             '&#8216;': "'",
             '&#8218;': "'",
@@ -97,13 +100,11 @@ class parseNewton(object):
             '&#8230;': '...',
             '&amp;': '&',
             }
-        
         for xml, replace in table.items():
             text = re.sub(xml, replace, text)
         if re.search(r"&#\d*;", text):
             print("Don't know how to replace :",
-                  ", ".join(re.findall(r"&#\d*;", text))
-                  )
+                  ", ".join(re.findall(r"&#\d*;", text)))
         return text
 
     def process(self, content):
@@ -125,8 +126,6 @@ class parseNewton(object):
 ##                print(meta_data)
         article_data["observations"] = ""
         article_data['text'] = content.find(class_="article-content").text.strip()
-##        for element in article_data:
-##            article_data[element] = self.replace_cz(article_data[element])
         return {element: self.replace_cz(value)
                 for element, value in article_data.items()}
 
@@ -190,6 +189,7 @@ class parseNewton(object):
     def write_prospero_files(self, save_dir=".", cleaning=False):
         """for each article, write txt and ctx in a given directory"""
         for article in self.articles.values():
+            
             filepath = file_name(article['date'],
                                  article['root'],
                                  save_dir)
@@ -201,9 +201,11 @@ class parseNewton(object):
                 text = text_cleaner.content
             else:
                 text = article['text']
+                
+            #to bytes
+            text = text.encode('iso-8859-2', 'xmlcharrefreplace')
             with open(path, 'wb') as file:
-                #to bytes
-                file.write(text.encode('latin-1', 'xmlcharrefreplace'))
+                file.write(text)
             ctx = [
                 "fileCtx0005",
                 article['title'],
@@ -219,7 +221,7 @@ class parseNewton(object):
                 "", "n", "n", ""
                 ]
             ctx = "\r\n".join(ctx)
-            ctx = ctx.encode('latin-1', 'xmlcharrefreplace') #to bytes
+            ctx = ctx.encode('iso-8859-2', 'xmlcharrefreplace') #to bytes
             path = os.path.join(save_dir, filepath + ".ctx")
             with open(path, 'wb') as file:
                 file.write(ctx)
