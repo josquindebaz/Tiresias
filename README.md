@@ -1,6 +1,11 @@
 ﻿Tiresias made by Josquin Debaz for association Doxa (http://prosperologie.org)
 
-__This version use Python3__ and BeautifulSoup4 -> https://tedboy.github.io/bs4_doc/2_installation.html
+__This version use Python3__ 
+and need:
+
+- BeautifulSoup4 -> https://tedboy.github.io/bs4_doc/2_installation.html
+- Pandas
+
 
 
 Code available on https://github.com/josquindebaz/Tiresias

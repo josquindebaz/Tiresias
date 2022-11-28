@@ -25,6 +25,7 @@ import views.cited_years
 import views.heatmap
 import views.capitals
 import views.openbooks
+import views.convert
 
 
 class MainView(tk.Toplevel):
@@ -97,6 +98,10 @@ class MainView(tk.Toplevel):
                         command=self.cited_years)
         Viz.add_command(label="Month heatmap",
                         command=self.heatmap)
+
+        Cnvcsv = self.addmenu("Conversions")
+        Cnvcsv.add_command(label="Convert csv to txt/ctx",
+                             command=self.C_convert)
         
     def addmenu(self, lab):
         men = tk.Menu(self.menubar, tearoff=0)
@@ -138,6 +143,10 @@ class MainView(tk.Toplevel):
     def C_factiva(self):
         self.reset_view()
         views.factiva.ViewFactiva(self)
+
+    def C_convert(self):
+        self.reset_view()
+        views.convert.ViewConvert(self)
 
     def C_lexis(self):
         self.reset_view()
