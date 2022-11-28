@@ -6,6 +6,10 @@ and need:
 - BeautifulSoup4 -> https://tedboy.github.io/bs4_doc/2_installation.html
 - Pandas
 
+to install them:
+$ pip install beautifulsoup4 lxml
+
+
 
 
 Code available on https://github.com/josquindebaz/Tiresias
