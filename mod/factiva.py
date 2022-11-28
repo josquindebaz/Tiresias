@@ -9,7 +9,7 @@ import os
 import glob
 import random
 import datetime
-
+import csv
 try:
     import cleaning
 except:
@@ -85,16 +85,36 @@ def parse(article):
                     '<%s class=["\'][a-z]{2}Headline["\']>'%tag,
                     '</%s>'%tag)
         result['title'] = re.sub(r"^(\r\n|\n)\s*", "", title)
+        result['title'] = re.sub(r"\s*(\r\n|\n)\s*$", "", result['title'])
+        result['title'] = re.sub(r"\s+", " ", result['title'])
+        result["title"] = str(result["title"]).strip()
     except:
         result['title'] = "Title problem"
     #remove <b> and </b>
     result['title'] = re.sub(r"</?b>", "", result['title'])
-
     #get date and support
     divs = re.split('<div>', article)
     form1 = re.compile(r"\d{1,2}\s{1,}[a-zéèûñíáóúüãçA-Z]*\s{1,}\d{4}</div>")
     form2 = re.compile(r"<td>(\d{1,2}\s{1,}[a-zéèûñíáóúüãçA-Z]*\s{1,}\d{4})</td>")
+    c = 0
     for div in divs:
+        
+        chaves = ["CLM", "SE", "HD", "BY", "CR", "WC", "PD", "SN", "SC", "ED", "PG", "LA", "CY", "LP", "TD", "ART", "CO", "IN", "NS", "RE", "IPC", "IPD", "PUB", "AN"]
+        for chave in chaves:
+            div_name = f"<b>{chave}</b>&nbsp;</td><td>"
+            if div_name in div:
+                v = get(div, div_name, "</td></tr>")
+                v = str(v).strip()
+                v = v.replace("<br/>","").replace("</span>", "")
+                v = re.sub(r"</?b>", "", v)
+                v = re.sub(r"</?span[^>]*>", "", v)
+                v = re.sub(r"</?font[^>]*>", "", v)
+                v = re.sub(r"<br[^>]*>", "", v)
+                result[chave] = v
+            else:
+                result[chave] = ""
+            
+        
         if form1.search(div):
             result['date'] = div[:-6]
             if re.search(r"\d{2}:\d{2}</div>", divs[divs.index(div)+1]):
@@ -107,9 +127,12 @@ def parse(article):
             result['media'] = get(article,
                                   '<b>SN</b>&nbsp;</td><td>',
                                   '</td>')
+        else:
+            result['date'] = result["PD"]
+            result['media'] = result["SN"]
     #format date
-    result['date'] = format_date(result['date'])
 
+    result['date'] = format_date(result['date'])
     #get narrator
     try:
         result['narrator'] = get(article,
@@ -117,17 +140,33 @@ def parse(article):
                                  r'\s*</div>')
     except:
         pass
-
+    
+    paragraphs = re.split('<p class="articleParagraph [a-z]{2}\
+articleParagraph" >', article)[1:]
+    if paragraphs == []:
+        paragraphs = re.split('<p class="articleParagraph [a-z]{2}\
+articleParagraph">', article)[1:]
     #get text content
-    result['text'] = result['title'] + "\r\n.\r\n"
-    for paragraph in re.split('<p class="articleParagraph [a-z]{2}\
-articleParagraph">', article)[1:]:
+    result['text'] = result['title'] + "\r\n.\r\n" + "LP: "
+    
+    for idx,paragraph in enumerate(paragraphs):
+        p = paragraph
         paragraph = re.split("</p>", paragraph)[0]
         paragraph = re.sub(r"^(\r\n|\n)\s*", "", paragraph)
         paragraph = re.sub(r"\s*(\r\n|\n)\s*", " ", paragraph)
         paragraph = re.sub(r"</?b>", "", paragraph)#remove <b> and </b>
+        #removendo span
+        paragraph = re.sub(r"</?span[^>]*>", "", paragraph)
+        lp = p if "</td><td>" in p else ""
+        if lp:
+            if idx < len(paragraphs)-1:
+                result["LP"] = paragraph
+                paragraph = paragraph + "\r\n" + "TD: "
         result['text'] += paragraph
-
+    texto =  str(str(result['text']).split('LP:')[1]).split('TD:')
+    result["LP"] = texto[0]
+    result["TD"] = texto[1]
+    result["text"] = result["text"].replace("LP: ","").replace("TD: ","")
     return result
 
 class ParseHtm():
@@ -137,7 +176,10 @@ class ParseHtm():
         self.unknowns = []
         with open(fname, 'rb') as file:
             buf = file.read()
-            buf = buf.decode('utf-8') #byte to str
+            try:
+                buf = buf.decode('utf8') #byte to str
+            except:
+                buf = buf.decode('latin1')
         self.content = re.split(' class="article [a-z]{2}Article">',
                                 buf)[1:]
         for article in self.content:
@@ -145,6 +187,7 @@ class ParseHtm():
             while id_article in self.articles.keys():
                 id_article = random.randint(0, 1000000)
             self.articles[id_article] = parse(article)
+
 
     def get_supports(self, fname):
         """parse supports.publi and find correspondences"""
@@ -157,7 +200,7 @@ class ParseHtm():
             media = re.split('; ', line)
             if media:
                 medias[media[0]] = media[1:]
-
+        
         for key, article in self.articles.items():
             if article['media'] in medias.keys():
                 self.articles[key]['support'] = medias[article['media']][0]
@@ -171,7 +214,29 @@ class ParseHtm():
                 self.articles[key]['root'] = 'FACTIVA'
 
     def write_prospero_files(self, save_dir=".", cleaning=False):
-        """for each article, write txt and ctx in a given directory"""
+        """for each article, write txt, csv and ctx in a given directory"""
+        
+        #escrevendo csv
+        article = list(self.articles.values())[0]
+        filepath = file_name(article['date'],
+                                 article['root'],
+                                 save_dir)
+        path = os.path.join(save_dir, "dados.csv")
+        chaves = ["CLM", "SE", "HD", "BY", "CR", "WC", "PD", "SN", "SC", "ED", "PG", "LA", "CY", "LP", "TD", "ART", "CO", "IN", "NS", "RE", "IPC", "IPD", "PUB", "AN"]
+        
+        #criando o csv
+        #escrever csv com valores onde a chave estiver em chaves
+        with open(path, 'w', encoding="utf8", newline="") as csvfile:
+            writer = csv.writer(csvfile, delimiter=';', quotechar='"',
+                                quoting=csv.QUOTE_MINIMAL)
+            writer.writerow(chaves)
+            for article in self.articles.values():
+                row = []
+                for chave in chaves:
+                    chave = "date" if chave == "PD" else chave
+                    row.append(str(article[chave]).replace(";", "").replace(',', ''))
+                writer.writerow(row)
+
         for article in self.articles.values():
             filepath = file_name(article['date'],
                                  article['root'],
@@ -179,35 +244,43 @@ class ParseHtm():
             path = os.path.join(save_dir, filepath + ".txt")
 
             if cleaning:
-                text_cleaner = Cleaner(article['text'].encode('utf-8'))
+                text_cleaner = Cleaner(article['text'].encode('utf8'))
                 text = text_cleaner.content
             else:
                 text = article['text']
             with open(path, 'wb') as file:
                 #to bytes
-                file.write(text.encode('latin-1', 'xmlcharrefreplace'))
+                file.write(text.encode('utf8', 'xmlcharrefreplace'))
+
+            
+            ed = f'\ ED: {article["ED"]}'
+            pg_se = f'PG: {article["PG"]} / SE: {article["SE"]} '.replace("\\"," ")
             ctx = [
-                "fileCtx0005",
-                article['title'],
-                article['support'],
-                "", "",
-                article['date'],
-                "",
-                article['source_type'],
-                "", "", "",
+                "fileCtx0005",#1
+                str(article['HD']).strip(),#2
+                f"{article['SN']}",#3
+                f"{article['BY']}",#4
+                "", #5
+                f"{article['date']}",#6
+                f"{article['support']}",#7
+                "","",#8, #9
+                pg_se,#10
+                "",#11,
+                # article['source_type'],
+                # "", "", "",
                 "Processed by Tiresias on %s"\
-                    % datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-                "", "n", "n", ""
+                    % datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),#12
+                "", "n", "n", #13, #14, #15
                 ]
             ctx = "\r\n".join(ctx)
-            ctx = ctx.encode('latin-1', 'xmlcharrefreplace') #to bytes
+            ctx = ctx.encode('utf8', 'xmlcharrefreplace') #to bytes
             path = os.path.join(save_dir, filepath + ".ctx")
             with open(path, 'wb') as file:
                 file.write(ctx)
 
 if __name__ == "__main__":
     SUPPORTS_FILE = "support.publi"
-    for filename in glob.glob("*.htm"):
+    for filename in glob.glob(["*.htm", "*.html"]):
         print(filename)
         run = ParseHtm(filename)
         print("%s: found %d article(s)"%(filename, len(run.content)))
