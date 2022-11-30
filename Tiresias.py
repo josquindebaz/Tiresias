@@ -26,6 +26,37 @@ import views.openbooks
 import views.convert
 
 
+def get_new_version():
+    webbrowser.open("https://github.com/josquindebaz/Tiresias", 0, True)
+
+
+def check_for_update():
+    try:
+        last_on_remote = get_last_on_remote()
+        last_on_local = get_last_on_local()
+
+        if last_on_remote > last_on_local:
+            return "A new version is available"
+
+        return "Your version is up to date"
+
+    except Exception as e:
+        return "Can't retrieve last version: %s" % e
+
+
+def get_last_on_remote():
+    url = "https://raw.githubusercontent.com/josquindebaz/Tiresias/master/CHANGELOG.txt"
+    with urllib.request.urlopen(url) as page:
+        buf = page.read().decode()
+    return time.strptime(re.findall(r"\d{2}/\d{2}/\d{4}", buf)[0], "%d/%m/%Y")
+
+
+def get_last_on_local():
+    with open("CHANGELOG.txt", 'rb') as file:
+        buf = file.read().decode()
+    return time.strptime(re.findall(r"\d{2}/\d{2}/\d{4}", buf)[0], "%d/%m/%Y")
+
+
 class MainView(tk.Toplevel):
     def __init__(self, parent):
         tk.Toplevel.__init__(self, parent)
@@ -33,10 +64,7 @@ class MainView(tk.Toplevel):
         self.title("Tirésias")
         self.protocol('WM_DELETE_WINDOW', self.parent.destroy)
 
-        filename = "README.md"
-        #        if '_MEIPASS2' in os.environ:
-        #            filename = os.path.join(os.environ['_MEIPASS2'], filename)
-        with open(filename, 'rb') as f:
+        with open("README.md", 'rb') as f:
             welcome_txt = f.read().decode()
         welcome_txt = re.sub(r"[\r\n]+", "\n", welcome_txt)
         welcome = tk.Message(self,
@@ -48,17 +76,19 @@ class MainView(tk.Toplevel):
         self.update_string = tk.StringVar()
         version = tk.Label(self, textvariable=self.update_string)
         version.pack()
-        self._thread = Thread(target=self.check_update)
+        self._thread = Thread(target=self.show_update())
         self._thread.start()
 
         self.menubar = tk.Menu(self)
         self.config(menu=self.menubar)
 
         file_menu = self.add_menu("Files")
-        file_menu.add_command(label="List .txt", command=self.corrector_list_txt)
+        file_menu.add_command(label="List .txt",
+                              command=self.corrector_list_txt)
         file_menu.add_command(label="Go to code repository",
-                              command=self.get_new_version)
-        file_menu.add_command(label="Quit", command=self.parent.destroy)
+                              command=get_new_version)
+        file_menu.add_command(label="Quit",
+                              command=self.parent.destroy)
 
         corrector_menu = self.add_menu("Corrections")
         corrector_menu.add_command(label="Character cleaning",
@@ -101,9 +131,11 @@ class MainView(tk.Toplevel):
                                     command=self.convert_convert)
 
     def add_menu(self, lab):
-        men = tk.Menu(self.menubar, tearoff=0)
-        self.menubar.add_cascade(label=lab, menu=men)
-        return men
+        menu = tk.Menu(self.menubar,
+                       tearoff=0)
+        self.menubar.add_cascade(label=lab,
+                                 menu=menu)
+        return menu
 
     def corrector_list_txt(self):
         self.reset_view()
@@ -170,36 +202,12 @@ class MainView(tk.Toplevel):
         views.convert.ViewConvert(self)
 
     def reset_view(self):
-        for p in self.slaves():
-            p.destroy()
+        for process in self.slaves():
+            process.destroy()
 
-    def check_update(self):
+    def show_update(self):
         self.update_string.set("Checking for a newer version")
-
-        try:
-            url = "https://raw.githubusercontent.com/josquindebaz/Tiresias/master/CHANGELOG.txt"
-            with urllib.request.urlopen(url) as page:
-                buf = page.read().decode()
-                last_on_remote = time.strptime(
-                    re.findall(r"\d{2}/\d{2}/\d{4}", buf)[0], "%d/%m/%Y")
-
-            with open("CHANGELOG.txt", 'rb') as file:
-                buf2 = file.read().decode()
-                last_on_local = time.strptime(
-                    re.findall(r"\d{2}/\d{2}/\d{4}", buf2)[0], "%d/%m/%Y")
-
-            update_message = "A new version is available" \
-                if last_on_remote > last_on_local \
-                else "Your version is up to date"
-
-        except Exception as e:
-            update_message = "Can't retrieve last version: %s" % e
-
-        self.update_string.set(update_message)
-
-    @staticmethod
-    def get_new_version():
-        webbrowser.open("https://github.com/josquindebaz/Tiresias", 0, True)
+        self.update_string.set(check_for_update())
 
 
 if __name__ == '__main__':

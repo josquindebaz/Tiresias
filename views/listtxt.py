@@ -34,7 +34,7 @@ class ViewListTxt:
         self.Recursive = tk.BooleanVar()
         bn_recursive = tk.Checkbutton(frame1,
                                       text='recursive',
-                                      var=self.Recursive)
+                                      variable=self.Recursive)
         bn_recursive.select()
         bn_recursive.pack(side=tk.LEFT)
 
@@ -65,7 +65,7 @@ class ViewListTxt:
         bn_slash = tk.Checkbutton(frame2,
                                   padx=30,
                                   text='replace / with \\',
-                                  var=self.Slash)
+                                  variable=self.Slash)
         bn_slash.select()
         bn_slash.pack(side=tk.RIGHT)
 

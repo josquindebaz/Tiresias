@@ -44,14 +44,14 @@ class ViewCleaning:
         self.is_recursive = tk.BooleanVar()
         button_recursive = tk.Checkbutton(fr1,
                                           text='recursive',
-                                          var=self.is_recursive)
+                                          variable=self.is_recursive)
         button_recursive.select()
         button_recursive.pack(side=tk.LEFT)
 
         self.test = tk.BooleanVar()
         bn_test = tk.Checkbutton(fr1,
                                  text='test only',
-                                 var=self.test)
+                                 variable=self.test)
         # bn_test.select()
         bn_test.pack(side=tk.LEFT)
 
@@ -68,63 +68,63 @@ class ViewCleaning:
         self.utf = tk.BooleanVar()
         bn_utf = tk.Checkbutton(fr2,
                                 text='Utf8 to Latin1',
-                                var=self.utf)
+                                variable=self.utf)
         bn_utf.select()
         bn_utf.pack(side=tk.LEFT)
         self.ascii = tk.BooleanVar()
         bn_ascii = tk.Checkbutton(fr2,
                                   text='ascii',
-                                  var=self.ascii)
+                                  variable=self.ascii)
         bn_ascii.select()
         bn_ascii.pack(side=tk.LEFT)
         self.char_replace = tk.BooleanVar()
         bn_char_replace = tk.Checkbutton(fr2,
                                          text='special chars',
-                                         var=self.char_replace)
+                                         variable=self.char_replace)
         bn_char_replace.select()
         bn_char_replace.pack(side=tk.LEFT)
 
         self.html_chars = tk.BooleanVar()
         bn_html_unescape = tk.Checkbutton(fr2,
                                           text='html chars',
-                                          var=self.html_chars)
+                                          variable=self.html_chars)
         bn_html_unescape.select()
         bn_html_unescape.pack(side=tk.LEFT)
 
         self.split = tk.BooleanVar()
         bn_split = tk.Checkbutton(fr2,
-                                  text='splitted numbers',
-                                  var=self.split)
+                                  text='split numbers',
+                                  variable=self.split)
         bn_split.select()
         bn_split.pack(side=tk.LEFT)
         self.hyphens = tk.BooleanVar()
         bn_hyphens = tk.Checkbutton(fr2,
                                     text='hyphenations',
-                                    var=self.hyphens)
+                                    variable=self.hyphens)
         bn_hyphens.select()
         bn_hyphens.pack(side=tk.LEFT)
         self.html_tags = tk.BooleanVar()
         bn_html_tags = tk.Checkbutton(fr2,
                                       text='html tags',
-                                      var=self.html_tags)
+                                      variable=self.html_tags)
         bn_html_tags.select()
         bn_html_tags.pack(side=tk.LEFT)
         self.parity_marks = tk.BooleanVar()
         bn_parity_marks = tk.Checkbutton(fr2,
                                          text='parity marks',
-                                         var=self.parity_marks)
+                                         variable=self.parity_marks)
         bn_parity_marks.select()
         bn_parity_marks.pack(side=tk.LEFT)
-        self.dashs = tk.BooleanVar()
-        bn_dashs = tk.Checkbutton(fr2,
-                                  text='dashes',
-                                  var=self.dashs)
-        bn_dashs.select()
-        bn_dashs.pack(side=tk.LEFT)
+        self.dashes = tk.BooleanVar()
+        bn_dashes = tk.Checkbutton(fr2,
+                                   text='dashes',
+                                   variable=self.dashes)
+        bn_dashes.select()
+        bn_dashes.pack(side=tk.LEFT)
         self.footnotes = tk.BooleanVar()
         bn_footnotes = tk.Checkbutton(fr2,
                                       text='footnotes',
-                                      var=self.footnotes)
+                                      variable=self.footnotes)
         bn_footnotes.select()
         bn_footnotes.pack(side=tk.LEFT)
 
@@ -140,7 +140,7 @@ class ViewCleaning:
 
     def t_action(self):
         """execute cleaning"""
-        self.query = None
+        self.query = []
         self.result.delete(1.0, "end")
         self.result.insert("end", "Listing text files\n")
         self.parent.update()
@@ -194,21 +194,22 @@ class ViewCleaning:
             options += "t"
         if self.parity_marks.get():
             options += "p"
-        if self.dashs.get():
+        if self.dashes.get():
             options += "d"
         if self.footnotes.get():
             options += "f"
 
         c = Cleaner(b, options)
 
-        if not set([x for x in c.log.values()]) == set([0]):
+        if not set([x for x in c.log.values()]) == {0}:
             # if something has to be corrected
             self.result.insert("end", "%s  " % txt)
             self.result.insert("end",
                                "%s\n" % "; ".join(["%s: %s" % (x, y)
-                                                   for x, y in c.log.items() if y != 0]))
+                                                   for x, y in c.log.items()
+                                                   if y != 0]))
             if not self.test.get():
-                # if not test mode
+                # if not in test mode
                 buf = bytes(c.content, 'latin-1')
                 with open(txt, 'wb') as f:
                     f.write(buf)
