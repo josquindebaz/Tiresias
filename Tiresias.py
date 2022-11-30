@@ -199,7 +199,7 @@ class MainView(tk.Toplevel):
 
     @staticmethod
     def get_new_version():
-        webbrowser.open("https://github.com/josquindebaz/Tiresias", 0, 1)
+        webbrowser.open("https://github.com/josquindebaz/Tiresias", 0, True)
 
 
 if __name__ == '__main__':
