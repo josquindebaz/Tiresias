@@ -1,23 +1,24 @@
 ﻿Tiresias made by Josquin Debaz for association Doxa (http://prosperologie.org)
 
-__This version use Python3__ 
+__This version use Python 3 and tk__ 
 and need:
 
-- BeautifulSoup4 -> https://tedboy.github.io/bs4_doc/2_installation.html
+- BeautifulSoup4
 - Pandas
 
 to install them:
-$ pip install beautifulsoup4 lxml
+python3 -m pip install --upgrade pip
+pip3 install beautifulsoup4 pandas
 
-
+On Ubuntu, you may need to install Tk
+sudo apt-get install python3-tk
 
 
 Code available on https://github.com/josquindebaz/Tiresias
-For windows users, a .exe is available on https://github.com/josquindebaz/Tiresias/raw/master/EXEC/Tiresias.zip
+For Windows users, a .exe is available on https://github.com/josquindebaz/Tiresias/raw/master/EXEC/Tiresias.zip
 
 
 Help, comments and suggestions: http://prosperologie.org/forum/viewtopic.php?f=16&t=445
-
 
 
 Le logiciel Tirésias a pour fonction d'aider à produire les séries textuelles à partir desquelles le chercheur construit ses dossiers et opère ses partitions. 
@@ -29,4 +30,6 @@ Tirésias permet aussi d'assurer une délégation technique lorsque les dossiers
 Une partie de ses scripts, dédiée à la mise en forme des textes des corpus, est regroupée ici avec une interface graphique et distributée sous licence GPL.
 
 Script pour Europresse initié par Guillaume Ollivier
-Merci à Bastien, Robin, Federico, Guillaume, Markku, Patrick, Pierrick, Thomas, et les autres pour les suggestions et retours de bug
+Script for CSV conversion and Factiva is maintained by Prefigura
+
+Merci à Waldir, Bastien, Robin, Federico, Guillaume, Markku, Patrick, Pierrick, Thomas, et les autres pour les suggestions et retours de bug

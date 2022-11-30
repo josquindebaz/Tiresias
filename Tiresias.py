@@ -6,9 +6,7 @@ import re
 import time
 import webbrowser
 import tkinter as tk
-import os
 from threading import Thread
-
 
 import views.listtxt
 import views.cleaning
@@ -36,11 +34,11 @@ class MainView(tk.Toplevel):
         self.protocol('WM_DELETE_WINDOW', self.parent.destroy)
 
         filename = "README.md"
-##        if '_MEIPASS2' in os.environ:
-##            filename = os.path.join(os.environ['_MEIPASS2'], filename)
+        #        if '_MEIPASS2' in os.environ:
+        #            filename = os.path.join(os.environ['_MEIPASS2'], filename)
         with open(filename, 'rb') as f:
             welcome_txt = f.read().decode()
-        welcome_txt = re.sub(r"[\r\n]{1,}", "\n", welcome_txt)  
+        welcome_txt = re.sub(r"[\r\n]+", "\n", welcome_txt)
         welcome = tk.Message(self,
                              bg="white",
                              width=1024,
@@ -48,155 +46,159 @@ class MainView(tk.Toplevel):
         welcome.pack()
 
         self.update_string = tk.StringVar()
-        version = tk.Label(self, textvariable=self.update_string)               
+        version = tk.Label(self, textvariable=self.update_string)
         version.pack()
-        self.update_string.set("Checking for a newer version")
         self._thread = Thread(target=self.check_update)
         self._thread.start()
-   
+
         self.menubar = tk.Menu(self)
         self.config(menu=self.menubar)
 
-        Files = self.addmenu("Files")
-        Files.add_command(label="List .txt", command=self.C_list_txt)
-        Files.add_command(label="Go to code repository",
-                          command=self.get_new_version)
-        Files.add_command(label="Quit", command=self.parent.destroy)
+        file_menu = self.add_menu("Files")
+        file_menu.add_command(label="List .txt", command=self.corrector_list_txt)
+        file_menu.add_command(label="Go to code repository",
+                              command=self.get_new_version)
+        file_menu.add_command(label="Quit", command=self.parent.destroy)
 
-        Corrector = self.addmenu("Corrections")
-        Corrector.add_command(label="Character cleaning",
-            command=self.C_cleaning)
-        Corrector.add_command(label="Word replace",
-            command=self.Word_Replace)
-        Corrector.add_command(label="Case change",
-            command=self.case_change)
-        
-        PRCmodif = self.addmenu("Projects")
-        PRCmodif.add_command(label="Filter",
-                             command=self.C_filter)
+        corrector_menu = self.add_menu("Corrections")
+        corrector_menu.add_command(label="Character cleaning",
+                                   command=self.corrector_cleaning)
+        corrector_menu.add_command(label="Word replace",
+                                   command=self.corrector_replace)
+        corrector_menu.add_command(label="Case change",
+                                   command=self.corrector_case_change)
 
-        PRCdb = self.addmenu("Databases")
-        PRCdb.add_command(label="Questions parlementaires",
-                             command=self.C_QP)
-        PRCdb.add_command(label="Europresse",
-                             command=self.C_EP)
-        PRCdb.add_command(label="Scopus",
-                             command=self.C_scopus)
-        PRCdb.add_command(label="Factiva",
-                             command=self.C_factiva)
-        PRCdb.add_command(label="Lexis Nexis",
-                             command=self.C_lexis)
-        PRCdb.add_command(label="Newton",
-                             command=self.C_newton)
-        PRCdb.add_command(label="books.openedition",
-                             command=self.C_openbooks)
-        
-        Viz = self.addmenu("Dataviz")
-        Viz.add_command(label="QP Atlas",
-                        command=self.QpAtlas)
-        Viz.add_command(label="Cited years timeline",
-                        command=self.cited_years)
-        Viz.add_command(label="Month heatmap",
-                        command=self.heatmap)
+        prc_menu = self.add_menu("Projects")
+        prc_menu.add_command(label="Filter",
+                             command=self.corrector_filter)
 
-        Cnvcsv = self.addmenu("Conversions")
-        Cnvcsv.add_command(label="Convert csv to txt/ctx",
-                             command=self.C_convert)
-        
-    def addmenu(self, lab):
+        database_menu = self.add_menu("Databases")
+        database_menu.add_command(label=u"Questions parlementaires",
+                                  command=self.database_qp)
+        database_menu.add_command(label="Europresse",
+                                  command=self.database_europresse)
+        database_menu.add_command(label="Scopus",
+                                  command=self.database_scopus)
+        database_menu.add_command(label="Factiva",
+                                  command=self.database_factiva)
+        database_menu.add_command(label="Lexis Nexis",
+                                  command=self.database_lexis)
+        database_menu.add_command(label="Newton",
+                                  command=self.database_newton)
+        database_menu.add_command(label="books.openedition",
+                                  command=self.database_openbooks)
+
+        dataviz_menu = self.add_menu("Dataviz")
+        dataviz_menu.add_command(label="QP Atlas",
+                                 command=self.dataviz_qp_atlas)
+        dataviz_menu.add_command(label="Cited years timeline",
+                                 command=self.dataviz_cited_years)
+        dataviz_menu.add_command(label="Month heatmap",
+                                 command=self.dataviz_heatmap)
+
+        conversion_menu = self.add_menu("Conversions")
+        conversion_menu.add_command(label="Convert csv to txt/ctx",
+                                    command=self.convert_convert)
+
+    def add_menu(self, lab):
         men = tk.Menu(self.menubar, tearoff=0)
         self.menubar.add_cascade(label=lab, menu=men)
         return men
 
-    def C_list_txt(self):
+    def corrector_list_txt(self):
         self.reset_view()
         views.listtxt.ViewListTxt(self)
-        
-    def C_cleaning(self):
+
+    def corrector_cleaning(self):
         self.reset_view()
         views.cleaning.ViewCleaning(self)
 
-    def Word_Replace(self):
+    def corrector_replace(self):
         self.reset_view()
         views.wordreplace.ViewReplacer(self)
 
-    def case_change(self):
+    def corrector_case_change(self):
         self.reset_view()
         views.capitals.ViewCap(self)
-        
-    def C_filter(self):
+
+    def corrector_filter(self):
         self.reset_view()
         views.filter.ViewFilter(self)
-        
-    def C_QP(self):
+
+    def database_qp(self):
         self.reset_view()
         views.qp.ViewQP(self)
 
-    def C_EP(self):
+    def database_europresse(self):
         self.reset_view()
         views.europresse.ViewEuropresse(self)
 
-    def C_scopus(self):
+    def database_scopus(self):
         self.reset_view()
         views.scopus.ViewScopus(self)
 
-    def C_factiva(self):
+    def database_factiva(self):
         self.reset_view()
         views.factiva.ViewFactiva(self)
 
-    def C_convert(self):
-        self.reset_view()
-        views.convert.ViewConvert(self)
-
-    def C_lexis(self):
+    def database_lexis(self):
         self.reset_view()
         views.lexis.ViewLexis(self)
-        
-    def C_newton(self):
+
+    def database_newton(self):
         self.reset_view()
         views.newton.ViewNewton(self)
 
-    def C_openbooks(self):
+    def database_openbooks(self):
         self.reset_view()
         views.openbooks.ViewOpenbooks(self)
-        
 
-    def QpAtlas(self):
+    def dataviz_qp_atlas(self):
         self.reset_view()
         views.qpmap.ViewPaster(self)
 
-    def cited_years(self):
+    def dataviz_cited_years(self):
         self.reset_view()
         views.cited_years.ViewYears(self)
 
-    def heatmap(self):
+    def dataviz_heatmap(self):
         self.reset_view()
         views.heatmap.ViewPaster(self)
-        
+
+    def convert_convert(self):
+        self.reset_view()
+        views.convert.ViewConvert(self)
+
     def reset_view(self):
         for p in self.slaves():
             p.destroy()
 
     def check_update(self):
+        self.update_string.set("Checking for a newer version")
+
         try:
-            url = "https://raw.githubusercontent.com/josquindebaz/\
-Tiresias/master/CHANGELOG.txt"
+            url = "https://raw.githubusercontent.com/josquindebaz/Tiresias/master/CHANGELOG.txt"
             with urllib.request.urlopen(url) as page:
                 buf = page.read().decode()
-                last = time.strptime(re.findall("\d{2}/\d{2}/\d{4}",
-                                                buf)[0], "%d/%m/%Y")
+                last_on_remote = time.strptime(
+                    re.findall(r"\d{2}/\d{2}/\d{4}", buf)[0], "%d/%m/%Y")
+
             with open("CHANGELOG.txt", 'rb') as file:
                 buf2 = file.read().decode()
-                loc = time.strptime(re.findall("\d{2}/\d{2}/\d{4}",
-                                               buf2)[0], "%d/%m/%Y")
-            if last > loc:
-                self.update_string.set("A new version is avalaible")
-            else:
-                self.update_string.set("Your version is up to date")
-        except:
-            self.update_string.set("Can't retrieve last version")       
+                last_on_local = time.strptime(
+                    re.findall(r"\d{2}/\d{2}/\d{4}", buf2)[0], "%d/%m/%Y")
 
-    def get_new_version(self):
+            update_message = "A new version is available" \
+                if last_on_remote > last_on_local \
+                else "Your version is up to date"
+
+        except Exception as e:
+            update_message = "Can't retrieve last version: %s" % e
+
+        self.update_string.set(update_message)
+
+    @staticmethod
+    def get_new_version():
         webbrowser.open("https://github.com/josquindebaz/Tiresias", 0, 1)
 
 
