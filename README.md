@@ -6,18 +6,15 @@ and need:
 - BeautifulSoup4 -> https://tedboy.github.io/bs4_doc/2_installation.html
 - Pandas
 
-to install them:
+to install them, usually:
 $ pip install beautifulsoup4 lxml
 
 
-
-
 Code available on https://github.com/josquindebaz/Tiresias
-For windows users, a .exe is available on https://github.com/josquindebaz/Tiresias/raw/master/EXEC/Tiresias.zip
+For Windows users, a .exe is available on https://github.com/josquindebaz/Tiresias/raw/master/EXEC/Tiresias.zip
 
 
 Help, comments and suggestions: http://prosperologie.org/forum/viewtopic.php?f=16&t=445
-
 
 
 Le logiciel Tirésias a pour fonction d'aider à produire les séries textuelles à partir desquelles le chercheur construit ses dossiers et opère ses partitions. 
@@ -29,4 +26,5 @@ Tirésias permet aussi d'assurer une délégation technique lorsque les dossiers
 Une partie de ses scripts, dédiée à la mise en forme des textes des corpus, est regroupée ici avec une interface graphique et distributée sous licence GPL.
 
 Script pour Europresse initié par Guillaume Ollivier
+
 Merci à Bastien, Robin, Federico, Guillaume, Markku, Patrick, Pierrick, Thomas, et les autres pour les suggestions et retours de bug
