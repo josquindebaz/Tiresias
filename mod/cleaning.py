@@ -6,13 +6,14 @@ import os
 import re
 import html
 
-def list_files(rep='.', exts=('.txt', '.TXT'),
-               recursive=True, slash=False, repl=None):
+
+def list_files(rep='.', exts=('.txt', '.TXT'), recursive=True, slash=False, repl=None):
     """List files with txt or TXT extension"""
     txt_files = []
-    for roots, _, files in os.walk('%s'%rep):
-        txt_files.extend([os.path.join(roots, f) for f in files \
-            if os.path.splitext(f)[1] in exts])
+    for roots, _, files in os.walk('%s' % rep):
+        txt_files.extend([os.path.join(roots, file)
+                          for file in files
+                          if os.path.splitext(file)[1] in exts])
         if not recursive:
             break
     if repl:
@@ -21,8 +22,10 @@ def list_files(rep='.', exts=('.txt', '.TXT'),
         txt_files = list(map(lambda x: x.replace("/", "\\"), txt_files))
     return txt_files
 
+
 class Cleaner():
     """Convert bytes and clean string"""
+
     def __init__(self, content, options="uasdhtpcef"):
         self.content = content
         self.log = {}
@@ -34,7 +37,7 @@ class Cleaner():
             else:
                 self.log['utf'] = 0
 
-        self.content = self.content.decode('latin-1') #byte to str
+        self.content = self.content.decode('latin-1')  # byte to str
 
         if "a" in options:
             self.log['ascii'] = self.replace_ascii()
@@ -43,7 +46,7 @@ class Cleaner():
         if "e" in options:
             self.log['html characters'] = self.unescape()
         if "s" in options:
-            self.log['splitted numbers'] = self.splitted_numbers()
+            self.log['split numbers'] = self.splitted_numbers()
         if "h" in options:
             self.log['hyphens'] = self.hyphens()
         if "t" in options:
@@ -74,7 +77,7 @@ class Cleaner():
         txt_unicode = txt_unicode.replace('a\u0300', 'à')
         txt_unicode = txt_unicode.replace('A\u0300', 'à'.upper())
         txt_unicode = txt_unicode.replace('u\u0300', 'ù')
-        self.content = txt_unicode.encode('latin-1', 'xmlcharrefreplace')      
+        self.content = txt_unicode.encode('latin-1', 'xmlcharrefreplace')
 
     def replace_ascii(self):
         """{unknown ascii code: correct form,}"""
@@ -89,7 +92,7 @@ class Cleaner():
             150: "-",
             151: "-",
             160: " ",
-            171:'" ',
+            171: '" ',
             173: "-",
             180: "'",
             183: "-",
@@ -180,7 +183,7 @@ class Cleaner():
                   "&#8195;",
                   "&#8297;",
                   "&#8202;",
-                  "&#8200;",],
+                  "&#8200;", ],
             "oe": ["&oelig;",
                    "&#156;",
                    "&#339;",
@@ -213,7 +216,7 @@ class Cleaner():
             "@": ["&#8294;"],
             "phi": ["&#966;"],
             "°": ["&#730;"],
-            }
+        }
 
         number = 0
         for correcte, incorrectes in to_be_replaced.items():
@@ -284,28 +287,28 @@ class Cleaner():
                 '</pre>',
                 ]
         number = 0
-        #delete tags from the list
+        # delete tags from the list
         for tag in tags:
             tag_number = self.content.count(tag)
             if tag_number:
                 self.content = self.content.replace(tag, "")
                 number += tag_number
-        #delete unknown even tags: <balise>bla bla</balise>
+        # delete unknown even tags: <balise>bla bla</balise>
         unlisted = re.findall("<([a-z]*)>", self.content)
         if unlisted:
             for balise in unlisted:
-                opening = re.findall("<%s>"%balise, self.content)
-                closing = re.findall("</%s>"%balise, self.content)
+                opening = re.findall("<%s>" % balise, self.content)
+                closing = re.findall("</%s>" % balise, self.content)
                 if len(opening) == len(closing):
-                    self.content = re.sub("<%s>"%balise, "", self.content)
-                    self.content = re.sub("</%s>"%balise, "", self.content)
+                    self.content = re.sub("<%s>" % balise, "", self.content)
+                    self.content = re.sub("</%s>" % balise, "", self.content)
                     number += len(opening)
-        #delete single tags: <tag something>
+        # delete single tags: <tag something>
         singles = re.findall(r"<[a-z]{1,} \S*>", self.content)
         if singles:
             number += len(singles)
             self.content = re.sub(r"<[a-z]{1,} \S*>", "", self.content)
-        #delete links: <a something>keep me</a>
+        # delete links: <a something>keep me</a>
         links = re.findall("<a .*>(.*)</a>", self.content)
         if links:
             number += len(links)
@@ -315,7 +318,7 @@ class Cleaner():
 
     def parity_marks(self):
         """Separate parity marks -e-s or (e)"""
-        #not i.e.
+        # not i.e.
         motif = re.compile(r"([a-zé](?<!i))(\.e|-e|\(e\)|-ne|-rice|-euse)(\s|\.|-)")
         number = len(motif.findall(self.content))
         if number:
