@@ -86,7 +86,7 @@ def get_date(d):
 
 
 def in_tag(html_source, tag):
-    motif = re.compile(r'(<(\S*) \S*=[\'"]%s[\'"]>)' % tag)
+    motif = re.compile(r'(<(\S*) \S*=[\'"]%s[\'"][^>]*>)' % tag)
     if motif.search(html_source):
         elements = motif.split(html_source)
         if len(elements) == 4:
