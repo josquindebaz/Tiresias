@@ -229,14 +229,14 @@ class ViewEuropresse():
             f = self.list_html[c]
             self.log.insert(1.0, 'Analysing %s\n' % f)
             try:
-                path = os.path.join(self.htmldirectory, f)
-                p = ParseHtml(path)
-                for a in p.parsed_articles:
-                    if a not in self.articles_list:
-                        self.articles_list.append(a)
-                    if (a['source'] not in self.Supports.codex.keys() and
-                            a['source'] not in unknowns):
-                        unknowns.append(a['source'])
+                filepath = os.path.join(self.htmldirectory, f)
+                articles, parsed_articles = europresse_file_parser(filepath)
+                for article in parsed_articles:
+                    if article not in self.articles_list:
+                        self.articles_list.append(article)
+                    if (article['source'] not in self.Supports.codex.keys() and
+                            article['source'] not in unknowns):
+                        unknowns.append(article['source'])
             except:
                 self.log.insert(1.0, 'Analyse problem\n')
 
@@ -268,7 +268,7 @@ articles and %d unknown source(s)\n' % (len(self.articles_list), len(unknowns)))
             else:
                 for c, index in enumerate(articles):
                     article = self.articles_list[index]
-                    f = ProcessArticle(article, directory,
-                                       self.CleaningVal.get())
+                    f = EuropresseArticleExtractor(article, directory,
+                                                   self.CleaningVal.get())
                     self.log.insert(1.0, 'Writing %s\n' % f.filename)
                     self.progressbar['value'] = c + 1

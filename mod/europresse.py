@@ -5,10 +5,9 @@ import os
 import datetime
 
 try:
-    # import cleaning
     from cleaning import Cleaner
     from supports import Publi
-except:
+except ModuleNotFoundError:
     from mod.cleaning import Cleaner
     from mod.supports import Publi
 
@@ -135,7 +134,6 @@ def parse_article(article_content):
         else:
             subtitle = False
 
-        # print("get text")
         text = in_tag(article_content, "docOcurrContainer")
         text = strip_tags(text)
 
@@ -149,19 +147,19 @@ def parse_article(article_content):
         }
 
 
-class ParseHtml(object):
-    def __init__(self, filename):
-        with open(filename, 'rb') as file_pointer:
-            buffer = file_pointer.read().decode('utf-8')
-        self.articles = re.split('<article>', buffer)[1:]
-        self.parsed_articles = []
-        for article in self.articles:
-            parsed = parse_article(article)
-            if parsed:
-                self.parsed_articles.append(parsed)
+def europresse_file_parser(filepath):
+    with open(filepath, 'rb') as file_pointer:
+        buffer = file_pointer.read().decode('utf-8')
+    articles = re.split('<article>', buffer)[1:]
+    parsed_articles = []
+    for article in articles:
+        parsed = parse_article(article)
+        if parsed:
+            parsed_articles.append(parsed)
 
+    return articles, parsed_articles
 
-class ProcessArticle(object):
+class EuropresseArticleExtractor(object):
     def __init__(self, a, destination, c=1):
         self.destination = destination
         s = Publi()
@@ -248,13 +246,13 @@ if __name__ == "__main__":
     europresse_files = glob.glob(os.path.join(directory_path, "*.HTM*"))
     print("# Found %d Europresse file(s)" % len(europresse_files))
 
-    for file_name in europresse_files:
-        print("# Parsing %s" % file_name)
-        parser = ParseHtml(file_name)
-        print("## Found %d article(s)" % len(parser.articles))
-        print("## Parsed %d article(s)" % len(parser.parsed_articles))
+    for filepath in europresse_files:
+        print("# Parsing %s" % filepath)
+        articles, parsed_articles = europresse_file_parser(filepath)
+        print("## Found %d article(s)" % len(articles))
+        print("## Parsed %d article(s)" % len(parsed_articles))
 
-    for article in parser.parsed_articles:
-        ProcessArticle(article, directory_path)
+    for article in parsed_articles:
+        EuropresseArticleExtractor(article, directory_path)
 
     free_test_directory(directory_path)
