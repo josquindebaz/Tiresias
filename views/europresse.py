@@ -268,7 +268,7 @@ articles and %d unknown source(s)\n' % (len(self.articles_list), len(unknowns)))
             else:
                 for c, index in enumerate(articles):
                     article = self.articles_list[index]
-                    f = EuropresseArticleExtractor(article, directory,
-                                                   self.CleaningVal.get())
+                    f = EuropresseProsperoFileBuilder(article, directory,
+                                                      self.CleaningVal.get())
                     self.log.insert(1.0, 'Writing %s\n' % f.filename)
                     self.progressbar['value'] = c + 1
