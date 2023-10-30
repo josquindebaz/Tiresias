@@ -1,4 +1,3 @@
-import glob
 import re
 import html
 import os
@@ -234,27 +233,3 @@ class ProcessArticle(object):
             path = os.path.join(self.destination, name + ".txt")
         return name
 
-
-def free_test_directory(directory):
-    for file_path in glob.glob(os.path.join(directory, '*')):
-        if os.path.splitext(file_path)[1] in ['.ctx', '.CTX', '.Ctx', '.txt', '.TXT', '.Txt']:
-            os.remove(file_path)
-
-
-if __name__ == "__main__":
-    directory_path = "../tests/mod/europresse/"
-    free_test_directory(directory_path)
-
-    europresse_files = glob.glob(os.path.join(directory_path, "*.HTM*"))
-    print("# Found %d Europresse file(s)" % len(europresse_files))
-
-    for file_name in europresse_files:
-        print("# Parsing %s" % file_name)
-        parser = ParseHtml(file_name)
-        print("## Found %d article(s)" % len(parser.articles))
-        print("## Parsed %d article(s)" % len(parser.parsed_articles))
-
-    for article in parser.parsed_articles:
-        ProcessArticle(article, directory_path)
-
-    free_test_directory(directory_path)
