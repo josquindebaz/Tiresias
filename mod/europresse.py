@@ -13,7 +13,7 @@ except ModuleNotFoundError:
 
 
 def format_support(support):
-    motif = re.compile(r'\s*([<(,]).*$')
+    motif = re.compile(r'\s*[<(,].*$')
     return motif.sub('', support)
 
 
