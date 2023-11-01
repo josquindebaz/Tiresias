@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<title>Tiresias version python3 : mode d'emploi</title>
+</head>
+
+<body>
+<h1>Tiresias version python3 : mode d'emploi</h1>
+<p>On utilise l'appellation <em>Tirésias</em> pour dénommer d'un coup toutes les fonctionnalités connexes à l'usage de Prospéro, Chéloné et Marlowe. Un certain nombre de celles-ci sont regroupées dans une
+interface graphique qui vise à rendre leur usage plus aisé.</p>
+<p>Une première version a été développée en Python2 au début de la décennie 2010. Le support de Python2 s'arrêtant début 2020, il est recommandé de passer à Python3, ce que j'ai fait pour les scripts présents, en les nettoyant et les corrigeant au passage et en révisant l'interface graphique. Comme pour la première version, le pari est d'utiliser la bibliothèque graphique Tk qui est installée par défaut avec Python, ceci afin d'être plus accessible puisqu'il n'y a rien de spécial à installer.</p>
+<p>Pour faciliter encore la vie des utilisateurs des versions exécutables existent pour windows :</p>
+<ul>
+	<li> Vous avez un windows récent : <a href="https://github.com/josquindebaz/Tiresias/raw/master/EXEC/Tiresias.zip" >https://github.com/josquindebaz/Tiresias.zip</a></li> 
+	<li>si vous tombez sur un message du genre blabla kernel32.dll, si vous êtes sur XP et que vous n'êtes pas sur que tous les mises à jour sont présentes, essayez cette version là : <a href="https://github.com/josquindebaz/Tiresias/raw/master/EXEC/TiresiasP34.zip" >https://github.com/josquindebaz/TiresiasP34.zip</a></li>
+</ul>
+<p>Le code est disponible sur github : <a href="https://github.com/josquindebaz/Tiresias" >https://github.com/josquindebaz/Tiresias</a></p>.
+
+<h2>Utiliser Tiresias avec Python3 sur windows</h2>
+<p>Allez sur <a href="https://www.python.org/">https://www.python.org/</a></p>
+<p>Dans le menu Download, sélectionnez windows.</p>
+<p>Si vous êtes sur une version récente de Windows, choisissez la dernière version de Python Latest Python 3 Release</p>
+<p>Si vous êtes sur une vieille version de Windows, comme XP, il vous faudra Python 3.4, téléchargez  <a href="https://www.python.org/ftp/python/3.4.3/python-3.4.3.msi">Windows x86 MSI installer</a>, si ce dernier lien ne fonctionne pas descendez dans la page du site de Python jusqu'à trouver Python 3.4.3 - Feb. 25, 2015.</p>
+<p>Installez. (Je vous conseille d'activer add Python 3.x au PATH)</p>
+<p>Récupérez le code de Tiresias, soit via git, soit en zip : <a href="https://github.com/josquindebaz/Tiresias/archive/master.zip">https://github.com/josquindebaz/Tiresias/archive/master.zip</a></p>
+<p>Un double-clic sur Tiresias.py pour le lancer.</p>
+
+<h2>Prise en main</h2>
+<p>À l'ouverture un texte d'accueil et une vérification que vous avez bien la dernière version qui s'affiche en bas (si vous accès à Internet)</p>
+		
+<img src="Capture%20d%E2%80%99%C3%A9cran%20de%202019-12-12%2011-22-49.png">
+		
+<p>Dans le menu Files, vous trouvez :</p>
+<ul>
+	<li>un accès à un outil de liste de fichiers ;</li>
+	<li>une commande qui vous permet d'accéder au github, pour voir les fichiers ou récupérer une nouvelle version.</li>
+</ul>
+
+<img src="Capture%20d%E2%80%99%C3%A9cran%20de%202019-12-12%2011-23-16.png" >
+		
+<p>Les fonctionnalités présentes :</p>
+<ul>
+<li> Files 
+   <ul>
+   <li><a href="#p736">List .txt</a></li>
+   </ul></li>
+<li> Corrections 
+   <ul>
+   <li> <a href="#p737" >Character cleaning le correcteur de caractères</a></li>
+   <li> <a href="#p743" >Word Replace permet de remplacer des motifs dans tous les .txt d'un dossier </a></li>
+   <li> <a href="#p774" >Case change permet de transformation la casse des mots dans les textes</a></li>
+   </ul></li>
+<li> Projects 
+   <ul>
+	   <li> <a href="#p738" >Filter vous permet de filtrer un corpus par rapport à des mots clefs></a></li>
+   </ul></li>
+<li> Databases 
+   <ul>
+	   <li> <a href="#p739" >Questions parlementaires</a></li>
+	   <li> <a href="#p742" >Europresse</a></li>
+   <li> Scopus</li>
+   <li> Factiva</li>
+   <li> Lexis nexis</li>
+   </ul>
+</li>
+<li> Dataviz 
+   <ul>
+   <li> <a href="#p740" >QP Atlas, génère une carte des départements d'élection des parlementaires d'un corpus de questions parlementaires</a></li>
+   <li> <a href="#p741" >Cited years timeline</a></li>
+   <li> <a href="#p773" >Month heatmap permet de générer une frise chronologique du nombre de textes par mois dans un corpus</a></li>
+   </ul></li>
+</ul>
+
+<p>Notes sur la structure du dépôt, vous trouverez dans les répertoires :</p>
+<ul>
+	<li>  EXEC, le(s) exécutable(s)</li>
+	<li>  data, le support.publi</li>
+	<li>  frm, les formules pour le calcul des années citées</li>
+	<li>  previous version, l'ancien Tiresias qui fonctionne avec Python2</li>
+	<li>  mod, les scripts utilisés pour chaque fonctionnalité. Ils sont utilisables de façon autonome du reste du programme.</li>
+</ul>	
+
+<h2><a id="p736">l'outil de liste de fichiers txt</a></h2>
+											
+			
+<p>Dans le menu File, la commande List .txt vous donne accès à une nouvelle fenêtre :</p>
+
+<img src="Capture%20d%E2%80%99%C3%A9cran%20de%202019-12-12%2011-44-56.png">
+		
+<p>voici comme il s'utilise : </p>
+<ul>
+	<li> Sélectionnez le répertoire dont vous voulez lister les .txt. La 
+	case recursive signifie qu'il listera aussi ce qui est dans les 
+	sous-répertoires</li>
+	<li> Appuyez sur List pour lancer l'opération, elle peut prendre du temps, la barre de progression devrait s'animer.</li>
+	<li> L'espace du bas se peuple des chemins vers les .txt, vous pouvez les copier soit par CTRL-C, soit avec le bouton Copy</li>
+</ul>
+
+<p>Le cadre <em class="text-italics">Replace path</em> vous permet de faire des remplacements dans cette liste.</p>
+<p> Cela peut être utile si vous utilisez un autre OS, par exemple ici remplacer /home/josquin/ par C:\, ainsi que les / par des \ afin de générer une liste directement compatible avec Prospéro
+		
+			<img src="Capture%20d%E2%80%99%C3%A9cran%20de%202019-12-12%2011-54-20.png">
+		
+<h2><a id="p737">le correcteur de caractères</a></h2>
+<p>Certains caractères ne sont pas reconnus par Prospéro 1. Dans le menu Corrections, la commande Character cleaning en corrige un certain nombre.</p>
+
+<img src="Capture%20d%E2%80%99%C3%A9cran%20de%202019-12-12%2013-27-39.png">
+		
+
+<p>Sélectionnez votre dossier et lancez le traitement avec Process cleaning, vos fichiers .txt seront modifiés. La case à fond noir vous commente l'opération.</p>
+<p> Les options :</p>
+<ul>
+	<li> recursive : prend en compte les sous-dossiers</li>
+	<li> test only : effectue le nettoyage sans enregistrer les fichiers</li>
+	<li> utf8 to latin1 : si le txt est en utf8, il le passe en latin1 (seul lisible correctement par Prospéro 1)</li>
+	<li> ascii : transforme des caractères latin1 mal lus par Prospéro 1 comme le caractère des points de suspension "…" qu'il transforme en trois points successifs "..."</li>
+	<li> special chars : remplace en particulier les caractères xml qui peuvent résulter du passage de l'utf-8 au latin1, comme "&amp;#8230;" en "...", ou certaines balises html comme "&lt;br&gt;" en saut de ligne.</li>
+	<li> splitted numbers : regroupe les grands nombres 1 000 000 -&gt; 1000000</li>
+	<li> hyphenations : "recolle" un mot est coupé en deux par une fin de ligne avec un tiret</li>
+	<li> html tags : supprime les balises html, comme &lt;b&gt; ou &lt;/i&gt;. Intervient après le traitement special chars.</li>
+	<li> parity marks : décolle les formes de parité du mot. Exemple étudiant-e -&gt; étudiant -e. (ne transforme pas i.e.)</li>
+	<li> dashes : décolle les tirets des ponctuations comme ",-". Sauf sur ".-" pour ne pas séparer les initiales de prénom (J.-P.)</li>
+	<li> footnotes : décolle les appels de note du mot qui les précède et de la ponctuation qui les suit.</li>
+</ul>					
+
+
+
+<h2><a id="p743">Word Replace</a></h2>
+		<p>Dans le menu Corrections, la commande Word Replace permet de remplacer des motifs dans tous les .txt d'un dossier.</p>
+
+		<img src="Capture%20d%E2%80%99%C3%A9cran%20de%202019-12-13%2011-42-47.png">
+
+		<p>Sélectionnez le dossier dans lequel vos changements doivent être effectués. </p>
+<p>Avec le bouton Add, ajoutez des motifs à remplacer, ils se placent dans la liste de gauche. Il peut y en avoir plusieurs.</p>
+<p>Ils seront tous remplacés par le motif que vous placez dans le champ central.</p>
+<p>Cliquez sur Replace. La case sur fond noir du bas vous commente les opérations.</p>
+<p>Dans l'exemple affiché, nous souhaitons remplacer "broadest range" et "largest range" par "smallest range", le commentaire indique qu'il a trouvé 5 fichiers .txt dont 1 dans lequel un des motifs à remplacer apparaissait. Il a donc édité un fichier.</p>
+<p> Les options :</p>
+<ul>
+	<li> recursive : agit également dans les sous-dossiers</li> <li> test only : n'écrit pas le résultat dans les fichiers</li>
+	<li> with marks : si la case est cochée, le remplacement sera effectif même si les motifs à remplacer sont directement précédés ou suivis d'un des signes de ponctuation suivant .,;!?':¿(){}[]-</li>
+</ul>
+
+<p>La liste de droite montre l'historique des motifs utilisés. Avec Recall, vous pouvez directement repeupler les listes avec de précédents motifs.</p>
+
+
+
+<h2><a id="p738">Filter</a></h2>
+<p>Dans le menu Projects, la commande filtrer vous permet de filtrer un corpus par rapport à des mots clefs.</p>
+
+<img src="Capture%20d%E2%80%99%C3%A9cran%20de%202019-12-12%2014-13-50.png">
+<p>Tout d'abord choisissez votre .prc (ne fonctionne que sur Windows) ou votre dossier, il va établir la liste des fichiers correspondante.</p>
+<p> La case en bas à droite sur fond noir commente les actions.</p>
+<p> En bas à gauche, dans le cadre Theme, listez les termes que vous voulez chercher (avec les boutons add et del). </p>
+<p> Evidemment, si des mots sont déjà présents et qu'ils ne vous intéressent pas, il faut les enlever.</p>
+<p> Définissez ensuite les valeurs souhaitées : score total et composants. </p>
+<p> Par exemple 7 et 2 : pour valider un texte, il faut qu'il contienne au moins 2 mots différents du thème et comptent au moins 7 occurrences des mots du thème.</p>
+<p> En cliquant sur <em class="text-italics">theme evaluation</em>, les deux cases du haut vont se peupler : 
+<ul>
+	<li>à gauche pour les textes qui valident les conditions (= corpus),</li> 
+	<li>à droite ceux qui sont rejetés (=anticorpus).</li>
+</ul> 
+
+<p>Il indique le chemin du texte, puis les mots clefs trouvés et leur nombre d'occurrence.</p>
+<p> Avec les boutons <em class="text-italics">save</em>, on enregistre les listes de gauche ou de droite, dans un nouveau .prc, avec les même paramètres (dictionnaires et langues) que le .prc fourni au départ. </p>
+<p> Évidemment, si vous êtes filtrez un dossier et non un .prc, il n'y aura pas de paramètres dans le .prc enregistré.</p>
+
+<h2><a id="p739">Questions parlementaires</a></h2>
+<p>Située dans le menu Databases, la commande Questions parlementaires vous permet de générer des fichiers .txt et .ctx pour constituer un corpus pour Prospéro à partir des moteurs de recherche du Sénat (<a href="http://www.senat.fr/quesdom.html" >http://www.senat.fr/quesdom.html</a>) et de l'Assemblée (<a href="http://www2.assemblee-nationale.fr/recherche/questions" >http://www2.assemblee-nationale.fr/recherche/questions</a>).</p>
+
+<img src="Capture%20d%E2%80%99%C3%A9cran%20de%202019-12-12%2015-07-20.png">
+		
+
+<p>Dans le champ keywords, entrez le(s) mot(s) clef(s), entre guillemets " si nécessaire.</p>
+<p> Indiquez à gauche, l'intervalle temporel de recherche pour le Sénat (mettez deux fois la même date si vous ne voulez rien venant du Sénat.</p>
+<p> Sélectionnez à droite les législations qui vous intéressent à l'Assemblée.</p>
+<p> Ensuite, cliquez sur Search. En bas, dans la case noire s'affichent des commentaires sur le processus.</p>
+<p> Les listes se remplissent avec les questions qui correspondent à votre recherche. Elles informent de la date de la question, de son numéro et éventuellement de son type (QE = question écrite), ainsi que de l'existence d'une réponse par le gouvernement (R).</p>
+<p> En double cliquant sur une question en particulier, votre navigateur ouvrira la page web correspondant à la question.</p>
+<p> Sélectionnez les questions qui vous intéressent, renseignez le dossier d'écriture des fichiers .txt et .ctx. </p>
+<p> Lancer la procédure avec le bouton <em class="text-italics">Process</em>. Si  <em class="text-italics">clean texts</em> est cochée, le processus opérera un nettoyage des caractères (comme si vous utilisiez la fonctionnalité avec toutes les options, voir le mode d'emploi spécifique supra)
+
+
+<h2><a id="p740">QP Atlas</a></h2>
+			
+			<p>Dans le menu dataviz, la commande QP Atlas, génère une carte des départements d'élection des parlementaires d'un corpus de questions parlementaires.</p>
+			<p>Dans Prospéro, à partir d'un corpus de questions parlementaires généré avec le script de Tirésias, entrez par Appuis externe -&gt; <strong class="text-strong">lieux d'émissions</strong></p>
+
+<img src="Capture%20d%E2%80%99%C3%A9cran%20de%202019-12-12%2015-25-30.png">
+		
+<p>Copiez la liste fournie avec le clic contextuel (droit sur Windows) et renseignez une valeur suffisante pour tout récupérer (par exemple 200)</p>
+
+<img src="Capture%20d%E2%80%99%C3%A9cran%20de%202019-12-12%2015-28-07.png">
+
+<p>Dans QP Atlas de Tiresias, collez la liste, soit par CTRL-V soit par le bouton Paste</p>
+
+<img src="Capture%20d%E2%80%99%C3%A9cran%20de%202019-12-12%2015-31-42.png">
+
+<p>Le programme prend en compte ligne par ligne les valeurs composées selon la forme : Département[tabulation]valeur</p>
+<p> Cliquez sur Draw atlas, une carte des départements de France est générée en .svg, choisissez où vous voulez l'enregistrer. Votre navigateur par défaut va l'ouvrir dans la foulée.</p>
+<p> En passant votre pointeur sur un département, l'infobulle vous en donne les détails : (no de département) nom de département valeur</p>
+
+<img src="Capture%20d%E2%80%99%C3%A9cran%20du%202019-12-12%2015-37-52.png">
+
+<p>La méthode par défaut est celle des quarts des valeurs cumulées, c'est généralement la plus informative pour ce genre de données.</p>
+<p> Si vous préférez vous pouvez générer une légende en quartiles.</p>
+<p> Ici 25% des valeurs sont entre 1 et 3, 25% entre 4 et 6, 25% entre 7 et 12, et 25% entre 13 et 50.</p>
+
+
+<img src="Capture%20d%E2%80%99%C3%A9cran%20de%202019-12-12%2015-43-45.png">
+		
+<p>ou même en divisant en quatre parts égales les valeurs.</p>
+<p> Ici 50 divisé par 4 = 12,5, on a donc une légende avec les valeurs : de 1 à 12, de 13 à 23 (il n'y a pas de département avec 24), de 25 à 30 (il n'y a pas de valeur entre 30 et 37,5) et 50 (il n'y a pas de valeur entre 37,5 et 50)</p>
+
+<img src="Capture%20d%E2%80%99%C3%A9cran%20de%202019-12-12%2015-46-09.png">
+
+<p>Pour approfondir la question du choix de la génération de l'échelle, voir <a href="https://socioargu.hypotheses.org/69" >Un atlas des questions parlementaires</a> sur le carnet de recherches Socioinformatique et argumentation</p>
+<p> Méthodologiquement, on recommande ce type de représentation (choroplèthe) pour des densités, c'est-à-dire des valeurs rapportées à la même mesure (par exemple un indicateur pour 100 000 habitants). Or, ici, nous représentons des valeurs absolues et discontinues. Ayez bien à l'esprit que si ces cartes ont une valeur heuristique pour visualiser des zones régionales qui s'agrègent ou se démarquent de leurs voisines, la carte peut vous amener à voir ces valeurs comme comparables à l'unité près (alors que tous les départements n'ont pas le même nombre de parlementaires et que les parlementaires ne posent pas le même nombre de question) et même à vous représenter les données comme discrètes. </p>
+<p>Aussi, un autre rendu est proposé par le logiciel, avec des carrés proportionnels centrés sur les préfectures.</p>
+
+<img src="proportional.PNG">
+
+<p>Si vous entendez diffuser un document, utilisez cette méthode, moins sujette à ces biais de lecture (elle en présente d'autres et partage celui de lier à un espace géographique différent l'agrégation au cours du temps de questions posées dans des institutions nationales).</p>
+
+<img src="squares.PNG">
+		
+<p>Pour essayer d'être le moins déformant dans la perception, on utilise des carrés plutôt que des cercles, et des surfaces proportionnelles.</p>
+
+<h2><a id="p741">Cited years timeline</a></h2>
+			
+<p>Dans Dataviz, la commande Cited years timeline s'utilise de la façon suivante :</p>
+<p> Dans Prospéro, ouvrez la fenêtre des formules (dans le menu inférences).</p>
+
+<img src="Capture%20d%E2%80%99%C3%A9cran%20de%202019-12-12%2016-02-27.png">
+
+<ol style="list-style-type:decimal">
+	<li> Chargez le fichier de formules ref_temporelles.frm, vous le trouverez dans le dossier frm du répertoire Tiresias.</li>
+	<li> Calculez. Il repère les formes dans lesquelles une année est citée, comme "le 12 décembre <strong class="text-strong">2019</strong>", "en <strong class="text-strong">1957</strong>", "de l'année <strong class="text-strong">2008</strong>", ...</li>
+	<li> Sélectionnez la classe de formules recup. Dans la fenêtre de résultats (en bas), le menu contextuel (clic droit) vous permet de les copier. Choisissez une valeur suffisante pour tout récupérer (ici par exemple 3000)</li>
+</ol>
+
+<p>Dans  Cited years timeline de Tirésias.</p>
+
+<img src="Capture%20d%E2%80%99%C3%A9cran%20de%202019-12-12%2016-11-38.png">
+
+<ol style="list-style-type:decimal">
+	<li> Collez le résultat avec le bouton Paste ou CTRL-C</li>
+	<li> Calculez. Il classe les années dans l'ordre chronologique, additionne les occurrences, créée les années manquantes.</li>
+	<li> Copiez avec le bouton Copy ou CTRL-A CTRL-C</li>
+</ol>
+
+<p> Dans votre tableur préféré, collez dans la première case avec CTRL-V (les valeurs sont séparées par une tabulation)</p>
+<p> Sélectionnez les deux colonnes, insérez un graphique/diagramme en définissant la première colonne comme étiquette.</p>
+
+<img src="Capture%20d%E2%80%99%C3%A9cran%20de%202019-12-12%2016-18-35.png">
+
+<h2><a id="p742">Europresse</a></h2>
+		
+<p>Pour générer les fichiers .txt et .ctx à partir d'une recherche dans la base de données Europresse.</p>
+<p> Vous devez évidemment avoir un accès Europresse, de nombreux établissements universitaires en France sont abonnés.</p>
+<p> Il vous faut passer par la <strong class="text-strong">version classique</strong>, sur la page Europresse, elle se trouve en haut à droite, tant quelle existe...</p>
+
+<img src="Capture%20d%E2%80%99%C3%A9cran%20de%202019-12-12%2016-28-13.png">
+
+<p> Effectuez votre recherche. Sélectionnez les textes qui vous intéressent, puis cliquez sur la disquette pour sauvegarder <strong class="text-strong">au format HTML</strong>.</p>
+
+<img src="Capture%20d%E2%80%99%C3%A9cran%20de%202019-12-12%2016-35-34.png">
+		
+		
+<p> Attention :</p>
+<ul>
+	<li> vous ne pouvez pas légalement redistribuer le fichier obtenu</li>
+	<li> Veillez à bien vous déconnecter quand vous avez fini pour ne pas saturer les sessions (limitées) pour les autres utilisateurs d'Europresse de votre établissement (ça s'effectue au même endroit où 
+	vous avez choisi la version classique)</li>
+</ul>
+
+<p>Dans Tiresias, menu Databases, choisissez la commande Europresse.</p>
+
+		
+<img src="Capture%20d%E2%80%99%C3%A9cran%20de%202019-12-12%2016-45-27.png">
+		
+<ol style="list-style-type:decimal">
+	<li> Sélectionnez le dossier dans lequel vous avez enregistré les html générés par Europresse</li>
+	<li> Sélectionner le .html a analyser et cliquez sur le bouton Analyse.  La case de droite est peuplée par les articles trouvés, un résumé est produit dans la case la plus basse à fond noir.</li>
+	<li> Ici, il n'a pas reconnu un format de source, pour attribuer automatiquement les champs du .Ctx. Le cadre Unknown Sources permet de le renseigner. Si le média existe dans la base, il suffit de le trouver dans le menu déroulant, sinon renseigner son nom, le type de support (par exemple Presse quotidienne régionale...) ainsi qu'une abréviation qui servira  à former le nom des fichiers générés. Cliquez ensuite sur Add to support.publi pour sauvegarder l'ajout.</li>
+	<li> Sélectionnez les textes voulus dans liste de droite, sélectionnez le dossier d'écriture des fichiers dans celle du bas, puis cliquez sur Write. Si clean texts est cochée, il appliquera la fonction de nettoyage des caractères (avec toutes les options voir supra).</li>
+</ol>	
+
+			
+<h2><a id="p773">Month heatmap</a></h2>
+<p>Month heatmap permet de générer une frise chronologique du nombre de textes par mois dans un corpus.</p>
+<p>Dans Prospéro, dans le menu Temporalités, sélectionner Temps du corpus et spécifier l'unité en mois. Le logiciel envoie au presse-papier un tableau avec en première colonne le mois et en seconde colonne le nombre de textes correspondant.</p>
+<p>Une fois obtenu le message confirmant cette copie, dans Tirésias, dans le menu Dataviz, sélectionner Month heatmap.</p>
+<p>Coller le tableau.</p>
+<img src="month%20heatmap.png">
+<p>Cliquer sur Draw heatmap et enregistrer le fichier svg à l'endroit souhaité. Votre navigateur par défaut s'ouvre pour afficher l'image générée.</p>
+<p>Vous obtenez une grille avec en abscisse les années, en ordonnée les mois, la case est foncée proportionnellement au nombre relatif de textes du mois. À droite, la légende indique les valeurs min et max et des intensités au quart ou aux quartiles des valeurs. Dans l'exemple infra, elle indique que le 3e quartile (Q3) est à 19, c'est-à-dire que 75% des mois sont en-dessous et 25% au-dessus.</p>
+<p>Sous la grille, un histogramme affiche le nombre annuel de textes.</p>
+<p>En passant le pointeur sur les cases, s'affichent mois/années et valeur.</p>
+
+<img src="heatmap.png">
+	
+<h2><a id="p774">case change</a></h2>
+
+<p>Case change permet de transformation la casse des mots dans les textes.</p>
+			
+		
+			<img src="case%20change%201.png">
+		
+
+			<p>Attention, les changements sont irréversibles, n'hésitez pas à faire une sauvegarde des .txt de votre corpus avant d'utiliser cette fonction ou à travailler sur une copie temporaire.</p>
+<ol style="list-style-type:decimal">
+	<li>Sélectionner le .prc ou le répertoire (1') dans lequel vous souhaitez agir.</li>
+	<li>Pour rechercher des groupement de capitales, indiquer les valeurs min et max.</li>
+	<li>Cliquer sur list uppercase pour lister les groupements de capitales dans les .txt ou sur list first letter (3') si ce sont les mots avec majuscule qui vous intéressent.</li>
+	<li>Cliquer dans la liste de gauche sur les termes que vous souhaitez modifier pour les faire passer sur la liste de droite, ou sur select all pour tout faire basculer. Cliquer sur un élément dans la liste de droite le ramène dans la liste de gauche, deselect all y ramène tous les éléments.</li>
+	<li>Choisir la transformation souhaitée :
+		<ul>
+			<li> Lower case : passe les mots de la liste de droite en minuscules</li>
+			<li> Capitalize : passe les mots de la liste de droite en minuscules avec une majuscule en première lettre</li>
+			<li> Upper case : passe les mots de la liste de droite en majuscules</li>
+		</ul>
+	</li>
+</ol>
+
+<h2><a id="p799">books.openeditions</a></h2>
+
+			<p>Permet de transformer des livres déposés sur <a href="https://books.openedition.org/" >https://books.openedition.org</a></p>
+<p> accès dans Databases -&gt;  books.openeditions</p>
+<img src="books.PNG">
+<p>indiquez le dossier d'enregistrement des txt et ctx</p>
+<p>indiquez l'url de la page à traiter</p>
+<p>cliquez sur Process</p>
+<p>c'est une première version, merci de faire remonter les erreurs</p>
+</body>
+</html>
