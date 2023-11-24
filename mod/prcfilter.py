@@ -7,6 +7,7 @@ import re
 
 class PrcFilter():
     """Only files with score and dep"""
+
     def __init__(self):
         self.list_txt = []
         self.theme = []
@@ -44,7 +45,7 @@ class PrcFilter():
             testsresults = ""
 
             for item in self.theme:
-                #punctuation Before or after
+                # punctuation Before or after
                 beforeafter = r"[\s\.,;!\?\"']"
                 index = r"(^|(%s))(%s)((%s)|$)" % (beforeafter, item,
                                                    beforeafter)
@@ -63,10 +64,11 @@ class PrcFilter():
         """save txt list to path prc"""
         lines = ["projet0005\n"]
         lines.extend(self.prc_param)
-        lines.extend([txt+"\n" for txt in txts])
+        lines.extend([txt + "\n" for txt in txts])
         lines.append("ENDFILE")
         with open(path, "w") as handle:
             handle.writelines(lines)
+
 
 if __name__ == '__main__':
     test = PrcFilter()
@@ -74,7 +76,7 @@ if __name__ == '__main__':
     test.theme = [
         "test",
         "jamais"
-        ]
+    ]
     test.score = 4
     test.dep = 2
     test.eval_corpus()
