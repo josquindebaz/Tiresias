@@ -5,7 +5,17 @@ import os
 import re
 
 
-class PrcFilter():
+def count_item(item, text):
+    # punctuation Before or after
+    beforeafter = r"[\s\.,;!\?\"']"
+    index = r"(^|(%s))(%s)((%s)|$)" % (beforeafter, item,
+                                       beforeafter)
+    index = re.compile(index)
+
+    return len(index.findall(text))
+
+
+class PrcFilter:
     """Only files with score and dep"""
 
     def __init__(self):
@@ -45,13 +55,7 @@ class PrcFilter():
             testsresults = ""
 
             for item in self.theme:
-                # punctuation Before or after
-                beforeafter = r"[\s\.,;!\?\"']"
-                index = r"(^|(%s))(%s)((%s)|$)" % (beforeafter, item,
-                                                   beforeafter)
-                index = re.compile(index)
-
-                number = len(index.findall(text))
+                number = count_item(item, text)
                 if number > 0:
                     testsresults += "[%s:%d]" % (item, number)
                     tests.append(number)
@@ -71,15 +75,23 @@ class PrcFilter():
 
 
 if __name__ == '__main__':
-    test = PrcFilter()
-    test.openprc("C:/corpus/atmosphere/socle.prc")
-    test.theme = [
-        "test",
-        "jamais"
-    ]
-    test.score = 4
-    test.dep = 2
-    test.eval_corpus()
-    for t in test.corpus.items():
-        print(t)
-    test.save_prc("test.prc", test.corpus.keys())
+    content = """No Palácio do Planalto, a saída de Sérgio Machado da Transpetro é tratada como definitiva. A 
+    "licença" foi acertada com Renan Calheiros e José Sarney, padrinhos do ex-presidente da empresa, subsidiária da 
+    Petrobras. Quando a PricewaterhouseCoopers exigiu sua saída para prosseguir a auditoria na empresa, 
+    Machado procurou apoio na cúpula do PMDB e disse à presidente da Petrobras, Graça Foster, que não aceitava ser 
+    demitido. A partir daí, foi costurada a saída honrosa para ele. presidentes palácio"""
+
+    result = count_item("saída", content)
+    print("Can count item", result == 3)
+
+    result = count_item("presidente", content)
+    print("Does not count subwords", result == 1)
+
+    result = count_item("definitiva", content)
+    print("Does count words with punctuation", result == 1)
+
+    result = count_item("Palácio", content)
+    print("Is case sensitive", result == 1)
+
+
+
