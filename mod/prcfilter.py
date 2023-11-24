@@ -6,17 +6,36 @@ import re
 
 
 def count_item(item, text):
-    # punctuation Before or after
-    beforeafter = r"[\s\.,;!\?\"']"
-    index = r"(^|(%s))(%s)((%s)|$)" % (beforeafter, item,
-                                       beforeafter)
+    before_and_after = r"[\s\.,;!\?\"']"  # punctuation Before or after
+    index = r"(^|(%s))(%s)((%s)|$)" % (before_and_after,
+                                       item,
+                                       before_and_after)
     index = re.compile(index)
 
     return len(index.findall(text))
 
 
+def parse_text(theme, text):
+    if len(theme) < 2:
+        return False
+
+    tests = {}
+    for item in theme:
+        number = count_item(item, text)
+        tests[item] = number
+
+    return tests
+
+
+def evaluate_tests(tests):
+    return {
+        "sum": sum(tests.values()),
+        "components": sum(1 for x in tests.values() if x > 0)
+    }
+
+
 class PrcFilter:
-    """Only files with score and dep"""
+    """Filter files with score and depth"""
 
     def __init__(self):
         self.list_txt = []
@@ -50,19 +69,17 @@ class PrcFilter:
 
     def eval_theme(self, text):
         """give score and dep of a theme"""
-        if len(self.theme) > 1:
-            tests = []
-            testsresults = ""
+        test_theme = parse_text(self.theme, text)
+        if not test_theme:
+            return False, False
 
-            for item in self.theme:
-                number = count_item(item, text)
-                if number > 0:
-                    testsresults += "[%s:%d]" % (item, number)
-                    tests.append(number)
+        tests_results = [
+            "[%s:%d]" % (item, result) for item,
+            result in test_theme.items() if result
+        ]
+        evaluate = evaluate_tests(test_theme)
 
-            evaluation = [sum(tests), sum(1 for x in tests if x > 0)]
-            return testsresults, evaluation
-        return False, False
+        return "".join(tests_results), list(evaluate.values())
 
     def save_prc(self, path, txts):
         """save txt list to path prc"""
@@ -81,17 +98,47 @@ if __name__ == '__main__':
     Machado procurou apoio na cúpula do PMDB e disse à presidente da Petrobras, Graça Foster, que não aceitava ser 
     demitido. A partir daí, foi costurada a saída honrosa para ele. presidentes palácio"""
 
-    result = count_item("saída", content)
+    theme = ["saída", "presidente", "definitiva", "Palácio", "arsoiten"]
+
+    print(">> count_item")
+
+    result = count_item(theme[0], content)
     print("Can count item", result == 3)
 
-    result = count_item("presidente", content)
-    print("Does not count subwords", result == 1)
+    result = count_item(theme[1], content)
+    print("Does not count sub words", result == 1)
 
-    result = count_item("definitiva", content)
+    result = count_item(theme[2], content)
     print("Does count words with punctuation", result == 1)
 
-    result = count_item("Palácio", content)
+    result = count_item(theme[3], content)
     print("Is case sensitive", result == 1)
 
+    print(">> parse_text")
 
+    result = parse_text([theme[0]], content)
+    print("Does not parse theme with less than 2 items", result is False)
 
+    result = parse_text(theme, content)
+    print("Does parse every item in a theme", len(result) == len(theme))
+
+    print(">> evaluate_tests")
+
+    evaluate_result = evaluate_tests(result)
+    print("Sum the value of all the item test", evaluate_result["sum"] == 6)
+    print("Count the number of valid tests", evaluate_result["components"] == 4)
+
+    print(">> PrcFilter().eval_theme")
+
+    test = PrcFilter()
+    test.score = 1
+    test.dep = 1
+
+    test.theme = [theme[0]]
+    result = test.eval_theme(content)
+    print("Does not go for theme with less than 2 items", result == (False, False))
+
+    test.theme = theme
+    result = test.eval_theme(content)
+    print("Returns a string with theme tests", result[0] == "[saída:3][presidente:1][definitiva:1][Palácio:1]")
+    print("Returns an array with tests sum and depth", result[1] == [6, 4])
