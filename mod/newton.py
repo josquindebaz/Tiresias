@@ -15,11 +15,11 @@ import os
 import datetime
 from bs4 import BeautifulSoup
 
-
 try:
     from cleaning import Cleaner
 except:
     from mod.cleaning import Cleaner
+
 
 def file_name(date, prefix, save_dir):
     """return a name in Prospero style"""
@@ -33,11 +33,12 @@ def file_name(date, prefix, save_dir):
         else:
             base += 1
             index = "A"
-        if base > 64: #if Z => 2 letters
+        if base > 64:  # if Z => 2 letters
             index = chr(base) + index
         name = "%s%s%s" % (prefix, date, index)
         path = os.path.join(save_dir, name + ".txt")
     return name
+
 
 class parseNewton(object):
     def __init__(self, filename):
@@ -46,52 +47,50 @@ class parseNewton(object):
         self.count = 0
         with open(filename, 'rb') as file:
             buf = file.read()
-            buf = buf.decode('utf-8') #byte to str
+            buf = buf.decode('utf-8')  # byte to str
         articles = self.get_articles(buf)
         for article in articles:
             self.count += 1
-            
+
             id_article = random.randint(0, 1000000)
             while id_article in self.articles.keys():
-                id_article = random.randint(0, 1000000)                
-            self.articles[id_article] = self.process(article)#content
-
+                id_article = random.randint(0, 1000000)
+            self.articles[id_article] = self.process(article)  # content
 
     def get_articles(self, text):
         soup = BeautifulSoup(text, 'lxml')
         tables = soup.find_all("table",
-                               attrs={"style":"margin-top: 15px"})
+                               attrs={"style": "margin-top: 15px"})
         articles = [table for table in tables
                     if len(table.find_all('tr')) == 3]
 
-        print("found %s articles"% len(articles))
+        print("found %s articles" % len(articles))
         for article in articles:
             yield article
 
-
     def replace_cz(self, text):
-##        latin1 = text.encode('ISO-8859-1', 'xmlcharrefreplace')
-##        text = latin1.decode('ISO-8859-1')
+        ##        latin1 = text.encode('ISO-8859-1', 'xmlcharrefreplace')
+        ##        text = latin1.decode('ISO-8859-1')
 
         latin2 = text.encode('iso-8859-2', 'xmlcharrefreplace')
         text = latin2.decode('iso-8859-2')
-        
+
         table = {
-##            '&#268;': 'Č',
-##            '&#269;': 'č',
-##            '&#271;': "d'",
-##            "&#282;": 'Ě',
-##            "&#283;": 'ě',
-##            '&#328;': 'ň',
-##            '&#344;': 'Ř',
-##            "&#345;": 'ř',
-##            '&#352;': 'Š',
-##            '&#353;': 'š',
-##            '&#357;': "ť",
-##            '&#366;': 'Ů',
-##            '&#367;': 'ů',
-##            '&#381;': 'Ž',
-##            '&#382;': 'ž',
+            ##            '&#268;': 'Č',
+            ##            '&#269;': 'č',
+            ##            '&#271;': "d'",
+            ##            "&#282;": 'Ě',
+            ##            "&#283;": 'ě',
+            ##            '&#328;': 'ň',
+            ##            '&#344;': 'Ř',
+            ##            "&#345;": 'ř',
+            ##            '&#352;': 'Š',
+            ##            '&#353;': 'š',
+            ##            '&#357;': "ť",
+            ##            '&#366;': 'Ů',
+            ##            '&#367;': 'ů',
+            ##            '&#381;': 'Ž',
+            ##            '&#382;': 'ž',
             '&#8211;': '-',
             '&#8216;': "'",
             '&#8218;': "'",
@@ -99,7 +98,7 @@ class parseNewton(object):
             '&#8222;': '"',
             '&#8230;': '...',
             '&amp;': '&',
-            }
+        }
         for xml, replace in table.items():
             text = re.sub(xml, replace, text)
         if re.search(r"&#\d*;", text):
@@ -118,56 +117,55 @@ class parseNewton(object):
                                               meta_data.find('span').text)
             elif re.search(r', Zdroj:', meta_data.text):
                 article_data["media"] = re.sub(r'\.', r'/',
-                                              meta_data.find('span').text)
+                                               meta_data.find('span').text)
             elif re.search(r', Autor:', meta_data.text):
                 article_data["narrator"] = re.sub(r'\.', r'/',
-                                              meta_data.find('span').text)
-##            else:
-##                print(meta_data)
+                                                  meta_data.find('span').text)
+        ##            else:
+        ##                print(meta_data)
         article_data["observations"] = ""
         article_data['text'] = content.find(class_="article-content").text.strip()
         return {element: self.replace_cz(value)
                 for element, value in article_data.items()}
 
+    ##    def get_articles_old(self, text):
+    ##        articles = re.split('<hr size="1"', text)[2:-1]
+    ##        for article in articles:
+    ##            yield article
 
-##    def get_articles_old(self, text):
-##        articles = re.split('<hr size="1"', text)[2:-1]
-##        for article in articles:
-##            yield article
-
-##    def process_old(self, content):
-##        article_data = {}
-##        content = self.replace_cz(content)
-##
-##        metadata, text = re.split("<em>zpet</em>", content)
-##        article_data["title"] =\
-##            re.findall('<a name="\d*">.*>(.*)</a>.*size="2">', metadata)[0]
-##        date = re.split("\.",
-##                        re.findall('>([\d\.]*)&nbsp;&nbsp;', metadata)[0])
-##        article_data["date"] =  "%02d/%02d/%s"%(int(date[0]),
-##                                                int(date[1]),
-##                                                date[2])
-##        splitted = re.split('&nbsp;&nbsp;(.*)</font>', metadata)[1]
-##        article_data["media"] = re.findall('(.*)\&nbsp;&nbsp;str', splitted)[0]
-##        article_data["observations"] = re.findall('\d&nbsp;&nbsp;(.*)</font>',
-##                                                  splitted)[0]
-##        article_data["narrator"] = re.findall('<em>(.*)</em>', splitted)[0]
-##        
-##        text = re.split('<font face="Arial" size="2">', text)[1]
-##        text = re.split('</td>', text)[0]
-##        text = re.sub('<br />', '', text)
-##        text = re.sub('<strong><span style="background-color: #fac900; color: #000000;">', '', text)
-##        text = re.sub('</span></strong>', '', text)
-##        article_data['text'] = text
-##                
-##        return article_data  
+    ##    def process_old(self, content):
+    ##        article_data = {}
+    ##        content = self.replace_cz(content)
+    ##
+    ##        metadata, text = re.split("<em>zpet</em>", content)
+    ##        article_data["title"] =\
+    ##            re.findall('<a name="\d*">.*>(.*)</a>.*size="2">', metadata)[0]
+    ##        date = re.split("\.",
+    ##                        re.findall('>([\d\.]*)&nbsp;&nbsp;', metadata)[0])
+    ##        article_data["date"] =  "%02d/%02d/%s"%(int(date[0]),
+    ##                                                int(date[1]),
+    ##                                                date[2])
+    ##        splitted = re.split('&nbsp;&nbsp;(.*)</font>', metadata)[1]
+    ##        article_data["media"] = re.findall('(.*)\&nbsp;&nbsp;str', splitted)[0]
+    ##        article_data["observations"] = re.findall('\d&nbsp;&nbsp;(.*)</font>',
+    ##                                                  splitted)[0]
+    ##        article_data["narrator"] = re.findall('<em>(.*)</em>', splitted)[0]
+    ##
+    ##        text = re.split('<font face="Arial" size="2">', text)[1]
+    ##        text = re.split('</td>', text)[0]
+    ##        text = re.sub('<br />', '', text)
+    ##        text = re.sub('<strong><span style="background-color: #fac900; color: #000000;">', '', text)
+    ##        text = re.sub('</span></strong>', '', text)
+    ##        article_data['text'] = text
+    ##
+    ##        return article_data
 
     def get_supports(self, supports_path):
         """parse supports.publi and find correspondences"""
         medias = {}
         with open(supports_path, 'rb') as file:
             buf = file.read()
-            buf = buf.decode('cp1252') #byte to str
+            buf = buf.decode('cp1252')  # byte to str
             lines = re.split("\r*\n", buf)
         for line in lines:
             media = re.split('; ', line[:-1])
@@ -185,24 +183,24 @@ class parseNewton(object):
                 self.articles[key]['support'] = article['media']
                 self.articles[key]['source_type'] = 'unknown source'
                 self.articles[key]['root'] = 'NEWTON'
-                
+
     def write_prospero_files(self, save_dir=".", cleaning=False):
         """for each article, write txt and ctx in a given directory"""
         for article in self.articles.values():
-            
+
             filepath = file_name(article['date'],
                                  article['root'],
                                  save_dir)
             path = os.path.join(save_dir, filepath + ".txt")
 
-            article['text'] = article['title'] +  "\r\n.\r\n" + article['text']
+            article['text'] = article['title'] + "\r\n.\r\n" + article['text']
             if cleaning:
                 text_cleaner = Cleaner(article['text'].encode('utf-8'))
                 text = text_cleaner.content
             else:
                 text = article['text']
-                
-            #to bytes
+
+            # to bytes
             text = text.encode('iso-8859-2', 'xmlcharrefreplace')
             with open(path, 'wb') as file:
                 file.write(text)
@@ -216,12 +214,12 @@ class parseNewton(object):
                 article['source_type'],
                 article["observations"],
                 "", "",
-                "Processed by Tiresias on %s"\
-                    % datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                "Processed by Tiresias on %s" \
+                % datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
                 "", "n", "n", ""
-                ]
+            ]
             ctx = "\r\n".join(ctx)
-            ctx = ctx.encode('iso-8859-2', 'xmlcharrefreplace') #to bytes
+            ctx = ctx.encode('iso-8859-2', 'xmlcharrefreplace')  # to bytes
             path = os.path.join(save_dir, filepath + ".ctx")
             with open(path, 'wb') as file:
                 file.write(ctx)
@@ -233,7 +231,7 @@ if __name__ == '__main__':
         print("Processing " + filename)
         parse = parseNewton(filename)
         parse.get_supports(SUPPORTS_FILE)
-        print("%d unknown(s) source(s)" %len(parse.unknowns))
+        print("%d unknown(s) source(s)" % len(parse.unknowns))
         for unknown in parse.unknowns:
             print("unknown: %s" % unknown)
         parse.write_prospero_files(".")

@@ -27,7 +27,7 @@ def ctx_prospero(csvfile, save_dir=".",
     papers = {}
     file_count = 0
     no_abstract = 0
-    for row in reader:           
+    for row in reader:
         link = row['Link']
         eid = re.search(r'eid=([^\&]*)\&', link).group(1)
         if row['Abstract'] == "[No abstract available]":
@@ -42,37 +42,37 @@ def ctx_prospero(csvfile, save_dir=".",
                            ]
 
     for eid in papers:
-        #remove the traductions between [] in title
+        # remove the traductions between [] in title
         if brackets:
             papers[eid][1] = re.sub(r"\[.*\]$", "", papers[eid][1])
 
-        #put the title at the beginning of the text
+        # put the title at the beginning of the text
         txt_content = papers[eid][1] + "\r\n.\r\n"
 
-        #put author keywords
+        # put author keywords
         if author_keywords:
             if papers[eid][4]:
                 txt_content += papers[eid][4] + "\r\n.\r\n"
-                
-        #put index keywords
+
+        # put index keywords
         if index_keywords:
             if papers[eid][5]:
                 txt_content += papers[eid][5] + "\r\n.\r\n"
 
-        #remove ©
+        # remove ©
         if rm_copyright:
-            papers[eid][3] = re.sub(" (©|Copyright),? \d{4},? .*$", "", papers[eid][3])                
-                
-        #put text content
+            papers[eid][3] = re.sub(" (©|Copyright),? \d{4},? .*$", "", papers[eid][3])
+
+            # put text content
         txt_content += papers[eid][3]
 
         if cleaning:
             text_cleaner = Cleaner(txt_content.encode('utf-8'))
             txt_content = text_cleaner.content
         txt_content = txt_content.encode('latin-1',
-                                         'xmlcharrefreplace') #to bytes
+                                         'xmlcharrefreplace')  # to bytes
         filename = os.path.join(save_dir, eid)
-        with open("%s.txt"%filename, 'wb') as txtfile:
+        with open("%s.txt" % filename, 'wb') as txtfile:
             txtfile.write(txt_content)
             file_count += 1
 
@@ -81,31 +81,32 @@ def ctx_prospero(csvfile, save_dir=".",
             papers[eid][1],
             papers[eid][0],
             "", "",
-            "01/01/%s"%papers[eid][2],
+            "01/01/%s" % papers[eid][2],
             "",
             "",
             "", "", "",
-            "From Scopus by Tiresias on %s"\
-                % datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            "From Scopus by Tiresias on %s" \
+            % datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
             "", "n", "n", ""
-            ]
+        ]
         ctx = "\r\n".join(ctx)
-        with open("%s.ctx"%filename, 'wb') as ctxfile:
-            ctx = ctx.encode('latin-1', 'xmlcharrefreplace') #to bytes
+        with open("%s.ctx" % filename, 'wb') as ctxfile:
+            ctx = ctx.encode('latin-1', 'xmlcharrefreplace')  # to bytes
             ctxfile.write(ctx)
             file_count += 1
 
     return file_count, no_abstract
 
+
 if __name__ == "__main__":
     for ctx_file in glob.glob("*.csv"):
         with open(ctx_file, newline='', encoding='utf-8-sig') as csvfile:
-            #encoding='utf-8-sig' against BOM saved file that generate a "ï»¿"
+            # encoding='utf-8-sig' against BOM saved file that generate a "ï»¿"
             file_count, no_abstract = ctx_prospero(csvfile,
                                                    cleaning=True,
                                                    brackets=True,
                                                    author_keywords=True,
                                                    index_keywords=True,
                                                    rm_copyright=True)
-            print("Created %d file(s), skipped %d articles with no abstract"\
-                  %(file_count, no_abstract))
+            print("Created %d file(s), skipped %d articles with no abstract" \
+                  % (file_count, no_abstract))
