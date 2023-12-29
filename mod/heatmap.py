@@ -57,15 +57,9 @@ def create_svg(values):
     first_q, median, third_q = quartiles(text_num)
 
     step = 50
-    svg_width = step * (max(values) - min(values)) + 250
-    if svg_width > 1000:
-        step = (1000 - 200) / (max(values) - min(values))
-        if step < 20:
-            step = 20
-        svg_width = step * (max(values) - min(values)) + 200
 
+    svg_width = compute_svg_width(step, max(values), min(values))
     svg = write_svg_header(svg_width)
-
     svg += write_y_axis_legend(step)
 
     y = 0
@@ -166,3 +160,16 @@ def create_legend_list(min_value, max_value, third_q, median):
     legend_list.append([max_value, max_value])
 
     return legend_list
+
+
+def compute_svg_width(step, max_value, min_value):
+    svg_width = step * (max_value - min_value) + 250
+
+    if svg_width < 1000:
+        return svg_width
+
+    step = (1000 - 200) / (max_value - min_value)
+    if step < 20:
+        step = 20
+
+    return int(step * (max_value - min_value) + 200)

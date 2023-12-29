@@ -1,4 +1,5 @@
-from mod.heatmap import quartiles, create_svg, parse_data, write_svg_legend, write_y_axis_legend, create_legend_list
+from mod.heatmap import quartiles, create_svg, parse_data, write_svg_legend, write_y_axis_legend, create_legend_list, \
+    compute_svg_width
 
 
 def test_quartiles_returns_3_quartiles():
@@ -134,4 +135,24 @@ def test_create_legend_list():
 
     result = create_legend_list(min_value, max_value, third_q, median)
 
+    assert result == expected
+
+
+def test_compute_svg_width():
+    step = 50
+    max_value = 2021
+    min_value = 2020
+
+    expected = 300
+    result = compute_svg_width(step, max_value, min_value)
+    assert result == expected
+
+
+def test_compute_svg_width_larger():
+    step = 500
+    max_value = 2022
+    min_value = 2020
+
+    expected = 1000
+    result = compute_svg_width(step, max_value, min_value)
     assert result == expected
