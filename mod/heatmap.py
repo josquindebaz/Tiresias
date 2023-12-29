@@ -47,36 +47,27 @@ def parse_data(data):
     return values
 
 
-def create_svg(values):
+def create_svg(data):
     text_num = []
-    for year, months in values.items():
+    for year, months in data.items():
         for month, texts in months.items():
             text_num.append(texts)
+
     max_value = max(text_num)
     min_value = min(text_num)
     first_q, median, third_q = quartiles(text_num)
 
     step = 50
+    year_range = range(min(data), max(data) + 1)
+    year_sums = sum_year_values(year_range, data)
+    svg_width = compute_svg_width(step, max(data), min(data))
 
-    svg_width = compute_svg_width(step, max(values), min(values))
     svg = write_svg_header(svg_width)
     svg += write_y_axis_legend(step)
-
-    year_range = range(min(values), max(values) + 1)
-    year_sums = sum_year_values(year_range, values)
-
-    svg += write_svg_map(year_range, step, values, max_value)
-    svg += write_svg_barplot(year_sums, values, step)
+    svg += write_svg_map(year_range, step, data, max_value)
+    svg += write_svg_barplot(year_sums, data, step)
     legend_list = create_legend_list(min_value, max_value, third_q, median)
     svg += write_svg_legend(legend_list, len(year_range) * step, step)
-
-    ##    svg += '\n <text x="%s" y="380" font-family="sans-serif" \
-    ##font-size="14">Q1:%s</text>\n' %(y+60, first_q)
-    ##    svg += '\n <text x="%s" y="400" font-family="sans-serif" \
-    ##font-size="14">Q2:%s</text>\n' %(y+60, median)
-    ##    svg += '\n <text x="%s" y="420" font-family="sans-serif" \
-    ##font-size="14">Q3:%s</text>\n' %(y+60, third_q)
-
     svg += "\n</svg>"
 
     return svg
@@ -113,6 +104,13 @@ def write_svg_legend(legend_list, y, step):
                f'class="rect" style="fill-opacity:{legend_item[1]}"></rect>\n'
                f' <text x="{text_x_coordinate}" y="{330 - 50 * index}" class="norm">{legend_item[0]}</text>\n'
                for index, legend_item in enumerate(legend_list)]
+
+    #    svg += '\n <text x="%s" y="380" font-family="sans-serif" \
+    # font-size="14">Q1:%s</text>\n' %(y+60, first_q)
+    #    svg += '\n <text x="%s" y="400" font-family="sans-serif" \
+    # font-size="14">Q2:%s</text>\n' %(y+60, median)
+    #    svg += '\n <text x="%s" y="420" font-family="sans-serif" \
+    # font-size="14">Q3:%s</text>\n' %(y+60, third_q)
 
     return "".join(legends)
 
