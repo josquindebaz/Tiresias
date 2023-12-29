@@ -99,19 +99,7 @@ def create_svg(values):
         svg += '</rect>\n   <text x="%s" y="%s" ' % (x, y_value + 685)
         svg += 'class="small">%s</text>\n' % year_sums[year]
 
-    legend_list = [[min_value, min_value / max_value]]
-    if third_q < int(max_value / 4) and third_q != 0:
-        legend_list.extend([["Q3:%s" % third_q, third_q / max_value],
-                            [int(max_value / 2), 0.5],
-                            [int(3 * max_value / 4), 0.75]])
-    else:
-        if median <= int(max_value / 4) and median != 0:
-            legend_list.append(["Q2:%s" % median, median / max_value])
-        else:
-            legend_list.append([int(max_value / 4), 0.25])
-        legend_list.extend([[int(max_value / 2), 0.5],
-                            [int(3 * max_value / 4), 0.75]])
-    legend_list.append([max_value, max_value])
+    legend_list = create_legend_list(min_value, max_value, third_q, median)
 
     svg += write_svg_legend(legend_list, y, step)
 
@@ -160,3 +148,21 @@ def write_svg_legend(legend_list, y, step):
                for index, legend_item in enumerate(legend_list)]
 
     return "".join(legends)
+
+
+def create_legend_list(min_value, max_value, third_q, median):
+    legend_list = [[min_value, min_value / max_value]]
+    if third_q < int(max_value / 4) and third_q != 0:
+        legend_list.extend([["Q3:%s" % third_q, third_q / max_value],
+                            [int(max_value / 2), 0.5],
+                            [int(3 * max_value / 4), 0.75]])
+    else:
+        if median <= int(max_value / 4) and median != 0:
+            legend_list.append(["Q2:%s" % median, median / max_value])
+        else:
+            legend_list.append([int(max_value / 4), 0.25])
+        legend_list.extend([[int(max_value / 2), 0.5],
+                            [int(3 * max_value / 4), 0.75]])
+    legend_list.append([max_value, max_value])
+
+    return legend_list

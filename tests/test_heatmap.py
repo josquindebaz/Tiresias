@@ -1,4 +1,4 @@
-from mod.heatmap import quartiles, create_svg, parse_data, write_svg_legend, write_y_axis_legend
+from mod.heatmap import quartiles, create_svg, parse_data, write_svg_legend, write_y_axis_legend, create_legend_list
 
 
 def test_quartiles_returns_3_quartiles():
@@ -120,5 +120,18 @@ def test_write_svg_legend():
     step = 50
 
     result = write_svg_legend(legend_list, y, step)
+
+    assert result == expected
+
+
+def test_create_legend_list():
+    min_value = 0
+    max_value = 30
+    third_q = 13
+    median = 0
+
+    expected = [[0, 0.0], [7, 0.25], [15, 0.5], [22, 0.75], [30, 30]]
+
+    result = create_legend_list(min_value, max_value, third_q, median)
 
     assert result == expected
