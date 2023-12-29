@@ -1,5 +1,5 @@
 from mod.heatmap import quartiles, create_svg, parse_data, write_svg_legend, write_y_axis_legend, create_legend_list, \
-    compute_svg_width, write_svg_barplot
+    compute_svg_width, write_svg_barplot, sum_year_values, write_svg_map
 
 
 def test_quartiles_returns_3_quartiles():
@@ -171,3 +171,41 @@ def test_write_svg_barplot():
 
     result = write_svg_barplot(year_sums, values, step)
     assert result == expected
+
+
+def test_sum_year_values():
+    year_range = [2020, 2021]
+    values = {2020: {1: 3, 2: 0, 3: 0, 4: 0, 5: 30, 6: 30, 7: 23, 8: 13, 9: 0, 10: 0, 11: 0, 12: 0}, 2021: {1: 10}}
+
+    expected = {2020: 99, 2021: 10}
+    result = sum_year_values(year_range, values)
+
+    assert result == expected
+
+
+def test_write_svg_map():
+    year_range = range(2020, 2022)
+    step = 50
+    values = {2020: {1: 3, 2: 0, 3: 0, 4: 0, 5: 30, 6: 30, 7: 23, 8: 13, 9: 0, 10: 0, 11: 0, 12: 0}, 2021: {1: 10}}
+    max_value = 30
+
+    expected = """ <rect width="50" height="50" x="50" y="20" class="rect" style="fill-opacity:0.0"><title>12/2020: 0</title></rect>
+ <rect width="50" height="50" x="50" y="70" class="rect" style="fill-opacity:0.0"><title>11/2020: 0</title></rect>
+ <rect width="50" height="50" x="50" y="120" class="rect" style="fill-opacity:0.0"><title>10/2020: 0</title></rect>
+ <rect width="50" height="50" x="50" y="170" class="rect" style="fill-opacity:0.0"><title>9/2020: 0</title></rect>
+ <rect width="50" height="50" x="50" y="220" class="rect" style="fill-opacity:0.43333333333333335"><title>8/2020: 13</title></rect>
+ <rect width="50" height="50" x="50" y="270" class="rect" style="fill-opacity:0.7666666666666667"><title>7/2020: 23</title></rect>
+ <rect width="50" height="50" x="50" y="320" class="rect" style="fill-opacity:1.0"><title>6/2020: 30</title></rect>
+ <rect width="50" height="50" x="50" y="370" class="rect" style="fill-opacity:1.0"><title>5/2020: 30</title></rect>
+ <rect width="50" height="50" x="50" y="420" class="rect" style="fill-opacity:0.0"><title>4/2020: 0</title></rect>
+ <rect width="50" height="50" x="50" y="470" class="rect" style="fill-opacity:0.0"><title>3/2020: 0</title></rect>
+ <rect width="50" height="50" x="50" y="520" class="rect" style="fill-opacity:0.0"><title>2/2020: 0</title></rect>
+ <rect width="50" height="50" x="50" y="570" class="rect" style="fill-opacity:0.1"><title>1/2020: 3</title></rect>
+<text x="75.0" y="630" class="vert">2020</text>
+ <rect width="50" height="50" x="100" y="570" class="rect" style="fill-opacity:0.3333333333333333"><title>1/2021: 10</title></rect>
+<text x="125.0" y="630" class="vert">2021</text>
+"""
+
+    result = write_svg_map(year_range, step, values, max_value)
+    assert result == expected
+

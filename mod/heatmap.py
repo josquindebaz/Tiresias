@@ -62,29 +62,13 @@ def create_svg(values):
     svg = write_svg_header(svg_width)
     svg += write_y_axis_legend(step)
 
-    y = 0
-    year_sums = {}
     year_range = range(min(values), max(values) + 1)
-    for year in year_range:
-        y += step
-        year_sum = 0
-        for month in range(12, 0, -1):
-            if month in values[year]:
-                svg += ' <rect width="%s" height="50" ' % step
-                svg += 'x="%d" y="%d" class="rect" ' % (y, 620 - month * 50)
-                svg += 'style="fill-opacity:%s">' % (values[year][month] / float(max_value))
-                svg += '<title>%s/%s: %s</title>' % (month,
-                                                     year,
-                                                     values[year][month])
-                svg += '</rect>\n'
-                year_sum += values[year][month]
-        svg += '<text x="%s" y="%s" ' % (y + step / 2, 630)
-        svg += 'class="vert">%s</text>\n' % year
-        year_sums[year] = year_sum
+    year_sums = sum_year_values(year_range, values)
 
+    svg += write_svg_map(year_range, step, values, max_value)
     svg += write_svg_barplot(year_sums, values, step)
     legend_list = create_legend_list(min_value, max_value, third_q, median)
-    svg += write_svg_legend(legend_list, len(year_range)*step, step)
+    svg += write_svg_legend(legend_list, len(year_range) * step, step)
 
     ##    svg += '\n <text x="%s" y="380" font-family="sans-serif" \
     ##font-size="14">Q1:%s</text>\n' %(y+60, first_q)
@@ -175,8 +159,37 @@ def write_svg_barplot(year_sums, values, step):
         year_sum = year_sums[year]
         y_value = 100 * year_sum / float(max_year_value)
 
-        result += f'   <rect width="{step}" height="{y_value}" x="{x}" y="670" class="rect">'\
-                  f'<title>{year}: {year_sum}</title></rect>\n'\
+        result += f'   <rect width="{step}" height="{y_value}" x="{x}" y="670" class="rect">' \
+                  f'<title>{year}: {year_sum}</title></rect>\n' \
                   f'   <text x="{x}" y="{y_value + 685}" class="small">{year_sum}</text>\n'
+
+    return result
+
+
+def sum_year_values(year_range, values):
+    year_sums = {}
+
+    for year in year_range:
+        year_sum = 0
+        for month in range(12, 0, -1):
+            if month in values[year]:
+                year_sum += values[year][month]
+        year_sums[year] = year_sum
+
+    return year_sums
+
+
+def write_svg_map(year_range, step, values, max_value):
+    result = ""
+    y = 0
+    for year in year_range:
+        y += step
+        for month in range(12, 0, -1):
+            if month in values[year]:
+                result += (f' <rect width="{step}" height="50" '
+                           f'x="{y}" y="{620 - month * 50}" class="rect" '
+                           f'style="fill-opacity:{values[year][month] / float(max_value)}">'
+                           f'<title>{month}/{year}: {values[year][month]}</title></rect>\n')
+        result += f'<text x="{y + step / 2}" y="630" class="vert">{year}</text>\n'
 
     return result
