@@ -64,7 +64,8 @@ def create_svg(values):
 
     y = 0
     year_sums = {}
-    for year in range(min(values), max(values) + 1):
+    year_range = range(min(values), max(values) + 1)
+    for year in year_range:
         y += step
         year_sum = 0
         for month in range(12, 0, -1):
@@ -83,10 +84,8 @@ def create_svg(values):
         year_sums[year] = year_sum
 
     svg += write_svg_barplot(year_sums, values, step)
-
     legend_list = create_legend_list(min_value, max_value, third_q, median)
-
-    svg += write_svg_legend(legend_list, y, step)
+    svg += write_svg_legend(legend_list, len(year_range)*step, step)
 
     ##    svg += '\n <text x="%s" y="380" font-family="sans-serif" \
     ##font-size="14">Q1:%s</text>\n' %(y+60, first_q)
