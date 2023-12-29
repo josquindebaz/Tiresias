@@ -99,7 +99,7 @@ def create_svg(values):
         for month in range(12, 0, -1):
             if month in values[year]:
                 year_sum += values[year][month]
-                svg += ' <rect width="%s" height="50" ' % (step)
+                svg += ' <rect width="%s" height="50" ' % step
                 svg += 'x="%d" y="%d" class="rect" ' % (y, 620 - month * 50)
                 svg += 'style="fill-opacity:%s">' % (values[year][month] / float(max_value))
                 svg += '<title>%s/%s: %s</title>' % (month,
@@ -136,13 +136,7 @@ def create_svg(values):
                             [int(3 * max_value / 4), 0.75]])
     legend_list.append([max_value, max_value])
 
-    for index, legend in enumerate(legend_list):
-        svg += '<rect width="%s" height="50" ' % step
-        svg += 'x="%s" y="%s" ' % (y + step + 10, 300 - 50 * index)
-        svg += 'class="rect" style="'
-        svg += 'fill-opacity:%s"></rect>' % (legend[1])
-        svg += '\n <text x="%s" y="%s" ' % (y + 2 * step + 15, 330 - 50 * index)
-        svg += 'class="norm">%s</text>\n' % (legend[0])
+    svg += write_svg_legend(legend_list, y, step)
 
     ##    svg += '\n <text x="%s" y="380" font-family="sans-serif" \
     ##font-size="14">Q1:%s</text>\n' %(y+60, first_q)
@@ -154,3 +148,16 @@ def create_svg(values):
     svg += "\n</svg>"
 
     return svg
+
+
+def write_svg_legend(legend_list, y, step):
+    result = ""
+    for index, legend in enumerate(legend_list):
+        result += '<rect width="%s" height="50" ' % step
+        result += 'x="%s" y="%s" ' % (y + step + 10, 300 - 50 * index)
+        result += 'class="rect" style="'
+        result += 'fill-opacity:%s"></rect>' % (legend[1])
+        result += '\n <text x="%s" y="%s" ' % (y + 2 * step + 15, 330 - 50 * index)
+        result += 'class="norm">%s</text>\n' % (legend[0])
+
+    return result

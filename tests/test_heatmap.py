@@ -9,7 +9,7 @@ def test_quartiles_returns_3_quartiles():
     assert result == (3, 5, 7)
 
 
-def test_e2e():
+def test_heatmap_e2e():
     copy_pasted_data = """sans date	0
 janvier/2020	3
 février/2020	0
