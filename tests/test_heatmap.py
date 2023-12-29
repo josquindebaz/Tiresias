@@ -61,10 +61,10 @@ janvier/2021	10"""
 <text x="75.0" y="630" class="vert">2020</text>
  <rect width="50" height="50" x="100" y="570" class="rect" style="fill-opacity:0.3333333333333333"><title>1/2021: 10</title></rect>
 <text x="125.0" y="630" class="vert">2021</text>
-   <rect width="50" height="100.0" x="50" y="670" class="rect"><title>2020: 198</title></rect>
-   <text x="50" y="785.0" class="small">198</text>
-   <rect width="50" height="10.1010101010101" x="100" y="670" class="rect"><title>2021: 20</title></rect>
-   <text x="100" y="695.10101010101" class="small">20</text>
+   <rect width="50" height="100.0" x="50" y="670" class="rect"><title>2020: 99</title></rect>
+   <text x="50" y="785.0" class="small">99</text>
+   <rect width="50" height="10.1010101010101" x="100" y="670" class="rect"><title>2021: 10</title></rect>
+   <text x="100" y="695.10101010101" class="small">10</text>
 <rect width="50" height="50" x="160" y="300" class="rect" style="fill-opacity:0.0"></rect>
  <text x="215" y="330" class="norm">0</text>
 <rect width="50" height="50" x="160" y="250" class="rect" style="fill-opacity:0.25"></rect>

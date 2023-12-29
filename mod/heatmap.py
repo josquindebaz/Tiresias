@@ -70,7 +70,6 @@ def create_svg(values):
         year_sum = 0
         for month in range(12, 0, -1):
             if month in values[year]:
-                year_sum += values[year][month]
                 svg += ' <rect width="%s" height="50" ' % step
                 svg += 'x="%d" y="%d" class="rect" ' % (y, 620 - month * 50)
                 svg += 'style="fill-opacity:%s">' % (values[year][month] / float(max_value))
