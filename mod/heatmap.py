@@ -77,15 +77,7 @@ def create_svg(values):
             step = 20
         svg_width = step * (max(values) - min(values)) + 200
 
-    svg = """<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="%s">
-<style>
-    .norm { font:14px sans-serif; }
-    .small { font:12px sans-serif; }
-    .vert { font:14px sans-serif; writing-mode: tb; }
-    .rect { stroke:gray; stroke-width:1; fill:blue; }
-</style>
-""" % svg_width
+    svg = write_svg_header(svg_width)
 
     for month in range(12, 0, -1):
         svg += '<text x="%s" y="%s" ' % (step - 15, 645 - month * 50)
@@ -148,6 +140,18 @@ def create_svg(values):
     svg += "\n</svg>"
 
     return svg
+
+
+def write_svg_header(svg_width):
+    return """<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="%s">
+<style>
+    .norm { font:14px sans-serif; }
+    .small { font:12px sans-serif; }
+    .vert { font:14px sans-serif; writing-mode: tb; }
+    .rect { stroke:gray; stroke-width:1; fill:blue; }
+</style>
+""" % svg_width
 
 
 def write_svg_legend(legend_list, y, step):
