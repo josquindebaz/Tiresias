@@ -1,4 +1,4 @@
-from mod.heatmap import quartiles, create_svg, parse_data
+from mod.heatmap import quartiles, create_svg, parse_data, write_svg_legend, write_y_axis_legend
 
 
 def test_quartiles_returns_3_quartiles():
@@ -80,4 +80,23 @@ janvier/2021	10"""
     values = parse_data(copy_pasted_data)
     result = create_svg(values)
 
+    assert result == expected
+
+
+def test_write_y_axis_legend():
+    expected = """<text x="85" y="45" class="norm">d</text>
+<text x="85" y="95" class="norm">n</text>
+<text x="85" y="145" class="norm">o</text>
+<text x="85" y="195" class="norm">s</text>
+<text x="85" y="245" class="norm">a</text>
+<text x="85" y="295" class="norm">j</text>
+<text x="85" y="345" class="norm">j</text>
+<text x="85" y="395" class="norm">m</text>
+<text x="85" y="445" class="norm">a</text>
+<text x="85" y="495" class="norm">m</text>
+<text x="85" y="545" class="norm">f</text>
+<text x="85" y="595" class="norm">j</text>
+"""
+
+    result = write_y_axis_legend(100)
     assert result == expected

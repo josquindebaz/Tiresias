@@ -48,19 +48,6 @@ def parse_data(data):
 
 
 def create_svg(values):
-    month_index = {1: "j",
-                   2: "f",
-                   3: "m",
-                   4: "a",
-                   5: "m",
-                   6: "j",
-                   7: "j",
-                   8: "a",
-                   9: "s",
-                   10: "o",
-                   11: "n",
-                   12: "d"}
-
     text_num = []
     for year, months in values.items():
         for month, texts in months.items():
@@ -79,9 +66,7 @@ def create_svg(values):
 
     svg = write_svg_header(svg_width)
 
-    for month in range(12, 0, -1):
-        svg += '<text x="%s" y="%s" ' % (step - 15, 645 - month * 50)
-        svg += 'class="norm">%s</text>\n' % (month_index[month])
+    svg += write_y_axis_legend(step)
 
     y = 0
     year_sums = {}
@@ -140,6 +125,16 @@ def create_svg(values):
     svg += "\n</svg>"
 
     return svg
+
+
+def write_y_axis_legend(step):
+    x_coordinate = step - 15
+    reversed_month_index = "dnosajjmamfj"
+
+    months = [f'<text x="{x_coordinate}" y="{645 - (12 - index) * 50}" class="norm">{month_initial}</text>\n'
+              for index, month_initial in enumerate(reversed_month_index)]
+
+    return "".join(months)
 
 
 def write_svg_header(svg_width):
