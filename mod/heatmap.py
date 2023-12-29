@@ -82,16 +82,7 @@ def create_svg(values):
         svg += 'class="vert">%s</text>\n' % year
         year_sums[year] = year_sum
 
-    x = 0
-    max_year_value = max(year_sums.values())
-    for year in range(min(values), max(values) + 1):
-        x += step
-        y_value = 100 * year_sums[year] / float(max_year_value)
-        svg += '   <rect width="%d" height="%s" ' % (step, y_value)
-        svg += 'x="%d" y="%d" class="rect">' % (x, 670)
-        svg += '<title>%s: %d</title>' % (year, year_sums[year])
-        svg += '</rect>\n   <text x="%s" y="%s" ' % (x, y_value + 685)
-        svg += 'class="small">%s</text>\n' % year_sums[year]
+    svg += write_svg_barplot(year_sums, values, step)
 
     legend_list = create_legend_list(min_value, max_value, third_q, median)
 
@@ -173,3 +164,21 @@ def compute_svg_width(step, max_value, min_value):
         step = 20
 
     return int(step * (max_value - min_value) + 200)
+
+
+def write_svg_barplot(year_sums, values, step):
+    result = ""
+    max_year_value = max(year_sums.values())
+
+    x = 0
+    for year in range(min(values), max(values) + 1):
+        x += step
+
+        year_sum = year_sums[year]
+        y_value = 100 * year_sum / float(max_year_value)
+
+        result += f'   <rect width="{step}" height="{y_value}" x="{x}" y="670" class="rect">'\
+                  f'<title>{year}: {year_sum}</title></rect>\n'\
+                  f'   <text x="{x}" y="{y_value + 685}" class="small">{year_sum}</text>\n'
+
+    return result

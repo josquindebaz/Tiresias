@@ -1,5 +1,5 @@
 from mod.heatmap import quartiles, create_svg, parse_data, write_svg_legend, write_y_axis_legend, create_legend_list, \
-    compute_svg_width
+    compute_svg_width, write_svg_barplot
 
 
 def test_quartiles_returns_3_quartiles():
@@ -155,4 +155,19 @@ def test_compute_svg_width_larger():
 
     expected = 1000
     result = compute_svg_width(step, max_value, min_value)
+    assert result == expected
+
+
+def test_write_svg_barplot():
+    year_sums = {2020: 198, 2021: 20}
+    values = {2020: {1: 3, 2: 0, 3: 0, 4: 0, 5: 30, 6: 30, 7: 23, 8: 13, 9: 0, 10: 0, 11: 0, 12: 0}, 2021: {1: 10}}
+    step = 50
+
+    expected = """   <rect width="50" height="100.0" x="50" y="670" class="rect"><title>2020: 198</title></rect>
+   <text x="50" y="785.0" class="small">198</text>
+   <rect width="50" height="10.1010101010101" x="100" y="670" class="rect"><title>2021: 20</title></rect>
+   <text x="100" y="695.10101010101" class="small">20</text>
+"""
+
+    result = write_svg_barplot(year_sums, values, step)
     assert result == expected
