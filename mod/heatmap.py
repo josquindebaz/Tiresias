@@ -47,25 +47,24 @@ def parse_data(data):
     return values
 
 
-def create_svg(data):
-    text_num = []
-    for year, months in data.items():
-        for month, texts in months.items():
-            text_num.append(texts)
+def create_svg(monthly_values):
+    only_values = [item for items in
+                   [month.values() for month in monthly_values.values()]
+                   for item in items]
 
-    max_value = max(text_num)
-    min_value = min(text_num)
-    first_q, median, third_q = quartiles(text_num)
+    max_value = max(only_values)
+    min_value = min(only_values)
+    first_q, median, third_q = quartiles(only_values)
 
     step = 50
-    year_range = range(min(data), max(data) + 1)
-    year_sums = sum_year_values(year_range, data)
-    svg_width = compute_svg_width(step, max(data), min(data))
+    year_range = range(min(monthly_values), max(monthly_values) + 1)
+    year_sums = sum_year_values(year_range, monthly_values)
+    svg_width = compute_svg_width(step, max(monthly_values), min(monthly_values))
 
     svg = write_svg_header(svg_width)
     svg += write_y_axis_legend(step)
-    svg += write_svg_map(year_range, step, data, max_value)
-    svg += write_svg_barplot(year_sums, data, step)
+    svg += write_svg_map(year_range, step, monthly_values, max_value)
+    svg += write_svg_barplot(year_sums, monthly_values, step)
     legend_list = create_legend_list(min_value, max_value, third_q, median)
     svg += write_svg_legend(legend_list, len(year_range) * step, step)
     svg += "\n</svg>"
