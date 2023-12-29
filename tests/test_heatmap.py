@@ -100,3 +100,25 @@ def test_write_y_axis_legend():
 
     result = write_y_axis_legend(100)
     assert result == expected
+
+
+def test_write_svg_legend():
+    expected = """<rect width="50" height="50" x="160" y="300" class="rect" style="fill-opacity:0.0"></rect>
+ <text x="215" y="330" class="norm">0</text>
+<rect width="50" height="50" x="160" y="250" class="rect" style="fill-opacity:0.25"></rect>
+ <text x="215" y="280" class="norm">7</text>
+<rect width="50" height="50" x="160" y="200" class="rect" style="fill-opacity:0.5"></rect>
+ <text x="215" y="230" class="norm">15</text>
+<rect width="50" height="50" x="160" y="150" class="rect" style="fill-opacity:0.75"></rect>
+ <text x="215" y="180" class="norm">22</text>
+<rect width="50" height="50" x="160" y="100" class="rect" style="fill-opacity:30"></rect>
+ <text x="215" y="130" class="norm">30</text>
+"""
+
+    legend_list = [[0, 0.0], [7, 0.25], [15, 0.5], [22, 0.75], [30, 30]]
+    y = 100
+    step = 50
+
+    result = write_svg_legend(legend_list, y, step)
+
+    assert result == expected

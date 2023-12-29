@@ -150,13 +150,13 @@ def write_svg_header(svg_width):
 
 
 def write_svg_legend(legend_list, y, step):
-    result = ""
-    for index, legend in enumerate(legend_list):
-        result += '<rect width="%s" height="50" ' % step
-        result += 'x="%s" y="%s" ' % (y + step + 10, 300 - 50 * index)
-        result += 'class="rect" style="'
-        result += 'fill-opacity:%s"></rect>' % (legend[1])
-        result += '\n <text x="%s" y="%s" ' % (y + 2 * step + 15, 330 - 50 * index)
-        result += 'class="norm">%s</text>\n' % (legend[0])
+    rect_x_coordinate = y + step + 10
+    text_x_coordinate = y + 2 * step + 15
 
-    return result
+    legends = [f'<rect width="{step}" height="50" '
+               f'x="{rect_x_coordinate}" y="{300 - 50 * index}" '
+               f'class="rect" style="fill-opacity:{legend_item[1]}"></rect>\n'
+               f' <text x="{text_x_coordinate}" y="{330 - 50 * index}" class="norm">{legend_item[0]}</text>\n'
+               for index, legend_item in enumerate(legend_list)]
+
+    return "".join(legends)
