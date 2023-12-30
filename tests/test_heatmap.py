@@ -1,17 +1,7 @@
 from mod.heatmap import quartiles, create_svg, parse_data, write_svg_legend, write_y_axis_legend, create_legend_list, \
-    compute_svg_width, write_svg_barplot, sum_year_values, write_svg_map
+    compute_svg_width, write_svg_barplot, sum_year_values, write_svg_map, MonthlyData
 
-
-def test_quartiles_returns_3_quartiles():
-    testing_values = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    result = quartiles(testing_values)
-
-    assert len(result) == 3
-    assert result == (3, 5, 7)
-
-
-def test_heatmap_e2e():
-    copy_pasted_data = """sans date	0
+raw_values = """sans date	0
 janvier/2020	3
 février/2020	0
 mars/2020	0
@@ -26,6 +16,18 @@ novembre/2020	0
 décembre/2020	0
 janvier/2021	10"""
 
+testing_values = {2020: {1: 3, 2: 0, 3: 0, 4: 0, 5: 30, 6: 30, 7: 23, 8: 13, 9: 0, 10: 0, 11: 0, 12: 0}, 2021: {1: 10}}
+
+
+def test_quartiles_returns_3_quartiles():
+    testing_values = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    result = quartiles(testing_values)
+
+    assert len(result) == 3
+    assert result == (3, 5, 7)
+
+
+def test_heatmap_e2e():
     expected = """<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="300">
 <style>
@@ -78,7 +80,7 @@ janvier/2021	10"""
 
 </svg>"""
 
-    values = parse_data(copy_pasted_data)
+    values = parse_data(raw_values)
     result = create_svg(values)
 
     assert result == expected
@@ -160,7 +162,6 @@ def test_compute_svg_width_larger():
 
 def test_write_svg_barplot():
     year_sums = {2020: 198, 2021: 20}
-    values = {2020: {1: 3, 2: 0, 3: 0, 4: 0, 5: 30, 6: 30, 7: 23, 8: 13, 9: 0, 10: 0, 11: 0, 12: 0}, 2021: {1: 10}}
     step = 50
 
     expected = """   <rect width="50" height="100.0" x="50" y="670" class="rect"><title>2020: 198</title></rect>
@@ -169,16 +170,15 @@ def test_write_svg_barplot():
    <text x="100" y="695.10101010101" class="small">20</text>
 """
 
-    result = write_svg_barplot(year_sums, values, step)
+    result = write_svg_barplot(year_sums, testing_values, step)
     assert result == expected
 
 
 def test_sum_year_values():
     year_range = [2020, 2021]
-    values = {2020: {1: 3, 2: 0, 3: 0, 4: 0, 5: 30, 6: 30, 7: 23, 8: 13, 9: 0, 10: 0, 11: 0, 12: 0}, 2021: {1: 10}}
 
     expected = {2020: 99, 2021: 10}
-    result = sum_year_values(year_range, values)
+    result = sum_year_values(year_range, testing_values)
 
     assert result == expected
 
@@ -186,7 +186,6 @@ def test_sum_year_values():
 def test_write_svg_map():
     year_range = range(2020, 2022)
     step = 50
-    values = {2020: {1: 3, 2: 0, 3: 0, 4: 0, 5: 30, 6: 30, 7: 23, 8: 13, 9: 0, 10: 0, 11: 0, 12: 0}, 2021: {1: 10}}
     max_value = 30
 
     expected = """ <rect width="50" height="50" x="50" y="20" class="rect" style="fill-opacity:0.0"><title>12/2020: 0</title></rect>
@@ -206,6 +205,46 @@ def test_write_svg_map():
 <text x="125.0" y="630" class="vert">2021</text>
 """
 
-    result = write_svg_map(year_range, step, values, max_value)
+    result = write_svg_map(year_range, step, testing_values, max_value)
     assert result == expected
 
+
+def test_init_only_values():
+    monthly_data = MonthlyData(testing_values)
+
+    expected = [3, 0, 0, 0, 30, 30, 23, 13, 0, 0, 0, 0, 10]
+    result = monthly_data.get_only_values()
+    assert result == expected
+
+
+def test_get_max_monthly_values():
+    monthly_data = MonthlyData(testing_values)
+    result = monthly_data.get_max_monthly_values()
+    assert result == 30
+
+
+def test_get_min_monthly_values():
+    monthly_data = MonthlyData(testing_values)
+    result = monthly_data.get_min_monthly_values()
+    assert result == 0
+
+
+def test_get_year_range():
+    monthly_data = MonthlyData(testing_values)
+    result = monthly_data.get_year_range()
+
+    assert result == range(2020, 2022)
+
+
+def test_get_min_year():
+    monthly_data = MonthlyData(testing_values)
+    result = monthly_data.get_min_year()
+
+    assert result == 2020
+
+
+def test_get_max_year():
+    monthly_data = MonthlyData(testing_values)
+    result = monthly_data.get_max_year()
+
+    assert result == 2021

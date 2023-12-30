@@ -48,28 +48,58 @@ def parse_data(data):
 
 
 def create_svg(monthly_values):
-    only_values = [item for items in
-                   [month.values() for month in monthly_values.values()]
-                   for item in items]
+    monthly_data = MonthlyData(monthly_values)
 
-    max_value = max(only_values)
-    min_value = min(only_values)
+    only_values = monthly_data.get_only_values()
+
     first_q, median, third_q = quartiles(only_values)
 
     step = 50
-    year_range = range(min(monthly_values), max(monthly_values) + 1)
-    year_sums = sum_year_values(year_range, monthly_values)
-    svg_width = compute_svg_width(step, max(monthly_values), min(monthly_values))
+    year_sums = sum_year_values(monthly_data.get_year_range(), monthly_values)
+    svg_width = compute_svg_width(step, monthly_data.get_max_year(), monthly_data.get_min_year())
 
     svg = write_svg_header(svg_width)
     svg += write_y_axis_legend(step)
-    svg += write_svg_map(year_range, step, monthly_values, max_value)
+    svg += write_svg_map(monthly_data.get_year_range(), step, monthly_values, monthly_data.get_max_monthly_values())
     svg += write_svg_barplot(year_sums, monthly_values, step)
-    legend_list = create_legend_list(min_value, max_value, third_q, median)
-    svg += write_svg_legend(legend_list, len(year_range) * step, step)
+    legend_list = create_legend_list(monthly_data.get_min_monthly_values(),
+                                     monthly_data.get_max_monthly_values(),
+                                     third_q,
+                                     median)
+    svg += write_svg_legend(legend_list, len(monthly_data.get_year_range()) * step, step)
     svg += "\n</svg>"
 
     return svg
+
+
+class MonthlyData:
+    def __init__(self, data):
+        self.data = data
+        self.only_values = self.init_only_values()
+
+    def init_only_values(self):
+        return [item for items in
+                [month.values() for month in self.data.values()]
+                for item in items]
+
+    def get_only_values(self):
+        return self.only_values
+
+    def get_max_monthly_values(self):
+        return max(self.only_values)
+
+    def get_min_monthly_values(self):
+        return min(self.only_values)
+
+    def get_year_range(self):
+        return range(self.get_min_year(), self.get_max_year() + 1)
+
+    def get_min_year(self):
+        return min(self.data)
+
+    def get_max_year(self):
+        return max(self.data)
+
 
 
 def write_y_axis_legend(step):
