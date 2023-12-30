@@ -1,6 +1,6 @@
-from mod.heatmap import create_svg, parse_data, write_svg_legend, write_y_axis_legend, create_legend_list, \
-    compute_svg_width, write_svg_barplot, write_svg_map
 from mod.HeatmapDataProcessor import quartiles, HeatmapDataProcessor, sum_year_values
+from mod.heatmap import create_svg, parse_data
+from mod.HeatmapSvgWriter import HeatmapSvgWriter, compute_svg_width
 
 raw_values = """sans date	0
 janvier/2020	3
@@ -101,8 +101,10 @@ def test_write_y_axis_legend():
 <text x="85" y="545" class="norm">f</text>
 <text x="85" y="595" class="norm">j</text>
 """
+    monthly_data = HeatmapDataProcessor(testing_values)
+    writer = HeatmapSvgWriter(step=100, data=monthly_data)
 
-    result = write_y_axis_legend(100)
+    result = writer.write_y_axis_legend()
     assert result == expected
 
 
@@ -120,21 +122,20 @@ def test_write_svg_legend():
 """
 
     monthly_data = HeatmapDataProcessor(testing_values)
+    writer = HeatmapSvgWriter(step=50, data=monthly_data)
 
-    legend_list = [[0, 0.0], [7, 0.25], [15, 0.5], [22, 0.75], [30, 30]]
-    step = 50
-
-    result = write_svg_legend(step, monthly_data)
+    result = writer.write_svg_legend()
 
     assert result == expected
 
 
 def test_create_legend_list():
     monthly_data = HeatmapDataProcessor(testing_values)
+    writer = HeatmapSvgWriter(step=50, data=monthly_data)
 
     expected = [[0, 0.0], [7, 0.25], [15, 0.5], [22, 0.75], [30, 30]]
 
-    result = create_legend_list(monthly_data)
+    result = writer.create_legend_list()
 
     assert result == expected
 
@@ -161,7 +162,7 @@ def test_compute_svg_width_larger():
 
 def test_write_svg_barplot():
     monthly_data = HeatmapDataProcessor(testing_values)
-    step = 50
+    writer = HeatmapSvgWriter(step=50, data=monthly_data)
 
     expected = """   <rect width="50" height="100.0" x="50" y="670" class="rect"><title>2020: 99</title></rect>
    <text x="50" y="785.0" class="small">99</text>
@@ -169,7 +170,7 @@ def test_write_svg_barplot():
    <text x="100" y="695.10101010101" class="small">10</text>
 """
 
-    result = write_svg_barplot(step, monthly_data)
+    result = writer.write_svg_barplot()
     assert result == expected
 
 
@@ -199,12 +200,11 @@ def test_write_svg_map():
  <rect width="50" height="50" x="100" y="570" class="rect" style="fill-opacity:0.3333333333333333"><title>1/2021: 10</title></rect>
 <text x="125.0" y="630" class="vert">2021</text>
 """
-    year_range = range(2020, 2022)
-    step = 50
-    max_value = 30
-    monthly_data = HeatmapDataProcessor(testing_values)
 
-    result = write_svg_map(step, monthly_data)
+    monthly_data = HeatmapDataProcessor(testing_values)
+    writer = HeatmapSvgWriter(step=50, data=monthly_data)
+
+    result = writer.write_svg_map()
     assert result == expected
 
 
