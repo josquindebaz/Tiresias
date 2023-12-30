@@ -123,7 +123,7 @@ def test_write_svg_legend():
     legend_list = [[0, 0.0], [7, 0.25], [15, 0.5], [22, 0.75], [30, 30]]
     step = 50
 
-    result = write_svg_legend(legend_list, step, monthly_data)
+    result = write_svg_legend(step, monthly_data)
 
     assert result == expected
 
@@ -142,8 +142,6 @@ def test_compute_svg_width():
     monthly_data = MonthlyData(testing_values)
 
     step = 50
-    max_value = 2021
-    min_value = 2020
 
     expected = 300
     result = compute_svg_width(step, monthly_data)
@@ -154,8 +152,6 @@ def test_compute_svg_width_larger():
     monthly_data = MonthlyData(testing_values)
 
     step = 750
-    max_value = 2022
-    min_value = 2020
 
     expected = 1000
     result = compute_svg_width(step, monthly_data)

@@ -49,19 +49,9 @@ def parse_data(data):
 
 def create_svg(monthly_values):
     data_processor = MonthlyData(monthly_values)
+    svg_writer = SvgWriter(step=50, data=data_processor)
 
-    step = 50
-    svg_width = compute_svg_width(step, data_processor)
-
-    svg = write_svg_header(svg_width)
-    svg += write_y_axis_legend(step)
-    svg += write_svg_map(step, data_processor)
-    svg += write_svg_barplot(step, data_processor)
-    legend_list = create_legend_list(data_processor)
-    svg += write_svg_legend(legend_list, step, data_processor)
-    svg += "\n</svg>"
-
-    return svg
+    return svg_writer.produce_svg()
 
 
 class MonthlyData:
@@ -110,6 +100,22 @@ class MonthlyData:
         return max(self.data)
 
 
+class SvgWriter:
+    def __init__(self, step, data):
+        self.step = step
+        self.data = data
+
+    def produce_svg(self):
+        svg = write_svg_header(self.step, self.data)
+        svg += write_y_axis_legend(self.step)
+        svg += write_svg_map(self.step, self.data)
+        svg += write_svg_barplot(self.step, self.data)
+        svg += write_svg_legend(self.step, self.data)
+        svg += "\n</svg>"
+
+        return svg
+
+
 def write_y_axis_legend(step):
     x_coordinate = step - 15
     reversed_month_index = "dnosajjmamfj"
@@ -120,7 +126,9 @@ def write_y_axis_legend(step):
     return "".join(months)
 
 
-def write_svg_header(svg_width):
+def write_svg_header(step, data):
+    svg_width = compute_svg_width(step, data)
+
     return """<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="%s">
 <style>
@@ -132,7 +140,8 @@ def write_svg_header(svg_width):
 """ % svg_width
 
 
-def write_svg_legend(legend_list, step, data):
+def write_svg_legend(step, data):
+    legend_list = create_legend_list(data)
     y = len(data.get_year_range()) * step
     rect_x_coordinate = y + step + 10
     text_x_coordinate = y + 2 * step + 15
