@@ -1,5 +1,6 @@
-from mod.heatmap import quartiles, create_svg, parse_data, write_svg_legend, write_y_axis_legend, create_legend_list, \
-    compute_svg_width, write_svg_barplot, sum_year_values, write_svg_map, MonthlyData
+from mod.heatmap import create_svg, parse_data, write_svg_legend, write_y_axis_legend, create_legend_list, \
+    compute_svg_width, write_svg_barplot, write_svg_map
+from mod.HeatmapDataProcessor import quartiles, HeatmapDataProcessor, sum_year_values
 
 raw_values = """sans date	0
 janvier/2020	3
@@ -118,7 +119,7 @@ def test_write_svg_legend():
  <text x="215" y="130" class="norm">30</text>
 """
 
-    monthly_data = MonthlyData(testing_values)
+    monthly_data = HeatmapDataProcessor(testing_values)
 
     legend_list = [[0, 0.0], [7, 0.25], [15, 0.5], [22, 0.75], [30, 30]]
     step = 50
@@ -129,7 +130,7 @@ def test_write_svg_legend():
 
 
 def test_create_legend_list():
-    monthly_data = MonthlyData(testing_values)
+    monthly_data = HeatmapDataProcessor(testing_values)
 
     expected = [[0, 0.0], [7, 0.25], [15, 0.5], [22, 0.75], [30, 30]]
 
@@ -139,7 +140,7 @@ def test_create_legend_list():
 
 
 def test_compute_svg_width():
-    monthly_data = MonthlyData(testing_values)
+    monthly_data = HeatmapDataProcessor(testing_values)
 
     step = 50
 
@@ -149,7 +150,7 @@ def test_compute_svg_width():
 
 
 def test_compute_svg_width_larger():
-    monthly_data = MonthlyData(testing_values)
+    monthly_data = HeatmapDataProcessor(testing_values)
 
     step = 750
 
@@ -159,7 +160,7 @@ def test_compute_svg_width_larger():
 
 
 def test_write_svg_barplot():
-    monthly_data = MonthlyData(testing_values)
+    monthly_data = HeatmapDataProcessor(testing_values)
     step = 50
 
     expected = """   <rect width="50" height="100.0" x="50" y="670" class="rect"><title>2020: 99</title></rect>
@@ -201,14 +202,14 @@ def test_write_svg_map():
     year_range = range(2020, 2022)
     step = 50
     max_value = 30
-    monthly_data = MonthlyData(testing_values)
+    monthly_data = HeatmapDataProcessor(testing_values)
 
     result = write_svg_map(step, monthly_data)
     assert result == expected
 
 
 def test_init_only_values():
-    monthly_data = MonthlyData(testing_values)
+    monthly_data = HeatmapDataProcessor(testing_values)
 
     expected = [3, 0, 0, 0, 30, 30, 23, 13, 0, 0, 0, 0, 10]
     result = monthly_data.get_only_values()
@@ -216,45 +217,45 @@ def test_init_only_values():
 
 
 def test_init_quartiles():
-    monthly_data = MonthlyData(testing_values)
+    monthly_data = HeatmapDataProcessor(testing_values)
     assert monthly_data.get_quartile1() == 0
     assert monthly_data.get_quartile2() == 0
     assert monthly_data.get_quartile3() == 13
 
 
 def test_init_year_sums():
-    monthly_data = MonthlyData(testing_values)
+    monthly_data = HeatmapDataProcessor(testing_values)
     assert monthly_data.year_sums == {2020: 99, 2021: 10}
 
 
 def test_get_max_monthly_values():
-    monthly_data = MonthlyData(testing_values)
+    monthly_data = HeatmapDataProcessor(testing_values)
     result = monthly_data.get_max_monthly_values()
     assert result == 30
 
 
 def test_get_min_monthly_values():
-    monthly_data = MonthlyData(testing_values)
+    monthly_data = HeatmapDataProcessor(testing_values)
     result = monthly_data.get_min_monthly_values()
     assert result == 0
 
 
 def test_get_year_range():
-    monthly_data = MonthlyData(testing_values)
+    monthly_data = HeatmapDataProcessor(testing_values)
     result = monthly_data.get_year_range()
 
     assert result == range(2020, 2022)
 
 
 def test_get_min_year():
-    monthly_data = MonthlyData(testing_values)
+    monthly_data = HeatmapDataProcessor(testing_values)
     result = monthly_data.get_min_year()
 
     assert result == 2020
 
 
 def test_get_max_year():
-    monthly_data = MonthlyData(testing_values)
+    monthly_data = HeatmapDataProcessor(testing_values)
     result = monthly_data.get_max_year()
 
     assert result == 2021
