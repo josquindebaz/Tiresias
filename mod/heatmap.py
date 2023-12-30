@@ -48,25 +48,17 @@ def parse_data(data):
 
 
 def create_svg(monthly_values):
-    monthly_data = MonthlyData(monthly_values)
-
-    only_values = monthly_data.get_only_values()
-
-    first_q, median, third_q = quartiles(only_values)
+    data_processor = MonthlyData(monthly_values)
 
     step = 50
-    year_sums = sum_year_values(monthly_data.get_year_range(), monthly_values)
-    svg_width = compute_svg_width(step, monthly_data.get_max_year(), monthly_data.get_min_year())
+    svg_width = compute_svg_width(step, data_processor)
 
     svg = write_svg_header(svg_width)
     svg += write_y_axis_legend(step)
-    svg += write_svg_map(monthly_data.get_year_range(), step, monthly_values, monthly_data.get_max_monthly_values())
-    svg += write_svg_barplot(year_sums, monthly_values, step)
-    legend_list = create_legend_list(monthly_data.get_min_monthly_values(),
-                                     monthly_data.get_max_monthly_values(),
-                                     third_q,
-                                     median)
-    svg += write_svg_legend(legend_list, len(monthly_data.get_year_range()) * step, step)
+    svg += write_svg_map(step, data_processor)
+    svg += write_svg_barplot(step, data_processor)
+    legend_list = create_legend_list(data_processor)
+    svg += write_svg_legend(legend_list, step, data_processor)
     svg += "\n</svg>"
 
     return svg
@@ -76,6 +68,11 @@ class MonthlyData:
     def __init__(self, data):
         self.data = data
         self.only_values = self.init_only_values()
+        self.quartile1, self.quartile2, self.quartile3 = quartiles(self.only_values)
+        self.year_sums = sum_year_values(self.get_year_range(), self.data)
+
+    def get_all_data(self):
+        return self.data
 
     def init_only_values(self):
         return [item for items in
@@ -84,6 +81,18 @@ class MonthlyData:
 
     def get_only_values(self):
         return self.only_values
+
+    def get_quartile1(self):
+        return self.quartile1
+
+    def get_quartile2(self):
+        return self.quartile2
+
+    def get_quartile3(self):
+        return self.quartile3
+
+    def get_year_sums(self):
+        return self.year_sums
 
     def get_max_monthly_values(self):
         return max(self.only_values)
@@ -99,7 +108,6 @@ class MonthlyData:
 
     def get_max_year(self):
         return max(self.data)
-
 
 
 def write_y_axis_legend(step):
@@ -124,7 +132,8 @@ def write_svg_header(svg_width):
 """ % svg_width
 
 
-def write_svg_legend(legend_list, y, step):
+def write_svg_legend(legend_list, step, data):
+    y = len(data.get_year_range()) * step
     rect_x_coordinate = y + step + 10
     text_x_coordinate = y + 2 * step + 15
 
@@ -144,46 +153,46 @@ def write_svg_legend(legend_list, y, step):
     return "".join(legends)
 
 
-def create_legend_list(min_value, max_value, third_q, median):
-    legend_list = [[min_value, min_value / max_value]]
-    if third_q < int(max_value / 4) and third_q != 0:
-        legend_list.extend([["Q3:%s" % third_q, third_q / max_value],
-                            [int(max_value / 2), 0.5],
-                            [int(3 * max_value / 4), 0.75]])
+def create_legend_list(data):
+    legend_list = [[data.get_min_monthly_values(), data.get_min_monthly_values() / data.get_max_monthly_values()]]
+    if data.get_quartile3() < int(data.get_max_monthly_values() / 4) and data.get_quartile3() != 0:
+        legend_list.extend([["Q3:%s" % data.get_quartile3(), data.get_quartile3() / data.get_max_monthly_values()],
+                            [int(data.get_max_monthly_values() / 2), 0.5],
+                            [int(3 * data.get_max_monthly_values() / 4), 0.75]])
     else:
-        if median <= int(max_value / 4) and median != 0:
-            legend_list.append(["Q2:%s" % median, median / max_value])
+        if data.get_quartile2() <= int(data.get_max_monthly_values() / 4) and data.get_quartile2() != 0:
+            legend_list.append(["Q2:%s" % data.get_quartile2(), data.get_quartile2() / data.get_max_monthly_values()])
         else:
-            legend_list.append([int(max_value / 4), 0.25])
-        legend_list.extend([[int(max_value / 2), 0.5],
-                            [int(3 * max_value / 4), 0.75]])
-    legend_list.append([max_value, max_value])
+            legend_list.append([int(data.get_max_monthly_values() / 4), 0.25])
+        legend_list.extend([[int(data.get_max_monthly_values() / 2), 0.5],
+                            [int(3 * data.get_max_monthly_values() / 4), 0.75]])
+    legend_list.append([data.get_max_monthly_values(), data.get_max_monthly_values()])
 
     return legend_list
 
 
-def compute_svg_width(step, max_value, min_value):
-    svg_width = step * (max_value - min_value) + 250
+def compute_svg_width(step, data):
+    svg_width = step * (data.get_max_year() - data.get_min_year()) + 250
 
     if svg_width < 1000:
         return svg_width
 
-    step = (1000 - 200) / (max_value - min_value)
+    step = (1000 - 200) / (data.get_max_year() - data.get_min_year())
     if step < 20:
         step = 20
 
-    return int(step * (max_value - min_value) + 200)
+    return int(step * (data.get_max_year() - data.get_min_year()) + 200)
 
 
-def write_svg_barplot(year_sums, values, step):
+def write_svg_barplot(step, data):
     result = ""
-    max_year_value = max(year_sums.values())
+    max_year_value = max(data.year_sums.values())
 
     x = 0
-    for year in range(min(values), max(values) + 1):
+    for year in data.get_year_range():
         x += step
 
-        year_sum = year_sums[year]
+        year_sum = data.year_sums[year]
         y_value = 100 * year_sum / float(max_year_value)
 
         result += f'   <rect width="{step}" height="{y_value}" x="{x}" y="670" class="rect">' \
@@ -206,17 +215,17 @@ def sum_year_values(year_range, values):
     return year_sums
 
 
-def write_svg_map(year_range, step, values, max_value):
+def write_svg_map(step, data):
     result = ""
     y = 0
-    for year in year_range:
+    for year in data.get_year_range():
         y += step
         for month in range(12, 0, -1):
-            if month in values[year]:
+            if month in data.get_all_data()[year]:
                 result += (f' <rect width="{step}" height="50" '
                            f'x="{y}" y="{620 - month * 50}" class="rect" '
-                           f'style="fill-opacity:{values[year][month] / float(max_value)}">'
-                           f'<title>{month}/{year}: {values[year][month]}</title></rect>\n')
+                           f'style="fill-opacity:{data.get_all_data()[year][month] / float(data.get_max_monthly_values())}">'
+                           f'<title>{month}/{year}: {data.get_all_data()[year][month]}</title></rect>\n')
         result += f'<text x="{y + step / 2}" y="630" class="vert">{year}</text>\n'
 
     return result
