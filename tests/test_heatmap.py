@@ -212,15 +212,15 @@ def test_init_only_values():
     monthly_data = HeatmapDataProcessor(testing_values)
 
     expected = [3, 0, 0, 0, 30, 30, 23, 13, 0, 0, 0, 0, 10]
-    result = monthly_data.get_only_values()
+    result = monthly_data.get_only_values
     assert result == expected
 
 
 def test_init_quartiles():
     monthly_data = HeatmapDataProcessor(testing_values)
-    assert monthly_data.get_quartile1() == 0
-    assert monthly_data.get_quartile2() == 0
-    assert monthly_data.get_quartile3() == 13
+    assert monthly_data.get_quartile1 == 0
+    assert monthly_data.get_quartile2 == 0
+    assert monthly_data.get_quartile3 == 13
 
 
 def test_init_year_sums():
@@ -230,32 +230,32 @@ def test_init_year_sums():
 
 def test_get_max_monthly_values():
     monthly_data = HeatmapDataProcessor(testing_values)
-    result = monthly_data.get_max_monthly_values()
+    result = monthly_data.get_max_monthly_values
     assert result == 30
 
 
 def test_get_min_monthly_values():
     monthly_data = HeatmapDataProcessor(testing_values)
-    result = monthly_data.get_min_monthly_values()
+    result = monthly_data.get_min_monthly_values
     assert result == 0
 
 
 def test_get_year_range():
     monthly_data = HeatmapDataProcessor(testing_values)
-    result = monthly_data.get_year_range()
+    result = monthly_data.get_year_range
 
     assert result == range(2020, 2022)
 
 
 def test_get_min_year():
     monthly_data = HeatmapDataProcessor(testing_values)
-    result = monthly_data.get_min_year()
+    result = monthly_data.get_min_year
 
     assert result == 2020
 
 
 def test_get_max_year():
     monthly_data = HeatmapDataProcessor(testing_values)
-    result = monthly_data.get_max_year()
+    result = monthly_data.get_max_year
 
     assert result == 2021

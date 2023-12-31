@@ -6,8 +6,9 @@ class HeatmapDataProcessor:
         self.data = data
         self.only_values = self.init_only_values()
         self.quartile1, self.quartile2, self.quartile3 = quartiles(self.only_values)
-        self.year_sums = sum_year_values(self.get_year_range(), self.data)
+        self.year_sums = sum_year_values(self.get_year_range, self.data)
 
+    @property
     def get_all_data(self):
         return self.data
 
@@ -16,33 +17,43 @@ class HeatmapDataProcessor:
                 [month.values() for month in self.data.values()]
                 for item in items]
 
+    @property
     def get_only_values(self):
         return self.only_values
 
+    @property
     def get_quartile1(self):
         return self.quartile1
 
+    @property
     def get_quartile2(self):
         return self.quartile2
 
+    @property
     def get_quartile3(self):
         return self.quartile3
 
+    @property
     def get_year_sums(self):
         return self.year_sums
 
+    @property
     def get_max_monthly_values(self):
         return max(self.only_values)
 
+    @property
     def get_min_monthly_values(self):
         return min(self.only_values)
 
+    @property
     def get_year_range(self):
-        return range(self.get_min_year(), self.get_max_year() + 1)
+        return range(self.get_min_year, self.get_max_year + 1)
 
+    @property
     def get_min_year(self):
         return min(self.data)
 
+    @property
     def get_max_year(self):
         return max(self.data)
 
