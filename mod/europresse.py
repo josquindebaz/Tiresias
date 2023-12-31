@@ -11,9 +11,9 @@ except:
     from mod.supports import Publi
 
 
-def format_support_name(s):
+def format_support_name(support):
     motif = re.compile(r"\s*(<|\(|,).*$")
-    return motif.sub('', s)
+    return motif.sub('', support)
 
 
 def strip_tags(text):
