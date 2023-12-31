@@ -2,6 +2,7 @@ class HeatmapSvgWriter:
     def __init__(self, data, step=50):
         self.step = step
         self.data = data
+        self.color = "blue"
 
     def produce_svg(self):
         svg = self.write_svg_header()
@@ -14,15 +15,15 @@ class HeatmapSvgWriter:
         return svg
 
     def write_svg_header(self):
-        return """<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="%s">
-<style>
-    .norm { font:14px sans-serif; }
-    .small { font:12px sans-serif; }
-    .vert { font:14px sans-serif; writing-mode: tb; }
-    .rect { stroke:gray; stroke-width:1; fill:blue; }
-</style>
-""" % compute_svg_width(self.step, self.data)
+        svg_width = compute_svg_width(self.step, self.data)
+        return (f"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n"
+                f"<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" width=\"{svg_width}\">\n"
+                f"<style>\n"
+                f"    .norm {{ font:14px sans-serif; }}\n"
+                f"    .small {{ font:12px sans-serif; }}\n"
+                f"    .vert {{ font:14px sans-serif; writing-mode: tb; }}\n"
+                f"    .rect {{ stroke:gray; stroke-width:1; fill:{self.color}; }}\n"
+                f"</style>\n")
 
     def write_y_axis_legend(self):
         x_coordinate = self.step - 15
