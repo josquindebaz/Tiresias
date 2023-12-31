@@ -8,11 +8,11 @@ def test_list_files():
     create_filesystem()
 
     assert list_files("up_dir/empty_directory") == []
-    assert list_files("up_dir", recursive=False) == ['up_dir/b.txt', 'up_dir/a.txt']
-    assert list_files("up_dir", recursive=True) == ['up_dir/b.txt',
-                                                    'up_dir/a.txt',
-                                                    'up_dir/sub_dir/d.txt',
-                                                    'up_dir/sub_dir/c.txt']
+    without_recursion = list_files("up_dir", recursive=False)
+    assert set(without_recursion) == set(['up_dir/b.txt', 'up_dir/a.txt'])
+    with_recursion = list_files("up_dir", recursive=True)
+    expected = ['up_dir/b.txt', 'up_dir/a.txt', 'up_dir/sub_dir/d.txt', 'up_dir/sub_dir/c.txt']
+    assert set(with_recursion) == set(expected)
 
     delete_filesystem()
 
@@ -34,10 +34,3 @@ def delete_filesystem():
         return 0
 
     shutil.rmtree("up_dir")
-
-    # os.remove('up_dir/sub_dir/c.txt')
-    # os.remove('up_dir/sub_dir/d.txt')
-    # os.rmdir('up_dir/sub_dir')
-    # os.remove("up_dir/a.txt")
-    # os.remove("up_dir/b.txt")
-    # os.rmdir("up_dir")
