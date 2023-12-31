@@ -36,9 +36,9 @@ class HeatmapSvgWriter:
     def write_svg_map(self):
         result = ""
 
-        all_data = self.data.get_all_data()
+        all_data = self.data.get_all_data
         y = 0
-        for year in self.data.get_year_range():
+        for year in self.data.get_year_range:
             y += self.step
 
             for month in [month for month in range(12, 0, -1) if month in all_data[year]]:
@@ -51,7 +51,7 @@ class HeatmapSvgWriter:
     def write_svg_month_map(self, y, month, all_data, year):
         return (f' <rect width="{self.step}" height="50" '
                 f'x="{y}" y="{620 - month * 50}" class="rect" '
-                f'style="fill-opacity:{all_data[year][month] / float(self.data.get_max_monthly_values())}">'
+                f'style="fill-opacity:{all_data[year][month] / float(self.data.get_max_monthly_values)}">'
                 f'<title>{month}/{year}: {all_data[year][month]}</title></rect>\n')
 
     def write_svg_barplot(self):
@@ -59,7 +59,7 @@ class HeatmapSvgWriter:
         max_year_value = max(self.data.year_sums.values())
 
         x = 0
-        for year in self.data.get_year_range():
+        for year in self.data.get_year_range:
             x += self.step
 
             year_sum = self.data.year_sums[year]
@@ -73,7 +73,7 @@ class HeatmapSvgWriter:
 
     def write_svg_legend(self):
         legend_list = self.create_legend_list()
-        y = len(self.data.get_year_range()) * self.step
+        y = len(self.data.get_year_range) * self.step
         rect_x_coordinate = y + self.step + 10
         text_x_coordinate = y + 2 * self.step + 15
 
@@ -93,10 +93,10 @@ class HeatmapSvgWriter:
         return "".join(legends)
 
     def create_legend_list(self):
-        minimum_value = self.data.get_min_monthly_values()
-        q2 = self.data.get_quartile2()
-        q3 = self.data.get_quartile3()
-        maximum_value = self.data.get_max_monthly_values()
+        minimum_value = self.data.get_min_monthly_values
+        q2 = self.data.get_quartile2
+        q3 = self.data.get_quartile3
+        maximum_value = self.data.get_max_monthly_values
 
         legend_list = [[minimum_value, minimum_value / maximum_value]]
         if q3 < int(maximum_value / 4) and q3 != 0:
@@ -115,13 +115,13 @@ class HeatmapSvgWriter:
 
 
 def compute_svg_width(step, data):
-    svg_width = step * (data.get_max_year() - data.get_min_year()) + 250
+    svg_width = step * (data.get_max_year - data.get_min_year) + 250
 
     if svg_width < 1000:
         return svg_width
 
-    step = (1000 - 200) / (data.get_max_year() - data.get_min_year())
+    step = (1000 - 200) / (data.get_max_year - data.get_min_year)
     if step < 20:
         step = 20
 
-    return int(step * (data.get_max_year() - data.get_min_year()) + 200)
+    return int(step * (data.get_max_year - data.get_min_year) + 200)
