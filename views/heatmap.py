@@ -7,7 +7,7 @@ import tkinter as tk
 from tkinter.scrolledtext import ScrolledText
 from tkinter import filedialog
 
-from mod.heatmap import parse_data
+from mod.HeatmapDataProcessor import parse_data
 from mod.heatmap import create_svg
 
 import webbrowser

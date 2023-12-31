@@ -1,3 +1,6 @@
+import re
+
+
 class HeatmapDataProcessor:
     def __init__(self, data):
         self.data = data
@@ -70,3 +73,32 @@ def quartiles(values):
         median = (values[size // 2] + values[(size // 2) + 1]) / 2
         third = (values[size * 3 // 4] + values[(size * 3 // 4) + 1]) / 2
     return first, median, third
+
+
+def parse_data(data):
+    values = {}
+    months = {"janvier": 1,
+              "février": 2,
+              "mars": 3,
+              "avril": 4,
+              "mai": 5,
+              "juin": 6,
+              "juillet": 7,
+              "août": 8,
+              "septembre": 9,
+              "octobre": 10,
+              "novembre": 11,
+              "décembre": 12}
+
+    for line in data.split("\n"):
+        if re.search("sans date", line) or re.match(r"^\s*$", line):
+            continue
+
+        row = line.split('\t')
+        _date = row[0].split("/")
+        year = int(_date[1])
+        if year in values:
+            values[year][months[_date[0]]] = int(row[1])
+        else:
+            values[year] = {months[_date[0]]: int(row[1])}
+    return values

@@ -1,5 +1,5 @@
-from mod.HeatmapDataProcessor import quartiles, HeatmapDataProcessor, sum_year_values
-from mod.heatmap import create_svg, parse_data
+from mod.HeatmapDataProcessor import quartiles, HeatmapDataProcessor, sum_year_values, parse_data
+from mod.heatmap import create_svg
 from mod.HeatmapSvgWriter import HeatmapSvgWriter, compute_svg_width
 
 raw_values = """sans date	0
@@ -21,8 +21,7 @@ testing_values = {2020: {1: 3, 2: 0, 3: 0, 4: 0, 5: 30, 6: 30, 7: 23, 8: 13, 9: 
 
 
 def test_quartiles_returns_3_quartiles():
-    testing_values = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    result = quartiles(testing_values)
+    result = quartiles([1, 2, 3, 4, 5, 6, 7, 8, 9])
 
     assert len(result) == 3
     assert result == (3, 5, 7)
