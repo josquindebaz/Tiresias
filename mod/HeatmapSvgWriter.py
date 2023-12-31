@@ -1,5 +1,5 @@
 class HeatmapSvgWriter:
-    def __init__(self, step, data):
+    def __init__(self, data, step=50):
         self.step = step
         self.data = data
 

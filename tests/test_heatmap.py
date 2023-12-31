@@ -1,5 +1,4 @@
 from mod.HeatmapDataProcessor import quartiles, HeatmapDataProcessor, sum_year_values, parse_data
-from mod.heatmap import create_svg
 from mod.HeatmapSvgWriter import HeatmapSvgWriter, compute_svg_width
 
 raw_values = """sans date	0
@@ -81,7 +80,9 @@ def test_heatmap_e2e():
 </svg>"""
 
     values = parse_data(raw_values)
-    result = create_svg(values)
+    data_processor = HeatmapDataProcessor(values)
+    svg_writer = HeatmapSvgWriter(data=data_processor)
+    result = svg_writer.produce_svg()
 
     assert result == expected
 
