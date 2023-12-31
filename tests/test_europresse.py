@@ -2,7 +2,7 @@ import filecmp
 import glob
 import os
 
-from mod.europresse import format_support_name, ParseHtml, ProcessArticle
+from mod.europresse import format_support_name, ParseHtml, ProcessArticle, strip_tags_with_class
 
 
 def test_europresse_e2e():
@@ -30,7 +30,7 @@ def test_europresse_e2e():
 
     assert expected_txt == generated_txt
 
-    ctx_to_compare = os.path.join(directory_path,"europresse/EUROPRESSE20231023A.ctx")
+    ctx_to_compare = os.path.join(directory_path, "europresse/EUROPRESSE20231023A.ctx")
     with open(ctx_to_compare, "r", encoding='cp1252') as expected:
         expected_lines = expected.readlines()
     ctx_generated = os.path.join(directory_path, "EUROPRESSE20231023A.ctx")
@@ -58,3 +58,8 @@ def free_directory(directory):
     for file_path in glob.glob(os.path.join(directory, '*')):
         if os.path.splitext(file_path)[1] in ['.ctx', '.CTX', '.Ctx', '.txt', '.TXT', '.Txt']:
             os.remove(file_path)
+
+
+def test_strip_tags_with_class():
+    result = strip_tags_with_class("<foo class='bar'>something</foo>")
+    assert result == "something"

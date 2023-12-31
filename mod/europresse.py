@@ -16,7 +16,7 @@ def format_support_name(support):
     return motif.sub('', support)
 
 
-def strip_tags(text):
+def strip_tags_with_class(text):
     motif = re.compile(r'(<(\S+) class=(.))')
 
     if not motif.search(text):
@@ -24,9 +24,10 @@ def strip_tags(text):
 
     while motif.search(text):
         catches = motif.split(text, 1)
-        to_keep = re.split("%s>" % catches[3], catches[4], 1)[1]
-        to_keep = re.sub("</%s>" % catches[2], "", to_keep, 1)
+        to_keep = re.split(f"{catches[3]}>", catches[4], 1)[1]
+        to_keep = re.sub(f"</{catches[2]}>", "", to_keep, 1)
         text = catches[0] + to_keep
+
     text = re.sub("</*mark>", "", text)
 
     return text
@@ -124,7 +125,7 @@ def parse_article(article_content):
         date = get_date(date)
         # print("date %s" %date)
         title = in_tag(header, "titreArticle")
-        title = strip_tags(title)
+        title = strip_tags_with_class(title)
         narrator = in_tag(header, "docAuthors")
         m_subtitle = re.compile("<b><p>(.*)</p></b>")
         if m_subtitle.search(header):
@@ -134,7 +135,7 @@ def parse_article(article_content):
 
         # print("get text")
         text = in_tag(article_content, "docOcurrContainer")
-        text = strip_tags(text)
+        text = strip_tags_with_class(text)
 
         return {
             "source": publication_name,
