@@ -4,7 +4,6 @@ import os
 import datetime
 
 try:
-    # import cleaning
     from cleaning import Cleaner
     from supports import Publi
 except:
@@ -12,10 +11,9 @@ except:
     from mod.supports import Publi
 
 
-def form_support(s):
-    m = re.compile(r"\s*(<|\(|,).*$")
-    n = m.sub('', s)
-    return n
+def format_support_name(s):
+    motif = re.compile(r"\s*(<|\(|,).*$")
+    return motif.sub('', s)
 
 
 def strip_tags(text):
@@ -26,15 +24,15 @@ def strip_tags(text):
 
     while motif.search(text):
         catches = motif.split(text, 1)
-        t = re.split("%s>" % catches[3], catches[4], 1)[1]
-        t = re.sub("</%s>" % catches[2], "", t, 1)
-        text = catches[0] + t
+        to_keep = re.split("%s>" % catches[3], catches[4], 1)[1]
+        to_keep = re.sub("</%s>" % catches[2], "", to_keep, 1)
+        text = catches[0] + to_keep
     text = re.sub("</*mark>", "", text)
+
     return text
 
 
-def get_date(d):
-    # print(d)
+def get_date(given_date):
     m = re.compile(r"(\d+) (\S*) (\d{4})")
     m2 = re.compile(r"(\S*)\s+(\d+)[,\s]{2,}(\d{4})")
     months = {
@@ -63,16 +61,16 @@ def get_date(d):
         "November": "11",
         "December": "12"
     }
-    if m.search(d):
-        day, month, year = m.search(d).group(1, 2, 3)
+    if m.search(given_date):
+        day, month, year = m.search(given_date).group(1, 2, 3)
         if month not in months:
             print("I don't know this month %s" % month)
             return False
         else:
             month = months[month]
         return "%s/%s/%s" % ("%02d" % int(day), month, year)
-    elif m2.search(d):
-        month, day, year = m2.search(d).group(1, 2, 3)
+    elif m2.search(given_date):
+        month, day, year = m2.search(given_date).group(1, 2, 3)
         if month not in months:
             print("I don't know this month %s" % month)
             return False
@@ -80,7 +78,7 @@ def get_date(d):
             month = months[month]
         return "%s/%s/%s" % ("%02d" % int(day), month, year)
     else:
-        print("Problem reading date [%s]" % d)
+        print("Problem reading date [%s]" % given_date)
         return False
 
 
@@ -105,13 +103,13 @@ def in_tag(html_source, tag):
 
 def parse_article(article_content):
     if re.search('<p class="link-not-hosted">', article_content):
-        print("only a link")
+        # print("only a link")
         return False
     elif re.search('class="DocPublicationName">(Rapports|Reports) -', article_content):
-        print("only a report extract")
+        # print("only a report extract")
         return False
     elif re.search('<div class="twitter">', article_content):
-        print("only a tweet")
+        # print("only a tweet")
         return False
     else:
         article_content = html.unescape(article_content)
@@ -120,7 +118,7 @@ def parse_article(article_content):
 
         # print("get header infos")
         publication_name = in_tag(header, "DocPublicationName")
-        publication_name = form_support(publication_name)
+        publication_name = format_support_name(publication_name)
         # print("publication_name")
         date = in_tag(header, "DocHeader")
         date = get_date(date)

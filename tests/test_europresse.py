@@ -2,7 +2,7 @@ import filecmp
 import glob
 import os
 
-from mod.europresse import form_support, ParseHtml, ProcessArticle
+from mod.europresse import format_support_name, ParseHtml, ProcessArticle
 
 
 def test_europresse_e2e():
@@ -43,15 +43,15 @@ def test_europresse_e2e():
     free_directory(directory_path)
 
 
-def test_form_support():
+def test_format_support_name():
     support_with_parenthesis = "Le Monde (site web)"
-    assert form_support(support_with_parenthesis) == "Le Monde"
+    assert format_support_name(support_with_parenthesis) == "Le Monde"
 
     support_with_comma = "Le Point.fr, no. 202202"
-    assert form_support(support_with_comma) == "Le Point.fr"
+    assert format_support_name(support_with_comma) == "Le Point.fr"
 
     support_with_tag = "Ouest-France                <br />Vannes ; Auray ; Ploërmel"
-    assert form_support(support_with_tag) == "Ouest-France"
+    assert format_support_name(support_with_tag) == "Ouest-France"
 
 
 def free_directory(directory):
