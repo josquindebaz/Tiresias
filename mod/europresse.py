@@ -33,9 +33,7 @@ def strip_tags_with_class(text):
     return text
 
 
-def get_date(given_date):
-    m = re.compile(r"(\d+) (\S*) (\d{4})")
-    m2 = re.compile(r"(\S*)\s+(\d+)[,\s]{2,}(\d{4})")
+def fetch_date(given_date):
     months = {
         "janvier": "01",
         'février': "02",
@@ -62,25 +60,27 @@ def get_date(given_date):
         "November": "11",
         "December": "12"
     }
-    if m.search(given_date):
-        day, month, year = m.search(given_date).group(1, 2, 3)
-        if month not in months:
-            print("I don't know this month %s" % month)
-            return False
-        else:
-            month = months[month]
-        return "%s/%s/%s" % ("%02d" % int(day), month, year)
-    elif m2.search(given_date):
-        month, day, year = m2.search(given_date).group(1, 2, 3)
-        if month not in months:
-            print("I don't know this month %s" % month)
-            return False
-        else:
-            month = months[month]
-        return "%s/%s/%s" % ("%02d" % int(day), month, year)
-    else:
+
+    day_first_date_format = re.compile(r"(\d+) (\S*) (\d{4})")
+    month_first_date_format = re.compile(r"(\S*)\s+(\d+)[,\s]{2,}(\d{4})")
+
+    if not day_first_date_format.search(given_date) and not month_first_date_format.search(given_date):
         print("Problem reading date [%s]" % given_date)
         return False
+
+    if day_first_date_format.search(given_date):
+        day, month, year = day_first_date_format.search(given_date).group(1, 2, 3)
+        if month not in months:
+            print("I don't know this month %s" % month)
+            return False
+
+    elif month_first_date_format.search(given_date):
+        month, day, year = month_first_date_format.search(given_date).group(1, 2, 3)
+        if month not in months:
+            print("I don't know this month %s" % month)
+            return False
+
+    return "%s/%s/%s" % (f"{int(day):02d}", months[month], year)
 
 
 def in_tag(html_source, tag):
@@ -122,7 +122,8 @@ def parse_article(article_content):
         publication_name = format_support_name(publication_name)
         # print("publication_name")
         date = in_tag(header, "DocHeader")
-        date = get_date(date)
+        date = fetch_date(date)
+
         # print("date %s" %date)
         title = in_tag(header, "titreArticle")
         title = strip_tags_with_class(title)
@@ -231,4 +232,3 @@ class ProcessArticle(object):
             name = "%s%s%s" % (prefix, date, index)
             path = os.path.join(self.destination, name + ".txt")
         return name
-

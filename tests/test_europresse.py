@@ -2,7 +2,7 @@ import filecmp
 import glob
 import os
 
-from mod.europresse import format_support_name, ParseHtml, ProcessArticle, strip_tags_with_class
+from mod.europresse import format_support_name, ParseHtml, ProcessArticle, strip_tags_with_class, fetch_date
 
 
 def test_europresse_e2e():
@@ -63,3 +63,9 @@ def free_directory(directory):
 def test_strip_tags_with_class():
     result = strip_tags_with_class("<foo class='bar'>something</foo>")
     assert result == "something"
+
+
+def test_fetch_date():
+    result = fetch_date("lundi 16 octobre 2023 - 16:55:20 -0000 1017 mots")
+    assert result == "16/10/2023"
+
