@@ -116,40 +116,36 @@ def parse_article(article_content):
     elif re.search('<div class="twitter">', article_content):
         # print("only a tweet")
         return False
-    else:
-        article_content = html.unescape(article_content)
-        # print("split header and content")
-        header, content = re.split('</header>', article_content)
 
-        # print("get header infos")
-        publication_name = in_tag(header, "DocPublicationName")
-        publication_name = format_support_name(publication_name)
-        # print("publication_name")
-        date = in_tag(header, "DocHeader")
-        date = fetch_date(date)
+    article_content = html.unescape(article_content)
+    header, body = re.split('</header>', article_content)
 
-        # print("date %s" %date)
-        title = in_tag(header, "titreArticle")
-        title = strip_tags_with_class(title)
-        narrator = in_tag(header, "docAuthors")
-        m_subtitle = re.compile("<b><p>(.*)</p></b>")
-        if m_subtitle.search(header):
-            subtitle = m_subtitle.search(header).group(1)
-        else:
-            subtitle = False
+    result = get_header_infos(header)
 
-        # print("get text")
-        text = in_tag(article_content, "docOcurrContainer")
-        text = strip_tags_with_class(text)
+    text = in_tag(article_content, "docOcurrContainer")
+    result["text"] = strip_tags_with_class(text)
 
-        return {
-            "source": publication_name,
-            "date": date,
-            "title": title,
-            "narrator": narrator,
-            "subtitle": subtitle,
-            "text": text
-        }
+    return result
+
+
+def get_header_infos(header):
+    result = {}
+    publication_name = in_tag(header, "DocPublicationName")
+    result["source"] = format_support_name(publication_name)
+
+    result["date"] = fetch_date(in_tag(header, "DocHeader"))
+
+    title = in_tag(header, "titreArticle")
+    result["title"] = strip_tags_with_class(title)
+
+    result["narrator"]  = in_tag(header, "docAuthors")
+
+    result["subtitle"] = False
+    m_subtitle = re.compile("<b><p>(.*)</p></b>")
+    if m_subtitle.search(header):
+        result["subtitle"] = m_subtitle.search(header).group(1)
+
+    return result
 
 
 class ParseHtml(object):
