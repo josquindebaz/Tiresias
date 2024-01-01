@@ -189,32 +189,38 @@ class EuropresseHtmlParser(object):
                 self.parsed_articles.append(parsed)
 
 
-class ProcessArticle(object):
-    def __init__(self, a, destination, c=1):
+def fetch_publication_infos(publication):
+    publication_index = Publi()
+
+    if publication not in publication_index.codex.keys():
+        return "EUROPRESSE", publication, "unknown source"
+
+    prefix = publication_index.codex[publication]['abr']
+    source = publication_index.codex[publication]['source']
+    source_type = publication_index.codex[publication]['type']
+
+    return prefix, source, source_type
+
+
+class EuropresseProsperoFileWriter(object):
+    def __init__(self, article, destination, c=1):
         self.destination = destination
-        s = Publi()
-        if a['source'] not in s.codex.keys():
-            prefix = "EUROPRESSE"
-            source = a['source']
-            source_type = "unknown source"
-        else:
-            prefix = s.codex[a['source']]['abr']
-            source = s.codex[a['source']]['source']
-            source_type = s.codex[a['source']]['type']
 
-        self.filename = self.file_name(a['date'], prefix)
+        prefix, source, source_type = fetch_publication_infos(article['source'])
 
-        text = a['title'] + "\r\n.\r\n"
-        text += a['subtitle'] + "\r\n.\r\n" if a['subtitle'] else ""
-        text += a['text']
+        self.filename = self.file_name(article['date'], prefix)
+
+        text = article['title'] + "\r\n.\r\n"
+        text += article['subtitle'] + "\r\n.\r\n" if article['subtitle'] else ""
+        text += article['text']
 
         ctx = [
             "fileCtx0005",
-            a['title'],
+            article['title'],
             source,
             "",
             "",
-            a['date'],
+            article['date'],
             source,
             source_type,
             "",

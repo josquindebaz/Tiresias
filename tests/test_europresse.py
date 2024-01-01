@@ -2,7 +2,7 @@ import filecmp
 import glob
 import os
 
-from mod.europresse import format_support_name, EuropresseHtmlParser, ProcessArticle, strip_tags_with_class, fetch_date, in_tag
+from mod.europresse import format_support_name, EuropresseHtmlParser, EuropresseProsperoFileWriter, strip_tags_with_class, fetch_date, in_tag
 
 
 def test_europresse_e2e():
@@ -19,7 +19,7 @@ def test_europresse_e2e():
     assert len(parser.articles) == 305
     assert len(parser.parsed_articles) == 292
 
-    ProcessArticle(parser.parsed_articles[0], directory_path)
+    EuropresseProsperoFileWriter(parser.parsed_articles[0], directory_path)
 
     txt_to_compare = os.path.join(directory_path, "europresse/EUROPRESSE20231023A.txt")
     with open(txt_to_compare, "r", encoding='cp1252') as expected:
