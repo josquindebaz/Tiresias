@@ -2,7 +2,7 @@ import filecmp
 import glob
 import os
 
-from mod.europresse import format_support_name, ParseHtml, ProcessArticle, strip_tags_with_class, fetch_date
+from mod.europresse import format_support_name, ParseHtml, ProcessArticle, strip_tags_with_class, fetch_date, in_tag
 
 
 def test_europresse_e2e():
@@ -36,11 +36,16 @@ def test_europresse_e2e():
     ctx_generated = os.path.join(directory_path, "EUROPRESSE20231023A.ctx")
     with open(ctx_generated, "r", encoding='cp1252') as result:
         result_lines = result.readlines()
-        print(result_lines)
 
     assert expected_lines[0:10] == result_lines[0:10]
 
     free_directory(directory_path)
+
+
+def free_directory(directory):
+    for file_path in glob.glob(os.path.join(directory, '*')):
+        if os.path.splitext(file_path)[1] in ['.ctx', '.CTX', '.Ctx', '.txt', '.TXT', '.Txt']:
+            os.remove(file_path)
 
 
 def test_format_support_name():
@@ -54,12 +59,6 @@ def test_format_support_name():
     assert format_support_name(support_with_tag) == "Ouest-France"
 
 
-def free_directory(directory):
-    for file_path in glob.glob(os.path.join(directory, '*')):
-        if os.path.splitext(file_path)[1] in ['.ctx', '.CTX', '.Ctx', '.txt', '.TXT', '.Txt']:
-            os.remove(file_path)
-
-
 def test_strip_tags_with_class():
     result = strip_tags_with_class("<foo class='bar'>something</foo>")
     assert result == "something"
@@ -69,3 +68,10 @@ def test_fetch_date():
     result = fetch_date("lundi 16 octobre 2023 - 16:55:20 -0000 1017 mots")
     assert result == "16/10/2023"
 
+
+def test_in_tag():
+    tag = "DocPublicationName"
+    html_source = """<span class="DocPublicationName">Le Journal des Femmes (site web)</span>"""
+    result = in_tag(html_source, tag)
+
+    assert result == "Le Journal des Femmes (site web)"

@@ -6,7 +6,7 @@ import datetime
 try:
     from cleaning import Cleaner
     from supports import Publi
-except:
+except ModuleNotFoundError:
     from mod.cleaning import Cleaner
     from mod.supports import Publi
 
@@ -83,23 +83,27 @@ def fetch_date(given_date):
     return "%s/%s/%s" % (f"{int(day):02d}", months[month], year)
 
 
-def in_tag(html_source, tag):
-    motif = re.compile(r'(<(\S*) \S*=[\'"]%s[\'"][^>]*>)' % tag)
-    if motif.search(html_source):
-        elements = motif.split(html_source)
-        if len(elements) == 4:
-            closing = re.split("</%s>" % elements[2], elements[3], 1)
-            if len(closing) == 2:
-                return closing[0].strip()
-            else:
-                print("Can't find closing %s" % elements[2])
-                return False
-        else:
-            print("problem with element list size")
-            return False
-    else:
-        # print("Can't find tag %s" % tag)
+def in_tag(html_source, tag_class):
+    motif = re.compile(r'(<(\S*) \S*=[\'"]%s[\'"][^>]*>)' % tag_class)
+
+    if not motif.search(html_source):
         return False
+
+    elements = motif.split(html_source)
+
+    if not len(elements) == 4:
+        # print("problem with element list size")
+        return False
+
+    tag_type = elements[2]
+    after_tag = elements[3]
+    closing = re.split("</%s>" % tag_type, after_tag, 1)
+
+    if not len(closing) == 2:
+        # print("Can't find closing %s" % tag_type)
+        return False
+
+    return closing[0].strip()
 
 
 def parse_article(article_content):
