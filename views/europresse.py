@@ -230,8 +230,8 @@ class ViewEuropresse():
             self.log.insert(1.0, 'Analysing %s\n' % f)
             try:
                 path = os.path.join(self.htmldirectory, f)
-                p = ParseHtml(path)
-                for a in p.parsed_articles:
+                html_parser = EuropresseHtmlParser(path)
+                for a in html_parser.parsed_articles:
                     if a not in self.articles_list:
                         self.articles_list.append(a)
                     if (a['source'] not in self.Supports.codex.keys() and

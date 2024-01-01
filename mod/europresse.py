@@ -148,12 +148,25 @@ def get_header_infos(header):
     return result
 
 
-class ParseHtml(object):
+def read_file(filename):
+    with open(filename, 'rb') as file_pointer:
+        buffer = file_pointer.read().decode('utf-8')
+    return buffer
+
+
+def separate_articles(buffer):
+    return re.split('<article>', buffer)[1:]
+
+
+class EuropresseHtmlParser(object):
     def __init__(self, filename):
-        with open(filename, 'rb') as file_pointer:
-            buffer = file_pointer.read().decode('utf-8')
-        self.articles = re.split('<article>', buffer)[1:]
+
         self.parsed_articles = []
+
+        buffer = read_file(filename)
+
+        self.articles = separate_articles(buffer)
+
         for article in self.articles:
             parsed = parse_article(article)
             if parsed:

@@ -2,7 +2,7 @@ import filecmp
 import glob
 import os
 
-from mod.europresse import format_support_name, ParseHtml, ProcessArticle, strip_tags_with_class, fetch_date, in_tag
+from mod.europresse import format_support_name, EuropresseHtmlParser, ProcessArticle, strip_tags_with_class, fetch_date, in_tag
 
 
 def test_europresse_e2e():
@@ -15,7 +15,7 @@ def test_europresse_e2e():
     free_directory(directory_path)
 
     to_parse = os.path.join(directory_path, "europresse/pesquet_19-11-21_a_26-10-23.HTML")
-    parser = ParseHtml(to_parse)
+    parser = EuropresseHtmlParser(to_parse)
     assert len(parser.articles) == 305
     assert len(parser.parsed_articles) == 292
 
@@ -84,7 +84,7 @@ def test_parse_article():
     else:
         directory_path = "tests"
     to_parse = os.path.join(directory_path, "europresse/pesquet_19-11-21_a_26-10-23.HTML")
-    parser = ParseHtml(to_parse)
+    parser = EuropresseHtmlParser(to_parse)
     result = parser.parsed_articles[0]
     expected = {'source': 'Le Journal des Femmes',
                 'date': '23/10/2023',
@@ -203,3 +203,17 @@ def test_parse_article():
     assert result["narrator"] == expected["narrator"]
     assert result["title"] == expected["title"]
     assert result["text"] == expected["text"]
+
+
+def test_europresse_html_parser():
+    current_directory = os.getcwd()
+    if os.path.basename(current_directory) == "tests":
+        directory_path = "."
+    else:
+        directory_path = "tests"
+
+    to_parse = os.path.join(directory_path, "europresse/pesquet_19-11-21_a_26-10-23.HTML")
+    parser = EuropresseHtmlParser(to_parse)
+
+    assert len(parser.articles) == 305
+    assert len(parser.parsed_articles) == 292
