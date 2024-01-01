@@ -106,46 +106,61 @@ def in_tag(html_source, tag_class):
     return closing[0].strip()
 
 
-def parse_article(article_content):
-    if re.search('<p class="link-not-hosted">', article_content):
+def get_header_infos(header):
+    infos = {}
+
+    publication_name = in_tag(header, "DocPublicationName")
+    infos["source"] = format_support_name(publication_name)
+
+    infos["date"] = fetch_date(in_tag(header, "DocHeader"))
+
+    title = in_tag(header, "titreArticle")
+    infos["title"] = strip_tags_with_class(title)
+
+    infos["narrator"] = in_tag(header, "docAuthors")
+
+    infos["subtitle"] = False
+    m_subtitle = re.compile("<b><p>(.*)</p></b>")
+    if m_subtitle.search(header):
+        infos["subtitle"] = m_subtitle.search(header).group(1)
+
+    return infos
+
+
+def is_plain_article(raw_article):
+    if re.search('<p class="link-not-hosted">', raw_article):
         # print("only a link")
         return False
-    elif re.search('class="DocPublicationName">(Rapports|Reports) -', article_content):
+    elif re.search('class="DocPublicationName">(Rapports|Reports) -', raw_article):
         # print("only a report extract")
         return False
-    elif re.search('<div class="twitter">', article_content):
+    elif re.search('<div class="twitter">', raw_article):
         # print("only a tweet")
         return False
 
-    article_content = html.unescape(article_content)
-    header, body = re.split('</header>', article_content)
-
-    result = get_header_infos(header)
-
-    text = in_tag(article_content, "docOcurrContainer")
-    result["text"] = strip_tags_with_class(text)
-
-    return result
+    return True
 
 
-def get_header_infos(header):
-    result = {}
-    publication_name = in_tag(header, "DocPublicationName")
-    result["source"] = format_support_name(publication_name)
+class EuropresseArticleParser:
+    def __init__(self, article):
+        self.header = ""
+        self.result = False
 
-    result["date"] = fetch_date(in_tag(header, "DocHeader"))
+        if is_plain_article(article):
+            self.parse_article(article)
 
-    title = in_tag(header, "titreArticle")
-    result["title"] = strip_tags_with_class(title)
+    def parse_article(self, raw_article):
+        article_content = html.unescape(raw_article)
+        header, body = re.split('</header>', article_content)
 
-    result["narrator"]  = in_tag(header, "docAuthors")
+        self.result = get_header_infos(header)
 
-    result["subtitle"] = False
-    m_subtitle = re.compile("<b><p>(.*)</p></b>")
-    if m_subtitle.search(header):
-        result["subtitle"] = m_subtitle.search(header).group(1)
+        text = in_tag(body, "docOcurrContainer")
+        self.result["text"] = strip_tags_with_class(text)
 
-    return result
+    @property
+    def get_result(self):
+        return self.result
 
 
 def read_file(filename):
@@ -168,7 +183,8 @@ class EuropresseHtmlParser(object):
         self.articles = separate_articles(buffer)
 
         for article in self.articles:
-            parsed = parse_article(article)
+            article_parser = EuropresseArticleParser(article)
+            parsed = article_parser.get_result
             if parsed:
                 self.parsed_articles.append(parsed)
 
