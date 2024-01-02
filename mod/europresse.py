@@ -277,7 +277,7 @@ class EuropresseProsperoFileWriter(object):
     def __init__(self, article, destination, cleaning_required=True):
 
         prefix, source, source_type = fetch_publication_infos(article['source'])
-        filename = name_file(article['date'], prefix, destination)
+        self.filename = name_file(article['date'], prefix, destination)
 
         txt_content = create_txt_content(article)
         ctx_content = create_ctx_content(article, source, source_type)
@@ -286,5 +286,9 @@ class EuropresseProsperoFileWriter(object):
                                                                  ctx_content,
                                                                  txt_content)
 
-        write_file(destination, filename, ".txt", cleaned_txt_content)
-        write_file(destination, filename, ".ctx", cleaned_ctx_content)
+        write_file(destination, self.filename, ".txt", cleaned_txt_content)
+        write_file(destination, self.filename, ".ctx", cleaned_ctx_content)
+
+    @property
+    def get_filename(self):
+        return self.filename

@@ -258,17 +258,21 @@ articles and %d unknown source(s)\n' % (len(self.articles_list), len(unknowns)))
             self.art_list.selection_set(a)
 
     def write_articles(self):
-        articles = self.art_list.curselection()
-        if len(articles):
+        selected_articles = self.art_list.curselection()
+
+        if len(selected_articles):
             self.progressbar['value'] = 0
-            self.progressbar['maximum'] = len(articles)
+            self.progressbar['maximum'] = len(selected_articles)
+
             directory = self.chosen_dir_w.get()
+
             if not directory:
                 self.log.insert(1.0, 'No directory for Prospero files\n')
             else:
-                for c, index in enumerate(articles):
-                    article = self.articles_list[index]
-                    f = EuropresseProsperoFileWriter(article, directory,
-                                                     self.CleaningVal.get())
-                    self.log.insert(1.0, 'Writing %s\n' % f.filename)
-                    self.progressbar['value'] = c + 1
+                for count, article_index in enumerate(selected_articles):
+                    article = self.articles_list[article_index]
+                    writer = EuropresseProsperoFileWriter(article,
+                                                          directory,
+                                                          self.CleaningVal.get())
+                    self.log.insert(1.0, 'Writing %s\n' % writer.filename)
+                    self.progressbar['value'] = count + 1
