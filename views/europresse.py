@@ -13,8 +13,8 @@ class ViewEuropresse():
         self.knownSources = None
         self.list_html = None
         self.parent = parent
-        self.htmldirectory = None
-        window_title = tk.Label(self.parent, text="Europresse",
+        self.html_directory = None
+        window_title = tk.Label(self.parent, text="From Europresse .html to Prospero .txt/.ctx",
                                 font=("Helvetica", 12, "bold"))
         window_title.pack(fill=tk.X)
 
@@ -25,11 +25,11 @@ class ViewEuropresse():
         except:
             corpus_path_unix = "/home"
         if os.path.isdir(corpus_path_windows):
-            self.initdir = corpus_path_windows
+            self.init_dir = corpus_path_windows
         elif os.path.isdir(corpus_path_unix):
-            self.initdir = corpus_path_unix
+            self.init_dir = corpus_path_unix
         else:
-            self.initdir = "."
+            self.init_dir = "."
 
         # FrameDir
         frame_dir = tk.Frame(self.parent)
@@ -78,10 +78,10 @@ class ViewEuropresse():
 
         up1 = tk.PanedWindow(fr_u)
         up1.pack(anchor=tk.W, fill=tk.X)
-        lab_u_pubname = tk.Label(up1, text="Name")
-        lab_u_pubname.pack(side=tk.LEFT)
-        self.u_pubname = tk.Entry(up1)
-        self.u_pubname.pack(fill=tk.X)
+        lab_u_publication_name = tk.Label(up1, text="Name")
+        lab_u_publication_name.pack(side=tk.LEFT)
+        self.u_publication_name = tk.Entry(up1)
+        self.u_publication_name.pack(fill=tk.X)
         up2 = tk.PanedWindow(fr_u)
         up2.pack(anchor=tk.W, fill=tk.X)
         lab_u_type = tk.Label(up2, text="Type")
@@ -151,7 +151,7 @@ class ViewEuropresse():
         index = self.CbS.current()
         if index:
             values = self.knownSources[index].split("; ")
-            self.u_pubname.insert(0, values[0])
+            self.u_publication_name.insert(0, values[0])
             self.U_type.insert(0, values[1])
             self.U_abr.insert(0, values[2])
 
@@ -162,7 +162,7 @@ class ViewEuropresse():
         i = self.unknown_list.curselection()
         if i:
             s = self.unknown_list.get(i)
-            n = self.u_pubname.get()
+            n = self.u_publication_name.get()
             t = self.U_type.get()
             a = self.U_abr.get()
             self.log.insert(1.0,
@@ -176,12 +176,12 @@ class ViewEuropresse():
         self.chosen_dir.set("")
         self.reset_lists()
 
-        self.htmldirectory = tk.filedialog.askdirectory(title="Choose directory")
-        self.chosen_dir.set(self.htmldirectory)
+        self.html_directory = tk.filedialog.askdirectory(title="Choose directory")
+        self.chosen_dir.set(self.html_directory)
         self.get_html_list()
         self.log.insert(1.0,
                         "Found %d .html file(s) in %s\n" % (len(self.list_html),
-                                                            self.htmldirectory))
+                                                            self.html_directory))
 
     def reset_lists(self):
         self.unknown_list.delete(0, 'end')
@@ -199,11 +199,11 @@ class ViewEuropresse():
             [self.htm_list.insert("end",
                                   os.path.split(item)[1]) for item in self.list_html]
             self.htm_list.select_set(0, "end")
-            if not self.htmldirectory:
-                self.htmldirectory = directory
+            if not self.html_directory:
+                self.html_directory = directory
 
     def reset_supports(self):
-        self.u_pubname.delete(0, 'end')
+        self.u_publication_name.delete(0, 'end')
         self.U_type.delete(0, 'end')
         self.U_abr.delete(0, 'end')
 
@@ -229,7 +229,7 @@ class ViewEuropresse():
             f = self.list_html[c]
             self.log.insert(1.0, 'Analysing %s\n' % f)
             try:
-                path = os.path.join(self.htmldirectory, f)
+                path = os.path.join(self.html_directory, f)
                 html_parser = EuropresseHtmlParser(path)
                 for a in html_parser.parsed_articles:
                     if a not in self.articles_list:
@@ -240,8 +240,9 @@ class ViewEuropresse():
             except:
                 self.log.insert(1.0, 'Analyse problem\n')
 
-        self.log.insert(1.0, 'Found %d compatible \
-articles and %d unknown source(s)\n' % (len(self.articles_list), len(unknowns)))
+        self.log.insert(1.0, f'Found {len(self.articles_list):d} compatible articles and {len(unknowns):d} unknown '
+                             f'source(s)\n')
+
         [self.art_list.insert("end", "%s %s %s" %
                               (a['source'], a['date'], a['title'])) for a in self.articles_list]
         [self.unknown_list.insert("end", u) for u in unknowns]
@@ -252,7 +253,7 @@ articles and %d unknown source(s)\n' % (len(self.articles_list), len(unknowns)))
         memory_selected_articles = self.art_list.curselection()
         self.chosen_dir_w.set("")
         directory = tk.filedialog.askdirectory(title="Choose directory",
-                                               initialdir=self.initdir)
+                                               initialdir=self.init_dir)
         self.chosen_dir_w.set(directory)
         for a in memory_selected_articles:
             self.art_list.selection_set(a)
