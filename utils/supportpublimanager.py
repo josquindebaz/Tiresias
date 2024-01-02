@@ -2,24 +2,25 @@ import os
 import re
 
 
+def read_publi_file():
+    path = "data/support.publi"
+    path = path if os.path.isfile(path) else "../data/support.publi"
+
+    with open(path, 'rb') as handle:
+        buf = (handle.read().decode('cp1252'))
+
+    return buf, path
+
+
 class SupportPubliManager:
     """Deal with support.publi"""
 
     def __init__(self):
+        self.path = None
         self.codex = {}
         self.sources = {}
 
-        path1 = "data/support.publi"
-        path2 = "../data/support.publi"
-
-        if os.path.isfile(path1):
-            with open(path1, 'rb') as handle:
-                self.path = path1
-                buf = (handle.read().decode('cp1252'))
-        else:
-            with open(path2, 'rb') as handle:
-                self.path = path2
-                buf = (handle.read().decode('cp1252'))
+        buf, self.path = read_publi_file()
         lines = re.split('\r*\n', buf)
 
         for line in lines:
