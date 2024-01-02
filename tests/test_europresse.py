@@ -4,7 +4,7 @@ import os
 import shutil
 
 from mod.europresse import format_support_name, EuropresseHtmlParser, EuropresseProsperoFileWriter, \
-    strip_tags_with_class, fetch_date, in_tag, name_file
+    strip_tags_with_class, fetch_date, in_tag, name_file, create_txt_content, create_ctx_content
 
 
 def test_europresse_e2e():
@@ -255,3 +255,43 @@ def delete_directory(directory):
         return 0
 
     shutil.rmtree(directory)
+
+
+def test_create_txt_content():
+    article = {"title": 'A title', "subtitle": "A subtitle", "text": "Lorem ipsum"}
+    expected = 'A title\r\n.\r\nA subtitle\r\n.\r\nLorem ipsum'
+    result = create_txt_content(article)
+
+    assert result == expected
+
+
+def test_create_ctx_content():
+    article = {"title": 'A title', "date": "02/01/2024"}
+    source = "The world publication"
+    source_type = "Magazine"
+
+    ctx = [
+        "fileCtx0005",
+        article['title'],
+        source,
+        "",
+        "",
+        article['date'],
+        source,
+        source_type,
+        "",
+        "",
+        "",
+        "Processed by Tiresias on ",
+        "",
+        "n",
+        "n",
+        ""
+    ]
+
+    expected = "\r\n".join(ctx)
+    result = create_ctx_content(article, source, source_type)
+
+    assert result[0-10] == expected[0-10]
+    assert result[10].find("Processed by Tiresias on ")
+

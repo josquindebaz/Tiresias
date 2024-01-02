@@ -225,50 +225,66 @@ def name_file(formatted_date, prefix, destination):
     return name
 
 
+def create_txt_content(article):
+    result = article['title'] + "\r\n.\r\n"
+    result += article['subtitle'] + "\r\n.\r\n" if article['subtitle'] else ""
+    result += article['text']
+
+    return result
+
+
+def create_ctx_content(article, source, source_type):
+    ctx = [
+        "fileCtx0005",
+        article['title'],
+        source,
+        "",
+        "",
+        article['date'],
+        source,
+        source_type,
+        "",
+        "",
+        "",
+        "Processed by Tiresias on %s" % datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+        "",
+        "n",
+        "n",
+        ""
+    ]
+    ctx = "\r\n".join(ctx)
+    return ctx
+
+
+def write_file(destination, filename, extension, content):
+    path = os.path.join(destination, filename + extension)
+    encoded_content = content.encode('latin-1', 'xmlcharrefreplace')
+    with open(path, 'wb') as f:
+        f.write(encoded_content)
+
+
+def clean_content(cleaning_required, ctx_content, txt_content):
+    if not cleaning_required:
+        return ctx_content, txt_content
+
+    txt_cleaner = Cleaner(txt_content.encode('utf-8'))
+    ctx_cleaner = Cleaner(ctx_content.encode('utf-8'))
+
+    return ctx_cleaner.content, txt_cleaner.content
+
+
 class EuropresseProsperoFileWriter(object):
-    def __init__(self, article, destination, c=1):
+    def __init__(self, article, destination, cleaning_required=True):
 
         prefix, source, source_type = fetch_publication_infos(article['source'])
-
         filename = name_file(article['date'], prefix, destination)
 
-        text = article['title'] + "\r\n.\r\n"
-        text += article['subtitle'] + "\r\n.\r\n" if article['subtitle'] else ""
-        text += article['text']
+        txt_content = create_txt_content(article)
+        ctx_content = create_ctx_content(article, source, source_type)
 
-        ctx = [
-            "fileCtx0005",
-            article['title'],
-            source,
-            "",
-            "",
-            article['date'],
-            source,
-            source_type,
-            "",
-            "",
-            "",
-            "Processed by Tiresias on %s" % datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-            "",
-            "n",
-            "n",
-            ""
-        ]
-        ctx = "\r\n".join(ctx)
+        cleaned_ctx_content, cleaned_txt_content = clean_content(cleaning_required,
+                                                                 ctx_content,
+                                                                 txt_content)
 
-        if c:
-            cl_txt = Cleaner(text.encode('utf-8'))
-            text = cl_txt.content.encode('latin-1', 'xmlcharrefreplace')  # to bytes
-            cl_ctx = Cleaner(ctx.encode('utf-8'))
-            ctx = cl_ctx.content.encode('latin-1', 'xmlcharrefreplace')  # to bytes
-        else:
-            ctx = ctx.encode('latin-1', 'xmlcharrefreplace')  # to bytes
-            text = text.encode('latin-1', 'xmlcharrefreplace')  # to bytes
-
-        path = os.path.join(destination, filename + ".txt")
-        with open(path, 'wb') as f:
-            f.write(text)
-
-        path = os.path.join(destination, filename + ".ctx")
-        with open(path, 'wb') as f:
-            f.write(ctx)
+        write_file(destination, filename, ".txt", cleaned_txt_content)
+        write_file(destination, filename, ".ctx", cleaned_ctx_content)
