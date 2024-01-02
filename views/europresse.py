@@ -104,7 +104,9 @@ class ViewEuropresse():
         fr_art.pack()
         self.art_list = tk.Listbox(fr_art, width=100, height=30,
                                    selectmode=tk.EXTENDED)
+        self.art_list.bind_class("Listbox", "<Control-a>", self.select_all_found_articles)
         self.art_list.pack(side=tk.LEFT)
+
         sb_art = tk.Scrollbar(fr_art)
         sb_art.pack(side=tk.RIGHT, fill=tk.Y)
         sb_art.configure(command=self.art_list.yview)
@@ -142,6 +144,9 @@ class ViewEuropresse():
         self.log = tk.scrolledtext.ScrolledText(fr_log,
                                                 height=10, bg="black", fg="orange")
         self.log.pack(fill=tk.X)
+
+    def select_all_found_articles(self, _):
+        self.art_list.select_set(0, "end")
 
     def memo_unknown(self, callback):
         self.memory_selected_unknown = self.unknown_list.curselection()
