@@ -202,13 +202,35 @@ def fetch_publication_infos(publication):
     return prefix, source, source_type
 
 
+def name_file(formatted_date, prefix, destination):
+    index, base = "A", 64
+    formatted_date = "".join(reversed(formatted_date.split("/")))
+    name = "%s%s%s" % (prefix, formatted_date, index)
+
+    path = os.path.join(destination, name + ".txt")
+
+    while os.path.isfile(path):
+        if ord(index[-1]) < 90:
+            index = chr(ord(index[-1]) + 1)
+        else:
+            base += 1
+            index = "A"
+
+        if base > 64:  # if index is Z => add a letter
+            index = chr(base) + index
+
+        name = "%s%s%s" % (prefix, formatted_date, index)
+        path = os.path.join(destination, name + ".txt")
+
+    return name
+
+
 class EuropresseProsperoFileWriter(object):
     def __init__(self, article, destination, c=1):
-        self.destination = destination
 
         prefix, source, source_type = fetch_publication_infos(article['source'])
 
-        self.filename = self.file_name(article['date'], prefix)
+        filename = name_file(article['date'], prefix, destination)
 
         text = article['title'] + "\r\n.\r\n"
         text += article['subtitle'] + "\r\n.\r\n" if article['subtitle'] else ""
@@ -243,27 +265,10 @@ class EuropresseProsperoFileWriter(object):
             ctx = ctx.encode('latin-1', 'xmlcharrefreplace')  # to bytes
             text = text.encode('latin-1', 'xmlcharrefreplace')  # to bytes
 
-        path = os.path.join(self.destination, self.filename + ".txt")
+        path = os.path.join(destination, filename + ".txt")
         with open(path, 'wb') as f:
             f.write(text)
 
-        path = os.path.join(self.destination, self.filename + ".ctx")
+        path = os.path.join(destination, filename + ".ctx")
         with open(path, 'wb') as f:
             f.write(ctx)
-
-    def file_name(self, date, prefix):
-        index, base = "A", 64
-        date = "".join(reversed(date.split("/")))
-        name = "%s%s%s" % (prefix, date, index)
-        path = os.path.join(self.destination, name + ".txt")
-        while os.path.isfile(path):
-            if ord(index[-1]) < 90:
-                index = chr(ord(index[-1]) + 1)
-            else:
-                base += 1
-                index = "A"
-            if base > 64:  # if Z => 2 letters
-                index = chr(base) + index
-            name = "%s%s%s" % (prefix, date, index)
-            path = os.path.join(self.destination, name + ".txt")
-        return name
