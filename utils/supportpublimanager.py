@@ -34,6 +34,7 @@ class SupportPubliManager:
                     'type': source[2].strip(),
                     'abr': source[3].strip()
                 }
+        print(self.sources)
 
     def add(self, k, source, typ, abbr):
         """add a source to the dic"""
