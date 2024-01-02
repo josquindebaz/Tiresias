@@ -1,14 +1,14 @@
-import re
+import datetime
 import html
 import os
-import datetime
+import re
+
+from utils.supportpublimanager import SupportPubliManager
 
 try:
     from cleaning import Cleaner
-    from supports import Publi
 except ModuleNotFoundError:
     from mod.cleaning import Cleaner
-    from mod.supports import Publi
 
 
 def format_support_name(support):
@@ -190,7 +190,7 @@ class EuropresseHtmlParser(object):
 
 
 def fetch_publication_infos(publication):
-    publication_index = Publi()
+    publication_index = SupportPubliManager()
 
     if publication not in publication_index.codex.keys():
         return "EUROPRESSE", publication, "unknown source"

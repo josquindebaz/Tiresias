@@ -1,9 +1,8 @@
-"""Deal with support.publi"""
-import re
 import os
+import re
 
 
-class Publi():
+class SupportPubliManager:
     """Deal with support.publi"""
 
     def __init__(self):
@@ -68,14 +67,3 @@ class Publi():
                              candidat[1],
                              candidat[2],
                              candidat[3])
-
-
-if __name__ == '__main__':
-    ##    with open("support.publi", 'r') as filehandle:
-    ##        content = filehandle.readlines()
-    ##        print(content[:1])
-    test = Publi()
-    print(len(test.codex))
-    test.fusion(r"C:\Users\gspr\Downloads\support.publi")
-    print(len(test.codex))
-    test.write()

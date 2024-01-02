@@ -3,7 +3,7 @@ from tkinter import ttk
 from pathlib import Path
 
 from mod.europresse import *
-from mod.supports import Publi
+from utils.supportpublimanager import SupportPubliManager
 
 
 class ViewEuropresse():
@@ -225,7 +225,7 @@ class ViewEuropresse():
     def analyse(self):
         self.reset_lists()
 
-        self.Supports = Publi()
+        self.Supports = SupportPubliManager()
         self.populate_supports()
 
         unknowns = []
