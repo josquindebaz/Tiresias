@@ -49,11 +49,12 @@ class SupportPubliManager:
 
     def add(self, entry, source, typ, abbr):
         """add a source to the dic"""
-        self.codex[entry] = {
-            'source': source,
-            'type': typ,
-            'abr': abbr
-        }
+        if entry not in self.codex.keys():
+            self.codex[entry] = {
+                'source': source,
+                'type': typ,
+                'abr': abbr
+            }
 
         if source not in self.sources.keys():
             self.sources[source] = {
@@ -61,11 +62,13 @@ class SupportPubliManager:
                 'abr': abbr
             }
 
-    def write(self):
+    def write_support_publi(self):
         """write as file"""
-        sources = sorted(["%s; %s; %s; %s\n" % \
-                          (k, v['source'], v['type'], v['abr']) \
-                          for k, v in self.codex.items()])
+        sources = [f"{entry}; {value['source']}; {value['type']}; {value['abr']}\n"
+                   for entry, value in self.codex.items()]
+
+        sources.sort()
+
         with open(self.path, 'w', encoding='cp1252') as handle:
             handle.writelines(sources)
 

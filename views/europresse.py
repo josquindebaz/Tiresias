@@ -173,7 +173,7 @@ class ViewEuropresse():
             self.log.insert(1.0,
                             "Adding to support.publi [%s] as %s; %s; %s\n" % (s, n, t, a))
             self.Supports.add(s, n, t, a)
-            self.Supports.write()
+            self.Supports.write_support_publi()
             self.populate_supports()
             self.unknown_list.delete(i)
 

@@ -68,3 +68,16 @@ def test_add():
     manager.add(new_entry, source, source_type, abbr)
     assert new_entry not in manager.sources.keys()
 
+
+def test_write_support_publi():
+    manager = SupportPubliManager()
+    manager.path = "test_support_publi"
+    manager.write_support_publi()
+
+    assert os.path.isfile(manager.path)
+    with open(manager.path, 'rb') as handle:
+        buf = handle.readlines()
+
+    assert len(manager.codex) == len(buf)
+
+    os.remove(manager.path)
