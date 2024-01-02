@@ -12,6 +12,30 @@ def read_publi_file():
     return buf, path
 
 
+def parse_publi(publi_content):
+    codex = {}
+    sources = {}
+
+    for line in re.split('\r*\n', publi_content):
+        source = line.split(";")
+        if not len(source) == 4:
+            continue
+
+        stripped = list(map(lambda item: item.strip(), source))
+        codex[source[0]] = {
+            'source': stripped[1],
+            'type': stripped[2],
+            'abr': stripped[3]
+        }
+
+        sources[stripped[1]] = {
+            'type': stripped[2],
+            'abr': stripped[3]
+        }
+
+    return codex, sources
+
+
 class SupportPubliManager:
     """Deal with support.publi"""
 
@@ -21,21 +45,7 @@ class SupportPubliManager:
         self.sources = {}
 
         buf, self.path = read_publi_file()
-        lines = re.split('\r*\n', buf)
-
-        for line in lines:
-            source = line.split(";")
-            if len(source) == 4:
-                self.codex[source[0]] = {
-                    'source': source[1].strip(),
-                    'type': source[2].strip(),
-                    'abr': source[3].strip()
-                }
-                self.sources[source[1].strip()] = {
-                    'type': source[2].strip(),
-                    'abr': source[3].strip()
-                }
-        print(self.sources)
+        self.codex, self.sources = parse_publi(buf)
 
     def add(self, k, source, typ, abbr):
         """add a source to the dic"""

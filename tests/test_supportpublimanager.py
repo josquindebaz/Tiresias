@@ -1,6 +1,6 @@
 import os.path
 
-from utils.supportpublimanager import SupportPubliManager
+from utils.supportpublimanager import SupportPubliManager, parse_publi
 
 
 def test_support_publi_manager_init():
@@ -27,3 +27,22 @@ def test_support_publi_manager_init():
 
     expected = {'type': 'Presse nationale', 'abr': 'LIB'}
     assert manager.sources['Libération'] == expected
+
+
+def test_parse_publi():
+    content = """nouvelobs.com - Quotidien Permanent; Le Nouvel Observateur; News et magazines; OBS
+nouvelobs.com; Le Nouvel Observateur; News et magazines; OBS
+"""
+    codex, sources = parse_publi(content)
+
+    expected_codex = {'nouvelobs.com - Quotidien Permanent':
+                          {'source': 'Le Nouvel Observateur', 'type': 'News et magazines', 'abr': 'OBS'},
+                      'nouvelobs.com':
+                          {'source': 'Le Nouvel Observateur', 'type': 'News et magazines', 'abr': 'OBS'}
+                      }
+    assert len(codex) == 2
+    assert codex == expected_codex
+
+    expected_sources = {'Le Nouvel Observateur': {'type': 'News et magazines', 'abr': 'OBS'}}
+    assert len(sources) == 1
+    assert sources == expected_sources
