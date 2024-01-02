@@ -47,13 +47,14 @@ class SupportPubliManager:
         buf, self.path = read_publi_file()
         self.codex, self.sources = parse_publi(buf)
 
-    def add(self, k, source, typ, abbr):
+    def add(self, entry, source, typ, abbr):
         """add a source to the dic"""
-        self.codex[k] = {
+        self.codex[entry] = {
             'source': source,
             'type': typ,
             'abr': abbr
         }
+
         if source not in self.sources.keys():
             self.sources[source] = {
                 'type': typ,

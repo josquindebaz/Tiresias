@@ -46,3 +46,25 @@ nouvelobs.com; Le Nouvel Observateur; News et magazines; OBS
     expected_sources = {'Le Nouvel Observateur': {'type': 'News et magazines', 'abr': 'OBS'}}
     assert len(sources) == 1
     assert sources == expected_sources
+
+
+def test_add():
+    manager = SupportPubliManager()
+
+    entry = "A Publication on the web"
+    source = "A Publication"
+    source_type = "Magazine"
+    abbr = "PREFIX"
+
+    manager.add(entry, source, source_type, abbr)
+
+    assert entry in manager.codex.keys()
+    assert manager.codex[entry] == {'abr': 'PREFIX', 'source': 'A Publication', 'type': 'Magazine'}
+
+    assert source in manager.sources.keys()
+    assert manager.sources[source] == {'abr': 'PREFIX', 'type': 'Magazine'}
+
+    new_entry = "Same Publication anywhere else"
+    manager.add(new_entry, source, source_type, abbr)
+    assert new_entry not in manager.sources.keys()
+
