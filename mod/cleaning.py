@@ -327,7 +327,7 @@ class Cleaner():
 
     def footnotes(self):
         """Separate footnote calls"""
-        motif = re.compile(r'([A-Za-zé]{2,})(\d{1,})(\.|\(|,) ')
+        motif = re.compile(r'([A-Za-zé]{2,})(\d+)([.(,]) ')
         number = len(motif.findall(self.content))
         if number:
             self.content = motif.sub("\\1 \\2 \\3 ", self.content)
