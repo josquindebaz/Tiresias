@@ -33,10 +33,10 @@ class ViewReplacer:
         dir_entry.pack(side=tk.LEFT)
 
         self.Recursive = tk.BooleanVar()
-        bnRecursive = tk.Checkbutton(frame_1,
+        bn_recursive = tk.Checkbutton(frame_1,
                                      text='recursive', variable=self.Recursive)
-        bnRecursive.select()
-        bnRecursive.pack(side=tk.LEFT)
+        bn_recursive.select()
+        bn_recursive.pack(side=tk.LEFT)
 
         self.test = tk.BooleanVar()
         bn_test = tk.Checkbutton(frame_1,
@@ -45,50 +45,50 @@ class ViewReplacer:
         bn_test.pack(side=tk.LEFT)
 
         # Frame 2
-        Fr2 = tk.PanedWindow(self.parent)
-        Fr2.pack(anchor=tk.W)
+        fr2 = tk.PanedWindow(self.parent)
+        fr2.pack(anchor=tk.W)
 
-        Fr21 = tk.LabelFrame(Fr2,
+        fr21 = tk.LabelFrame(fr2,
                              text="From patterns", padx=10)
-        Fr21.pack(anchor=tk.N, side=tk.LEFT)
-        self.ListFrom = tk.Listbox(Fr21)
+        fr21.pack(anchor=tk.N, side=tk.LEFT)
+        self.ListFrom = tk.Listbox(fr21)
         self.ListFrom.pack(fill=tk.X)
-        bn_del = tk.Button(Fr21, text=u"del",
+        bn_del = tk.Button(fr21, text=u"del",
                            command=self.from_remove)
         bn_del.pack(anchor=tk.W)
-        P21 = tk.PanedWindow(Fr21)
-        P21.pack()
-        self.w_add_Entry = tk.Entry(P21)
+        p21 = tk.PanedWindow(fr21)
+        p21.pack()
+        self.w_add_Entry = tk.Entry(p21)
         self.w_add_Entry.pack(side=tk.LEFT)
-        self.bn_add = tk.Button(P21, text=u"add",
+        self.bn_add = tk.Button(p21, text=u"add",
                                 command=self.from_add)
         self.bn_add.pack()
         self.Marks = tk.BooleanVar()
-        bnM = tk.Checkbutton(Fr21, padx=30,
+        bn_m = tk.Checkbutton(fr21, padx=30,
                              text='with marks', variable=self.Marks)
-        bnM.select()
-        bnM.pack()
+        bn_m.select()
+        bn_m.pack()
 
-        Fr22 = tk.LabelFrame(Fr2,
+        fr22 = tk.LabelFrame(fr2,
                              text="To", padx=10)
-        Fr22.pack(anchor=tk.N, side=tk.LEFT)
+        fr22.pack(anchor=tk.N, side=tk.LEFT)
 
-        self.EntryTo = tk.Entry(Fr22, width=30)
+        self.EntryTo = tk.Entry(fr22, width=30)
         self.EntryTo.pack()
 
-        bn_proc = tk.Button(Fr22, text="Replace",
+        bn_proc = tk.Button(fr22, text="Replace",
                             command=self.process)
         bn_proc.pack(pady=10)
 
-        Fr23 = tk.LabelFrame(Fr2,
+        fr23 = tk.LabelFrame(fr2,
                              text="History", padx=10)
-        Fr23.pack()
-        self.history = tk.Listbox(Fr23, width=45)
+        fr23.pack()
+        self.history = tk.Listbox(fr23, width=45)
         self.history.pack()
         self.history_populate()
-        recallBn = tk.Button(Fr23, text='Recall',
-                             command=self.Recall)
-        recallBn.pack()
+        recall_bn = tk.Button(fr23, text='Recall',
+                              command=self.recall)
+        recall_bn.pack()
 
         self.progressbar = ttk.Progressbar(self.parent,
                                            mode='determinate')
@@ -150,7 +150,7 @@ class ViewReplacer:
             print('pb saving history')
         self.history_populate()
 
-    def Recall(self):
+    def recall(self):
         selected = self.history.curselection()
         if selected:
             rec = self.history.get(selected)
@@ -162,16 +162,16 @@ class ViewReplacer:
 
     def process(self):
         folder = self.choosenDir.get()
-        From = self.ListFrom.get(0, 'end')
-        To = self.EntryTo.get()
-        if From:
-            if To in From:
+        to_replace = self.ListFrom.get(0, 'end')
+        replacing_form = self.EntryTo.get()
+        if to_replace:
+            if replacing_form in to_replace:
                 self.result.insert(1.0,
-                                   "Error: [%s] is in From list\n" % To)
+                                   "Error: [%s] is in to_replace list\n" % replacing_form)
             else:
-                ToFrom = [To]
-                ToFrom.extend(From)
-                self.history_add(ToFrom)
+                to_from = [replacing_form]
+                to_from.extend(to_replace)
+                self.history_add(to_from)
 
                 text_list = list_files(folder, recursive=self.Recursive.get())
                 self.result.insert(1.0,
@@ -180,22 +180,22 @@ class ViewReplacer:
                 self.progressbar['maximum'] = len(text_list)
                 cpt = 0
 
-                Processer = Replacer()
-                Processer.set_motif(ToFrom, with_marks=self.Marks.get())
+                processor = Replacer()
+                processor.set_motif(to_from, with_marks=self.Marks.get())
 
                 for c, txt in enumerate(text_list):
                     self.progressbar['value'] = c + 1
                     with open(txt, 'rb') as f:
                         buf = f.read()
-                    Processer.set_content(buf)
-                    Processer.process()
-                    if Processer.log:
+                    processor.set_content(buf)
+                    processor.process()
+                    if processor.log:
                         if not self.test.get():
-                            buf = bytes(Processer.content, 'latin-1')
+                            buf = bytes(processor.content, 'latin-1')
                             with open(txt, 'wb') as f:
                                 f.write(buf)
                             cpt += 1
                         self.result.insert(1.0,
-                                           "%d match(es) in %s\n" % (Processer.log, txt))
+                                           "%d match(es) in %s\n" % (processor.log, txt))
                     self.parent.update()
                 self.result.insert(1.0, "%d file(s) edited\n" % cpt)

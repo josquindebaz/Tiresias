@@ -9,79 +9,79 @@ from mod.scopus import ctx_prospero
 class ViewScopus:
     def __init__(self, parent):
         self.parent = parent
-        WindowTitle = tk.Label(self.parent, text="csv from Scopus to Prospero",
+        window_title = tk.Label(self.parent, text="csv from Scopus to Prospero",
                                font=("Helvetica", 12, "bold"))
-        WindowTitle.pack(fill=tk.X)
+        window_title.pack(fill=tk.X)
 
         # Frame 1
-        Fr1 = tk.Frame(self.parent)
-        Fr1.pack(anchor=tk.W)
+        fr1 = tk.Frame(self.parent)
+        fr1.pack(anchor=tk.W)
 
-        bn_csv = tk.Button(Fr1, text="Select a csv file",
+        bn_csv = tk.Button(fr1, text="Select a csv file",
                            command=self.sel_file)
         bn_csv.pack(side=tk.RIGHT)
 
         self.choosen_file = tk.StringVar()
-        csv_entry = tk.Entry(Fr1, width=52,
+        csv_entry = tk.Entry(fr1, width=52,
                              textvariable=self.choosen_file)
         csv_entry.pack()
 
         # Frame 2
-        Fr2 = tk.Frame(self.parent)
-        Fr2.pack(anchor=tk.W)
-        bnDir = tk.Button(Fr2, text="Select directory for Prospero Files",
+        fr2 = tk.Frame(self.parent)
+        fr2.pack(anchor=tk.W)
+        bn_dir = tk.Button(fr2, text="Select directory for Prospero Files",
                           command=self.sel_dir)
-        bnDir.pack(side=tk.RIGHT)
+        bn_dir.pack(side=tk.RIGHT)
 
         self.choosenDir = tk.StringVar()
-        dir_entry = tk.Entry(Fr2, width=52,
+        dir_entry = tk.Entry(fr2, width=52,
                              textvariable=self.choosenDir)
         dir_entry.pack()
 
         # Frame 3
-        Fr3 = tk.Frame(self.parent)
-        Fr3.pack(anchor=tk.W)
+        fr3 = tk.Frame(self.parent)
+        fr3.pack(anchor=tk.W)
         self.CleaningVal = tk.BooleanVar()
-        Bn_Cleaning = tk.Checkbutton(Fr3,
+        bn_cleaning = tk.Checkbutton(fr3,
                                      text="clean texts",
                                      variable=self.CleaningVal)
-        Bn_Cleaning.select()
-        Bn_Cleaning.pack(side=tk.LEFT)
+        bn_cleaning.select()
+        bn_cleaning.pack(side=tk.LEFT)
         self.brackets = tk.BooleanVar()
-        Bn_brackets = tk.Checkbutton(Fr3,
+        bn_brackets = tk.Checkbutton(fr3,
                                      text="Remove translations in title",
                                      variable=self.brackets)
-        Bn_brackets.select()
-        Bn_brackets.pack(side=tk.LEFT)
+        bn_brackets.select()
+        bn_brackets.pack(side=tk.LEFT)
         self.rm_copyright = tk.BooleanVar()
-        Bn_rm_copyright = tk.Checkbutton(Fr3,
+        bn_rm_copyright = tk.Checkbutton(fr3,
                                          text="Remove copyright",
                                          variable=self.rm_copyright)
-        Bn_rm_copyright.select()
-        Bn_rm_copyright.pack(side=tk.LEFT)
+        bn_rm_copyright.select()
+        bn_rm_copyright.pack(side=tk.LEFT)
         self.author_keywords = tk.BooleanVar()
-        Bn_author_keywords = tk.Checkbutton(Fr3,
+        bn_author_keywords = tk.Checkbutton(fr3,
                                             text="Add author keywords",
                                             variable=self.author_keywords)
-        Bn_author_keywords.select()
-        Bn_author_keywords.pack(side=tk.LEFT)
+        bn_author_keywords.select()
+        bn_author_keywords.pack(side=tk.LEFT)
         self.index_keywords = tk.BooleanVar()
-        Bn_index_keywords = tk.Checkbutton(Fr3,
+        bn_index_keywords = tk.Checkbutton(fr3,
                                            text="Add index keywords",
                                            variable=self.index_keywords)
-        Bn_index_keywords.select()
-        Bn_index_keywords.pack(side=tk.LEFT)
+        bn_index_keywords.select()
+        bn_index_keywords.pack(side=tk.LEFT)
 
         # Frame 4
-        Fr4 = tk.Frame(self.parent)
-        Fr4.pack(anchor=tk.W)
-        bn_process = tk.Button(Fr4, text="Process", command=self.process)
+        fr4 = tk.Frame(self.parent)
+        fr4.pack(anchor=tk.W)
+        bn_process = tk.Button(fr4, text="Process", command=self.process)
         bn_process.pack(side=tk.LEFT)
 
         # Frame 5
-        Fr5 = tk.Frame(self.parent)
-        Fr5.pack()
-        self.log = ScrolledText(Fr5, height=10, bg="black", fg="orange")
+        fr5 = tk.Frame(self.parent)
+        fr5.pack()
+        self.log = ScrolledText(fr5, height=10, bg="black", fg="orange")
         self.log.pack()
 
     def sel_file(self):

@@ -88,13 +88,13 @@ class ViewPaster:
                 initialfile="QpAtlas.svg",
                 filetypes=[("svg Files", "*.svg")])
 
-            PROCESS = Mapper(data)
+            process = Mapper(data)
             method = self.method.get()
             if method == "graduated":
-                atlas = PROCESS.draw_map_graduated()
+                atlas = process.draw_map_graduated()
             else:
-                PROCESS.make_legend(method=method)
-                atlas = PROCESS.draw_map()
+                process.make_legend(method=method)
+                atlas = process.draw_map()
             with open(filename, 'wb') as pointer:
                 pointer.write(atlas.encode('utf-8'))
             webbrowser.open(filename, 0, True)

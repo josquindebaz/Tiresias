@@ -40,7 +40,7 @@ def file_name(date, prefix, save_dir):
     return name
 
 
-class parseNewton(object):
+class ParseNewton(object):
     def __init__(self, filename):
         self.articles = {}
         self.unknowns = []
@@ -227,7 +227,7 @@ if __name__ == '__main__':
     SUPPORTS_FILE = "../data/support.publi"
     for filename in glob.glob("*.html"):
         print("Processing " + filename)
-        parse = parseNewton(filename)
+        parse = ParseNewton(filename)
         parse.get_supports(SUPPORTS_FILE)
         print("%d unknown(s) source(s)" % len(parse.unknowns))
         for unknown in parse.unknowns:

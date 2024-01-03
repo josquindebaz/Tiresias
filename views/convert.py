@@ -9,32 +9,32 @@ from mod.convert import ParseCsv
 class ViewConvert:
     def __init__(self, parent):
         self.parent = parent
-        WindowTitle = tk.Label(self.parent, text="CSV to Ctx/Txt",
-                               font=("Helvetica", 12, "bold"))
-        WindowTitle.pack(fill=tk.X)
+        window_title = tk.Label(self.parent, text="CSV to Ctx/Txt",
+                                font=("Helvetica", 12, "bold"))
+        window_title.pack(fill=tk.X)
 
         # Frame 1
-        Fr1 = tk.Frame(self.parent)
-        Fr1.pack(anchor=tk.W)
+        fr1 = tk.Frame(self.parent)
+        fr1.pack(anchor=tk.W)
 
-        bn_csv = tk.Button(Fr1, text="Select a CSV file",
+        bn_csv = tk.Button(fr1, text="Select a CSV file",
                            command=self.sel_file)
         bn_csv.pack(side=tk.RIGHT)
 
         self.choosen_file = tk.StringVar()
-        csv_entry = tk.Entry(Fr1, width=52,
+        csv_entry = tk.Entry(fr1, width=52,
                              textvariable=self.choosen_file)
         csv_entry.pack()
 
         # Frame 2
-        Fr2 = tk.Frame(self.parent)
-        Fr2.pack(anchor=tk.W)
-        bnDir = tk.Button(Fr2, text="Select directory for Prospero Files",
+        fr2 = tk.Frame(self.parent)
+        fr2.pack(anchor=tk.W)
+        bn_dir = tk.Button(fr2, text="Select directory for Prospero Files",
                           command=self.sel_dir)
-        bnDir.pack(side=tk.RIGHT)
+        bn_dir.pack(side=tk.RIGHT)
 
         self.choosenDir = tk.StringVar()
-        dir_entry = tk.Entry(Fr2, width=52,
+        dir_entry = tk.Entry(fr2, width=52,
                              textvariable=self.choosenDir)
         dir_entry.pack()
 

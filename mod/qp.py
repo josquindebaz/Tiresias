@@ -138,7 +138,7 @@ class QuestionParlementaire(object):
             print("nature unknown: %s" % self.D['nature'])
             nat = "NU"
 
-        TXT = WriteFile(nat, self.D['leg'], self.D['num'], 'txt')
+        txt_writer = WriteFile(nat, self.D['leg'], self.D['num'], 'txt')
 
         subtitle = "%s %s, publiée au JO le %s" \
                    % (self.D['nature'], self.D['num'], self.D['dpq'])
@@ -153,27 +153,27 @@ class QuestionParlementaire(object):
             self.D['question']
         ]
 
-        filenames.append(TXT.w(cible, lines))
+        filenames.append(txt_writer.w(cible, lines))
 
-        CTX = WriteFile(nat, self.D['leg'], self.D['num'], 'ctx')
-        q_CTX = self.ctx_content(0, self.D['title'], TXT.nom_rep)
-        filenames.append(CTX.w(cible, q_CTX))
+        ctx_writer = WriteFile(nat, self.D['leg'], self.D['num'], 'ctx')
+        q_ctx = self.ctx_content(0, self.D['title'], txt_writer.nom_rep)
+        filenames.append(ctx_writer.w(cible, q_ctx))
 
         if self.D['ASREP'] == "Avec réponse":
             r_title = "Réponse à la %s %s, publiée au JO le %s (page %s)" \
                       % (self.D['nature'], self.D['num'],
                          self.D['dpr'], self.D['pgr'])
-            txtREP = [
+            txt_rep = [
                 r_title,
                 ".",
                 "",
                 self.D['reponse']
             ]
 
-            filenames.append(TXT.w(cible, txtREP, 1))
+            filenames.append(txt_writer.w(cible, txt_rep, 1))
 
-            r_CTX = self.ctx_content(1, r_title, TXT.nom_fichier)
-            filenames.append(CTX.w(cible, r_CTX, 1))
+            r_ctx = self.ctx_content(1, r_title, txt_writer.nom_fichier)
+            filenames.append(ctx_writer.w(cible, r_ctx, 1))
 
 
 class WriteFile(object):
@@ -192,8 +192,8 @@ class WriteFile(object):
         except:
             return ligne
 
-    def w(self, cible, contenu_fichier, REP=0):
-        if REP == 1:
+    def w(self, cible, contenu_fichier, rep=0):
+        if rep == 1:
             nom = self.nom_rep
         else:
             nom = self.nom_fichier
@@ -409,7 +409,7 @@ class CrawlAss(object):
     def __init__(self, leg, words):
         self.dicQ = {}
         html = self.getpage(leg, words)
-        self.getQuestions(html)
+        self.get_questions(html)
         if VERBOSE:
             print("found %d questions" % len(self.dicQ))
 
@@ -417,17 +417,17 @@ class CrawlAss(object):
         # !7th legislature has only empty data
         # !lack of accentuation before 11th
         url = "http://www2.assemblee-nationale.fr/recherche/resultats_questions/index.asp?legislature"
-        formData = (
+        form_data = (
             ('legislature', leg),
             ('q', words),
             ('q_in', 0),
             ("limit", 10000000),
         )
-        data = urllib.parse.urlencode(formData).encode()
+        data = urllib.parse.urlencode(form_data).encode()
         with urllib.request.urlopen(url, data) as response:
             return response.read().decode()
 
-    def getQuestions(self, html):
+    def get_questions(self, html):
         for q in re.split('<tr>', html)[2:]:
             m = re.compile('questions\.assemblee-nationale.fr/(.*).htm">\
 <strong>.* - (.*)</strong>')
@@ -628,10 +628,10 @@ class CrawlSenat(object):
             else:
                 self.n = int(re.search('results-number-global">\s*(\d*)\s*',
                                        html).group(1))
-                self.retrieveQ(html)
+                self.retrieve_question(html)
                 for offset in range(10, self.n, 10):
                     html = self.getpage(words, date_from, date_to, offset)
-                    self.retrieveQ(html)
+                    self.retrieve_question(html)
             if VERBOSE:
                 print("found %d questions" % len(self.dicQ))
         else:
@@ -668,7 +668,7 @@ class CrawlSenat(object):
         # tri : p pertinence, dd date descendante, da date ascendante
         # _c=MC1+MC2
 
-    def retrieveQ(self, html):
+    def retrieve_question(self, html):
         m1 = re.compile('visio.do\?id=(.*)&amp;idtable=.*\r\n\s*(.*)\r\n')
         m2 = re.compile('Question n&deg; (\S*)')
         m3 = re.compile('posée par\s*.*((\s*.*){2})')
