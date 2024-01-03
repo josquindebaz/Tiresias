@@ -14,6 +14,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 VERBOSE = 0
 
+
 class QuestionParlementaire(object):
     def __init__(self, url):
         self.final = None
@@ -23,90 +24,89 @@ class QuestionParlementaire(object):
     def retreive(self):
         with urllib.request.urlopen(self.url) as page:
             charset = page.info().get_param('charset')
-            
-            if(charset):
+
+            if (charset):
                 buf = page.read().decode(charset)
             else:
                 p = page.read()
                 buf = p.decode("latin-1")
 
-                #search for misencoding
+                # search for misencoding
                 if (re.search('encoding="UTF-8', buf)):
                     buf = p.decode("utf-8")
 
-               
             if re.search("questions.assemblee-nationale.fr", self.url):
-                self.D = ParseAss(buf).data              
+                self.D = ParseAss(buf).data
             else:
                 self.D = ParseSenat(buf).data
 
     def ctx_content(self, r, title, ref):
-        c = [ "fileCtx0005" ]
-        #title
+        c = ["fileCtx0005"]
+        # title
         c.append(title)
-        #author
+        # author
         if r:
             c.append(self.D['ministere'])
         else:
             c.append(self.D['aut'])
-        #group
+        # group
         if r:
             c.append("")
         else:
             c.append(self.D['groupe'])
-        #dest
+        # dest
         if r:
             c.append(self.D['aut'])
         else:
             c.append(self.D['ministere'])
-        #date
+        # date
         if r:
             c.append(self.D['dpr'])
         else:
             c.append(self.D['dpq'])
-        #journal
+        # journal
         c.append(self.D['support'])
-        #type
+        # type
         if r:
-            c.append("Réponse à une %s"%self.D['nature'])
+            c.append("Réponse à une %s" % self.D['nature'])
         else:
             c.append(self.D['nature'])
-        #reponse ?
+        # reponse ?
         if r:
             c.append("")
         else:
             c.append(self.D['ASREP'])
-        #status
+        # status
         if r:
             c.append("Ministère")
         else:
             c.append("Parlementaires")
-        #loc
+        # loc
         if r:
             c.append("")
         else:
             c.append(self.D['dept'])
-        #CL1
-        c.append("Retreived on %s"\
+        # CL1
+        c.append("Retreived on %s" \
                  % datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-        #tail
+        # tail
         c.extend(["", "n", "n", "REF_HEURE:00:00"])
 
         try:
-            c = list(map(lambda x: re.sub('\s{1,}',' ', x), c))
+            c = list(map(lambda x: re.sub('\s{1,}', ' ', x), c))
         except:
             if (VERBOSE):
-                print ("pb ctx list", c)
+                print("pb ctx list", c)
 
-        #source
-        c.append("REF_EXT:%s" %self.D['source'])
-        #link between question and answer
+        # source
+        c.append("REF_EXT:%s" % self.D['source'])
+        # link between question and answer
         if r:
             c.append("REF_EXT:%s\%s" % (self.final, ref))
-        elif(self.D['ASREP'] == "Avec réponse"):
+        elif (self.D['ASREP'] == "Avec réponse"):
             c.append("REF_EXT:%s\%s" % (self.final, ref))
         return c
-            
+
     def process(self, source=None, dest=None, temp=None):
         if not source:
             self.D['source'] = self.url
@@ -120,8 +120,8 @@ class QuestionParlementaire(object):
             cible = self.final
         else:
             cible = temp
-            
-        filenames = [] 
+
+        filenames = []
 
         natures = {
             'Question écrite': 'QE',
@@ -131,20 +131,20 @@ class QuestionParlementaire(object):
             'Question orale': 'QO',
             "Question d'actualité au gouvernement": 'QG'
         }
-        
+
         try:
             nat = natures[self.D['nature']]
         except:
-            print("nature unknown: %s"%self.D['nature'])
+            print("nature unknown: %s" % self.D['nature'])
             nat = "NU"
-        
+
         TXT = WriteFile(nat, self.D['leg'], self.D['num'], 'txt')
-        
-        subtitle = "%s %s, publiée au JO le %s"\
+
+        subtitle = "%s %s, publiée au JO le %s" \
                    % (self.D['nature'], self.D['num'], self.D['dpq'])
         if (self.D['pgq']):
             subtitle += " (page %s)" % self.D['pgq']
-            
+
         lines = [
             self.D['title'],
             ".",
@@ -152,53 +152,54 @@ class QuestionParlementaire(object):
             ".", "",
             self.D['question']
         ]
-    
-        filenames.append( TXT.w(cible, lines) )
-        
+
+        filenames.append(TXT.w(cible, lines))
+
         CTX = WriteFile(nat, self.D['leg'], self.D['num'], 'ctx')
         q_CTX = self.ctx_content(0, self.D['title'], TXT.nom_rep)
-        filenames.append( CTX.w(cible, q_CTX) )
+        filenames.append(CTX.w(cible, q_CTX))
 
         if (self.D['ASREP'] == "Avec réponse"):
-            r_title = "Réponse à la %s %s, publiée au JO le %s (page %s)"\
-                    % (self.D['nature'], self.D['num'],
-                       self.D['dpr'], self.D['pgr'])
+            r_title = "Réponse à la %s %s, publiée au JO le %s (page %s)" \
+                      % (self.D['nature'], self.D['num'],
+                         self.D['dpr'], self.D['pgr'])
             txtREP = [
                 r_title,
                 ".",
                 "",
                 self.D['reponse']
             ]
-            
-            filenames.append( TXT.w(cible, txtREP, 1) )
-            
+
+            filenames.append(TXT.w(cible, txtREP, 1))
+
             r_CTX = self.ctx_content(1, r_title, TXT.nom_fichier)
             filenames.append(CTX.w(cible, r_CTX, 1))
 
 
 class WriteFile(object):
     """Write a QP for Prospero"""
+
     def __init__(self, nature, leg, num, extension):
-        #nom de fichier complété par des zéros au besoin
+        # nom de fichier complété par des zéros au besoin
         nom_court = "%s_%s_%s" % (nature, leg, '0' * (6 - len(num)) + num)
         self.nom_fichier = "%s.%s" % (nom_court, extension)
         self.nom_rep = "%sREP.%s" % (nom_court, extension)
-        
-    def fin_de_ligne (self, ligne):
+
+    def fin_de_ligne(self, ligne):
         ligne += "\r\n"
-        try :
+        try:
             return ligne.encode('latin1', errors='xmlcharrefreplace')
         except:
             return ligne
 
     def w(self, cible, contenu_fichier, REP=0):
-        if (REP == 1) :
+        if (REP == 1):
             nom = self.nom_rep
-        else :
+        else:
             nom = self.nom_fichier
         texte_fichier = list(map(self.fin_de_ligne, contenu_fichier))
 
-        with open(os.path.join(cible, nom),'wb') as p:
+        with open(os.path.join(cible, nom), 'wb') as p:
             p.writelines(texte_fichier)
 
         return nom
@@ -206,8 +207,7 @@ class WriteFile(object):
 
 class ParseAss(object):
     def __init__(self, html):
-        d = {}
-        d['leg'] = self.get_leg(html)
+        d = {'leg': self.get_leg(html)}
         if d['leg']:
             d['num'], d['nature'] = self.get_num(html)
             if d['nature'] == 'Question au gouvernement':
@@ -215,18 +215,18 @@ class ParseAss(object):
             d['aut'], d['groupe'], d['dept'] = self.get_aut(html)
             d['aut'] = re.sub("^(M\.|Mme) ", "", d['aut'])
             d['ministere'] = self.get_ministere(html)
-            d['title'] = self.get_title(html)            
+            d['title'] = self.get_title(html)
             d['dpq'], d['pgq'] = self.get_publication(html)
             d['support'] = "Journal officiel"
 
             if d['nature'] == "Question au Gouvernement":
                 d['ASREP'] = d['nature']
                 d['question'] = self.get_reponse(html)
-                d['dpr'], d['pgr'] =  self.get_publication_rep(html)
+                d['dpr'], d['pgr'] = self.get_publication_rep(html)
                 d['pgq'] = d['pgr']
             else:
                 d['question'] = self.get_question(html)
-                d['dpr'], d['pgr'] =  self.get_publication_rep(html)
+                d['dpr'], d['pgr'] = self.get_publication_rep(html)
                 if (d['dpr']):
                     d['ASREP'] = "Avec réponse"
                     d['reponse'] = self.get_reponse(html)
@@ -237,25 +237,25 @@ class ParseAss(object):
                         if m.search(d['reponse']):
                             d['title'] = m.search(d['reponse']).group(1)
                             d['reponse'] = re.sub('<p align="CENTER">\s*.*\s*<a.*</p>',
-                                            d['title'], d['reponse'] )                                  
+                                                  d['title'], d['reponse'])
                 else:
                     d['ASREP'] = "Sans réponse"
         else:
-            print("pb parse Ass" )
-            
+            print("pb parse Ass")
+
         if d['question']:
             if re.search("^\s*$", d['question']):
                 d['question'] = "empty!"
         else:
             d['question'] = "empty!"
-            
+
         self.data = d
-         
+
     def get_leg(self, b):
         m1 = re.compile('<LEG>(\d*).me')
         m2 = re.compile('<header class="question_legislature">(\d*)')
         m3 = re.compile('<td class="tdstyleh1">(\d*)')
-        if  m1.search(b):
+        if m1.search(b):
             return m1.search(b).group(1)
         elif m2.search(b):
             return m2.search(b).group(1)
@@ -302,10 +302,10 @@ a>.*\((.*) - <span>(.*)</span>')
         elif m3.search(b):
             depute = m3.search(b).group(1)
             return re.search("<b>(.*)</b> \(\s*(.*) - (.*).\)",
-                             depute).group(1,2,3)
+                             depute).group(1, 2, 3)
         else:
             return False, False, False
-        
+
     def get_ministere(self, b):
         m1 = re.compile('<MINA>(.*)</MINA>')
         m2 = re.compile('Ministère attributaire > </span>(.*)')
@@ -318,7 +318,7 @@ a>.*\((.*) - <span>(.*)</span>')
             return m3.search(b).group(1)
         else:
             return False
-        
+
     def get_title(self, b):
         m1 = re.compile('<TANA>(.*)</TANA>')
         m2 = re.compile('Titre > </span>(.*)</p>')
@@ -330,7 +330,7 @@ a>.*\((.*) - <span>(.*)</span>')
         elif m3.search(b):
             return m3.search(b).group(1)
         else:
-            return False    
+            return False
 
     def get_publication(self, b):
         m1 = re.compile('<DPQ>(.*)</DPQ>')
@@ -373,10 +373,10 @@ a>.*\((.*) - <span>(.*)</span>')
     def get_question(self, b):
         m1 = re.compile('<QUEST>')
         m2 = re.compile('<h3>Texte de la question</h3>\s*<p>')
-        m3  = re.compile('<h2> Texte de la question</h2>\s*.*<div class="contenutexte">\s*')
+        m3 = re.compile('<h2> Texte de la question</h2>\s*.*<div class="contenutexte">\s*')
         if m1.search(b):
             question = m1.split(b)
-            return re.split('</QUEST>', question[1])[0]          
+            return re.split('</QUEST>', question[1])[0]
         elif m2.search(b):
             question = m2.split(b)
             return re.split('</p>', question[1])[0].strip()
@@ -384,17 +384,17 @@ a>.*\((.*) - <span>(.*)</span>')
             question = m3.split(b)
             return re.split('</div>', question[1])[0].strip()
         else:
-            print (re.findall('.*de la question.*', b))
+            print(re.findall('.*de la question.*', b))
 
     def get_reponse(self, b):
         m1 = re.compile('<REP>')
         m2 = re.compile('<div class="(reponse_contenu|contenutexte)">')
         m3 = re.compile('<\S><\S>(DEBAT|Texte de la REPONSE) : </\S></\S>')
         if m1.search(b):
-            reponse = m1.split(b)          
-            return re.split('</REP>', reponse[1])[0]          
+            reponse = m1.split(b)
+            return re.split('</REP>', reponse[1])[0]
         elif m2.search(b):
-            reponse = m2.split(b) 
+            reponse = m2.split(b)
             return re.split('</div>', reponse[2])[0].strip()
         elif m3.search(b):
             reponse = m3.split(b)
@@ -405,6 +405,7 @@ a>.*\((.*) - <span>(.*)</span>')
 
 class CrawlAss(object):
     """Search in Assemblée db via website form"""
+
     def __init__(self, leg, words):
         self.dicQ = {}
         html = self.getpage(leg, words)
@@ -413,8 +414,8 @@ class CrawlAss(object):
             print("found %d questions" % len(self.dicQ))
 
     def getpage(self, leg, words):
-        #!7th legislature has only empty data
-        #!lack of accentuation before 11th
+        # !7th legislature has only empty data
+        # !lack of accentuation before 11th
         url = "http://www2.assemblee-nationale.fr/recherche/resultats_questions/index.asp?legislature"
         formData = (
             ('legislature', leg),
@@ -424,7 +425,7 @@ class CrawlAss(object):
         )
         data = urllib.parse.urlencode(formData).encode()
         with urllib.request.urlopen(url, data) as response:
-            return(response.read().decode())
+            return (response.read().decode())
 
     def getQuestions(self, html):
         for q in re.split('<tr>', html)[2:]:
@@ -437,7 +438,7 @@ class CrawlAss(object):
             date = m.search(q).group(1)
             title = re.search('<em>(.*)</em>', q).group(1)
             response = True if re.search('Réponse JO le', q) else False
-        
+
             self.dicQ[lk] = {'title': title,
                              'number': num,
                              'depute': nom,
@@ -447,16 +448,12 @@ class CrawlAss(object):
 
     def create_url(self, q):
         return "http://questions.assemblee-nationale.fr/%s.htm" % q
-        
 
-        
+
 class ParseSenat(object):
-    def __init__(self, html):            
-        d = {}
-        
-        d['title'] = self.get_title(html)       
-        d['leg'] = self.get_leg(html)
-        
+    def __init__(self, html):
+        d = {'title': self.get_title(html), 'leg': self.get_leg(html)}
+
         spl = re.split("<h2>", html)
         q = spl[1]
         d['num'] = self.get_num(q)
@@ -464,7 +461,7 @@ class ParseSenat(object):
         d['dept'], g = self.get_from(q)
         d['groupe'] = self.find_groupe(g)
         d['nature'] = self.get_nature(q)
-        
+
         d['dpq'], d['pgq'] = self.get_publication(q)
         d['support'] = "Journal officiel du Sénat"
 
@@ -475,7 +472,7 @@ class ParseSenat(object):
             d['ASREP'] = "Avec réponse"
             rep = spl[2]
             d['ministere'] = self.get_ministere(rep)
-            d['dpr'], d['pgr'] =  self.get_publication(rep)
+            d['dpr'], d['pgr'] = self.get_publication(rep)
             rep_content = re.split('<p align="justify">', rep)
             d['reponse'] = self.formate_txt(rep_content[1])
         else:
@@ -483,11 +480,11 @@ class ParseSenat(object):
             d['ministere'] = ""
 
         self.data = d
-    
+
     def formate_txt(self, txt):
-        return re.sub('<br/>\s*','\n',
-                        re.split('</p>', txt)[0]
-                    ).strip()
+        return re.sub('<br/>\s*', '\n',
+                      re.split('</p>', txt)[0]
+                      ).strip()
 
     def get_title(self, b):
         m = re.compile('<h1.*\r\n\s*(.*)\s*\r\n')
@@ -495,14 +492,14 @@ class ParseSenat(object):
             return m.search(b).group(1).strip()
         else:
             return False
-         
+
     def get_leg(self, b):
         m = re.compile('(\d*)\s*<sup>\S*</sup> l&eacute;gislature')
         if m.search(b):
             return m.search(b).group(1)
         else:
             return False
-        
+
     def get_num(self, b):
         m = re.compile('n&deg;\s*(.*)\r')
         if m.search(b):
@@ -516,7 +513,7 @@ class ParseSenat(object):
             return re.sub("\s{1,}", " ", m.search(b).group(1)).strip()
         else:
             return False
-        
+
     def get_from(self, b):
         m = re.compile('(</b>|<span class="rouge">)\s*\((.*) - (.*)\)')
         if m.search(b):
@@ -527,20 +524,20 @@ class ParseSenat(object):
     def get_nature(self, b):
         m = re.compile('\s*(.*\S)\s*n&deg;')
         if m.search(b):
-            return re.sub("(&#39;|&quot;)", "'" , m.search(b).group(1))
+            return re.sub("(&#39;|&quot;)", "'", m.search(b).group(1))
         else:
             return False
-        
+
     def get_publication(self, b):
         m1 = re.compile('dans le JO S&eacute;nat du\s*([\d/]*)\s*')
-       
+
         if m1.search(b):
-            date =  m1.search(b).group(1)
+            date = m1.search(b).group(1)
         else:
             date = False
 
         m2 = re.compile('- page\s*(\d*)')
-          
+
         if m2.search(b):
             page = m2.search(b).group(1)
         else:
@@ -555,7 +552,7 @@ class ParseSenat(object):
             minis = re.sub("ministère :", "Ministère de", minis)
             return minis
         else:
-            return False        
+            return False
 
     def find_groupe(self, g):
         groupes = {
@@ -603,38 +600,40 @@ sur la liste d'aucun groupe",
             "UC-R": "Union centriste et républicaine",
             "LaREM": "La République en Marche",
             "Les Indépendants": "Groupe Les Indépendants",
-            }
+        }
         if g in groupes.keys():
             return groupes[g]
         else:
-            print ("unknown group", g)
+            print("unknown group", g)
             return g
+
 
 class CrawlSenat(object):
     """Search in Senat db via website form"""
+
     def __init__(self, words, date_from, date_to):
         words = words.split(" ")
-        #search after 2 avril 1978. 
-        #Not digitized before 8th legislation (may 86)
+        # search after 2 avril 1978.
+        # Not digitized before 8th legislation (may 86)
 
         if (time.strptime(date_from,
-            "%d/%m/%Y") < time.strptime("02/04/1978", "%d/%m/%Y")):
+                          "%d/%m/%Y") < time.strptime("02/04/1978", "%d/%m/%Y")):
             date_from = "02/04/1978"
-            
+
         html = self.getpage(words, date_from, date_to)
         if (html):
-            self.dicQ = {}    
+            self.dicQ = {}
             if re.search("Il n'y a aucun résultat pour cette recherche.", html):
                 self.n = 0
             else:
                 self.n = int(re.search('results-number-global">\s*(\d*)\s*',
-                                   html).group(1))
+                                       html).group(1))
                 self.retrieveQ(html)
                 for offset in range(10, self.n, 10):
                     html = self.getpage(words, date_from, date_to, offset)
                     self.retrieveQ(html)
             if (VERBOSE):
-                print("found %d questions" % len(self.dicQ) )
+                print("found %d questions" % len(self.dicQ))
         else:
             if (VERBOSE):
                 print("pb getpage")
@@ -644,15 +643,15 @@ class CrawlSenat(object):
         words = [urllib.parse.quote(w) for w in words]
         url = "https://www.senat.fr/basile/rechercheQuestion.do?tri=da\
 &radio=deau&rch=qs&aff=ens\
-&unk=%s&de=%s&au=%s&off=%d"%("+".join(words), date_from, date_to, offset)
+&unk=%s&de=%s&au=%s&off=%d" % ("+".join(words), date_from, date_to, offset)
         urllib.request.urlopen(url)
 
         try:
             if (VERBOSE):
-                print (url)
+                print(url)
             with urllib.request.urlopen(url) as page:
                 charset = page.info().get_param('charset')
-                if(charset):
+                if (charset):
                     buf = page.read().decode(charset)
                 else:
                     buf = page.read().decode("latin1")
@@ -677,10 +676,10 @@ class CrawlSenat(object):
 
         for q in re.split('<div class="document document-\d*"', html)[1:]:
             lk, title = m1.search(q, re.S).group(1, 2)
-            title = re.sub("(&#39;|&quot;)", "'" , title)
+            title = re.sub("(&#39;|&quot;)", "'", title)
             if re.search("&", title):
                 if (VERBOSE):
-                    print ("&", title)
+                    print("&", title)
             num = m2.search(q).group(1)
             if m3.search(q, re.S):
                 nom = re.sub("\s{1,}", " ", m3.search(q, re.S).group(1)).strip()
@@ -698,13 +697,10 @@ class CrawlSenat(object):
     def create_url(self, q):
         return "https://www.senat.fr/basile/visio.do?id=%s" % q
 
+
 if __name__ == '__main__':
     test = CrawlAss(13, '"ronds points"')
     for q in test.dicQ.keys():
         t = QuestionParlementaire(test.create_url(q))
         t.retreive()
         t.process()
-        
-
-            
-

@@ -150,8 +150,7 @@ class ParseTxt(object):
 
         """sous-titre ?"""
 
-        article_data = {}
-        article_data['text'] = re.sub(r"HIGHLIGHT:\s*", "", article)
+        article_data = {'text': re.sub(r"HIGHLIGHT:\s*", "", article)}
 
         metas = re.split(r"\r?\n\r\n\s*", head)
         article_data["media"] = metas[1]

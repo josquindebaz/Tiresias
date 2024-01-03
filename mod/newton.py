@@ -107,9 +107,7 @@ class parseNewton(object):
         return text
 
     def process(self, content):
-        article_data = {}
-
-        article_data["title"] = content.find('a').text.strip()
+        article_data = {"title": content.find('a').text.strip()}
 
         for meta_data in content.find_all(class_="metadata-item"):
             if re.search(r', Datum:\s\d', meta_data.text):
