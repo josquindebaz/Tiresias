@@ -11,7 +11,7 @@ import os
 
 try:
     from cleaning import Cleaner
-except:
+except ModuleNotFoundError:
     from mod.cleaning import Cleaner
 
 

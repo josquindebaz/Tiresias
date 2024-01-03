@@ -12,7 +12,7 @@ import datetime
 
 try:
     import cleaning
-except:
+except ModuleNotFoundError:
     from mod.cleaning import Cleaner
 
 

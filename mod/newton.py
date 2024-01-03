@@ -17,7 +17,7 @@ from bs4 import BeautifulSoup
 
 try:
     from cleaning import Cleaner
-except:
+except ModuleNotFoundError:
     from mod.cleaning import Cleaner
 
 
