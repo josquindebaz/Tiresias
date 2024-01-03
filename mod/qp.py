@@ -41,9 +41,8 @@ class QuestionParlementaire(object):
                 self.D = ParseSenat(buf).data
 
     def ctx_content(self, r, title, ref):
-        c = ["fileCtx0005"]
+        c = ["fileCtx0005", title]
         # title
-        c.append(title)
         # author
         if r:
             c.append(self.D['ministere'])
