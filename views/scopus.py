@@ -17,7 +17,7 @@ class ViewScopus:
         fr1 = tk.Frame(self.parent)
         fr1.pack(anchor=tk.W)
 
-        bn_csv = tk.Button(fr1, text="Select a csv file",command=self.sel_file)
+        bn_csv = tk.Button(fr1, text="Select a csv file", command=self.sel_file)
         bn_csv.pack(side=tk.RIGHT)
 
         self.choosen_file = tk.StringVar()

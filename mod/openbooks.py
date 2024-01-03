@@ -7,11 +7,13 @@ Version 3, 29 June 2007
 08/12/2020
 """
 
-import urllib.request, urllib.parse
-from bs4 import BeautifulSoup
-import re
-import os
 import datetime
+import os
+import re
+import urllib.parse
+import urllib.request
+
+from bs4 import BeautifulSoup
 
 try:
     from cleaning import Cleaner
@@ -86,8 +88,7 @@ def create_ctx(path, metadata):
         metadata['ref'],
         "",
         "",
-        "Processed by Tiresias on %s" \
-        % datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+        f"Processed by Tiresias on {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
         "", "n", "n", ""
     ]
     ctx = "\r\n".join(ctx)
@@ -167,8 +168,8 @@ def traite_url(url, save_dir="."):
 
 if __name__ == "__main__":
     # url = "https://books.openedition.org/igpde/6841"
-    ##    url = "https://books.openedition.org/igpde/6486"
-    ##    url = "http://books.openedition.org/igpde/6591"
+    #    url = "https://books.openedition.org/igpde/6486"
+    #    url = "http://books.openedition.org/igpde/6591"
     url = "https://books.openedition.org/editionsmsh/12006"
     # url = "https://books.openedition.org/editionsmsh/12030"
     # url = "https://books.openedition.org/enseditions/12892"

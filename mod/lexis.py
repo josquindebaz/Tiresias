@@ -136,18 +136,17 @@ class ParseTxt(object):
         elif re.search("\r\nLOAD-DATE:.*\r\n", article):
             article, foot = re.split("LOAD-DATE:", article)
 
-        """Internationaliser ?
-        def traite_article(self,article):
-            article = re.split('\r\nDATE-CHARGEMENT:',article)[0]
-            if re.search("ORIGINE-DEPECHE:",article):
-                    en_tete,article = re.split('\r\nORIGINE-DEPECHE: .*\r\n',article,1)
-            elif re.search("\r\nLONGUEUR: \d* \S*\r\n",article):
-                    en_tete,article = re.split('\r\n: \d* \S*\r\n',article,1)
-            elif re.search('\r\nRUBRIQUE: .*\r\n',article):
-                    en_tete,article = re.split('\r\nRUBRIQUE: .*\r\n',article,1)
-        """
+        # Internationaliser ?
+        # def traite_article(self,article):
+        #     article = re.split('\r\nDATE-CHARGEMENT:',article)[0]
+        #     if re.search("ORIGINE-DEPECHE:",article):
+        #             en_tete,article = re.split('\r\nORIGINE-DEPECHE: .*\r\n',article,1)
+        #     elif re.search("\r\nLONGUEUR: \d* \S*\r\n",article):
+        #             en_tete,article = re.split('\r\n: \d* \S*\r\n',article,1)
+        #     elif re.search('\r\nRUBRIQUE: .*\r\n',article):
+        #             en_tete,article = re.split('\r\nRUBRIQUE: .*\r\n',article,1)
 
-        """sous-titre ?"""
+        # sous-titre ?
 
         article_data = {'text': re.sub(r"HIGHLIGHT:\s*", "", article)}
 
@@ -191,8 +190,7 @@ class ParseTxt(object):
                 "",
                 article['source_type'],
                 "", "", "",
-                "Processed by Tiresias on %s" \
-                % datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                f"Processed by Tiresias on {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
                 "", "n", "n", ""
             ]
             ctx = "\r\n".join(ctx)

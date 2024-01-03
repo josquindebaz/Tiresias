@@ -61,7 +61,7 @@ def ctx_prospero(csvfile, save_dir=".",
 
         # remove ©
         if rm_copyright:
-            papers[eid][3] = re.sub(" (©|Copyright),? \d{4},? .*$", "", papers[eid][3])
+            papers[eid][3] = re.sub(r" (©|Copyright),? \d{4},? .*$", "", papers[eid][3])
 
             # put text content
         txt_content += papers[eid][3]
@@ -85,8 +85,7 @@ def ctx_prospero(csvfile, save_dir=".",
             "",
             "",
             "", "", "",
-            "From Scopus by Tiresias on %s" \
-            % datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            f"From Scopus by Tiresias on {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
             "", "n", "n", ""
         ]
         ctx = "\r\n".join(ctx)
@@ -108,5 +107,4 @@ if __name__ == "__main__":
                                                    author_keywords=True,
                                                    index_keywords=True,
                                                    rm_copyright=True)
-            print("Created %d file(s), skipped %d articles with no abstract" \
-                  % (file_count, no_abstract))
+            print(f"Created {file_count:d} file(s), skipped {no_abstract:d} articles with no abstract")
