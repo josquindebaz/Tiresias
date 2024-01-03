@@ -48,7 +48,7 @@ def format_date(date):
         "Mai": "05",
         "Juni": "06",
         "Juli": "07",
-        "August": "08",
+        # "August": "08", # duplicated
         "Oktober": "10",
         "Dezember": "12"
     }
