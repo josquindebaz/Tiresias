@@ -12,7 +12,7 @@ from mod.HeatmapDataProcessor import parse_data, HeatmapDataProcessor
 from mod.HeatmapSvgWriter import HeatmapSvgWriter
 
 
-class ViewPaster():
+class ViewPaster:
     """Paste window"""
 
     def __init__(self, parent):
@@ -56,7 +56,7 @@ class ViewPaster():
         if data != "\n":
             filename = filedialog.asksaveasfilename(
                 title="Save as",
-                initialdir="C:\corpus",
+                initialdir=r"C:\corpus",
                 initialfile="MonthHeatmap.svg",
                 filetypes=[("svg Files", "*.svg")])
 
@@ -67,4 +67,4 @@ class ViewPaster():
 
             with open(filename, 'wb') as pointer:
                 pointer.write(svg.encode('utf-8'))
-            webbrowser.open(filename, 0, 1)
+            webbrowser.open(filename, 0, True)

@@ -30,7 +30,7 @@ def quartiles(values):
     return first, median, third
 
 
-class Mapper():
+class Mapper:
     """take a list with department[\t]value[\r\n] to produce a map"""
 
     def __init__(self, content, pathfile="data/departement_path.tsv"):
@@ -170,7 +170,7 @@ class Mapper():
             mapcontent += "</title></path>\n"
 
         height = 520
-        for dpt in set(self.dpt_values.keys()).difference( \
+        for dpt in set(self.dpt_values.keys()).difference(
                 set(self.department_paths.keys())):
             mapcontent += """
 <text x="120" y="%d" font-family="sans-serif" font-size="12">%s:\
@@ -187,7 +187,7 @@ class Mapper():
         color = "rgb(1, 144, 3)"
 
         max_size = max(self.dpt_values.values())
-        s_max_v = max_size ** 2
+        # s_max_v = max_size ** 2
 
         if max_size > 64:
             r_max = 64
@@ -254,7 +254,7 @@ class Mapper():
 
         # Dpt with no path
         height = 520
-        for dpt in set(self.dpt_values.keys()).difference( \
+        for dpt in set(self.dpt_values.keys()).difference(
                 set(self.department_paths.keys())):
             mapcontent += """
 <text x="120" y="%d" font-family="sans-serif" font-size="12">%s:\

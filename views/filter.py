@@ -21,7 +21,7 @@ class ViewFilter:
         self.list_txt_c = []
         self.prc = []
 
-        corpus_path_windows = "C:\corpus"
+        corpus_path_windows = r"C:\corpus"
         try:
             home = str(Path.home())
             corpus_path_unix = "%s/.wine/drive_c/corpus" % home

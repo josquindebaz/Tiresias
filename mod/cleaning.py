@@ -23,7 +23,7 @@ def list_files(rep='.', exts=('.txt', '.TXT'), recursive=True, slash=False, repl
     return txt_files
 
 
-class Cleaner():
+class Cleaner:
     """Convert bytes and clean string"""
 
     def __init__(self, content, options="uasdhtpcef"):
@@ -191,7 +191,6 @@ class Cleaner():
             "euros": ["&#8364;",
                       "&euro;",
                       "&#8364"],
-            "e": ["&#7497;"],
             "à": ["a&#768;", "&#257;"],
             "À": ["A&#768;"],
             "é": ["e&#769;",
@@ -212,7 +211,7 @@ class Cleaner():
             ":(": ["&#128542;"],
             "µ": ["&#956"],
             "d": ["&#948;"],
-            "e": ["&#279;"],
+            "e": ["&#279;", "&#7497;"],
             "@": ["&#8294;"],
             "phi": ["&#966;"],
             "°": ["&#730;"],
@@ -229,7 +228,7 @@ class Cleaner():
 
     def unescape(self):
         """html entities"""
-        log = ""
+
         temp = html.unescape(self.content)
         try:
             bytes(temp, 'latin-1')
@@ -327,7 +326,7 @@ class Cleaner():
 
     def footnotes(self):
         """Separate footnote calls"""
-        motif = re.compile(r'([A-Za-zé]{2,})(\d{1,})(\.|\(|,) ')
+        motif = re.compile(r'([A-Za-zé]{2,})(\d+)([.(,]) ')
         number = len(motif.findall(self.content))
         if number:
             self.content = motif.sub("\\1 \\2 \\3 ", self.content)

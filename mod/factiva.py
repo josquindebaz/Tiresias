@@ -130,8 +130,8 @@ articleParagraph">', article)[1:]:
 
     return result
 
-class ParseHtm():
-    "from htm of factiva to Prospero"
+class ParseHtm:
+    """from htm of factiva to Prospero"""
     def __init__(self, fname):
         self.articles = {}
         self.unknowns = []

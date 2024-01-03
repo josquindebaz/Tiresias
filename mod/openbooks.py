@@ -92,7 +92,7 @@ def create_ctx(path, metadata):
     ]
     ctx = "\r\n".join(ctx)
     ctx_cleaner = Cleaner(ctx.encode('utf-8'))
-    ctx = ctx = ctx_cleaner.content.encode('latin-1', 'xmlcharrefreplace')  # to bytes
+    ctx = ctx_cleaner.content.encode('latin-1', 'xmlcharrefreplace')  # to bytes
     with open(path, 'wb') as file:
         file.write(ctx)
 
@@ -140,15 +140,8 @@ def get_citing(soup):
 
 
 def get_metadata(soup):
-    metadata = {"authors": None,
-                "title": None,
-                "date": None,
-                "ref": None}
-    metadata["authors"] = get_authors(soup)
-    metadata["title"] = soup.find("meta", {"name": "DC.title"})["content"].strip()
-    metadata["date"] = soup.find("meta", {"name": "DC.date"})["content"]
-    metadata["ref"] = get_citing(soup)
-    return metadata
+    return {"authors": get_authors(soup), "title": soup.find("meta", {"name": "DC.title"})["content"].strip(),
+            "date": soup.find("meta", {"name": "DC.date"})["content"], "ref": get_citing(soup)}
 
 
 def traite_url(url, save_dir="."):

@@ -40,7 +40,7 @@ def file_name(date, prefix, save_dir):
     return name
 
 
-class parseNewton(object):
+class ParseNewton(object):
     def __init__(self, filename):
         self.articles = {}
         self.unknowns = []
@@ -107,9 +107,7 @@ class parseNewton(object):
         return text
 
     def process(self, content):
-        article_data = {}
-
-        article_data["title"] = content.find('a').text.strip()
+        article_data = {"title": content.find('a').text.strip()}
 
         for meta_data in content.find_all(class_="metadata-item"):
             if re.search(r', Datum:\s\d', meta_data.text):
@@ -229,7 +227,7 @@ if __name__ == '__main__':
     SUPPORTS_FILE = "../data/support.publi"
     for filename in glob.glob("*.html"):
         print("Processing " + filename)
-        parse = parseNewton(filename)
+        parse = ParseNewton(filename)
         parse.get_supports(SUPPORTS_FILE)
         print("%d unknown(s) source(s)" % len(parse.unknowns))
         for unknown in parse.unknowns:

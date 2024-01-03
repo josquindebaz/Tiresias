@@ -177,7 +177,7 @@ articleParagraph">', article)[1:]
 
 
 class ParseCsv:
-    "from htm of csv to Prospero"
+    """from htm of csv to Prospero"""
 
     def __init__(self, fname):
         self.content = pd.read_csv(fname, sep=";", encoding="utf-8")
@@ -256,7 +256,7 @@ class ParseCsv:
 
 if __name__ == "__main__":
     SUPPORTS_FILE = "support.publi"
-    for filename in glob.glob(["*.csv", "*.csv"]):
+    for filename in glob.glob("*.csv"):
         print(filename)
         run = ParseCsv(filename)
         # print("%s: found %d article(s)"%(filename, len(run.content)))

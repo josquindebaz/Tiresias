@@ -6,7 +6,7 @@ from mod.europresse import *
 from utils.supportpublimanager import SupportPubliManager
 
 
-class ViewEuropresse():
+class ViewEuropresse:
     def __init__(self, parent):
         self.articles_list = None
         self.Supports = None
@@ -148,10 +148,10 @@ class ViewEuropresse():
     def select_all_found_articles(self, _):
         self.art_list.select_set(0, "end")
 
-    def memo_unknown(self, callback):
+    def memo_unknown(self, _):
         self.memory_selected_unknown = self.unknown_list.curselection()
 
-    def combobox_selector(self, callback):
+    def combobox_selector(self, _):
         self.reset_supports()
         index = self.CbS.current()
         if index:

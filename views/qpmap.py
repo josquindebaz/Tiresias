@@ -11,8 +11,10 @@ from mod.qpmap import Mapper
 
 import webbrowser
 
-class ViewPaster():
+
+class ViewPaster:
     """Paste window"""
+
     def __init__(self, parent):
         self.parent = parent
         windowtitle = tk.Label(parent,
@@ -32,7 +34,6 @@ class ViewPaster():
         self.data_list = ScrolledText(fr1)
         self.data_list.pack(fill=tk.X)
 
-
         fr2 = tk.Frame(parent)
         fr2.pack(anchor=tk.W, fill=tk.X)
         bn_paste = tk.Button(fr2,
@@ -41,7 +42,7 @@ class ViewPaster():
         bn_reset = tk.Button(fr2,
                              text="Reset", command=self.reset)
         bn_reset.pack(side=tk.LEFT)
-        
+
         bn_process = tk.Button(fr2,
                                text="Draw atlas", command=self.process)
         bn_process.pack(side=tk.LEFT)
@@ -70,7 +71,7 @@ class ViewPaster():
                                    value="graduated")
         r4_method.pack()
         self.method.set("cumulated_fourth")
-         
+
     def paste_list(self):
         self.reset()
         self.data_list.insert("end", self.data_list.clipboard_get())
@@ -80,21 +81,20 @@ class ViewPaster():
 
     def process(self):
         data = self.data_list.get(1.0, "end")
-        if (data != "\n"): 
-            filename = filedialog.asksaveasfilename(\
+        if data != "\n":
+            filename = filedialog.asksaveasfilename(
                 title="Save as",
-                initialdir="C:\corpus",
+                initialdir=r"C:\corpus",
                 initialfile="QpAtlas.svg",
-                filetypes = [("svg Files","*.svg")])
+                filetypes=[("svg Files", "*.svg")])
 
-            PROCESS = Mapper(data)
+            process = Mapper(data)
             method = self.method.get()
             if method == "graduated":
-                atlas = PROCESS.draw_map_graduated()
+                atlas = process.draw_map_graduated()
             else:
-                PROCESS.make_legend(method=method)
-                atlas = PROCESS.draw_map()
+                process.make_legend(method=method)
+                atlas = process.draw_map()
             with open(filename, 'wb') as pointer:
                 pointer.write(atlas.encode('utf-8'))
-            webbrowser.open(filename, 0, 1)
-
+            webbrowser.open(filename, 0, True)

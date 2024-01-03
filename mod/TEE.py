@@ -112,6 +112,7 @@ class ProcessArticle(object):
 
 class IndexNewArticles(object):
     def __init__(self):
+        self.soup = None
         to_do = "C:\\corpus\\EnergiCorpus\\FR\\TEE\\article_list.txt"
         url = "https://www.transitionsenergies.com"
         donepath = "C:\\corpus\\EnergiCorpus\\FR\\TEE\\article_retreived.txt"
@@ -164,6 +165,7 @@ class IndexNewArticles(object):
 
 class IndexArticles(object):
     def __init__(self):
+        self.soup = None
         dest = "C:\\corpus\\EnergiCorpus\\FR\\TEE\\article_list.txt"
         url = "https://www.transitionsenergies.com"
 

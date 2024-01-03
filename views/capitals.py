@@ -265,14 +265,14 @@ class ViewCap:
             aggregate.update(set(motif.findall(content)))
         self.show_groups(list(aggregate))
 
-    def found_list_clic(self, something):
+    def found_list_clic(self, _):
         select = self.found_list.curselection()
         self.selected_list.insert(tk.END,
                                   self.found_list.get(select))
         sort_listbox(self.selected_list)
         self.found_list.delete(select)
 
-    def selected_list_clic(self, something):
+    def selected_list_clic(self, _):
         select = self.selected_list.curselection()
         self.found_list.insert(tk.END,
                                self.selected_list.get(select))
