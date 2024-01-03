@@ -2,20 +2,22 @@
 # Author Josquin Debaz
 # GPL 3
 
-import glob
-import re
-import urllib.request, urllib.parse
-import os
 import datetime
-import time
-
+import os
+import re
 import ssl
+import time
+import urllib.parse
+import urllib.request
+
 ssl._create_default_https_context = ssl._create_unverified_context
 
 VERBOSE = 0
 
 class QuestionParlementaire(object):
     def __init__(self, url):
+        self.final = None
+        self.D = None
         self.url = url
 
     def retreive(self):

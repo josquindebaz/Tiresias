@@ -12,6 +12,9 @@ from mod.cleaning import Cleaner
 
 class ViewQP():
     def __init__(self, parent):
+        self.AssListQ = None
+        self.SenatListQ = None
+        self.dicQ = None
         self.parent = parent
         WindowTitle = tk.Label(self.parent, text="Questions parlementaires",
                                font=("Helvetica", 12, "bold"))
