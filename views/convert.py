@@ -30,7 +30,7 @@ class ViewConvert:
         fr2 = tk.Frame(self.parent)
         fr2.pack(anchor=tk.W)
         bn_dir = tk.Button(fr2, text="Select directory for Prospero Files",
-                          command=self.sel_dir)
+                           command=self.sel_dir)
         bn_dir.pack(side=tk.RIGHT)
 
         self.choosenDir = tk.StringVar()
@@ -39,21 +39,21 @@ class ViewConvert:
         dir_entry.pack()
 
         # Frame 3
-        Fr3 = tk.Frame(self.parent)
-        Fr3.pack(anchor=tk.W)
+        fr3 = tk.Frame(self.parent)
+        fr3.pack(anchor=tk.W)
         self.CleaningVal = tk.BooleanVar()
-        Bn_Cleaning = tk.Checkbutton(Fr3,
+        bn_cleaning = tk.Checkbutton(fr3,
                                      text="clean texts",
                                      variable=self.CleaningVal)
-        Bn_Cleaning.select()
-        Bn_Cleaning.pack(side=tk.LEFT)
-        bn_process = tk.Button(Fr3, text="Process", command=self.process)
+        bn_cleaning.select()
+        bn_cleaning.pack(side=tk.LEFT)
+        bn_process = tk.Button(fr3, text="Process", command=self.process)
         bn_process.pack(side=tk.LEFT)
 
         # Frame 4
-        Fr4 = tk.Frame(self.parent)
-        Fr4.pack()
-        self.log = ScrolledText(Fr4, height=10, bg="black", fg="orange")
+        fr4 = tk.Frame(self.parent)
+        fr4.pack()
+        self.log = ScrolledText(fr4, height=10, bg="black", fg="orange")
         self.log.pack()
 
     def sel_file(self):

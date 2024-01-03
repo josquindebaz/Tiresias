@@ -17,7 +17,7 @@ class ViewQP:
         self.dicQ = None
         self.parent = parent
         window_title = tk.Label(self.parent, text="Questions parlementaires",
-                               font=("Helvetica", 12, "bold"))
+                                font=("Helvetica", 12, "bold"))
         window_title.pack(fill=tk.X)
 
         # Frame keywords
@@ -105,7 +105,7 @@ class ViewQP:
         fr3.pack()
 
         bn_dir = tk.Button(fr3, text=u"Corpus File Directory",
-                          command=self.sel_dir)
+                           command=self.sel_dir)
         bn_dir.pack(side=tk.LEFT, anchor="n")
         self.choosenDir = tk.StringVar()
         dir_entry = tk.Entry(fr3, width=52,
@@ -132,7 +132,7 @@ class ViewQP:
     def sel_dir(self):
         self.choosenDir.set("")
         dir = filedialog.askdirectory(title=u"Choose directory",
-                                      initialdir="C:\corpus")
+                                      initialdir=r"C:\corpus")
         self.choosenDir.set(dir)
 
     def search(self):
@@ -155,8 +155,7 @@ class ViewQP:
 
     def search_senat(self, kw, f, t):
         self.log.insert(1.0,
-                        "Searching for [%s] in Sénat DB from %s to %s)" \
-                        % (kw, f, t))
+                        f"Searching for [{kw}] in Sénat DB from {f} to {t})")
         self.parent.update()
         senat_crawler = CrawlSenat(kw, f, t)
         self.log.insert(1.0, "Found %s question(s)\n" % len(senat_crawler.dicQ))
@@ -181,8 +180,7 @@ class ViewQP:
         self.AssListQ = []
         for leg in legs:
             self.log.insert(1.0,
-                            "Searching for [%s] in Assemblée DB for legislation %s\n" \
-                            % (kw, leg))
+                            f"Searching for [{kw}] in Assemblée DB for legislation {leg}\n")
             self.parent.update()
             ass_crawler = CrawlAss(leg, kw)
             self.log.insert(1.0, "Found %s question(s)\n" % len(ass_crawler.dicQ))

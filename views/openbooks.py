@@ -10,14 +10,14 @@ class ViewOpenbooks:
     def __init__(self, parent):
         self.parent = parent
         window_title = tk.Label(self.parent, text="from Openbooks to Prospero",
-                               font=("Helvetica", 12, "bold"))
+                                font=("Helvetica", 12, "bold"))
         window_title.pack(fill=tk.X)
 
         # Frame 1
         fr1 = tk.Frame(self.parent)
         fr1.pack(anchor=tk.W)
         bn_dir = tk.Button(fr1, text="Select directory for Prospero Files",
-                          command=self.sel_dir)
+                           command=self.sel_dir)
         bn_dir.pack(side=tk.RIGHT)
 
         self.choosenDir = tk.StringVar()
@@ -40,12 +40,12 @@ class ViewOpenbooks:
         # Frame 3
         fr3 = tk.Frame(self.parent)
         fr3.pack(anchor=tk.W)
-        ##        self.CleaningVal= tk.BooleanVar()
-        ##        Bn_Cleaning = tk.Checkbutton(Fr3,
-        ##                        text="clean texts",
-        ##                        variable=self.CleaningVal)
-        ##        Bn_Cleaning.select()
-        ##        Bn_Cleaning.pack(side=tk.LEFT)
+        #        self.CleaningVal= tk.BooleanVar()
+        #        Bn_Cleaning = tk.Checkbutton(Fr3,
+        #                        text="clean texts",
+        #                        variable=self.CleaningVal)
+        #        Bn_Cleaning.select()
+        #        Bn_Cleaning.pack(side=tk.LEFT)
         bn_process = tk.Button(fr3, text="Process", command=self.process)
         bn_process.pack(side=tk.LEFT)
 
@@ -75,15 +75,15 @@ class ViewOpenbooks:
             self.log.insert(1.0, "Processing %s to %s\n" % (url, save_dir))
             self.parent.update()
             traite_url(url, save_dir)
-            ##            self.log.insert(1.0,
-            ##                            "%s: found %d article(s)\n"%(filename,
-            ##                                                       len(parse.content)))
-            ##            parse.get_supports("data/support.publi")
-            ##            self.log.insert(1.0,
-            ##                            "%d unknown(s) source(s)\n" %len(parse.unknowns))
-            ##            for unknown in parse.unknowns:
-            ##                self.log.insert(1.0, "unknown: %s\n" % unknown)
-            ##            parse.write_prospero_files(save_dir, self.CleaningVal.get())
+            #            self.log.insert(1.0,
+            #                            "%s: found %d article(s)\n"%(filename,
+            #                                                       len(parse.content)))
+            #            parse.get_supports("data/support.publi")
+            #            self.log.insert(1.0,
+            #                            "%d unknown(s) source(s)\n" %len(parse.unknowns))
+            #            for unknown in parse.unknowns:
+            #                self.log.insert(1.0, "unknown: %s\n" % unknown)
+            #            parse.write_prospero_files(save_dir, self.CleaningVal.get())
             self.log.insert(1.0, "done\n")
             self.parent.update()
         else:

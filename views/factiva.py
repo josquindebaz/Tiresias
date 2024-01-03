@@ -30,7 +30,7 @@ class ViewFactiva:
         fr2 = tk.Frame(self.parent)
         fr2.pack(anchor=tk.W)
         bn_dir = tk.Button(fr2, text="Select directory for Prospero Files",
-                          command=self.sel_dir)
+                           command=self.sel_dir)
         bn_dir.pack(side=tk.RIGHT)
 
         self.choosenDir = tk.StringVar()

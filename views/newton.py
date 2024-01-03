@@ -10,8 +10,8 @@ class ViewNewton:
     def __init__(self, parent):
         self.parent = parent
         window_title = tk.Label(self.parent,
-                               text="html from Newton to Prospero",
-                               font=("Helvetica", 12, "bold"))
+                                text="html from Newton to Prospero",
+                                font=("Helvetica", 12, "bold"))
         window_title.pack(fill=tk.X)
 
         # Frame 1
@@ -31,7 +31,7 @@ class ViewNewton:
         fr2 = tk.Frame(self.parent)
         fr2.pack(anchor=tk.W)
         bn_dir = tk.Button(fr2, text="Select directory for Prospero Files",
-                          command=self.sel_dir)
+                           command=self.sel_dir)
         bn_dir.pack(side=tk.RIGHT)
 
         self.choosenDir = tk.StringVar()

@@ -10,15 +10,14 @@ class ViewScopus:
     def __init__(self, parent):
         self.parent = parent
         window_title = tk.Label(self.parent, text="csv from Scopus to Prospero",
-                               font=("Helvetica", 12, "bold"))
+                                font=("Helvetica", 12, "bold"))
         window_title.pack(fill=tk.X)
 
         # Frame 1
         fr1 = tk.Frame(self.parent)
         fr1.pack(anchor=tk.W)
 
-        bn_csv = tk.Button(fr1, text="Select a csv file",
-                           command=self.sel_file)
+        bn_csv = tk.Button(fr1, text="Select a csv file",command=self.sel_file)
         bn_csv.pack(side=tk.RIGHT)
 
         self.choosen_file = tk.StringVar()
@@ -29,8 +28,7 @@ class ViewScopus:
         # Frame 2
         fr2 = tk.Frame(self.parent)
         fr2.pack(anchor=tk.W)
-        bn_dir = tk.Button(fr2, text="Select directory for Prospero Files",
-                          command=self.sel_dir)
+        bn_dir = tk.Button(fr2, text="Select directory for Prospero Files", command=self.sel_dir)
         bn_dir.pack(side=tk.RIGHT)
 
         self.choosenDir = tk.StringVar()
