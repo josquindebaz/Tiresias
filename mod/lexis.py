@@ -89,8 +89,7 @@ class ParseTxt(object):
         with open(filename, 'rb') as file:
             buf = file.read()
             buf = buf.decode('utf-8')  # byte to str
-        cut_articles = re.split("(.*Do[kc]ument \d{1,} (von|de|of) \d{1,}.*)",
-                                buf)[1:]
+        cut_articles = re.split(r"(.*Do[kc]ument \d+ (von|de|of) \d+.*)", buf)[1:]
         while cut_articles:
             self.count += 1
             cut_articles.pop(0)  # number

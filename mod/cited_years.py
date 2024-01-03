@@ -24,9 +24,8 @@ months = [
 
 def find_years(content):
     years = {}
-    year_pattern = re.compile(r'\s{1,}([12]\d{3})\.?\t(\d{1,})')
-    month_pattern = re.compile(r'(%s)\s{1,}(\d{2})\.?\t(\d{1,})' \
-                               % "|".join(months), re.IGNORECASE)
+    year_pattern = re.compile(r'\s+([12]\d{3})\.?\t(\d+)')
+    month_pattern = re.compile(r'(%s)\s+(\d{2})\.?\t(\d+)' % "|".join(months), re.IGNORECASE)
     for index, line in enumerate(re.split("\r?\n", content)):
         if year_pattern.search(line):
             # take the forms in 1XXX and 20XX

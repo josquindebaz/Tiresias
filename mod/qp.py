@@ -340,8 +340,8 @@ a>.*\((.*) - <span>(.*)</span>')
             return dpq, pgq
         elif m2.search(b):
             spl = re.split("</div>", m2.split(b)[1])[0]
-            dpq = re.search("(\d{2}/\d{2}/\d{4})", spl).group(1)
-            m_pgq = re.compile('page.*>(\d{1,})<')
+            dpq = re.search(r"(\d{2}/\d{2}/\d{4})", spl).group(1)
+            m_pgq = re.compile(r'page.*>(\d+)<')
             if m_pgq.search(spl):
                 pgq = m_pgq.search(spl).group(1)
             else:
@@ -351,7 +351,7 @@ a>.*\((.*) - <span>(.*)</span>')
             return False, False
 
     def get_publication_rep(self, b):
-        m1 = re.compile('<DPR>(\d{2}/\d{2}/\d{4})</DPR>')
+        m1 = re.compile(r'<DPR>(\d{2}/\d{2}/\d{4})</DPR>')
         m2 = re.compile("Réponse publiée au JO le")
         if m1.search(b):
             dpq = m1.search(b).group(1)
@@ -359,8 +359,8 @@ a>.*\((.*) - <span>(.*)</span>')
             return dpq, pgq
         elif m2.search(b):
             spl = re.split("</div>", m2.split(b)[1])[0]
-            dpr = re.search("(\d{2}/\d{2}/\d{4})", spl).group(1)
-            m_pgr = re.compile('page.*>(\d{1,})<')
+            dpr = re.search(r"(\d{2}/\d{2}/\d{4})", spl).group(1)
+            m_pgr = re.compile(r'page.*>(\d+)<')
             if m_pgr.search(spl):
                 pgr = m_pgr.search(spl).group(1)
             else:
@@ -371,8 +371,8 @@ a>.*\((.*) - <span>(.*)</span>')
 
     def get_question(self, b):
         m1 = re.compile('<QUEST>')
-        m2 = re.compile('<h3>Texte de la question</h3>\s*<p>')
-        m3 = re.compile('<h2> Texte de la question</h2>\s*.*<div class="contenutexte">\s*')
+        m2 = re.compile(r'<h3>Texte de la question</h3>\s*<p>')
+        m3 = re.compile(r'<h2> Texte de la question</h2>\s*.*<div class="contenutexte">\s*')
         if m1.search(b):
             question = m1.split(b)
             return re.split('</QUEST>', question[1])[0]
