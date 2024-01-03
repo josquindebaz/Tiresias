@@ -67,4 +67,4 @@ class ViewPaster():
 
             with open(filename, 'wb') as pointer:
                 pointer.write(svg.encode('utf-8'))
-            webbrowser.open(filename, 0, 1)
+            webbrowser.open(filename, 0, True)

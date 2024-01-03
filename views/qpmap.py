@@ -96,5 +96,5 @@ class ViewPaster():
                 atlas = PROCESS.draw_map()
             with open(filename, 'wb') as pointer:
                 pointer.write(atlas.encode('utf-8'))
-            webbrowser.open(filename, 0, 1)
+            webbrowser.open(filename, 0, True)
 
