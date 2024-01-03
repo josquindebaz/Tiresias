@@ -658,17 +658,15 @@ class CrawlSenat(object):
         except:
             return False
 
-        """
-        aff=ens afficher ensemble avec et sans réponse (sep sinon)
-        off = 0 = page 1 ; 10 = page 2
-        rch=qs question simple
-        de date départ yyyymmjj
-        au date arrivée yyyymmjj
-        radio=deau
-        tri : p pertinence, dd date descendante, da date ascendante
-        _c=MC1+MC2
-        """
-        
+        # aff=ens afficher ensemble avec et sans réponse (sep sinon)
+        # off = 0 = page 1 ; 10 = page 2
+        # rch=qs question simple
+        # de date départ yyyymmjj
+        # au date arrivée yyyymmjj
+        # radio=deau
+        # tri : p pertinence, dd date descendante, da date ascendante
+        # _c=MC1+MC2
+
     def retrieveQ(self, html):
         m1 = re.compile('visio.do\?id=(.*)&amp;idtable=.*\r\n\s*(.*)\r\n')
         m2 = re.compile('Question n&deg; (\S*)')
