@@ -140,7 +140,7 @@ class ViewReplacer:
             self.config = {'WR': {'H': {}}}
         exists = [d for d, v in self.config['WR']['H'].items()
                   if (v == value)]
-        if (exists):
+        if exists:
             del (self.config['WR']['H'][exists[0]])
         self.config['WR']['H'][str(datetime.datetime.now())] = value
         try:
@@ -189,7 +189,7 @@ class ViewReplacer:
                         buf = f.read()
                     Processer.set_content(buf)
                     Processer.process()
-                    if (Processer.log):
+                    if Processer.log:
                         if not self.test.get():
                             buf = bytes(Processer.content, 'latin-1')
                             with open(txt, 'wb') as f:

@@ -12,7 +12,7 @@ from mod.HeatmapDataProcessor import parse_data, HeatmapDataProcessor
 from mod.HeatmapSvgWriter import HeatmapSvgWriter
 
 
-class ViewPaster():
+class ViewPaster:
     """Paste window"""
 
     def __init__(self, parent):

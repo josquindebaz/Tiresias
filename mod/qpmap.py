@@ -30,7 +30,7 @@ def quartiles(values):
     return first, median, third
 
 
-class Mapper():
+class Mapper:
     """take a list with department[\t]value[\r\n] to produce a map"""
 
     def __init__(self, content, pathfile="data/departement_path.tsv"):

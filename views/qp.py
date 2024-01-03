@@ -142,7 +142,7 @@ class ViewQP():
         AssLegs = self.Ass_legs_list.curselection()
         AssLegs = [str(l + 7) for l in AssLegs]
 
-        if (kw):
+        if kw:
             self.dicQ = {}
             self.Senat_list.delete(0, 'end')
             self.Ass_list.delete(0, 'end')

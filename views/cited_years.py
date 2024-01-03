@@ -1,11 +1,10 @@
 import tkinter as tk
-from tkinter import ttk
-from tkinter import filedialog
 from tkinter.scrolledtext import ScrolledText
 
 from mod.cited_years import find_years
 
-class ViewYears():
+
+class ViewYears:
     def __init__(self, parent):
         self.parent = parent
         WindowTitle = tk.Label(self.parent,
@@ -13,7 +12,7 @@ class ViewYears():
                                font=("Helvetica", 12, "bold"))
         WindowTitle.pack(fill=tk.X)
 
-        #Frame 1
+        # Frame 1
         Fr1 = tk.Frame(self.parent)
         Fr1.pack(anchor=tk.W)
         welcome = tk.Message(Fr1, bg="white", width=800,
@@ -24,14 +23,14 @@ class ViewYears():
 then click on calculate.\nCopy the transformed data from the right column and \
 paste it in your favorite spreadsheet")
         welcome.pack()
-        
-        #Frame 2
+
+        # Frame 2
         Fr2 = tk.Frame(self.parent)
         Fr2.pack(anchor=tk.W)
         FrPane = tk.PanedWindow(Fr2)
         FrPane.pack(anchor=tk.W)
 
-        #Frame left
+        # Frame left
         FrPaste_list = tk.Frame(FrPane)
         FrPaste_list.pack(side=tk.LEFT, anchor=tk.N)
         self.paste_list = ScrolledText(FrPaste_list, width=50)
@@ -39,19 +38,19 @@ paste it in your favorite spreadsheet")
         bn_paste = tk.Button(FrPaste_list, text="Paste",
                              command=self.paste_from_clipboard)
         bn_paste.pack()
-        
-        #middle Frame
+
+        # middle Frame
         FrCalc = tk.Frame(FrPane)
         FrCalc.pack(side=tk.LEFT)
-        
+
         bn_calculate = tk.Button(FrCalc, text="Calculate",
                                  command=self.process)
         bn_calculate.pack(padx=20)
 
-        #Frame right
+        # Frame right
         FrResult_list = tk.Frame(FrPane)
         FrResult_list.pack(side=tk.RIGHT, anchor=tk.N)
-        
+
         self.result_list = ScrolledText(FrResult_list, width=50)
         self.result_list.pack()
         bn_copy = tk.Button(FrResult_list,
@@ -59,7 +58,6 @@ paste it in your favorite spreadsheet")
                             command=self.copy_to_clipboard)
         bn_copy.pack()
 
-        
     def copy_to_clipboard(self):
         self.parent.clipboard_clear()
         self.parent.clipboard_append(self.result_list.get(1.0, "end"))
@@ -74,6 +72,6 @@ paste it in your favorite spreadsheet")
         try:
             years = find_years(content)
             for year in sorted(years.keys()):
-                self.result_list.insert("end", "%s\t%s\n"%(year, years[year]))
+                self.result_list.insert("end", "%s\t%s\n" % (year, years[year]))
         except:
             pass

@@ -25,14 +25,14 @@ class QuestionParlementaire(object):
         with urllib.request.urlopen(self.url) as page:
             charset = page.info().get_param('charset')
 
-            if (charset):
+            if charset:
                 buf = page.read().decode(charset)
             else:
                 p = page.read()
                 buf = p.decode("latin-1")
 
                 # search for misencoding
-                if (re.search('encoding="UTF-8', buf)):
+                if re.search('encoding="UTF-8', buf):
                     buf = p.decode("utf-8")
 
             if re.search("questions.assemblee-nationale.fr", self.url):
@@ -95,7 +95,7 @@ class QuestionParlementaire(object):
         try:
             c = list(map(lambda x: re.sub('\s{1,}', ' ', x), c))
         except:
-            if (VERBOSE):
+            if VERBOSE:
                 print("pb ctx list", c)
 
         # source
@@ -103,7 +103,7 @@ class QuestionParlementaire(object):
         # link between question and answer
         if r:
             c.append("REF_EXT:%s\%s" % (self.final, ref))
-        elif (self.D['ASREP'] == "Avec réponse"):
+        elif self.D['ASREP'] == "Avec réponse":
             c.append("REF_EXT:%s\%s" % (self.final, ref))
         return c
 
@@ -142,7 +142,7 @@ class QuestionParlementaire(object):
 
         subtitle = "%s %s, publiée au JO le %s" \
                    % (self.D['nature'], self.D['num'], self.D['dpq'])
-        if (self.D['pgq']):
+        if self.D['pgq']:
             subtitle += " (page %s)" % self.D['pgq']
 
         lines = [
@@ -159,7 +159,7 @@ class QuestionParlementaire(object):
         q_CTX = self.ctx_content(0, self.D['title'], TXT.nom_rep)
         filenames.append(CTX.w(cible, q_CTX))
 
-        if (self.D['ASREP'] == "Avec réponse"):
+        if self.D['ASREP'] == "Avec réponse":
             r_title = "Réponse à la %s %s, publiée au JO le %s (page %s)" \
                       % (self.D['nature'], self.D['num'],
                          self.D['dpr'], self.D['pgr'])
@@ -193,7 +193,7 @@ class WriteFile(object):
             return ligne
 
     def w(self, cible, contenu_fichier, REP=0):
-        if (REP == 1):
+        if REP == 1:
             nom = self.nom_rep
         else:
             nom = self.nom_fichier
@@ -227,7 +227,7 @@ class ParseAss(object):
             else:
                 d['question'] = self.get_question(html)
                 d['dpr'], d['pgr'] = self.get_publication_rep(html)
-                if (d['dpr']):
+                if d['dpr']:
                     d['ASREP'] = "Avec réponse"
                     d['reponse'] = self.get_reponse(html)
                     if not d['reponse']:
@@ -410,7 +410,7 @@ class CrawlAss(object):
         self.dicQ = {}
         html = self.getpage(leg, words)
         self.getQuestions(html)
-        if (VERBOSE):
+        if VERBOSE:
             print("found %d questions" % len(self.dicQ))
 
     def getpage(self, leg, words):
@@ -425,7 +425,7 @@ class CrawlAss(object):
         )
         data = urllib.parse.urlencode(formData).encode()
         with urllib.request.urlopen(url, data) as response:
-            return (response.read().decode())
+            return response.read().decode()
 
     def getQuestions(self, html):
         for q in re.split('<tr>', html)[2:]:
@@ -519,7 +519,7 @@ class ParseSenat(object):
         if m.search(b):
             return m.search(b).group(2, 3)
         else:
-            return (False, False)
+            return False, False
 
     def get_nature(self, b):
         m = re.compile('\s*(.*\S)\s*n&deg;')
@@ -543,7 +543,7 @@ class ParseSenat(object):
         else:
             page = False
 
-        return (date, page)
+        return date, page
 
     def get_ministere(self, b):
         m = re.compile('Réponse du (.*)\s*')
@@ -621,7 +621,7 @@ class CrawlSenat(object):
             date_from = "02/04/1978"
 
         html = self.getpage(words, date_from, date_to)
-        if (html):
+        if html:
             self.dicQ = {}
             if re.search("Il n'y a aucun résultat pour cette recherche.", html):
                 self.n = 0
@@ -632,10 +632,10 @@ class CrawlSenat(object):
                 for offset in range(10, self.n, 10):
                     html = self.getpage(words, date_from, date_to, offset)
                     self.retrieveQ(html)
-            if (VERBOSE):
+            if VERBOSE:
                 print("found %d questions" % len(self.dicQ))
         else:
-            if (VERBOSE):
+            if VERBOSE:
                 print("pb getpage")
             self.dicQ = {}
 
@@ -647,11 +647,11 @@ class CrawlSenat(object):
         urllib.request.urlopen(url)
 
         try:
-            if (VERBOSE):
+            if VERBOSE:
                 print(url)
             with urllib.request.urlopen(url) as page:
                 charset = page.info().get_param('charset')
-                if (charset):
+                if charset:
                     buf = page.read().decode(charset)
                 else:
                     buf = page.read().decode("latin1")
@@ -678,7 +678,7 @@ class CrawlSenat(object):
             lk, title = m1.search(q, re.S).group(1, 2)
             title = re.sub("(&#39;|&quot;)", "'", title)
             if re.search("&", title):
-                if (VERBOSE):
+                if VERBOSE:
                     print("&", title)
             num = m2.search(q).group(1)
             if m3.search(q, re.S):

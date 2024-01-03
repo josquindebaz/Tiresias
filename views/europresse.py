@@ -6,7 +6,7 @@ from mod.europresse import *
 from utils.supportpublimanager import SupportPubliManager
 
 
-class ViewEuropresse():
+class ViewEuropresse:
     def __init__(self, parent):
         self.articles_list = None
         self.Supports = None

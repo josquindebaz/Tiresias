@@ -23,7 +23,7 @@ def list_files(rep='.', exts=('.txt', '.TXT'), recursive=True, slash=False, repl
     return txt_files
 
 
-class Cleaner():
+class Cleaner:
     """Convert bytes and clean string"""
 
     def __init__(self, content, options="uasdhtpcef"):
