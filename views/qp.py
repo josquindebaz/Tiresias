@@ -10,7 +10,7 @@ from mod.qp import *
 from mod.cleaning import Cleaner
 
 
-class ViewQP():
+class ViewQP:
     def __init__(self, parent):
         self.AssListQ = None
         self.SenatListQ = None
@@ -172,7 +172,7 @@ class ViewQP():
 
     def Senat_DC(self, _):
         L = self.Senat_list.curselection()
-        if (len(L) == 1):
+        if len(L) == 1:
             q = self.SenatListQ[int(L[0])]
             url = "https://www.senat.fr/basile/visio.do?id=%s" % q
             webbrowser.open(url, 0, True)
@@ -199,7 +199,7 @@ class ViewQP():
 
     def Ass_DC(self, _):
         L = self.Ass_list.curselection()
-        if (len(L) == 1):
+        if len(L) == 1:
             q = self.AssListQ[int(L[0])]
             url = "http://questions.assemblee-nationale.fr/%s.htm" % q
             webbrowser.open(url, 0, True)
@@ -208,11 +208,11 @@ class ViewQP():
         self.progressbar['mode'] = 'determinate'
         destination = self.choosenDir.get()
         cl = self.CleaningVal.get()
-        if (destination):
+        if destination:
             LSen = self.Senat_list.curselection()
             if len(LSen):
                 self.progressbar['maximum'] = len(LSen)
-                for c in (LSen):
+                for c in LSen:
                     self.progressbar['value'] = c + 1
                     q = self.SenatListQ[c]
                     self.log.insert(1.0,
@@ -220,10 +220,10 @@ class ViewQP():
                     PQ = QuestionParlementaire(self.dicQ[q]['url'])
                     PQ.retreive()
 
-                    if (cl):
+                    if cl:
                         PQ.D['question'] = self.clean(PQ.D['question'])
                         PQ.D['title'] = self.clean(PQ.D['title'])
-                        if ('reponse' in PQ.D):
+                        if 'reponse' in PQ.D:
                             PQ.D['reponse'] = self.clean(PQ.D['reponse'])
 
                     PQ.process(dest=destination)
@@ -240,10 +240,10 @@ class ViewQP():
                     PQ = QuestionParlementaire(self.dicQ[q]['url'])
                     PQ.retreive()
 
-                    if (cl):
+                    if cl:
                         PQ.D['question'] = self.clean(PQ.D['question'])
                         PQ.D['title'] = self.clean(PQ.D['title'])
-                        if ('reponse' in PQ.D):
+                        if 'reponse' in PQ.D:
                             PQ.D['reponse'] = self.clean(PQ.D['reponse'])
 
                     try:
