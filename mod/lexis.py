@@ -80,7 +80,7 @@ def file_name(date, prefix, save_dir):
 
 
 class ParseTxt(object):
-    "from txt of Lexis to Prospero"
+    """from txt of Lexis to Prospero"""
 
     def __init__(self, filename):
         self.articles = {}

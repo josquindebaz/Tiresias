@@ -177,7 +177,7 @@ articleParagraph">', article)[1:]
 
 
 class ParseCsv:
-    "from htm of csv to Prospero"
+    """from htm of csv to Prospero"""
 
     def __init__(self, fname):
         self.content = pd.read_csv(fname, sep=";", encoding="utf-8")
