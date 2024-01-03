@@ -64,6 +64,7 @@ def fetch_date(given_date):
     day_first_date_format = re.compile(r"(\d+) (\S*) (\d{4})")
     month_first_date_format = re.compile(r"(\S*)\s+(\d+)[,\s]{2,}(\d{4})")
 
+    day, month, year = "", "", ""
     if not day_first_date_format.search(given_date) and not month_first_date_format.search(given_date):
         print("Problem reading date [%s]" % given_date)
         return False
