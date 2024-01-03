@@ -16,6 +16,7 @@ import views.heatmap
 import views.capitals
 import views.openbooks
 
+
 class MainView(tk.Toplevel):
     def __init__(self, parent):
         tk.Toplevel.__init__(self, parent)
@@ -24,9 +25,10 @@ class MainView(tk.Toplevel):
         self.protocol('WM_DELETE_WINDOW', self.
                       parent.destroy)
 
-        #views.newton.ViewNewton(self)
-        #views.uncapitalise.ViewReplacer(self)
+        # views.newton.ViewNewton(self)
+        # views.uncapitalise.ViewReplacer(self)
         views.openbooks.ViewOpenbooks(self)
+
 
 if __name__ == '__main__':
     root = tk.Tk()

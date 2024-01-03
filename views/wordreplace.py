@@ -34,7 +34,7 @@ class ViewReplacer:
 
         self.Recursive = tk.BooleanVar()
         bn_recursive = tk.Checkbutton(frame_1,
-                                     text='recursive', variable=self.Recursive)
+                                      text='recursive', variable=self.Recursive)
         bn_recursive.select()
         bn_recursive.pack(side=tk.LEFT)
 
@@ -65,7 +65,7 @@ class ViewReplacer:
         self.bn_add.pack()
         self.Marks = tk.BooleanVar()
         bn_m = tk.Checkbutton(fr21, padx=30,
-                             text='with marks', variable=self.Marks)
+                              text='with marks', variable=self.Marks)
         bn_m.select()
         bn_m.pack()
 
@@ -104,7 +104,7 @@ class ViewReplacer:
         self.result.delete(1.0, "end")
         self.progressbar['value'] = 0
         dir = filedialog.askdirectory(title="Choose directory",
-                                      initialdir="C:\corpus")
+                                      initialdir=r"C:\corpus")
         self.choosenDir.set(dir)
 
     def from_remove(self):

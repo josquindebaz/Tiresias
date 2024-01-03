@@ -56,7 +56,7 @@ class ViewPaster:
         if data != "\n":
             filename = filedialog.asksaveasfilename(
                 title="Save as",
-                initialdir="C:\corpus",
+                initialdir=r"C:\corpus",
                 initialfile="MonthHeatmap.svg",
                 filetypes=[("svg Files", "*.svg")])
 
