@@ -170,7 +170,7 @@ class ViewQP():
             self.Senat_list.insert("end", item)
             self.parent.update()
 
-    def Senat_DC(self, details):
+    def Senat_DC(self, _):
         L = self.Senat_list.curselection()
         if (len(L) == 1):
             q = self.SenatListQ[int(L[0])]
@@ -197,7 +197,7 @@ class ViewQP():
                 self.Ass_list.insert("end", item)
                 self.parent.update()
 
-    def Ass_DC(self, details):
+    def Ass_DC(self, _):
         L = self.Ass_list.curselection()
         if (len(L) == 1):
             q = self.AssListQ[int(L[0])]
