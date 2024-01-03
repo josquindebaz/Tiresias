@@ -110,7 +110,7 @@ class ViewReplacer:
     def from_remove(self):
         selected = self.ListFrom.curselection()
         if selected:
-            item = self.ListFrom.get(selected)
+            # item = self.ListFrom.get(selected)
             self.ListFrom.delete(selected)
             # self.result.insert(1.0, "%s removed from From list\n"%item)
 

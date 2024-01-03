@@ -187,7 +187,7 @@ class Mapper:
         color = "rgb(1, 144, 3)"
 
         max_size = max(self.dpt_values.values())
-        s_max_v = max_size ** 2
+        # s_max_v = max_size ** 2
 
         if max_size > 64:
             r_max = 64

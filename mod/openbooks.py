@@ -92,7 +92,7 @@ def create_ctx(path, metadata):
     ]
     ctx = "\r\n".join(ctx)
     ctx_cleaner = Cleaner(ctx.encode('utf-8'))
-    ctx = ctx = ctx_cleaner.content.encode('latin-1', 'xmlcharrefreplace')  # to bytes
+    ctx = ctx_cleaner.content.encode('latin-1', 'xmlcharrefreplace')  # to bytes
     with open(path, 'wb') as file:
         file.write(ctx)
 

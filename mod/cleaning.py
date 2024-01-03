@@ -228,7 +228,7 @@ class Cleaner:
 
     def unescape(self):
         """html entities"""
-        log = ""
+
         temp = html.unescape(self.content)
         try:
             bytes(temp, 'latin-1')
