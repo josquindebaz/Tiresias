@@ -170,7 +170,7 @@ class Mapper():
             mapcontent += "</title></path>\n"
 
         height = 520
-        for dpt in set(self.dpt_values.keys()).difference( \
+        for dpt in set(self.dpt_values.keys()).difference(
                 set(self.department_paths.keys())):
             mapcontent += """
 <text x="120" y="%d" font-family="sans-serif" font-size="12">%s:\
@@ -254,7 +254,7 @@ class Mapper():
 
         # Dpt with no path
         height = 520
-        for dpt in set(self.dpt_values.keys()).difference( \
+        for dpt in set(self.dpt_values.keys()).difference(
                 set(self.department_paths.keys())):
             mapcontent += """
 <text x="120" y="%d" font-family="sans-serif" font-size="12">%s:\

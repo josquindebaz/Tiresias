@@ -80,8 +80,8 @@ class ViewPaster():
 
     def process(self):
         data = self.data_list.get(1.0, "end")
-        if (data != "\n"): 
-            filename = filedialog.asksaveasfilename(\
+        if data != "\n":
+            filename = filedialog.asksaveasfilename(
                 title="Save as",
                 initialdir="C:\corpus",
                 initialfile="QpAtlas.svg",
