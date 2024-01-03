@@ -21,7 +21,7 @@ class QuestionParlementaire(object):
         self.D = None
         self.url = url
 
-    def retreive(self):
+    def retrieve(self):
         with urllib.request.urlopen(self.url) as page:
             charset = page.info().get_param('charset')
 
@@ -86,7 +86,7 @@ class QuestionParlementaire(object):
         else:
             c.append(self.D['dept'])
         # CL1
-        c.append("Retreived on {}".format(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
+        c.append("Retrieved on {}".format(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
         # tail
         c.extend(["", "n", "n", "REF_HEURE:00:00"])
 
@@ -703,5 +703,5 @@ if __name__ == '__main__':
     test = CrawlAss(13, '"ronds points"')
     for q in test.dicQ.keys():
         t = QuestionParlementaire(test.create_url(q))
-        t.retreive()
+        t.retrieve()
         t.process()
