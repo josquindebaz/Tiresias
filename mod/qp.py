@@ -195,6 +195,7 @@ class WriteFile(object):
             nom = self.nom_rep
         else:
             nom = self.nom_fichier
+        print(contenu_fichier)
         texte_fichier = list(map(self.fin_de_ligne, contenu_fichier))
 
         with open(os.path.join(cible, nom), 'wb') as p:
@@ -211,7 +212,11 @@ class ParseAss(object):
             if d['nature'] == 'Question au gouvernement':
                 d['nature'] = 'Question au Gouvernement'
             d['aut'], d['groupe'], d['dept'] = self.get_aut(html)
-            d['aut'] = re.sub(r"^(M\.|Mme) ", "", d['aut'])
+            # FIX ME
+            if d['aut']:
+                d['aut'] = re.sub(r"^(M\.|Mme) ", "", d['aut'])
+            else:
+                d['aut'] = "pb author"
             d['ministere'] = self.get_ministere(html)
             d['title'] = self.get_title(html)
             d['dpq'], d['pgq'] = self.get_publication(html)
@@ -238,6 +243,7 @@ class ParseAss(object):
                                                   d['title'], d['reponse'])
                 else:
                     d['ASREP'] = "Sans réponse"
+            print(d)
         else:
             print("pb parse Ass")
 
@@ -287,8 +293,7 @@ class ParseAss(object):
 
     def get_aut(self, b):
         m1 = re.compile('<AUT>(.*) (.*)</AUT>')
-        m2 = re.compile(r'<div id="question_col80"> de.*>(.*)</\
-a>.*\((.*) - <span>(.*)</span>')
+        m2 = re.compile(r'<div id="question_col80"> de.*>(.*)</a>.*\((.*) - <span>(.*)</span>')
         m3 = re.compile('<td class="tdstyleh3">de(.*)')
         if m1.search(b):
             aut = m1.search(b).group(1)
@@ -406,12 +411,12 @@ class CrawlAss(object):
 
     def __init__(self, leg, words):
         self.dicQ = {}
-        html = self.getpage(leg, words)
+        html = self.get_assemblee_request(leg, words)
         self.get_questions(html)
         if VERBOSE:
             print("found %d questions" % len(self.dicQ))
 
-    def getpage(self, leg, words):
+    def get_assemblee_request(self, leg, words):
         # !7th legislature has only empty data
         # !lack of accentuation before 11th
         url = "http://www2.assemblee-nationale.fr/recherche/resultats_questions/index.asp?legislature"
@@ -427,8 +432,7 @@ class CrawlAss(object):
 
     def get_questions(self, html):
         for q in re.split('<tr>', html)[2:]:
-            m = re.compile(r'questions\.assemblee-nationale.fr/(.*).htm">\
-<strong>.* - (.*)</strong>')
+            m = re.compile(r'questions\.assemblee-nationale.fr/(.*).htm"><strong>.* - (.*)</strong>')
             lk, num = m.search(q).group(1, 2)
             m = re.compile(r'<td class="text-center">\s*<strong>\S* (.*)</strong>')
             nom = m.search(q).group(1)
@@ -624,8 +628,7 @@ class CrawlSenat(object):
             if re.search("Il n'y a aucun résultat pour cette recherche.", html):
                 self.n = 0
             else:
-                self.n = int(re.search(r'results-number-global">\s*(\d*)\s*',
-                                       html).group(1))
+                self.n = int(re.search(r'results-number-global">\s*(\d*)\s*', html).group(1))
                 self.retrieve_question(html)
                 for offset in range(10, self.n, 10):
                     html = self.getpage(words, date_from, date_to, offset)
