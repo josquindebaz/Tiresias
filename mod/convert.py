@@ -256,7 +256,7 @@ class ParseCsv:
 
 if __name__ == "__main__":
     SUPPORTS_FILE = "support.publi"
-    for filename in glob.glob(["*.csv", "*.csv"]):
+    for filename in glob.glob("*.csv"):
         print(filename)
         run = ParseCsv(filename)
         # print("%s: found %d article(s)"%(filename, len(run.content)))
