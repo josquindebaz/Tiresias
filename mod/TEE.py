@@ -3,11 +3,13 @@
 # GPL 3
 # 28/08/2020
 
-import urllib.request, urllib.parse
-from bs4 import BeautifulSoup
-import re
 import datetime
 import os
+import re
+import urllib.parse
+import urllib.request
+
+from bs4 import BeautifulSoup
 
 from cleaning import Cleaner
 
@@ -46,8 +48,7 @@ def formate_ctx(title, date, url):
         '',
         "",
         url,
-        "Processed by Tiresias on %s" \
-        % datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+        f"Processed by Tiresias on {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
         "", "n", "n", ""
     ]
 
@@ -231,8 +232,8 @@ class RetreiveArticles(object):
                     donefile.write("%s\r\n" % url)
 
 
-##            else:
-##                print("already done")
+#            else:
+#                print("already done")
 
 
 """

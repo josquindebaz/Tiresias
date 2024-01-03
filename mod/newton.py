@@ -17,7 +17,7 @@ from bs4 import BeautifulSoup
 
 try:
     from cleaning import Cleaner
-except:
+except ModuleNotFoundError:
     from mod.cleaning import Cleaner
 
 
@@ -69,28 +69,28 @@ class ParseNewton(object):
             yield article
 
     def replace_cz(self, text):
-        ##        latin1 = text.encode('ISO-8859-1', 'xmlcharrefreplace')
-        ##        text = latin1.decode('ISO-8859-1')
+        #        latin1 = text.encode('ISO-8859-1', 'xmlcharrefreplace')
+        #        text = latin1.decode('ISO-8859-1')
 
         latin2 = text.encode('iso-8859-2', 'xmlcharrefreplace')
         text = latin2.decode('iso-8859-2')
 
         table = {
-            ##            '&#268;': 'Č',
-            ##            '&#269;': 'č',
-            ##            '&#271;': "d'",
-            ##            "&#282;": 'Ě',
-            ##            "&#283;": 'ě',
-            ##            '&#328;': 'ň',
-            ##            '&#344;': 'Ř',
-            ##            "&#345;": 'ř',
-            ##            '&#352;': 'Š',
-            ##            '&#353;': 'š',
-            ##            '&#357;': "ť",
-            ##            '&#366;': 'Ů',
-            ##            '&#367;': 'ů',
-            ##            '&#381;': 'Ž',
-            ##            '&#382;': 'ž',
+            #            '&#268;': 'Č',
+            #            '&#269;': 'č',
+            #            '&#271;': "d'",
+            #            "&#282;": 'Ě',
+            #            "&#283;": 'ě',
+            #            '&#328;': 'ň',
+            #            '&#344;': 'Ř',
+            #            "&#345;": 'ř',
+            #            '&#352;': 'Š',
+            #            '&#353;': 'š',
+            #            '&#357;': "ť",
+            #            '&#366;': 'Ů',
+            #            '&#367;': 'ů',
+            #            '&#381;': 'Ž',
+            #            '&#382;': 'ž',
             '&#8211;': '-',
             '&#8216;': "'",
             '&#8218;': "'",
@@ -119,44 +119,44 @@ class ParseNewton(object):
             elif re.search(r', Autor:', meta_data.text):
                 article_data["narrator"] = re.sub(r'\.', r'/',
                                                   meta_data.find('span').text)
-        ##            else:
-        ##                print(meta_data)
+        #            else:
+        #                print(meta_data)
         article_data["observations"] = ""
         article_data['text'] = content.find(class_="article-content").text.strip()
         return {element: self.replace_cz(value)
                 for element, value in article_data.items()}
 
-    ##    def get_articles_old(self, text):
-    ##        articles = re.split('<hr size="1"', text)[2:-1]
-    ##        for article in articles:
-    ##            yield article
+    #    def get_articles_old(self, text):
+    #        articles = re.split('<hr size="1"', text)[2:-1]
+    #        for article in articles:
+    #            yield article
 
-    ##    def process_old(self, content):
-    ##        article_data = {}
-    ##        content = self.replace_cz(content)
-    ##
-    ##        metadata, text = re.split("<em>zpet</em>", content)
-    ##        article_data["title"] =\
-    ##            re.findall('<a name="\d*">.*>(.*)</a>.*size="2">', metadata)[0]
-    ##        date = re.split("\.",
-    ##                        re.findall('>([\d\.]*)&nbsp;&nbsp;', metadata)[0])
-    ##        article_data["date"] =  "%02d/%02d/%s"%(int(date[0]),
-    ##                                                int(date[1]),
-    ##                                                date[2])
-    ##        splitted = re.split('&nbsp;&nbsp;(.*)</font>', metadata)[1]
-    ##        article_data["media"] = re.findall('(.*)\&nbsp;&nbsp;str', splitted)[0]
-    ##        article_data["observations"] = re.findall('\d&nbsp;&nbsp;(.*)</font>',
-    ##                                                  splitted)[0]
-    ##        article_data["narrator"] = re.findall('<em>(.*)</em>', splitted)[0]
-    ##
-    ##        text = re.split('<font face="Arial" size="2">', text)[1]
-    ##        text = re.split('</td>', text)[0]
-    ##        text = re.sub('<br />', '', text)
-    ##        text = re.sub('<strong><span style="background-color: #fac900; color: #000000;">', '', text)
-    ##        text = re.sub('</span></strong>', '', text)
-    ##        article_data['text'] = text
-    ##
-    ##        return article_data
+    #    def process_old(self, content):
+    #        article_data = {}
+    #        content = self.replace_cz(content)
+    #
+    #        metadata, text = re.split("<em>zpet</em>", content)
+    #        article_data["title"] =\
+    #            re.findall('<a name="\d*">.*>(.*)</a>.*size="2">', metadata)[0]
+    #        date = re.split("\.",
+    #                        re.findall('>([\d\.]*)&nbsp;&nbsp;', metadata)[0])
+    #        article_data["date"] =  "%02d/%02d/%s"%(int(date[0]),
+    #                                                int(date[1]),
+    #                                                date[2])
+    #        splitted = re.split('&nbsp;&nbsp;(.*)</font>', metadata)[1]
+    #        article_data["media"] = re.findall('(.*)\&nbsp;&nbsp;str', splitted)[0]
+    #        article_data["observations"] = re.findall('\d&nbsp;&nbsp;(.*)</font>',
+    #                                                  splitted)[0]
+    #        article_data["narrator"] = re.findall('<em>(.*)</em>', splitted)[0]
+    #
+    #        text = re.split('<font face="Arial" size="2">', text)[1]
+    #        text = re.split('</td>', text)[0]
+    #        text = re.sub('<br />', '', text)
+    #        text = re.sub('<strong><span style="background-color: #fac900; color: #000000;">', '', text)
+    #        text = re.sub('</span></strong>', '', text)
+    #        article_data['text'] = text
+    #
+    #        return article_data
 
     def get_supports(self, supports_path):
         """parse supports.publi and find correspondences"""
@@ -212,8 +212,7 @@ class ParseNewton(object):
                 article['source_type'],
                 article["observations"],
                 "", "",
-                "Processed by Tiresias on %s" \
-                % datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                f"Processed by Tiresias on {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
                 "", "n", "n", ""
             ]
             ctx = "\r\n".join(ctx)

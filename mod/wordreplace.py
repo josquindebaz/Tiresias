@@ -10,8 +10,7 @@ def list_files(rep='.', exts=('.txt', '.TXT'), recursive=True):
     """List txt files"""
     txt_files = []
     for roots, _, files in os.walk(u'%s' % rep):
-        txt_files.extend([os.path.join(roots, f) for f in files \
-                          if os.path.splitext(f)[1] in exts])
+        txt_files.extend([os.path.join(roots, f) for f in files if os.path.splitext(f)[1] in exts])
         if not recursive:
             break
     return txt_files

@@ -11,7 +11,7 @@ import datetime
 
 try:
     from cleaning import Cleaner
-except:
+except ModuleNotFoundError:
     from mod.cleaning import Cleaner
 
 
@@ -89,8 +89,7 @@ class ParseTxt(object):
         with open(filename, 'rb') as file:
             buf = file.read()
             buf = buf.decode('utf-8')  # byte to str
-        cut_articles = re.split("(.*Do[kc]ument \d{1,} (von|de|of) \d{1,}.*)",
-                                buf)[1:]
+        cut_articles = re.split(r"(.*Do[kc]ument \d+ (von|de|of) \d+.*)", buf)[1:]
         while cut_articles:
             self.count += 1
             cut_articles.pop(0)  # number
@@ -137,18 +136,17 @@ class ParseTxt(object):
         elif re.search("\r\nLOAD-DATE:.*\r\n", article):
             article, foot = re.split("LOAD-DATE:", article)
 
-        """Internationaliser ?
-        def traite_article(self,article):
-            article = re.split('\r\nDATE-CHARGEMENT:',article)[0]
-            if re.search("ORIGINE-DEPECHE:",article):
-                    en_tete,article = re.split('\r\nORIGINE-DEPECHE: .*\r\n',article,1)
-            elif re.search("\r\nLONGUEUR: \d* \S*\r\n",article):
-                    en_tete,article = re.split('\r\n: \d* \S*\r\n',article,1)
-            elif re.search('\r\nRUBRIQUE: .*\r\n',article):
-                    en_tete,article = re.split('\r\nRUBRIQUE: .*\r\n',article,1)
-        """
+        # Internationaliser ?
+        # def traite_article(self,article):
+        #     article = re.split('\r\nDATE-CHARGEMENT:',article)[0]
+        #     if re.search("ORIGINE-DEPECHE:",article):
+        #             en_tete,article = re.split('\r\nORIGINE-DEPECHE: .*\r\n',article,1)
+        #     elif re.search("\r\nLONGUEUR: \d* \S*\r\n",article):
+        #             en_tete,article = re.split('\r\n: \d* \S*\r\n',article,1)
+        #     elif re.search('\r\nRUBRIQUE: .*\r\n',article):
+        #             en_tete,article = re.split('\r\nRUBRIQUE: .*\r\n',article,1)
 
-        """sous-titre ?"""
+        # sous-titre ?
 
         article_data = {'text': re.sub(r"HIGHLIGHT:\s*", "", article)}
 
@@ -192,8 +190,7 @@ class ParseTxt(object):
                 "",
                 article['source_type'],
                 "", "", "",
-                "Processed by Tiresias on %s" \
-                % datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                f"Processed by Tiresias on {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
                 "", "n", "n", ""
             ]
             ctx = "\r\n".join(ctx)
