@@ -10,6 +10,8 @@ import time
 import urllib.parse
 import urllib.request
 
+from mod.AssembleeParser import AssembleeParser
+
 ssl._create_default_https_context = ssl._create_unverified_context
 
 VERBOSE = 0
@@ -36,7 +38,7 @@ class QuestionParlementaire(object):
                     buf = p.decode("utf-8")
 
             if re.search("questions.assemblee-nationale.fr", self.url):
-                self.D = ParseAss(buf).data
+                self.D = AssembleeParser(buf).data
             else:
                 self.D = ParseSenat(buf).data
 
@@ -195,215 +197,12 @@ class WriteFile(object):
             nom = self.nom_rep
         else:
             nom = self.nom_fichier
-        print(contenu_fichier)
         texte_fichier = list(map(self.fin_de_ligne, contenu_fichier))
 
         with open(os.path.join(cible, nom), 'wb') as p:
             p.writelines(texte_fichier)
 
         return nom
-
-
-class ParseAss(object):
-    def __init__(self, html):
-        d = {'leg': self.get_leg(html)}
-        if d['leg']:
-            d['num'], d['nature'] = self.get_num(html)
-            if d['nature'] == 'Question au gouvernement':
-                d['nature'] = 'Question au Gouvernement'
-            d['aut'], d['groupe'], d['dept'] = self.get_aut(html)
-            # FIX ME
-            if d['aut']:
-                d['aut'] = re.sub(r"^(M\.|Mme) ", "", d['aut'])
-            else:
-                d['aut'] = "pb author"
-            d['ministere'] = self.get_ministere(html)
-            d['title'] = self.get_title(html)
-            d['dpq'], d['pgq'] = self.get_publication(html)
-            d['support'] = "Journal officiel"
-
-            if d['nature'] == "Question au Gouvernement":
-                d['ASREP'] = d['nature']
-                d['question'] = self.get_reponse(html)
-                d['dpr'], d['pgr'] = self.get_publication_rep(html)
-                d['pgq'] = d['pgr']
-            else:
-                d['question'] = self.get_question(html)
-                d['dpr'], d['pgr'] = self.get_publication_rep(html)
-                if d['dpr']:
-                    d['ASREP'] = "Avec réponse"
-                    d['reponse'] = self.get_reponse(html)
-                    if not d['reponse']:
-                        d['reponse'] = "empty!"
-                    if d['nature'] == 'Question orale sans débat':
-                        m = re.compile(r'<p align="CENTER">\s*(.*)\s*<a.*</p>')
-                        if m.search(d['reponse']):
-                            d['title'] = m.search(d['reponse']).group(1)
-                            d['reponse'] = re.sub(r'<p align="CENTER">\s*.*\s*<a.*</p>',
-                                                  d['title'], d['reponse'])
-                else:
-                    d['ASREP'] = "Sans réponse"
-            print(d)
-        else:
-            print("pb parse Ass")
-
-        if d['question']:
-            if re.search(r"^\s*$", d['question']):
-                d['question'] = "empty!"
-        else:
-            d['question'] = "empty!"
-
-        self.data = d
-
-    def get_leg(self, b):
-        m1 = re.compile(r'<LEG>(\d*).me')
-        m2 = re.compile(r'<header class="question_legislature">(\d*)')
-        m3 = re.compile(r'<td class="tdstyleh1">(\d*)')
-        if m1.search(b):
-            return m1.search(b).group(1)
-        elif m2.search(b):
-            return m2.search(b).group(1)
-        elif m3.search(b):
-            return m3.search(b).group(1)
-        else:
-            return False
-
-    def get_num(self, b):
-        m1 = re.compile('<NUM>(.*)</NUM>')
-        m2 = re.compile('question_col10">(.*)</div>')
-        m3 = re.compile(r"Question\s*N.*\s*:\s*<b>(\d*)</b>")
-        if m1.search(b):
-            nat = re.search('<NAT>(.*)</NAT>', b).group(1)
-            natures = {
-                'QE': 'Question écrite',
-                'QG': 'Question au Gouvernement',
-                'QOSD': 'Question orale sans débat',
-            }
-            return m1.search(b).group(1), natures[nat]
-        elif m2.search(b):
-            r = m2.findall(b)
-            n = re.search(r' Question N\S* (\d*)', r[0]).group(1)
-            return n, r[1]
-        elif m3.search(b):
-            num = m3.search(b).group(1)
-            nat = re.search(r'<td class="tdstyleh3">\s*<b>(.*)</b>', b).group(1)
-            return num, nat
-        else:
-            return False, False
-
-    def get_aut(self, b):
-        m1 = re.compile('<AUT>(.*) (.*)</AUT>')
-        m2 = re.compile(r'<div id="question_col80"> de.*>(.*)</a>.*\((.*) - <span>(.*)</span>')
-        m3 = re.compile('<td class="tdstyleh3">de(.*)')
-        if m1.search(b):
-            aut = m1.search(b).group(1)
-            groupe = re.search('<GROUPE>(.*)</GROUPE>', b).group(1)
-            dept = re.search('<DEPT>(.*)</DEPT>', b).group(1)
-            return aut, groupe, dept
-        elif m2.search(b):
-            return m2.search(b).group(1, 2, 3)
-        elif m3.search(b):
-            depute = m3.search(b).group(1)
-            return re.search(r"<b>(.*)</b> \(\s*(.*) - (.*).\)",
-                             depute).group(1, 2, 3)
-        else:
-            return False, False, False
-
-    def get_ministere(self, b):
-        m1 = re.compile('<MINA>(.*)</MINA>')
-        m2 = re.compile('Ministère attributaire > </span>(.*)')
-        m3 = re.compile('Minist.*re attributaire &gt; <span class="contenu">(.*)</span>')
-        if m1.search(b):
-            return m1.search(b).group(1)
-        elif m2.search(b):
-            return m2.search(b).group(1).strip()
-        elif m3.search(b):
-            return m3.search(b).group(1)
-        else:
-            return False
-
-    def get_title(self, b):
-        m1 = re.compile('<TANA>(.*)</TANA>')
-        m2 = re.compile('Titre > </span>(.*)</p>')
-        m3 = re.compile('>Analyse &gt; <span class="contenu">(.*)</span>')
-        if m1.search(b):
-            return m1.search(b).group(1)
-        elif m2.search(b):
-            return m2.search(b).group(1)
-        elif m3.search(b):
-            return m3.search(b).group(1)
-        else:
-            return False
-
-    def get_publication(self, b):
-        m1 = re.compile('<DPQ>(.*)</DPQ>')
-        m2 = re.compile(r"Question publi\S* au JO le")
-        if m1.search(b):
-            dpq = m1.search(b).group(1)
-            pgq = re.search('<PGQ>(.*)</PGQ>', b).group(1)
-            return dpq, pgq
-        elif m2.search(b):
-            spl = re.split("</div>", m2.split(b)[1])[0]
-            dpq = re.search(r"(\d{2}/\d{2}/\d{4})", spl).group(1)
-            m_pgq = re.compile(r'page.*>(\d+)<')
-            if m_pgq.search(spl):
-                pgq = m_pgq.search(spl).group(1)
-            else:
-                pgq = False
-            return dpq, pgq
-        else:
-            return False, False
-
-    def get_publication_rep(self, b):
-        m1 = re.compile(r'<DPR>(\d{2}/\d{2}/\d{4})</DPR>')
-        m2 = re.compile("Réponse publiée au JO le")
-        if m1.search(b):
-            dpq = m1.search(b).group(1)
-            pgq = re.search('<PGREP>(.*)</PGREP>', b).group(1)
-            return dpq, pgq
-        elif m2.search(b):
-            spl = re.split("</div>", m2.split(b)[1])[0]
-            dpr = re.search(r"(\d{2}/\d{2}/\d{4})", spl).group(1)
-            m_pgr = re.compile(r'page.*>(\d+)<')
-            if m_pgr.search(spl):
-                pgr = m_pgr.search(spl).group(1)
-            else:
-                pgr = False
-            return dpr, pgr
-        else:
-            return False, False
-
-    def get_question(self, b):
-        m1 = re.compile('<QUEST>')
-        m2 = re.compile(r'<h3>Texte de la question</h3>\s*<p>')
-        m3 = re.compile(r'<h2> Texte de la question</h2>\s*.*<div class="contenutexte">\s*')
-        if m1.search(b):
-            question = m1.split(b)
-            return re.split('</QUEST>', question[1])[0]
-        elif m2.search(b):
-            question = m2.split(b)
-            return re.split('</p>', question[1])[0].strip()
-        elif m3.search(b):
-            question = m3.split(b)
-            return re.split('</div>', question[1])[0].strip()
-        else:
-            print(re.findall('.*de la question.*', b))
-
-    def get_reponse(self, b):
-        m1 = re.compile('<REP>')
-        m2 = re.compile('<div class="(reponse_contenu|contenutexte)">')
-        m3 = re.compile(r'<\S><\S>(DEBAT|Texte de la REPONSE) : </\S></\S>')
-        if m1.search(b):
-            reponse = m1.split(b)
-            return re.split('</REP>', reponse[1])[0]
-        elif m2.search(b):
-            reponse = m2.split(b)
-            return re.split('</div>', reponse[2])[0].strip()
-        elif m3.search(b):
-            reponse = m3.split(b)
-            return re.split('</TEXTES>', reponse[2])[0].strip()
-        else:
-            return False
 
 
 class CrawlAss(object):
