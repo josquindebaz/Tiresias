@@ -110,7 +110,7 @@ def test_parse_ass_8_qe_without_response():
                             'sensiblement le montant des impots exigibles. Il lui demande, '
                             "dans ces conditions, s'il compte donner des directives pour "
                             'rendre la circulaire susvisee applicable aux creances non '
-                            'reglees par les etablissements publics administratifs. ',
+                            'reglees par les etablissements publics administratifs.',
                 'reponse': '',
                 'support': 'Journal officiel',
                 'title': 'Paiement'}
@@ -146,7 +146,7 @@ def test_parse_ass_8_qe_with_response():
                             "physique et sportive soient respectees, a savoir : qu'il n'y ait "
                             'pas de postes bloques ; que soit applique strictement le decret '
                             "no 87-161 du 5 mars 1987 fixant l'attribution et le retrait du "
-                            "statut d'athlete de haut niveau. ",
+                            "statut d'athlete de haut niveau.",
                 'reponse': 'Reponse. - disciplines, le mouvement national des enseignants '
                            "fait l'objet d'une etude prealable visant, d'une part a "
                            "equilibrer la repartition des enseignants sur l'ensemble du "
@@ -174,7 +174,7 @@ def test_parse_ass_8_qe_with_response():
                            "relatives a la fonction publique de l'Etat. En effet, il s'agit "
                            "exclusivement d'affectations provisoires dont la duree est "
                            'limitee a une annee scolaire et qui se trouvent automatiquement '
-                           "remises en cause a l'issue de cette periode. ",
+                           "remises en cause a l'issue de cette periode.",
                 'support': 'Journal officiel',
                 'title': 'Personnel'}
 
@@ -283,7 +283,7 @@ def test_parse_ass_9_qe_with_response():
                             "facon autonome a leur domicile. Il lui demande d'etendre le "
                             "benefice de l'aide en faveur de la vie autonome a domicile aux "
                             "titulaires de l'allocation supplementaire du Fonds national de "
-                            'solidarite. ',
+                            'solidarite.',
                 'reponse': "Reponse. - L'allocation aux adultes handicapes (AAH), prestation "
                            'non contributive, est un revenu minimum garanti par la '
                            'collectivite nationale a toute personne reconnue handicapee par '
@@ -314,7 +314,7 @@ def test_parse_ass_9_qe_with_response():
                            'une prise en charge des personnes agees dependantes. Dans ce '
                            "cadre il est prevu l'instauration d'une allocation autonomie et "
                            'dependance qui portera le minimum de leurs ressources, en '
-                           'incluant le minimum vieillesse, a 7 200 francs par mois. ',
+                           'incluant le minimum vieillesse, a 7 200 francs par mois.',
                 'support': 'Journal officiel',
                 'title': 'Allocations et ressources'}
 
@@ -397,7 +397,7 @@ def test_parse_ass_10_qe_with_response():
                             "que ce type d'enfant en difficulte pouvait ne pas rester "
                             'illettre. Aussi lui demande-t-il de bien vouloir lui indiquer '
                             "les differentes mesures qu'il entend mettre en oeuvre pour "
-                            'remedier a cette lacune. ',
+                            'remedier a cette lacune.',
                 'reponse': "Le ministre de l'education nationale, de l'enseignement superieur "
                            'et de la recherche reserve une attention toute particuliere a la '
                            "situation des enfants eprouvant des difficultes d'apprentissage "
@@ -427,7 +427,7 @@ def test_parse_ass_10_qe_with_response():
                            'de recherches sur les handicaps et inadaptations (CTNERHI). Le '
                            "ministre de l'education nationale, de l'enseignement superieur et "
                            'de la recherche attend avec interet le resultat des travaux de ce '
-                           "groupe d'experts. ",
+                           "groupe d'experts.",
                 'support': 'Journal officiel',
                 'title': 'Dyslexie et dysphasie'}
 
@@ -472,7 +472,7 @@ def test_parse_ass_10_qosd():
                             'ce contournement ne pose de difficultes majeures. Le seul '
                             "obstacle concerne l'eventuel declassement d'une partie du site "
                             'inscrit. Sur ces deux dossiers, dont il est deja saisi, il '
-                            'souhaiterait connaitre son sentiment et ses intentions. ',
+                            'souhaiterait connaitre son sentiment et ses intentions.',
                 'reponse': 'Mme le president. M. Charles Cova a presente une question no '
                            '1340. <BR>  La parole est a M. Charles Cova, pour exposer sa '
                            "question. <BR>  M. Charles Cova. Je souhaite attirer l'attention "
@@ -582,7 +582,7 @@ def test_parse_ass_10_qosd():
                            "deverser des detritus d'origine alimentaire dans cette decharge, "
                            'on y enfouit des dechets de classe 1 prejudiciables a la sante '
                            "des riverains. J'exprime ici la volonte des habitants de ces "
-                           "communes d'etre vigilants a l'avenir. ",
+                           "communes d'etre vigilants a l'avenir.",
                 'support': 'Journal officiel',
                 'title': 'Protection'}
 
@@ -632,7 +632,7 @@ def test_parse_ass_10_qosd_without_response():
                             'cela en totale opposition avec la volonte affirmee de resorber '
                             'la fracture sociale. Il lui demande en consequence quels '
                             'correctifs sont envisages pour maintenir en francs constants la '
-                            'dotation du centre hospitalier intercommunal Andre Gregoire. ',
+                            'dotation du centre hospitalier intercommunal Andre Gregoire.',
                 'reponse': '',
                 'support': 'Journal officiel',
                 'title': 'Centres hospitaliers'}
@@ -707,7 +707,7 @@ def test_parse_ass_10_qg():
                             "des sectes. (Applaudissements sur les bancs du groupe de l'Union "
                             'pour la democratie francaise et du Centre et du groupe du '
                             'Rassemblement pour la Republique et sur quelques bancs du groupe '
-                            'communiste.) ',
+                            'communiste.)',
                 'reponse': '',
                 'support': 'Journal officiel',
                 'title': 'Etablissements'}
@@ -756,7 +756,7 @@ def test_parse_ass_11_qosd():
                             'auxiliaires, on ne puisse réamorcer le système. Cependant, elle '
                             "lui demande les dispositions qu'il envisage de prendre pour que, "
                             "dans ces disciplines très précises, l'enseignement puisse être "
-                            'assuré aux élèves.</html> ',
+                            'assuré aux élèves.</html>',
                 'reponse': '<html>M. le président. Mme Nicole Bricq a présenté une question, '
                            "n° 7, ainsi rédigée: <BR>  «Mme Nicole Bricq attire l'attention "
                            "de M. le ministre de l'éducation nationale, de la recherche et de "
@@ -885,7 +885,7 @@ def test_parse_ass_11_qosd():
                            "s'est progressivement mise en place depuis un certain nombre "
                            "d'années à l'intérieur de cette structure qui ressemble à un "
                            'conglomérat - pardonnez-moi ce terme géologique - de professions '
-                           'libérales étatisées ! (Sourire.)</html> ',
+                           'libérales étatisées ! (Sourire.)</html>',
                 'support': 'Journal officiel',
                 'title': 'fonctionnement'}
 
@@ -1036,7 +1036,7 @@ def test_parse_ass_14_qg():
                 'ministere': 'Industrie',
                 'nature': 'Question au Gouvernement',
                 'num': '4698',
-                'pgq': '',
+                'pgq': '1088',
                 'pgr': '1088',
                 'question': '</p><p align="CENTER"> BILAN DU QUINQUENNAT EN MATIÈRE D\'EMPLOI '
                             'INDUSTRIEL <a name=PG10></a> </p><br><strong>M.\xa0le président. '
@@ -2044,7 +2044,7 @@ def test_parse_ass_16_qg():
                 'ministere': 'Enseignement et formation professionnels',
                 'nature': 'Question au Gouvernement',
                 'num': '1398',
-                'pgq': '',
+                'pgq': '10679',
                 'pgr': '10679',
                 'question': '</p><p align="CENTER"> EXTINCTION DE L\'INDEMNITÉ TEMPORAIRE DE '
                             'RETRAITE <a name=PG10></a> </p><br><strong>Mme\xa0la présidente. '

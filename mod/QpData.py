@@ -17,7 +17,7 @@ class QpData:
     pgr: str = ''
     question: str = ''
     reponse: str = ''
-    support: str = ''
+    support: str = "Journal officiel"
     title: str = ''
 
     def set_question_nature(self, nature):

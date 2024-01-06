@@ -6,7 +6,6 @@ from mod.QpData import QpData
 
 def parse_assemblee_legislature(html):
     patterns = [
-        r'<LEG>(?P<m1>\d+).me',  # remove me when you can
         r'<NLEG>(?P<m2>\d+)</NLEG>',
         r'<header class="question_legislature">(?P<m3>\d+)',
         r'<td class="tdstyleh1">(?P<m4>\d+)'
@@ -50,26 +49,36 @@ def parse_assemblee_question_number(html, qp_data):
     qp_data.num = question_number
     qp_data.set_question_nature(question_nature)
 
-    return qp_data.nature, qp_data
+    return qp_data
 
 
-def parse_assemblee_author(html):
+def parse_assemblee_author(html, qp_data):
+    aut = ""
+    groupe = ""
+    dept = ""
+
     m1 = re.compile('<AUT>(.*) (.*)</AUT>')
     m2 = re.compile(r'<div id="question_col80"> de.*>(.*)</a>.*\((.*) - <span>(.*)</span>')
     m3 = re.compile('<td class="tdstyleh3">de(.*)')
+
     if m1.search(html):
         aut = m1.search(html).group(1)
         groupe = re.search('<GROUPE>(.*)</GROUPE>', html).group(1)
         dept = re.search('<DEPT>(.*)</DEPT>', html).group(1)
-        return aut, groupe, dept
     elif m2.search(html):
-        return m2.search(html).group(1, 2, 3)
+        aut, groupe, dept = m2.search(html).group(1, 2, 3)
     elif m3.search(html):
         depute = m3.search(html).group(1)
-        return re.search(r"<b>(.*)</b> \(\s*(.*) - (.*).\)",
-                         depute).group(1, 2, 3)
-    else:
-        return "", "", ""
+        aut, groupe, dept = re.search(r"<b>(.*)</b> \(\s*(.*) - (.*).\)",
+                                      depute).group(1, 2, 3)
+
+    aut = re.sub(r"^(M\.|Mme) ", "", aut)
+
+    qp_data.aut = aut
+    qp_data.groupe = groupe
+    qp_data.dept = dept
+
+    return qp_data
 
 
 def parse_assemblee_ministere(html):
@@ -147,15 +156,13 @@ def parse_assemblee_question_text(html):
     m3 = re.compile(r'<h2> Texte de la question</h2>\s*.*<div class="contenutexte">\s*')
     if m1.search(html):
         question = m1.split(html)
-        return re.split('</QUEST>', question[1])[0]
+        return re.split('</QUEST>', question[1])[0].strip()
     elif m2.search(html):
         question = m2.split(html)
         return re.split('</p>', question[1])[0].strip()
     elif m3.search(html):
         question = m3.split(html)
         return re.split('</div>', question[1])[0].strip()
-    else:
-        print(re.findall('.*de la question.*', html))
 
 
 def parse_assemblee_response(html):
@@ -164,7 +171,7 @@ def parse_assemblee_response(html):
     m3 = re.compile(r'<\S><\S>(DEBAT|Texte de la REPONSE) : </\S></\S>')
     if m1.search(html):
         reponse = m1.split(html)
-        return re.split('</REP>', reponse[1])[0]
+        return re.split('</REP>', reponse[1])[0].strip()
     elif m2.search(html):
         reponse = m2.split(html)
         return re.split('</div>', reponse[2])[0].strip()
@@ -176,83 +183,41 @@ def parse_assemblee_response(html):
     return ""
 
 
-def parse_assemblee_infos(result, html, qp_data):
-    result['nature'], qp_data = parse_assemblee_question_number(html, qp_data)
+def parse_assemblee_infos(html):
+    qp_data = QpData()
+    qp_data.leg = parse_assemblee_legislature(html)
+    qp_data = parse_assemblee_question_number(html, qp_data)
+    qp_data = parse_assemblee_author(html, qp_data)
+    qp_data.ministere = parse_assemblee_ministere(html)
+    qp_data.title = parse_assemblee_title(html)
+    qp_data.dpq, qp_data.pgq = parse_assemblee_publication(html)
 
-    result['aut'], result['groupe'], result['dept'] = parse_assemblee_author(html)
-    # FIX ME
-    if result['aut']:
-        result['aut'] = re.sub(r"^(M\.|Mme) ", "", result['aut'])
+    if qp_data.nature == "Question au Gouvernement":
+        qp_data.ASREP = qp_data.nature
+        qp_data.question = parse_assemblee_response(html)
+        qp_data.dpr, qp_data.pgr = parse_assemblee_publication_response(html)
+        qp_data.pgq = qp_data.pgr
     else:
-        result['aut'] = "pb author"
+        qp_data.question = parse_assemblee_question_text(html)
+        qp_data.dpr, qp_data.pgr = parse_assemblee_publication_response(html)
+        if qp_data.dpr:
+            qp_data.ASREP = "Avec réponse"
+            qp_data.reponse = parse_assemblee_response(html)
 
-    qp_data.aut = result['aut']
-    qp_data.groupe = result['groupe']
-    qp_data.dept = result['dept']
-
-    result['ministere'] = parse_assemblee_ministere(html)
-    result['title'] = parse_assemblee_title(html)
-    result['dpq'], result['pgq'] = parse_assemblee_publication(html)
-    result['support'] = "Journal officiel"
-
-    qp_data.ministere = result['ministere']
-    qp_data.title = result['title']
-    qp_data.dpq = result['dpq']
-    qp_data.pgq = result['pgq']
-    qp_data.support = result['support']
-
-    if result['nature'] == "Question au Gouvernement":
-        result['ASREP'] = result['nature']
-        result['question'] = parse_assemblee_response(html)
-        result['dpr'], result['pgr'] = parse_assemblee_publication_response(html)
-        result['pgq'] = result['pgr']
-    else:
-        result['question'] = parse_assemblee_question_text(html)
-        result['dpr'], result['pgr'] = parse_assemblee_publication_response(html)
-        if result['dpr']:
-            result['ASREP'] = "Avec réponse"
-            result['reponse'] = parse_assemblee_response(html)
-            if not result['reponse']:
-                result['reponse'] = ""
-            if result['nature'] == 'Question orale sans débat':
+            if qp_data.nature == 'Question orale sans débat':
                 m = re.compile(r'<p align="CENTER">\s*(.*)\s*<a.*</p>')
-                if m.search(result['reponse']):
-                    result['title'] = m.search(result['reponse']).group(1)
-                    result['reponse'] = re.sub(r'<p align="CENTER">\s*.*\s*<a.*</p>',
-                                               result['title'], result['reponse'])
+                if m.search(qp_data.reponse):
+                    qp_data.title = m.search(qp_data.reponse).group(1)
+                    qp_data.reponse = re.sub(r'<p align="CENTER">\s*.*\s*<a.*</p>',
+                                             qp_data.title, qp_data.reponse)
         else:
-            result['ASREP'] = "Sans réponse"
+            qp_data.ASREP = "Sans réponse"
 
-    qp_data.ASREP = result['ASREP']
-    qp_data.question = result['question']
-    qp_data.dpr = result['dpr']
-    qp_data.dpr = result['dpr']
-    qp_data.pgr = result['pgr']
-    qp_data.title = result['title']
-    if 'reponse' in result.keys():
-        qp_data.reponse = result['reponse']
-
-    return result, qp_data
+    return qp_data
 
 
 class AssembleeParser:
     def __init__(self, html):
-        qp_data = QpData()
-
-        legislature = parse_assemblee_legislature(html)
-        qp_data.leg = legislature
-
-        if legislature:
-            result, qp_data = parse_assemblee_infos({'leg': legislature}, html, qp_data)
-        else:
-            print("pb parse Ass")
-
-        if result['question']:
-            if re.search(r"^\s*$", result['question']):
-                result['question'] = ""
-        else:
-            result = {'question': ""}
-
-        qp_data.question = result['question']
+        qp_data = parse_assemblee_infos(html)
 
         self.data = asdict(qp_data)
