@@ -3,6 +3,9 @@ from dataclasses import asdict
 
 from mod.QpData import QpData
 
+def is_format_type_1(html):
+    return re.search(r'<NLEG>(?P<m2>\d+)</NLEG>', html)
+
 
 def parse_assemblee_legislature(html):
     patterns = [
@@ -17,7 +20,7 @@ def parse_assemblee_legislature(html):
     return match.group(match.lastgroup)
 
 
-def parse_assemblee_question_number(html, qp_data):
+def parse_assemblee_question_number(html, qp_data, qp_format):
     question_number = ""
     question_nature = ""
 
@@ -25,7 +28,7 @@ def parse_assemblee_question_number(html, qp_data):
     motif_type_2 = re.compile('question_col10">(.*)</div>')
     motif_type_3 = re.compile(r"Question\s*N.*\s*:\s*<b>(\d*)</b>")
 
-    if motif_type_1.search(html):
+    if qp_format:
         natures = {
             'QE': 'Question écrite',
             'QG': 'Question au Gouvernement',
@@ -185,8 +188,10 @@ def parse_assemblee_response(html):
 
 def parse_assemblee_infos(html):
     qp_data = QpData()
+
+    qp_format = is_format_type_1(html)
     qp_data.leg = parse_assemblee_legislature(html)
-    qp_data = parse_assemblee_question_number(html, qp_data)
+    qp_data = parse_assemblee_question_number(html, qp_data, qp_format)
     qp_data = parse_assemblee_author(html, qp_data)
     qp_data.ministere = parse_assemblee_ministere(html)
     qp_data.title = parse_assemblee_title(html)
