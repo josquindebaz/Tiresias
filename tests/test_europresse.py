@@ -89,7 +89,7 @@ def test_parse_article():
     result = parser.parsed_articles[0]
     expected = {'source': 'Le Journal des Femmes',
                 'date': '23/10/2023',
-                'title': 'Thomas  Pesquet, gêné par sa notoriété\xa0: "c\'est devenu beaucoup plus compliqué"',
+                'title': 'Thomas Pesquet, gêné par sa notoriété : "c\'est devenu beaucoup plus compliqué"',
                 'narrator': False,
                 'subtitle': False,
                 'text': '<p><mark>Thomas</mark> <mark>Pesquet</mark>, gêné par sa notoriété\xa0: "c\'est devenu '
@@ -294,3 +294,17 @@ def test_create_ctx_content():
     assert result[0-10] == expected[0-10]
     assert result[10].find("Processed by Tiresias on ")
 
+
+def test_strip_metata_title_field():
+    current_directory = os.getcwd()
+    if os.path.basename(current_directory) == "tests":
+        directory_path = "."
+    else:
+        directory_path = "tests"
+
+    to_parse = os.path.join(directory_path, "europresse/europresse_with_extra_lines_in_title.HTML")
+    parser = EuropresseHtmlParser(to_parse)
+
+    article = parser.parsed_articles[0]
+
+    assert article["title"] == "JO 2022/ Snowboard La médaillée olympique Chloé Trespeuch est de retour à la maison"

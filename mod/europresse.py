@@ -116,6 +116,9 @@ def get_header_infos(header):
     infos["date"] = fetch_date(in_tag(header, "DocHeader"))
 
     title = in_tag(header, "titreArticle")
+    title = strip_tags_with_class(title)
+    title = re.sub(r"\s+", " ", title)
+    title = title.strip()
     infos["title"] = strip_tags_with_class(title)
 
     infos["narrator"] = in_tag(header, "docAuthors")
