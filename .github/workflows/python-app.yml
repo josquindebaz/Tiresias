@@ -52,7 +52,9 @@ jobs:
           options: --clean#, --onefile, --name "Tiresias", --distpath Tiresias
       - name: Push exec file
         run: |
+          git config --local user.email "josquindebaz@pm.me"
+          git config --local user.name "josquindebaz"
           git add Tiresias.py
-          git commit -m "updating file"
+          git commit -m "updating exec file"
           git push
- 
+
