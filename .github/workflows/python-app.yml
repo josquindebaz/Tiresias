@@ -54,7 +54,8 @@ jobs:
         run: |
           git config --local user.email "josquindebaz@pm.me"
           git config --local user.name "josquindebaz"
-          git add Tiresias.py
+          
+          git add "D:\a\Tiresias\Tiresias\dist\Tiresias.exe"
           git commit -m "updating exec file"
-          git push
-
+          
+          git push origin HEAD:test_pyinstaller
