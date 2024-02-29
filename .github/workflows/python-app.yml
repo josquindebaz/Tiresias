@@ -49,4 +49,10 @@ jobs:
           requirements: 'EXEC/requirements.txt'
           upload_exe_with_name: 'Tiresias'
           path: EXEC/
-          options: --clean, --onefile, --name "Tiresias", --distpath Tiresias
+          options: --clean#, --onefile, --name "Tiresias", --distpath Tiresias
+      - name: Push exec file
+        run: |
+          git add Tiresias.py
+          git commit -m "updating file"
+          git push
+ 
