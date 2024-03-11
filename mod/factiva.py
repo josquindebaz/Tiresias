@@ -1,7 +1,6 @@
 """ From FACTIVA hml to Prospéro Files  TXT and CTX
 Josquin Debaz
 GNU General Public License
-Version 3, 29 June 2007
 """
 
 import re
@@ -24,7 +23,7 @@ def get(text, begin, end):
 
 
 def format_date(date):
-    """return the number of a french or English mouth"""
+    """return the number of a French or English mouth"""
     months = {
         "janvier": "01",
         'février': "02",
@@ -96,8 +95,8 @@ def parse(article):
 
     # get date and support
     divs = re.split('<div>', article)
-    form1 = re.compile(r"\d{1,2}\s{1,}[a-zéèûñíáóúüãçA-Z]*\s{1,}\d{4}</div>")
-    form2 = re.compile(r"<td>(\d{1,2}\s{1,}[a-zéèûñíáóúüãçA-Z]*\s{1,}\d{4})</td>")
+    form1 = re.compile(r"\d{1,2}\s+[a-zéèûñíáóúüãçA-Z]*\s+\d{4}</div>")
+    form2 = re.compile(r"<td>(\d{1,2}\s+[a-zéèûñíáóúüãçA-Z]*\s+\d{4})</td>")
     for div in divs:
         if form1.search(div):
             result['date'] = div[:-6]
@@ -124,8 +123,10 @@ def parse(article):
 
     # get text content
     result['text'] = result['title'] + "\r\n.\r\n"
-    for paragraph in re.split('<p class="articleParagraph [a-z]{2}\
-articleParagraph">', article)[1:]:
+
+    paragraphs = re.split(r'<p class="articleParagraph\s+[a-z]{2}articleParagraph"\s*>', article)
+
+    for paragraph in paragraphs[1:]:
         paragraph = re.split("</p>", paragraph)[0]
         paragraph = re.sub(r"^(\r\n|\n)\s*", "", paragraph)
         paragraph = re.sub(r"\s*(\r\n|\n)\s*", " ", paragraph)
@@ -136,7 +137,7 @@ articleParagraph">', article)[1:]:
 
 
 class ParseHtm:
-    """from htm of factiva to Prospero"""
+    """from htm of Wactiva to Prospero"""
 
     def __init__(self, fname):
         self.articles = {}
@@ -210,16 +211,3 @@ class ParseHtm:
             path = os.path.join(save_dir, filepath + ".ctx")
             with open(path, 'wb') as file:
                 file.write(ctx)
-
-
-if __name__ == "__main__":
-    SUPPORTS_FILE = "support.publi"
-    for filename in glob.glob("*.htm"):
-        print(filename)
-        run = ParseHtm(filename)
-        print("%s: found %d article(s)" % (filename, len(run.content)))
-        run.get_supports(SUPPORTS_FILE)
-        print("%d unknown(s) source(s)" % len(run.unknowns))
-        for unknown in run.unknowns:
-            print("unknown: %s" % unknown)
-        run.write_prospero_files(".")

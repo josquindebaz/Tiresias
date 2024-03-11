@@ -9,7 +9,7 @@ from mod.factiva import ParseHtm
 class ViewFactiva:
     def __init__(self, parent):
         self.parent = parent
-        window_title = tk.Label(self.parent, text="htm from Factiva to Prospero",
+        window_title = tk.Label(self.parent, text="html from Factiva to Prospero",
                                 font=("Helvetica", 12, "bold"))
         window_title.pack(fill=tk.X)
 
@@ -17,7 +17,7 @@ class ViewFactiva:
         fr1 = tk.Frame(self.parent)
         fr1.pack(anchor=tk.W)
 
-        bn_csv = tk.Button(fr1, text="Select a htm file",
+        bn_csv = tk.Button(fr1, text="Select a html file",
                            command=self.sel_file)
         bn_csv.pack(side=tk.RIGHT)
 
@@ -58,8 +58,8 @@ class ViewFactiva:
 
     def sel_file(self):
         self.choosen_file.set("")
-        filename = fd.askopenfilename(title="Select htm file",
-                                      filetypes=[("htm Files", "*.htm")])
+        filename = fd.askopenfilename(title="Select html file",
+                                      filetypes=[("html Files", "*.htm*")])
         self.choosen_file.set(filename)
 
     def sel_dir(self):

@@ -1,9 +1,8 @@
-import glob
 import os
-import shutil
 
 from mod.europresse import format_support_name, EuropresseHtmlParser, EuropresseProsperoFileWriter, \
     strip_tags_with_class, fetch_date, in_tag, name_file, create_txt_content, create_ctx_content
+from tests.utils import free_directory, delete_directory
 
 
 def test_europresse_e2e():
@@ -41,12 +40,6 @@ def test_europresse_e2e():
     assert expected_lines[0:10] == result_lines[0:10]
 
     free_directory(directory_path)
-
-
-def free_directory(directory):
-    for file_path in glob.glob(os.path.join(directory, '*')):
-        if os.path.splitext(file_path)[1] in ['.ctx', '.CTX', '.Ctx', '.txt', '.TXT', '.Txt']:
-            os.remove(file_path)
 
 
 def test_format_support_name():
@@ -249,11 +242,7 @@ def test_file_name():
     delete_directory(directory_path)
 
 
-def delete_directory(directory):
-    if not os.path.isdir(directory):
-        return 0
 
-    shutil.rmtree(directory)
 
 
 def test_create_txt_content():
@@ -291,7 +280,7 @@ def test_create_ctx_content():
     expected = "\r\n".join(ctx)
     result = create_ctx_content(article, source, source_type)
 
-    assert result[0-10] == expected[0-10]
+    assert result[0 - 10] == expected[0 - 10]
     assert result[10].find("Processed by Tiresias on ")
 
 
