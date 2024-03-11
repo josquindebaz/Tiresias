@@ -1,7 +1,6 @@
 """ From FACTIVA hml to Prospéro Files  TXT and CTX
 Josquin Debaz
 GNU General Public License
-Version 3, 29 June 2007
 """
 
 import re
@@ -24,7 +23,7 @@ def get(text, begin, end):
 
 
 def format_date(date):
-    """return the number of a french or English mouth"""
+    """return the number of a French or English mouth"""
     months = {
         "janvier": "01",
         'février': "02",
@@ -96,8 +95,8 @@ def parse(article):
 
     # get date and support
     divs = re.split('<div>', article)
-    form1 = re.compile(r"\d{1,2}\s{1,}[a-zéèûñíáóúüãçA-Z]*\s{1,}\d{4}</div>")
-    form2 = re.compile(r"<td>(\d{1,2}\s{1,}[a-zéèûñíáóúüãçA-Z]*\s{1,}\d{4})</td>")
+    form1 = re.compile(r"\d{1,2}\s+[a-zéèûñíáóúüãçA-Z]*\s+\d{4}</div>")
+    form2 = re.compile(r"<td>(\d{1,2}\s+[a-zéèûñíáóúüãçA-Z]*\s+\d{4})</td>")
     for div in divs:
         if form1.search(div):
             result['date'] = div[:-6]
