@@ -123,8 +123,10 @@ def parse(article):
 
     # get text content
     result['text'] = result['title'] + "\r\n.\r\n"
-    for paragraph in re.split('<p class="articleParagraph [a-z]{2}\
-articleParagraph">', article)[1:]:
+
+    paragraphs = re.split(r'<p class="articleParagraph\s+[a-z]{2}articleParagraph"\s*>', article)
+
+    for paragraph in paragraphs[1:]:
         paragraph = re.split("</p>", paragraph)[0]
         paragraph = re.sub(r"^(\r\n|\n)\s*", "", paragraph)
         paragraph = re.sub(r"\s*(\r\n|\n)\s*", " ", paragraph)
@@ -135,7 +137,7 @@ articleParagraph">', article)[1:]:
 
 
 class ParseHtm:
-    """from htm of factiva to Prospero"""
+    """from htm of Wactiva to Prospero"""
 
     def __init__(self, fname):
         self.articles = {}

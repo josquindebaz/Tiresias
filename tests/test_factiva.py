@@ -2,7 +2,7 @@ import glob
 import os
 
 from mod.factiva import ParseHtm
-from tests.utils import free_directory
+from tests.utils import free_directory, delete_directory
 
 
 def test_can_parse_htm():
@@ -35,3 +35,4 @@ def test_can_parse_htm():
     assert len(ctx_generated) == 40
 
     free_directory("temp")
+    delete_directory("temp")

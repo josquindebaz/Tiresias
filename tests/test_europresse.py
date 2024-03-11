@@ -1,9 +1,8 @@
 import os
-import shutil
 
 from mod.europresse import format_support_name, EuropresseHtmlParser, EuropresseProsperoFileWriter, \
     strip_tags_with_class, fetch_date, in_tag, name_file, create_txt_content, create_ctx_content
-from tests.utils import free_directory
+from tests.utils import free_directory, delete_directory
 
 
 def test_europresse_e2e():
@@ -243,11 +242,7 @@ def test_file_name():
     delete_directory(directory_path)
 
 
-def delete_directory(directory):
-    if not os.path.isdir(directory):
-        return 0
 
-    shutil.rmtree(directory)
 
 
 def test_create_txt_content():
