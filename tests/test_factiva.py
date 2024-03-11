@@ -25,7 +25,7 @@ def test_can_parse_htm():
 
     assert len(parser.unknowns) == 0
 
-    free_directory("temp")
+    os.mkdir("temp")
     parser.write_prospero_files("temp")
 
     txt_generated = glob.glob("temp/*.txt")

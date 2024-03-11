@@ -209,16 +209,3 @@ class ParseHtm:
             path = os.path.join(save_dir, filepath + ".ctx")
             with open(path, 'wb') as file:
                 file.write(ctx)
-
-
-if __name__ == "__main__":
-    SUPPORTS_FILE = "support.publi"
-    for filename in glob.glob("*.htm"):
-        print(filename)
-        run = ParseHtm(filename)
-        print("%s: found %d article(s)" % (filename, len(run.content)))
-        run.get_supports(SUPPORTS_FILE)
-        print("%d unknown(s) source(s)" % len(run.unknowns))
-        for unknown in run.unknowns:
-            print("unknown: %s" % unknown)
-        run.write_prospero_files(".")
