@@ -9,7 +9,7 @@ import random
 import datetime
 
 from mod.date_utils import fetch_date
-from mod.file_utils import name_file
+from mod.file_utils import name_file, write_file
 
 try:
     import cleaning
@@ -131,16 +131,15 @@ class ParseHtm:
             file_path = name_file(article['date'],
                                   article['root'],
                                   save_dir)
-            path = os.path.join(save_dir, file_path + ".txt")
 
             if cleaning:
                 text_cleaner = Cleaner(article['text'].encode('utf-8'))
                 text = text_cleaner.content
             else:
                 text = article['text']
-            with open(path, 'wb') as file:
-                # to bytes
-                file.write(text.encode('latin-1', 'xmlcharrefreplace'))
+
+            write_file(save_dir, file_path, ".txt", text)
+
             ctx = [
                 "fileCtx0005",
                 article['title'],

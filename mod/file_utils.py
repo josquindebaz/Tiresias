@@ -22,3 +22,10 @@ def name_file(formatted_date, prefix, destination):
         path = os.path.join(destination, file_name + ".txt")
 
     return file_name
+
+
+def write_file(destination, filename, extension, content):
+    path = os.path.join(destination, filename + extension)
+    encoded_content = content.encode('latin-1', 'xmlcharrefreplace')
+    with open(path, 'wb') as f:
+        f.write(encoded_content)

@@ -1,11 +1,10 @@
 import datetime
 import html
-import os
 import re
 
 from mod.date_utils import fetch_date
 from utils.supportpublimanager import SupportPubliManager
-from mod.file_utils import name_file
+from mod.file_utils import name_file, write_file
 
 try:
     from cleaning import Cleaner
@@ -186,13 +185,6 @@ def create_ctx_content(article, source, source_type):
     ]
     ctx = "\r\n".join(ctx)
     return ctx
-
-
-def write_file(destination, filename, extension, content):
-    path = os.path.join(destination, filename + extension)
-    encoded_content = content.encode('latin-1', 'xmlcharrefreplace')
-    with open(path, 'wb') as f:
-        f.write(encoded_content)
 
 
 def clean_content(cleaning_required, ctx_content, txt_content):
