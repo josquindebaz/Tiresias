@@ -1,9 +1,9 @@
 import os
 
 from mod.europresse import format_support_name, EuropresseHtmlParser, EuropresseProsperoFileWriter, \
-    strip_tags_with_class, fetch_date, in_tag, create_txt_content, create_ctx_content
-from mod.file_utils import name_file
-from tests.utils import free_directory, delete_directory
+    strip_tags_with_class, in_tag, create_txt_content, create_ctx_content
+
+from tests.utils import free_directory
 
 
 def test_europresse_e2e():
@@ -57,11 +57,6 @@ def test_format_support_name():
 def test_strip_tags_with_class():
     result = strip_tags_with_class("<foo class='bar'>something</foo>")
     assert result == "something"
-
-
-def test_fetch_date():
-    result = fetch_date("lundi 16 octobre 2023 - 16:55:20 -0000 1017 mots")
-    assert result == "16/10/2023"
 
 
 def test_in_tag():

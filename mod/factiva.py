@@ -8,6 +8,7 @@ import os
 import random
 import datetime
 
+from mod.date_utils import fetch_date
 from mod.file_utils import name_file
 
 try:
@@ -21,42 +22,6 @@ def get(text, begin, end):
     result = re.split(begin, text, 1)[1]
     result = re.split(end, result, 1)[0]
     return result
-
-
-def format_date(date):
-    """return the number of a French or English mouth"""
-    months = {
-        "janvier": "01",
-        'février': "02",
-        "mars": "03",
-        "avril": "04",
-        "mai": "05",
-        "juin": "06",
-        "juillet": "07",
-        "août": "08",
-        "septembre": "09",
-        "octobre": "10",
-        "novembre": "11",
-        "décembre": "12",
-        "January": "01",
-        'February': "02",
-        "March": "03",
-        "April": "04",
-        "May": "05",
-        "June": "06",
-        "July": "07",
-        "August": "08",
-        "September": "09",
-        "October": "10",
-        "November": "11",
-        "December": "12"
-    }
-    try:
-        date = re.split(" ", date)
-        day = "%02d" % int(date[0])  # day with 2 digits
-        return "%s/%s/%s" % (day, months[date[1]], date[2][:4])
-    except:
-        return "00/00/0000"
 
 
 def parse(article):
@@ -93,7 +58,8 @@ def parse(article):
                                   '<b>SN</b>&nbsp;</td><td>',
                                   '</td>')
     # format date
-    result['date'] = format_date(result['date'])
+    # result['date'] = format_date(result['date'])
+    result['date'] = fetch_date(result['date'])
 
     # get narrator
     try:
