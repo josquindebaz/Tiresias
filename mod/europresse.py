@@ -1,10 +1,9 @@
-import datetime
 import html
 import re
 
 from mod.date_utils import fetch_date
 from utils.supportpublimanager import SupportPubliManager
-from mod.file_utils import name_file, write_file
+from mod.file_utils import name_file, write_file, create_ctx_content
 
 try:
     from cleaning import Cleaner
@@ -162,29 +161,6 @@ def create_txt_content(article):
     result += article['text']
 
     return result
-
-
-def create_ctx_content(article, source, source_type):
-    ctx = [
-        "fileCtx0005",
-        article['title'],
-        source,
-        "",
-        "",
-        article['date'],
-        source,
-        source_type,
-        "",
-        "",
-        "",
-        "Processed by Tiresias on %s" % datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-        "",
-        "n",
-        "n",
-        ""
-    ]
-    ctx = "\r\n".join(ctx)
-    return ctx
 
 
 def clean_content(cleaning_required, ctx_content, txt_content):

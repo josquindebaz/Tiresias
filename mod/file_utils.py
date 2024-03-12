@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 
 
 def name_file(formatted_date, prefix, destination):
@@ -29,3 +30,26 @@ def write_file(destination, filename, extension, content):
     encoded_content = content.encode('latin-1', 'xmlcharrefreplace')
     with open(path, 'wb') as f:
         f.write(encoded_content)
+
+
+def create_ctx_content(article, source, source_type):
+    ctx = [
+        "fileCtx0005",
+        article['title'],
+        source,
+        "",
+        "",
+        article['date'],
+        source,
+        source_type,
+        "",
+        "",
+        "",
+        "Processed by Tiresias on %s" % datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+        "",
+        "n",
+        "n",
+        ""
+    ]
+    ctx = "\r\n".join(ctx)
+    return ctx

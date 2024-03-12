@@ -1,5 +1,6 @@
 import re
 
+
 def fetch_date(given_date):
     months = {
         "janvier": "01",

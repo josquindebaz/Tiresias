@@ -1,7 +1,7 @@
 import os
 
 from mod.europresse import format_support_name, EuropresseHtmlParser, EuropresseProsperoFileWriter, \
-    strip_tags_with_class, in_tag, create_txt_content, create_ctx_content
+    strip_tags_with_class, in_tag, create_txt_content
 
 from tests.utils import free_directory
 
@@ -215,37 +215,6 @@ def test_create_txt_content():
     result = create_txt_content(article)
 
     assert result == expected
-
-
-def test_create_ctx_content():
-    article = {"title": 'A title', "date": "02/01/2024"}
-    source = "The world publication"
-    source_type = "Magazine"
-
-    ctx = [
-        "fileCtx0005",
-        article['title'],
-        source,
-        "",
-        "",
-        article['date'],
-        source,
-        source_type,
-        "",
-        "",
-        "",
-        "Processed by Tiresias on ",
-        "",
-        "n",
-        "n",
-        ""
-    ]
-
-    expected = "\r\n".join(ctx)
-    result = create_ctx_content(article, source, source_type)
-
-    assert result[0 - 10] == expected[0 - 10]
-    assert result[10].find("Processed by Tiresias on ")
 
 
 def test_strip_metata_title_field():

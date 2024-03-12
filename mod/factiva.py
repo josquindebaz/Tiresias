@@ -6,10 +6,9 @@ GNU General Public License
 import re
 import os
 import random
-import datetime
 
 from mod.date_utils import fetch_date
-from mod.file_utils import name_file, write_file
+from mod.file_utils import name_file, write_file, create_ctx_content
 
 try:
     import cleaning
@@ -140,20 +139,7 @@ class ParseHtm:
 
             write_file(save_dir, file_path, ".txt", text)
 
-            ctx = [
-                "fileCtx0005",
-                article['title'],
-                article['support'],
-                "", "",
-                article['date'],
-                "",
-                article['source_type'],
-                "", "", "",
-                "Processed by Tiresias on %s" \
-                % datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-                "", "n", "n", ""
-            ]
-            ctx = "\r\n".join(ctx)
+            ctx = create_ctx_content(article, article['support'], article['source_type'])
             ctx = ctx.encode('latin-1', 'xmlcharrefreplace')  # to bytes
             path = os.path.join(save_dir, file_path + ".ctx")
             with open(path, 'wb') as file:

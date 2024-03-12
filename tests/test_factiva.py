@@ -46,7 +46,7 @@ def test_can_parse_htm():
 
     with open("temp/FIG20220315A.ctx", "r", encoding='cp1252') as ctx_test_file:
         ctx_test = ctx_test_file.readlines()
-    assert ctx_test[:11] == ['fileCtx0005\n', "Marine Le Pen ambitionne l'indépendance énergétique\n", 'Le Figaro\n', '\n', '\n', '15/03/2022\n', '\n', 'Presse nationale\n', '\n', '\n', '\n']
+    assert ctx_test[:11] == ['fileCtx0005\n', "Marine Le Pen ambitionne l'indépendance énergétique\n", 'Le Figaro\n', '\n', '\n', '15/03/2022\n',  'Le Figaro\n', 'Presse nationale\n', '\n', '\n', '\n']
 
     ctx_generated = glob.glob("temp/*.ctx")
     assert len(ctx_generated) == 40
