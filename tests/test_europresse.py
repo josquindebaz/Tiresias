@@ -1,7 +1,8 @@
 import os
 
 from mod.europresse import format_support_name, EuropresseHtmlParser, EuropresseProsperoFileWriter, \
-    strip_tags_with_class, fetch_date, in_tag, name_file, create_txt_content, create_ctx_content
+    strip_tags_with_class, fetch_date, in_tag, create_txt_content, create_ctx_content
+from mod.file_utils import name_file
 from tests.utils import free_directory, delete_directory
 
 
@@ -211,38 +212,6 @@ def test_europresse_html_parser():
 
     assert len(parser.articles) == 305
     assert len(parser.parsed_articles) == 292
-
-
-def test_file_name():
-    current_directory = os.getcwd()
-    if os.path.basename(current_directory) == "tests":
-        directory_path = 'europresse_file_name_test'
-    else:
-        directory_path = os.path.join("tests/", "europresse_file_name_test")
-
-    delete_directory(directory_path)
-    os.mkdir(directory_path)
-
-    date = '23/10/2023'
-    prefix = "EUROPRESSE"
-
-    result = name_file(date, prefix, directory_path)
-    assert result == "EUROPRESSE20231023A"
-
-    open(os.path.join(directory_path, "EUROPRESSE20231023A.txt"), 'a').close()
-    result = name_file(date, prefix, directory_path)
-    assert result == "EUROPRESSE20231023B"
-
-    for letter in range(65, 91):
-        open(os.path.join(directory_path, f"EUROPRESSE20231023{chr(letter)}.txt"), 'a').close()
-
-    result = name_file(date, prefix, directory_path)
-    assert result == "EUROPRESSE20231023AA"
-
-    delete_directory(directory_path)
-
-
-
 
 
 def test_create_txt_content():

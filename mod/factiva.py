@@ -5,9 +5,10 @@ GNU General Public License
 
 import re
 import os
-import glob
 import random
 import datetime
+
+from mod.file_utils import name_file
 
 try:
     import cleaning
@@ -56,25 +57,6 @@ def format_date(date):
         return "%s/%s/%s" % (day, months[date[1]], date[2][:4])
     except:
         return "00/00/0000"
-
-
-def file_name(date, prefix, save_dir):
-    """return a name in Prospero style"""
-    index, base = "A", 64
-    date = "".join(reversed(date.split("/")))
-    name = "%s%s%s" % (prefix, date, index)
-    path = os.path.join(save_dir, name + ".txt")
-    while os.path.isfile(path):
-        if ord(index[-1]) < 90:
-            index = chr(ord(index[-1]) + 1)
-        else:
-            base += 1
-            index = "A"
-        if base > 64:  # if Z => 2 letters
-            index = chr(base) + index
-        name = "%s%s%s" % (prefix, date, index)
-        path = os.path.join(save_dir, name + ".txt")
-    return name
 
 
 def parse(article):
@@ -137,7 +119,7 @@ def parse(article):
 
 
 class ParseHtm:
-    """from htm of Wactiva to Prospero"""
+    """from htm of Factiva to Prospero"""
 
     def __init__(self, fname):
         self.articles = {}
@@ -180,10 +162,10 @@ class ParseHtm:
     def write_prospero_files(self, save_dir=".", cleaning=False):
         """for each article, write txt and ctx in a given directory"""
         for article in self.articles.values():
-            filepath = file_name(article['date'],
-                                 article['root'],
-                                 save_dir)
-            path = os.path.join(save_dir, filepath + ".txt")
+            file_path = name_file(article['date'],
+                                  article['root'],
+                                  save_dir)
+            path = os.path.join(save_dir, file_path + ".txt")
 
             if cleaning:
                 text_cleaner = Cleaner(article['text'].encode('utf-8'))
@@ -208,6 +190,6 @@ class ParseHtm:
             ]
             ctx = "\r\n".join(ctx)
             ctx = ctx.encode('latin-1', 'xmlcharrefreplace')  # to bytes
-            path = os.path.join(save_dir, filepath + ".ctx")
+            path = os.path.join(save_dir, file_path + ".ctx")
             with open(path, 'wb') as file:
                 file.write(ctx)
