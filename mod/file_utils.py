@@ -1,5 +1,6 @@
 import os
 from datetime import datetime
+from mod.cleaning import Cleaner
 
 
 def name_file(formatted_date, prefix, destination):
@@ -53,3 +54,13 @@ def create_ctx_content(article, source, source_type):
     ]
     ctx = "\r\n".join(ctx)
     return ctx
+
+
+def clean_content(cleaning_required, ctx_content, txt_content):
+    if not cleaning_required:
+        return ctx_content, txt_content
+
+    txt_cleaner = Cleaner(txt_content.encode('utf-8'))
+    ctx_cleaner = Cleaner(ctx_content.encode('utf-8'))
+
+    return ctx_cleaner.content, txt_cleaner.content

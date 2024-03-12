@@ -3,12 +3,7 @@ import re
 
 from mod.date_utils import fetch_date
 from utils.supportpublimanager import SupportPubliManager
-from mod.file_utils import name_file, write_file, create_ctx_content
-
-try:
-    from cleaning import Cleaner
-except ModuleNotFoundError:
-    from mod.cleaning import Cleaner
+from mod.file_utils import name_file, write_file, create_ctx_content, clean_content
 
 
 def format_support_name(support):
@@ -163,14 +158,6 @@ def create_txt_content(article):
     return result
 
 
-def clean_content(cleaning_required, ctx_content, txt_content):
-    if not cleaning_required:
-        return ctx_content, txt_content
-
-    txt_cleaner = Cleaner(txt_content.encode('utf-8'))
-    ctx_cleaner = Cleaner(ctx_content.encode('utf-8'))
-
-    return ctx_cleaner.content, txt_cleaner.content
 
 
 class EuropresseProsperoFileWriter(object):

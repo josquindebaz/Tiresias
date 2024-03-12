@@ -4,16 +4,11 @@ GNU General Public License
 """
 
 import re
-import os
 import random
 
 from mod.date_utils import fetch_date
+from mod.europresse import clean_content
 from mod.file_utils import name_file, write_file, create_ctx_content
-
-try:
-    import cleaning
-except ModuleNotFoundError:
-    from mod.cleaning import Cleaner
 
 
 def get(text, begin, end):
@@ -123,20 +118,18 @@ class ParseHtm:
                 self.articles[key]['source_type'] = 'unknown source'
                 self.articles[key]['root'] = 'FACTIVA'
 
-    def write_prospero_files(self, save_dir=".", cleaning=False):
+    def write_prospero_files(self, save_dir=".", cleaning_required=False):
         """for each article, write txt and ctx in a given directory"""
         for article in self.articles.values():
             file_path = name_file(article['date'],
                                   article['root'],
                                   save_dir)
 
-            if cleaning:
-                text_cleaner = Cleaner(article['text'].encode('utf-8'))
-                text = text_cleaner.content
-            else:
-                text = article['text']
-
-            write_file(save_dir, file_path, ".txt", text)
-
             ctx = create_ctx_content(article, article['support'], article['source_type'])
-            write_file(save_dir, file_path, ".ctx", ctx)
+
+            cleaned_ctx_content, cleaned_txt_content = clean_content(cleaning_required,
+                                                                     ctx,
+                                                                     article['text'])
+
+            write_file(save_dir, file_path, ".txt", cleaned_txt_content)
+            write_file(save_dir, file_path, ".ctx", cleaned_ctx_content)
