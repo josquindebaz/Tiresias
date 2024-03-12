@@ -57,7 +57,6 @@ def parse(article):
                                   '<b>SN</b>&nbsp;</td><td>',
                                   '</td>')
     # format date
-    # result['date'] = format_date(result['date'])
     result['date'] = fetch_date(result['date'])
 
     # get narrator
@@ -140,7 +139,4 @@ class ParseHtm:
             write_file(save_dir, file_path, ".txt", text)
 
             ctx = create_ctx_content(article, article['support'], article['source_type'])
-            ctx = ctx.encode('latin-1', 'xmlcharrefreplace')  # to bytes
-            path = os.path.join(save_dir, file_path + ".ctx")
-            with open(path, 'wb') as file:
-                file.write(ctx)
+            write_file(save_dir, file_path, ".ctx", ctx)
