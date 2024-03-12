@@ -216,7 +216,7 @@ class ViewQP:
                     self.log.insert(1.0,
                                     "Processing question %s\n" % q)
                     pq = QuestionParlementaire(self.dicQ[q]['url'])
-                    pq.retreive()
+                    pq.retrieve()
 
                     if cl:
                         pq.D['question'] = self.clean(pq.D['question'])
@@ -236,7 +236,7 @@ class ViewQP:
                     self.log.insert(1.0,
                                     "Processing question %s\n" % q)
                     pq = QuestionParlementaire(self.dicQ[q]['url'])
-                    pq.retreive()
+                    pq.retrieve()
 
                     if cl:
                         pq.D['question'] = self.clean(pq.D['question'])
