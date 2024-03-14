@@ -1,7 +1,7 @@
 import os
 
-from mod.europresse import format_support_name, EuropresseHtmlParser, EuropresseProsperoFileWriter, \
-    strip_tags_with_class, in_tag
+from mod.europresse import format_support_name, EuropresseHtmlParser, strip_tags_with_class, in_tag
+from mod.PressArticleProsperoFileWriter import PressArticleProsperoFileWriter
 from mod.file_utils import create_txt_content
 
 from tests.utils import free_directory
@@ -21,7 +21,8 @@ def test_europresse_e2e():
     assert len(parser.articles) == 305
     assert len(parser.parsed_articles) == 292
 
-    EuropresseProsperoFileWriter(parser.parsed_articles[0], directory_path)
+    writer = PressArticleProsperoFileWriter(parser.parsed_articles[0], directory_path, "EUROPRESSE")
+    writer.write()
 
     txt_to_compare = os.path.join(directory_path, "europresse/EUROPRESSE20231023A.txt")
     with open(txt_to_compare, "r", encoding='cp1252') as expected:

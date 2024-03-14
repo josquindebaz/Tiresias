@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import ttk
 from pathlib import Path
 
+from mod.PressArticleProsperoFileWriter import PressArticleProsperoFileWriter
 from mod.europresse import *
 from utils.supportpublimanager import SupportPubliManager
 
@@ -278,8 +279,10 @@ class ViewEuropresse:
             else:
                 for count, article_index in enumerate(selected_articles):
                     article = self.articles_list[article_index]
-                    writer = EuropresseProsperoFileWriter(article,
-                                                          directory,
-                                                          self.CleaningVal.get())
+                    writer = PressArticleProsperoFileWriter(article,
+                                                            directory,
+                                                            "EUROPRESSE",
+                                                            self.CleaningVal.get())
+                    writer.write()
                     self.log.insert(1.0, 'Writing %s\n' % writer.filename)
                     self.progressbar['value'] = count + 1

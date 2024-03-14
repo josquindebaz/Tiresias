@@ -2,8 +2,6 @@ import html
 import re
 
 from mod.date_utils import fetch_date
-from utils.supportpublimanager import SupportPubliManager
-from mod.file_utils import name_file, write_file, create_ctx_content, clean_content, create_txt_content
 
 
 def format_support_name(support):
@@ -137,34 +135,3 @@ class EuropresseHtmlParser(object):
                 self.parsed_articles.append(parsed)
 
 
-def fetch_publication_infos(publication):
-    publication_index = SupportPubliManager()
-
-    if publication not in publication_index.codex.keys():
-        return "EUROPRESSE", publication, "unknown source"
-
-    prefix = publication_index.codex[publication]['abr']
-    source = publication_index.codex[publication]['source']
-    source_type = publication_index.codex[publication]['type']
-
-    return prefix, source, source_type
-
-
-class EuropresseProsperoFileWriter(object):
-    def __init__(self, article, destination, cleaning_required=True):
-        prefix, source, source_type = fetch_publication_infos(article['source'])
-        self.filename = name_file(article['date'], prefix, destination)
-
-        txt_content = create_txt_content(article)
-        ctx_content = create_ctx_content(article, source, source_type)
-
-        cleaned_ctx_content, cleaned_txt_content = clean_content(cleaning_required,
-                                                                 ctx_content,
-                                                                 txt_content)
-
-        write_file(destination, self.filename, ".txt", cleaned_txt_content)
-        write_file(destination, self.filename, ".ctx", cleaned_ctx_content)
-
-    @property
-    def get_filename(self):
-        return self.filename

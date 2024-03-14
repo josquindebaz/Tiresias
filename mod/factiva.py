@@ -7,8 +7,7 @@ import re
 import random
 
 from mod.date_utils import fetch_date
-from mod.europresse import clean_content
-from mod.file_utils import name_file, write_file, create_ctx_content, create_txt_content
+from mod.file_utils import name_file, write_file, create_ctx_content, create_txt_content, clean_content
 
 
 def get(text, begin, end):
