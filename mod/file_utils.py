@@ -56,6 +56,16 @@ def create_ctx_content(article, source, source_type):
     return ctx
 
 
+def create_txt_content(article):
+    result = article['title'] + "\r\n.\r\n"
+
+    if 'subtitle' in article and article['subtitle']:
+        result += article['subtitle'] + "\r\n.\r\n"
+    result += article['text']
+
+    return result
+
+
 def clean_content(cleaning_required, ctx_content, txt_content):
     if not cleaning_required:
         return ctx_content, txt_content

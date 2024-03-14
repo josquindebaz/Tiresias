@@ -1,4 +1,4 @@
-""" From FACTIVA hml to Prospéro Files  TXT and CTX
+""" From FACTIVA hml to Prospéro Files TXT and CTX
 Josquin Debaz
 GNU General Public License
 """
@@ -8,7 +8,7 @@ import random
 
 from mod.date_utils import fetch_date
 from mod.europresse import clean_content
-from mod.file_utils import name_file, write_file, create_ctx_content
+from mod.file_utils import name_file, write_file, create_ctx_content, create_txt_content
 
 
 def get(text, begin, end):
@@ -62,10 +62,8 @@ def parse(article):
     except:
         pass
 
-    # get text content
-    result['text'] = result['title'] + "\r\n.\r\n"
-
     paragraphs = re.split(r'<p class="articleParagraph\s+[a-z]{2}articleParagraph"\s*>', article)
+    result['text'] = ""
 
     for paragraph in paragraphs[1:]:
         paragraph = re.split("</p>", paragraph)[0]
@@ -118,18 +116,19 @@ class ParseHtm:
                 self.articles[key]['source_type'] = 'unknown source'
                 self.articles[key]['root'] = 'FACTIVA'
 
-    def write_prospero_files(self, save_dir=".", cleaning_required=False):
+    def write_prospero_files(self, save_dir=".", cleaning_required=True):
         """for each article, write txt and ctx in a given directory"""
         for article in self.articles.values():
             file_path = name_file(article['date'],
                                   article['root'],
                                   save_dir)
 
+            txt_content = create_txt_content(article)
             ctx = create_ctx_content(article, article['support'], article['source_type'])
 
             cleaned_ctx_content, cleaned_txt_content = clean_content(cleaning_required,
                                                                      ctx,
-                                                                     article['text'])
+                                                                     txt_content)
 
             write_file(save_dir, file_path, ".txt", cleaned_txt_content)
             write_file(save_dir, file_path, ".ctx", cleaned_ctx_content)

@@ -3,7 +3,7 @@ import re
 
 from mod.date_utils import fetch_date
 from utils.supportpublimanager import SupportPubliManager
-from mod.file_utils import name_file, write_file, create_ctx_content, clean_content
+from mod.file_utils import name_file, write_file, create_ctx_content, clean_content, create_txt_content
 
 
 def format_support_name(support):
@@ -150,19 +150,8 @@ def fetch_publication_infos(publication):
     return prefix, source, source_type
 
 
-def create_txt_content(article):
-    result = article['title'] + "\r\n.\r\n"
-    result += article['subtitle'] + "\r\n.\r\n" if article['subtitle'] else ""
-    result += article['text']
-
-    return result
-
-
-
-
 class EuropresseProsperoFileWriter(object):
     def __init__(self, article, destination, cleaning_required=True):
-
         prefix, source, source_type = fetch_publication_infos(article['source'])
         self.filename = name_file(article['date'], prefix, destination)
 

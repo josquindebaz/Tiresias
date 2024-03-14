@@ -1,7 +1,8 @@
 import os
 
 from mod.europresse import format_support_name, EuropresseHtmlParser, EuropresseProsperoFileWriter, \
-    strip_tags_with_class, in_tag, create_txt_content
+    strip_tags_with_class, in_tag
+from mod.file_utils import create_txt_content
 
 from tests.utils import free_directory
 
