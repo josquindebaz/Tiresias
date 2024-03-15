@@ -1,8 +1,10 @@
 import os
 
-from mod.europresse import format_support_name, EuropresseHtmlParser, EuropresseProsperoFileWriter, \
-    strip_tags_with_class, fetch_date, in_tag, name_file, create_txt_content, create_ctx_content
-from tests.utils import free_directory, delete_directory
+from mod.europresse import format_support_name, EuropresseHtmlParser, strip_tags_with_class, in_tag
+from mod.PressArticleProsperoFileWriter import PressArticleProsperoFileWriter
+from mod.file_utils import create_txt_content
+
+from tests.utils import free_directory
 
 
 def test_europresse_e2e():
@@ -19,7 +21,8 @@ def test_europresse_e2e():
     assert len(parser.articles) == 305
     assert len(parser.parsed_articles) == 292
 
-    EuropresseProsperoFileWriter(parser.parsed_articles[0], directory_path)
+    writer = PressArticleProsperoFileWriter(parser.parsed_articles[0], directory_path, "EUROPRESSE")
+    writer.write()
 
     txt_to_compare = os.path.join(directory_path, "europresse/EUROPRESSE20231023A.txt")
     with open(txt_to_compare, "r", encoding='cp1252') as expected:
@@ -56,11 +59,6 @@ def test_format_support_name():
 def test_strip_tags_with_class():
     result = strip_tags_with_class("<foo class='bar'>something</foo>")
     assert result == "something"
-
-
-def test_fetch_date():
-    result = fetch_date("lundi 16 octobre 2023 - 16:55:20 -0000 1017 mots")
-    assert result == "16/10/2023"
 
 
 def test_in_tag():
@@ -213,75 +211,12 @@ def test_europresse_html_parser():
     assert len(parser.parsed_articles) == 292
 
 
-def test_file_name():
-    current_directory = os.getcwd()
-    if os.path.basename(current_directory) == "tests":
-        directory_path = 'europresse_file_name_test'
-    else:
-        directory_path = os.path.join("tests/", "europresse_file_name_test")
-
-    delete_directory(directory_path)
-    os.mkdir(directory_path)
-
-    date = '23/10/2023'
-    prefix = "EUROPRESSE"
-
-    result = name_file(date, prefix, directory_path)
-    assert result == "EUROPRESSE20231023A"
-
-    open(os.path.join(directory_path, "EUROPRESSE20231023A.txt"), 'a').close()
-    result = name_file(date, prefix, directory_path)
-    assert result == "EUROPRESSE20231023B"
-
-    for letter in range(65, 91):
-        open(os.path.join(directory_path, f"EUROPRESSE20231023{chr(letter)}.txt"), 'a').close()
-
-    result = name_file(date, prefix, directory_path)
-    assert result == "EUROPRESSE20231023AA"
-
-    delete_directory(directory_path)
-
-
-
-
-
 def test_create_txt_content():
     article = {"title": 'A title', "subtitle": "A subtitle", "text": "Lorem ipsum"}
     expected = 'A title\r\n.\r\nA subtitle\r\n.\r\nLorem ipsum'
     result = create_txt_content(article)
 
     assert result == expected
-
-
-def test_create_ctx_content():
-    article = {"title": 'A title', "date": "02/01/2024"}
-    source = "The world publication"
-    source_type = "Magazine"
-
-    ctx = [
-        "fileCtx0005",
-        article['title'],
-        source,
-        "",
-        "",
-        article['date'],
-        source,
-        source_type,
-        "",
-        "",
-        "",
-        "Processed by Tiresias on ",
-        "",
-        "n",
-        "n",
-        ""
-    ]
-
-    expected = "\r\n".join(ctx)
-    result = create_ctx_content(article, source, source_type)
-
-    assert result[0 - 10] == expected[0 - 10]
-    assert result[10].find("Processed by Tiresias on ")
 
 
 def test_strip_metata_title_field():
