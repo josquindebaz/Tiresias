@@ -69,16 +69,15 @@ def fetch_date(given_date):
         print("Problem reading date [%s]" % given_date)
         return False
 
-    if day_first_date_format.search(given_date):
-        day, month, year = day_first_date_format.search(given_date).group(1, 2, 3)
-        if month not in months:
-            print("I don't know this month %s" % month)
-            return False
-
-    elif month_first_date_format.search(given_date):
+    if month_first_date_format.search(given_date):
         month, day, year = month_first_date_format.search(given_date).group(1, 2, 3)
         if month not in months:
-            print("I don't know this month %s" % month)
+            print(f"I don't know this month {month} in {given_date}")
+            return False
+    elif day_first_date_format.search(given_date):
+        day, month, year = day_first_date_format.search(given_date).group(1, 2, 3)
+        if month not in months:
+            print(f"I don't know this month {month} in {given_date}")
             return False
 
     return "%s/%s/%s" % (f"{int(day):02d}", months[month], year)
