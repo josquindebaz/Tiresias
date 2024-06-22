@@ -54,6 +54,7 @@ def get_last_on_remote():
 def get_last_on_local():
     with open("CHANGELOG.txt", 'rb') as file:
         buf = file.read().decode()
+    buf = "test"
     return time.strptime(re.findall(r"\d{2}/\d{2}/\d{4}", buf)[0], "%d/%m/%Y")
 
 
@@ -66,6 +67,7 @@ class MainView(tk.Toplevel):
 
         with open("README.md", 'rb') as f:
             welcome_txt = f.read().decode()
+        welcome_txt = "test"
         welcome_txt = re.sub(r"[\r\n]+", "\n", welcome_txt)
         welcome = tk.Message(self,
                              bg="white",
