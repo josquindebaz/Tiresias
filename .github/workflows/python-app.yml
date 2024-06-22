@@ -44,18 +44,8 @@ jobs:
       - name: Create Executable
         uses: sayyid5416/pyinstaller@v1
         with:
-          python_ver: '3.10'
-          spec: 'EXEC/Tiresias.spec'
-          requirements: 'EXEC/requirements.txt'
-          upload_exe_with_name: 'Tiresias'
-          path: EXEC/
-          options: --clean#, --onefile, --name "Tiresias", --distpath Tiresias
-      - name: Push exec file
-        run: |
-          git config --local user.email "josquindebaz@pm.me"
-          git config --local user.name "josquindebaz"
-          
-          git add "D:\a\Tiresias\Tiresias\dist\Tiresias.exe"
-          git commit -m "updating exec file"
-          
-          git push origin HEAD:test_pyinstaller
+          spec: './EXEC/Tiresias.spec'
+          requirements: './EXEC/requirements.txt'
+          upload_exe_with_name: 'TiresiasD'
+          options: --add-data "../README.md";"."
+
