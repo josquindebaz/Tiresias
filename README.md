@@ -1,5 +1,7 @@
 ﻿Tiresias made by Josquin Debaz for association Doxa (http://prosperologie.org)
 
+Download directly the zipfile of the last version : https://github.com/josquindebaz/Tiresias/archive/refs/heads/master.zip
+
 __This version use Python 3 and tk__ 
 and need:
 
