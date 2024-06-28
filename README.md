@@ -1,6 +1,8 @@
 ﻿Tiresias made by Josquin Debaz for association Doxa (http://prosperologie.org)
 
 Download directly the zipfile of the last version : https://github.com/josquindebaz/Tiresias/archive/refs/heads/master.zip
+For Windows users, an almost up to date .exe is available on https://github.com/josquindebaz/Tiresias/raw/master/EXEC/Tiresias.zip
+
 
 __This version use Python 3 and tk__ 
 and need:
@@ -20,7 +22,6 @@ On Ubuntu, you may need to install Tk
 
 
 Code available on https://github.com/josquindebaz/Tiresias
-For Windows users, a .exe is available on https://github.com/josquindebaz/Tiresias/raw/master/EXEC/Tiresias.zip
 
 
 Help, comments and suggestions: http://prosperologie.org/forum/viewtopic.php?f=16&t=445
